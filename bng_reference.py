@@ -22,3 +22,21 @@ _resolution_to_string = {
     5: "5m",
     1: "1m",
 }
+
+
+def is_valid_bng(bng_ref_string: str) -> bool:
+    """Validates a BNG reference string using a regular expression pattern.
+
+    Args:
+        bng_ref_string (str): The BNG reference string to validate.
+
+    Returns:
+        bool: True if the BNG reference is valid, False otherwise.
+
+    Examples:
+        >>> is_valid_bng("TQ12")
+        True
+        >>> is_valid_bng("TQ123")
+        False
+    """
+    return bool(_pattern.match(bng_ref_string))
