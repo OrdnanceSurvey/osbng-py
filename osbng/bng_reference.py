@@ -4,6 +4,7 @@
 import re
 
 # Compile regular expression pattern for BNG reference
+# Supports the following resolutions: 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 5m, 1m
 _pattern = re.compile(
     r"^[HJNOST][A-HJ-Z](\d{2}|\d{4}|\d{6}|\d{8}|\d{10})?(NE|SE|SW|NW)?$"
 )
