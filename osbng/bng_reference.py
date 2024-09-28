@@ -58,7 +58,31 @@ import re
 # Compile regular expression pattern for BNG reference
 # Supports the following resolutions: 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 5m, 1m
 _pattern = re.compile(
-    r"^[HJNOST][A-HJ-Z](\d{2}|\d{4}|\d{6}|\d{8}|\d{10})?(NE|SE|SW|NW)?$"
+    r"""
+    ^
+    # 100km grid square prefix
+    (H[LMNOPQRSTUVWXYZ]|
+     N[ABCDEFGHJKLMNOPQRSTUVWXYZ]|
+     O[ABFGLMQRVW]|
+     S[ABCDEFGHJKLMNOPQRSTUVWXYZ]|
+     T[ABFGLMQRVW]|
+     J[LMQRVW])
+    # Zero or one whitespace characters
+    \s?
+    # Easting and northing coordinates
+    # 2-8 digit BNG reference
+    # Not separated by whitespace
+    (?:(\d{2}|\d{4}|\d{6}|\d{8}|
+    # Separated by whitespace
+    \d{1}\s\d{1}|\d{2}\s\d{2}|\d{3}\s\d{3}|\d{4}\s\d{4}|)?
+    # Zero or one whitespace characters
+    \s?
+    # Ordinal direction suffix
+    (NE|SE|SW|NW)?$|
+    # Easting and northing coordinates
+    # 10-digit BNG reference
+    (\d{10}|\d{5}\s\d{5}$))""",
+    re.VERBOSE,
 )
 
 # BNG resolution mappings from metres to string representations
