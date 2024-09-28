@@ -38,13 +38,11 @@ Reference Specification
 
 BNG references must adhere to the following format:
 
-- No spaces should be used between the components of the reference (i.e. between the 2-letter prefix, 
-easting, northing, and ordinal suffix) unless providing a ‘human-readable’ version of the reference.
-- The two-letter 100 km grid square prefixes and ordinal direction suffixes (NE, SE, SW, NW) must always be in uppercase.
-- For improved human-readability, a single space may be introduced between the 100 km two-letter prefix, 
-the numerical components, and ordinal suffix (e.g. ' TQ 2386 3472 SW).
-However, note that this format will fail the validation rules in this custom BNG reference object and is 
-therefore not allowed in machine-processed grid references.
+- Whitespace may or may not separate  the components of the reference (i.e. between the two-letter 100km grid square prefix, 
+easting, northing, and ordinal suffix).
+- If whitespace is present, it should be a single space character.
+- Whitespace can be inconsistentyl used between components of the reference.
+- The two-letter 100 km grid square prefixes and ordinal direction suffixes (NE, SE, SW, NW) should be capitalised.
 
 At each resolution, a given location can be identified with increasing detail, 
 allowing for variable accuracy depending on the geospatial application, from small-scale mapping to precise survey measurements.
