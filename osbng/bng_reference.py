@@ -72,14 +72,16 @@ _pattern = re.compile(
     # Not separated by whitespace
     (?:(\d{2}|\d{4}|\d{6}|\d{8}|
     # Separated by whitespace
-    \d{1}\s\d{1}|\d{2}\s\d{2}|\d{3}\s\d{3}|\d{4}\s\d{4}|)?
+    \d{1}\s\d{1}|\d{2}\s\d{2}|\d{3}\s\d{3}|\d{4}\s\d{4}|
+    # 10-digit BNG reference
+    # Not separated by whitespace
+    \d{10}$|
+    # Separated by whitespace
+    \d{5}\s\d{5}$))?
     # Zero or one whitespace characters
     \s?
     # Ordinal direction suffix
-    (NE|SE|SW|NW)?$|
-    # Easting and northing coordinates
-    # 10-digit BNG reference
-    (\d{10}|\d{5}\s\d{5}$))""",
+    (NE|SE|SW|NW)?$""",
     re.VERBOSE,
 )
 
