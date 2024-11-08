@@ -116,6 +116,8 @@ def is_valid_bng(bng_ref_string: str) -> bool:
     Examples:
         >>> is_valid_bng("TQ 12 34")
         True
+        >>> is_valid_bng("TQ1234")
+        True
         >>> is_valid_bng("tq123")
         False
     """
