@@ -29,7 +29,7 @@ def test__is_valid_bng(test_case):
     "test_case",
     load_test_cases(file_path="./data/bng_reference_test_cases.json")["_get_bng_resolution"],
 )
-def test__is_valid_bng(test_case):
+def test__get_bng_resolution(test_case):
     """Test _get_bng_resolution function with test cases from JSON file.
 
     Args:
