@@ -104,7 +104,7 @@ _resolution_to_string = {
 }
 
 
-def is_valid_bng(bng_ref_string: str) -> bool:
+def _is_valid_bng(bng_ref_string: str) -> bool:
     """Validates a BNG reference string using a regular expression pattern.
 
     Args:
