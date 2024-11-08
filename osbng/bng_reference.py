@@ -3,8 +3,9 @@
 This module implements a custom British National Grid (BNG) reference 
 object for working with geographic locations based on the Ordnance Survey National Grid system. 
 The BNG is a map reference system used to identify locations across Great Britain (GB). 
-It is designed as a Cartesian grid where positions are identified by a combination of easting and northing 
+It is designed as a Cartesian grid where positions are identified by a combination of (positive) easting and northing 
 values within a defined grid square.
+The origin point (0, 0) of the BNG system is located to the southwest of the Isles of Scilly.
 
 The BNG is structured using a hierarchical system of grid squares at various resolutions. 
 At its highest level, the grid is divided into 100 km by 100 km squares, 
@@ -22,16 +23,16 @@ The grid reference can be expressed at different scales, as follows:
 
 1. 100 km: Identified by a two-letter code (e.g. 'TQ').
 2. 50 km: Subdivides the 100 km grid into four quadrants. The grid reference adds an ordinal direction suffix (NE, NW, SE, SW) 
-to indicate the quadrant within the 100 km square (e.g. ‘TQSW’).
-3. 10 km: Adds two-digit easting and northing values (e.g. 'TQ23').
-4. 5 km: Subdivides the 10 km square adding an ordinal suffix (e.g. 'TQ53SW').
-5. 1 km: Adds four-digit easting and northing values (e.g. 'TQ2334').
-6. 500 m: Subdivides the 1 km square adding an ordinal suffix (e.g. 'TQ2334NE').
-7. 100 m: Adds six-digit easting and northing values (e.g. ' TQ238347').
-8. 50 m: Subdivides the 100 m square adding an ordinal suffix (e.g. ' TQ238347SE').
-9. 10 m: Adds eight-digit easting and northing values (e.g. ' TQ23863472').
-10. 5 m: Subdivides the 10 m square adding an ordinal suffix (e.g. e.g. ‘TQ23863472NW').
-11. 1 m: Adds ten-digit easting and northing values (e.g. ' TQ2386334729’).
+to indicate the quadrant within the 100 km square (e.g. 'TQ SW').
+3. 10 km: Adds one-digit easting and northing values (e.g. 'TQ 2 3').
+4. 5 km: Subdivides the 10 km square adding an ordinal suffix (e.g. 'TQ 53 SW').
+5. 1 km: Adds two-digit easting and northing values (e.g. 'TQ 23 34').
+6. 500 m: Subdivides the 1 km square adding an ordinal suffix (e.g. 'TQ 23 34 NE').
+7. 100 m: Adds three-digit easting and northing values (e.g. ' TQ 238 347').
+8. 50 m: Subdivides the 100 m square adding an ordinal suffix (e.g. ' TQ 238 347 SE').
+9. 10 m: Adds four-digit easting and northing values (e.g. ' TQ 2386 3472').
+10. 5 m: Subdivides the 10 m square adding an ordinal suffix (e.g. 'TQ 2386 3472 NW').
+11. 1 m: Adds five-digit easting and northing values (e.g. ' TQ 23863 34729').
 
 Reference Specification
 ------------------------
@@ -41,19 +42,21 @@ BNG references must adhere to the following format:
 - Whitespace may or may not separate  the components of the reference (i.e. between the two-letter 100km grid square prefix, 
 easting, northing, and ordinal suffix).
 - If whitespace is present, it should be a single space character.
-- Whitespace can be inconsistentyl used between components of the reference.
+- Whitespace can be inconsistently used between components of the reference.
 - The two-letter 100 km grid square prefixes and ordinal direction suffixes (NE, SE, SW, NW) should be capitalised.
 
 At each resolution, a given location can be identified with increasing detail, 
 allowing for variable accuracy depending on the geospatial application, from small-scale mapping to precise survey measurements.
 
 The BNG system is widely used by the geospatial community across GB. 
-This module provides functionality to parse, create, and manipulate BNG references at a range of resolutions.
+This module provides functionality to parse, create and manipulate BNG references at a range of resolutions.
 """
 
 import re
 
 # Compile regular expression pattern for BNG reference
+# The geographical extent of the BNG reference system is defined as:
+# easting >= 0 and easting < 700000 and northing >= 0 and northing < 1300000
 # Supports the following resolutions: 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 5m, 1m
 _pattern = re.compile(
     r"""
