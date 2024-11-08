@@ -122,3 +122,36 @@ def _is_valid_bng(bng_ref_string: str) -> bool:
         False
     """
     return bool(_pattern.match(bng_ref_string))
+
+
+def _get_bng_resolution(bng_ref_string: str) -> int:
+    """Gets the resolution of the BNG reference in meters.
+
+    The resolution is determined based on the length of the easting
+    and northing components and whether an ordinal suffix is present.
+
+    Args:
+        bng_ref_string (str): The BNG reference string.
+
+    Returns:
+        resolution (int): The resolution of the BNG reference in meters.
+    """
+    # Match BNG reference string against regex pattern
+    match = _pattern.match(bng_ref_string)
+
+    # Extract components of the BNG reference
+    en_components = match.group(2)
+    suffix = match.group(3)
+
+    # Determine resolution based on length of easting and northing components
+    if en_components is None:
+        resolution = 100000
+    else:
+        length = len(en_components)
+        resolution = 10 ** (5 - length // 2)
+
+    # Adjust for ordinal suffix if present
+    if suffix:
+        resolution //= 2  # Ordinal suffix halves the resolution
+
+    return resolution
