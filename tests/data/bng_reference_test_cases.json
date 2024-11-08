@@ -5,6 +5,26 @@
             "expected": true
         },
         {
+            "bng_ref_string": "HP ",
+            "expected": true
+        },
+        {
+            "bng_ref_string": " HP",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "hp",
+            "expected": false
+        },
+        {
+            "bng_ref_string": " hp",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "hp ",
+            "expected": false
+        },
+        {
             "bng_ref_string": "OV",
             "expected": true
         },
@@ -15,10 +35,6 @@
         {
             "bng_ref_string": "TQ",
             "expected": true
-        },
-        {
-            "bng_ref_string": "hp",
-            "expected": false
         },
         {
             "bng_ref_string": "H",
@@ -37,8 +53,28 @@
             "expected": false
         },
         {
+            "bng_ref_string": "1 1",
+            "expected": false
+        },
+        {
             "bng_ref_string": "HPNE",
             "expected": true
+        },
+        {
+            "bng_ref_string": " HPNE ",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "HP NE",
+            "expected": true
+        },
+        {
+            "bng_ref_string": " HP NE",
+            "expected": false
+        },
+        {
+            "bng_ref_string": " HP NE ",
+            "expected": false
         },
         {
             "bng_ref_string": "HPSE",
@@ -54,7 +90,7 @@
         },
         {
             "bng_ref_string": "HP NW",
-            "expected": false
+            "expected": true
         },
         {
             "bng_ref_string": "HP00",
@@ -62,6 +98,22 @@
         },
         {
             "bng_ref_string": "HP99",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "HP 99",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "HP 9 9",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "HP 99 ",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "HP 9 9 ",
             "expected": true
         },
         {
@@ -74,15 +126,15 @@
         },
         {
             "bng_ref_string": "HP 99 NE",
-            "expected": false
+            "expected": true
         },
         {
             "bng_ref_string": "HP 99NE",
-            "expected": false
+            "expected": true
         },
         {
             "bng_ref_string": "HP99 NE",
-            "expected": false
+            "expected": true
         },
         {
             "bng_ref_string": "TQ1122",
@@ -90,15 +142,55 @@
         },
         {
             "bng_ref_string": "TQ 11 22",
-            "expected": false
+            "expected": true
         },
         {
             "bng_ref_string": "TQ11 22",
-            "expected": false
+            "expected": true
         },
         {
             "bng_ref_string": "TQ1122SW",
             "expected": true
+        },
+        {
+            "bng_ref_string": "TQ 1122SW",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "TQ 11 22SW",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "TQ 11 22 SW",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "tq 11 22 sw ",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "TQ 11 22 SW ",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "TQ 1122 SW",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "TQ1122 SW",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "TQ 11322 SW",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "TQ 113 22 SW",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "TQ 11 224 SW",
+            "expected": false
         },
         {
             "bng_ref_string": "ST112288",
@@ -109,7 +201,47 @@
             "expected": true
         },
         {
+            "bng_ref_string": "ST 112288NW",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "ST 112 288NW",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "ST 112 288 NW",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "ST112 288 NW",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "ST112 288NW",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "ST112288 NW",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "st112288NW",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "ST112288nw",
+            "expected": false
+        },
+        {
             "bng_ref_string": "st112288nw",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "st 112288 nw",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "st 112 288 nw",
             "expected": false
         },
         {
@@ -122,19 +254,39 @@
         },
         {
             "bng_ref_string": "NX 1122 8837 NE",
-            "expected": false
+            "expected": true
         },
         {
             "bng_ref_string": "NX 11228837 NE",
-            "expected": false
+            "expected": true
         },
         {
             "bng_ref_string": "NB1122883743",
             "expected": true
         },
         {
-            "bng_ref_string": "NB1122883743SE",
+            "bng_ref_string": "NB11228 83743",
             "expected": true
+        },
+        {
+            "bng_ref_string": "NB 11228 83743",
+            "expected": true
+        },
+        {
+            "bng_ref_string": "NB11228983743",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "NB 112289 83743",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "NB 11228 837434",
+            "expected": false
+        },
+        {
+            "bng_ref_string": "NB1122883743SE",
+            "expected": false
         },
         {
             "bng_ref_string": "NB112288374300",
