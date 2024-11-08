@@ -296,5 +296,51 @@
             "bng_ref_string": "NB112288374300NE",
             "expected": false
         }
+    ],
+    "_get_bng_resolution": [
+        {
+            "bng_ref_string": "SU",
+            "expected": 100000
+        },
+        {
+            "bng_ref_string": "SUSW",
+            "expected": 50000
+        },
+        {
+            "bng_ref_string": "SU12",
+            "expected": 10000
+        },
+        {
+            "bng_ref_string": "SU12SW",
+            "expected": 5000
+        },
+        {
+            "bng_ref_string": "SU1234",
+            "expected": 1000
+        },
+        {
+            "bng_ref_string": "SU1234NW",
+            "expected": 500
+        },
+        {
+            "bng_ref_string": "SU124348",
+            "expected": 100
+        },
+        {
+            "bng_ref_string": "SU124348SE",
+            "expected": 50
+        },
+        {
+            "bng_ref_string": "SU12473483",
+            "expected": 10
+        },
+        {
+            "bng_ref_string": "SU12473483NE",
+            "expected": 5
+        },
+        {
+            "bng_ref_string": "SU1247834838",
+            "expected": 1
+        }
     ]
 }
