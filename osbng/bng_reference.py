@@ -148,6 +148,9 @@ def _get_bng_resolution(bng_ref_string: str) -> int:
         resolution = 100000
     else:
         length = len(en_components)
+        # The possible resolutions are powers of ten: 1, 10, 100, 1000, 10000, 100000
+        # Integer division by 2 to determine the appropriate power of ten
+        # Subtracting from 5 aligns the length with the correct power of ten
         resolution = 10 ** (5 - length // 2)
 
     # Adjust for ordinal suffix if present
