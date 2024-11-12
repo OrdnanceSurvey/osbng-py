@@ -158,3 +158,23 @@ def _get_bng_resolution(bng_ref_string: str) -> int:
         resolution //= 2  # Ordinal suffix halves the resolution
 
     return resolution
+
+
+def _get_bng_resolution_string(bng_ref_string: str) -> str:
+    """Gets the resolution of a BNG reference expressed as a string.
+
+    The resolution is returned in a human-readable format, such as '10km', '50km', etc.
+
+    Args:
+        bng_ref_string (str): The BNG reference string.
+
+    Returns:
+        str: The resolution of the BNG reference as a string.
+
+    Examples:
+        >>> get_bng_resolution_string("TQ1234")
+        '10km'
+    """
+    resolution_meters = _get_bng_resolution(bng_ref_string)
+
+    return _resolution_to_string.get(resolution_meters)
