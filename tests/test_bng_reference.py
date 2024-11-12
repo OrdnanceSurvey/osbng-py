@@ -5,7 +5,7 @@ Test cases are loaded from a JSON file using the load_test_cases function from t
 
 import pytest
 
-from osbng.bng_reference import _is_valid_bng, _get_bng_resolution
+from osbng.bng_reference import _is_valid_bng, _get_bng_resolution, _get_bng_resolution_string
 from osbng.utils import load_test_cases
 
 
@@ -38,3 +38,18 @@ def test__get_bng_resolution(test_case):
     bng_ref_string = test_case["bng_ref_string"]
     expected = test_case["expected"]
     assert _get_bng_resolution(bng_ref_string) == expected
+
+# Parameterised test for _get_bng_resolution_string function
+@pytest.mark.parametrize(
+    "test_case",
+    load_test_cases(file_path="./data/bng_reference_test_cases.json")["_get_bng_resolution_string"],
+)
+def test__get_bng_resolution_string(test_case):
+    """Test _get_bng_resolution_string function with test cases from JSON file.
+
+    Args:
+        test_case (dict): Test case from JSON file.
+    """
+    bng_ref_string = test_case["bng_ref_string"]
+    expected = test_case["expected"]
+    assert _get_bng_resolution_string(bng_ref_string) == expected
