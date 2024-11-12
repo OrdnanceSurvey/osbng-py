@@ -342,5 +342,51 @@
             "bng_ref_string": "SU1247834838",
             "expected": 1
         }
+    ],
+    "_get_bng_resolution_string": [
+        {
+            "bng_ref_string": "SU",
+            "expected": "100km"
+        },
+        {
+            "bng_ref_string": "SUSW",
+            "expected": "50km"
+        },
+        {
+            "bng_ref_string": "SU12",
+            "expected": "10km"
+        },
+        {
+            "bng_ref_string": "SU12SW",
+            "expected": "5km"
+        },
+        {
+            "bng_ref_string": "SU1234",
+            "expected": "1km"
+        },
+        {
+            "bng_ref_string": "SU1234NW",
+            "expected": "500m"
+        },
+        {
+            "bng_ref_string": "SU124348",
+            "expected": "100m"
+        },
+        {
+            "bng_ref_string": "SU124348SE",
+            "expected": "50m"
+        },
+        {
+            "bng_ref_string": "SU12473483",
+            "expected": "10m"
+        },
+        {
+            "bng_ref_string": "SU12473483NE",
+            "expected": "5m"
+        },
+        {
+            "bng_ref_string": "SU1247834838",
+            "expected": "1m"
+        }
     ]
 }
