@@ -388,5 +388,51 @@
             "bng_ref_string": "SU1247834838",
             "expected": "1m"
         }
+    ],
+    "_get_bng_pretty_format": [
+        {
+            "bng_ref_string": "SU",
+            "expected": "SU"
+        },
+        {
+            "bng_ref_string": "SUSW",
+            "expected": "SU SW"
+        },
+        {
+            "bng_ref_string": "SU12",
+            "expected": "SU 1 2"
+        },
+        {
+            "bng_ref_string": "SU12SW",
+            "expected": "SU 1 2 SW"
+        },
+        {
+            "bng_ref_string": "SU1234",
+            "expected": "SU 12 34"
+        },
+        {
+            "bng_ref_string": "SU1234NW",
+            "expected": "SU 12 34 NW"
+        },
+        {
+            "bng_ref_string": "SU124348",
+            "expected": "SU 124 348"
+        },
+        {
+            "bng_ref_string": "SU124348SE",
+            "expected": "SU 124 348 SE"
+        },
+        {
+            "bng_ref_string": "SU12473483",
+            "expected": "SU 1247 3483"
+        },
+        {
+            "bng_ref_string": "SU12473483NE",
+            "expected": "SU 1247 3483 NE"
+        },
+        {
+            "bng_ref_string": "SU1247834838",
+            "expected": "SU 12478 34838"
+        }
     ]
 }
