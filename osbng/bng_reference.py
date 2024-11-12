@@ -177,7 +177,7 @@ def _get_bng_resolution_string(bng_ref_string: str) -> str:
 
     Examples:
         >>> get_bng_resolution_string("TQ1234")
-        '10km'
+        '1km'
     """
     resolution_meters = _get_bng_resolution(bng_ref_string)
 
