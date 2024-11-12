@@ -125,7 +125,7 @@ def _is_valid_bng(bng_ref_string: str) -> bool:
 
 
 def _get_bng_resolution(bng_ref_string: str) -> int:
-    """Gets the resolution of the BNG reference in meters.
+    """Gets the resolution of a BNG reference in meters.
 
     The resolution is determined based on the length of the easting
     and northing components and whether an ordinal suffix is present.
