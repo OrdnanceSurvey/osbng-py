@@ -135,6 +135,10 @@ def _get_bng_resolution(bng_ref_string: str) -> int:
 
     Returns:
         resolution (int): The resolution of the BNG reference in meters.
+
+    Examples:
+        >>> get_bng_resolution("TQ1234")
+        1000
     """
     # Match BNG reference string against regex pattern
     match = _pattern.match(bng_ref_string)
