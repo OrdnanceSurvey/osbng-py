@@ -182,3 +182,47 @@ def _get_bng_resolution_string(bng_ref_string: str) -> str:
     resolution_meters = _get_bng_resolution(bng_ref_string)
 
     return _resolution_to_string.get(resolution_meters)
+
+
+def _get_bng_pretty_format(bng_ref_string: str) -> str:
+    """Parses a BNG reference string and returns a pretty formatted BNG reference.
+
+    Pretty formatting is defined as a single whitespace between the reference components
+    including prefix, easting and northing, and suffix.
+
+    Args:
+        bng_ref_string (str): The BNG reference string.
+
+    Returns:
+        pretty_format (str): The pretty formatted BNG reference.
+
+    Examples:
+        >>> _get_bng_pretty_format("TQ1234")
+        'TQ 12 34'
+        >>> _get_bng_pretty_format("TQ1234NE")
+        'TQ 12 34 NE'
+    """
+    # Match BNG reference string against regex pattern
+    match = _pattern.match(bng_ref_string)
+
+    # Extract components of the BNG reference
+    prefix = match.group(1)
+    en_components = match.group(2)
+    suffix = match.group(3)
+
+    # Pretty format the BNG reference
+    if en_components is None:
+        pretty_format = prefix
+    else:
+        # Split easting and northing components
+        length = len(en_components)
+        easting = en_components[: length // 2]
+        northing = en_components[length // 2 :]
+        # Add whitespace between components
+        pretty_format = f"{prefix} {easting} {northing}"
+
+    # Add ordinal suffix if present
+    if suffix:
+        pretty_format += f" {suffix}"
+
+    return pretty_format
