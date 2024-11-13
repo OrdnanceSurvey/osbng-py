@@ -54,6 +54,8 @@ This module provides functionality to parse, create and manipulate BNG reference
 
 import re
 
+from osbng.errors import BNGReferenceError
+
 # Compile regular expression pattern for BNG reference
 # The geographical extent of the BNG reference system is defined as:
 # easting >= 0 and easting < 700000 and northing >= 0 and northing < 1300000
@@ -114,7 +116,7 @@ def _is_valid_bng(bng_ref_string: str) -> bool:
         bool: True if the BNG reference is valid, False otherwise.
 
     Examples:
-        >>> is_valid_bng("TQ 12 34")
+        >>> _is_valid_bng("TQ 12 34")
         True
         >>> is_valid_bng("TQ1234")
         True
@@ -226,3 +228,61 @@ def _get_bng_pretty_format(bng_ref_string: str) -> str:
         pretty_format += f" {suffix}"
 
     return pretty_format
+
+
+class BNGReference:
+    """A custom object for handling British National Grid (BNG) references.
+
+    Converts a BNG reference string into a BNG reference object.
+
+    Args:
+        bng_ref_string (str): The BNG reference string.
+
+    Properties:
+        bng_ref_compact (str): The BNG reference with whitespace removed.
+        bng_ref_formatted (str): The pretty-formatted version of the BNG reference with single spaces between components.
+        resolution_metres (int): The resolution of the BNG reference in meters.
+        resolution_label (str): The resolution of the BNG reference expressed as a descriptive string.
+
+    Raises:
+        BNGReferenceError: If the BNG reference string is invalid.
+
+    Examples:
+        >>> bng_ref = BNGReference("TQ1234")
+        >>> bng_ref.bng_ref_compact
+        'TQ1234'
+        >>> bng_ref.bng_ref_formatted
+        'TQ 12 34'
+        >>> bng_ref.resolution_metres
+        1000
+        >>> bng_ref.resolution_label
+        '1km'
+    """
+
+    def __init__(self, bng_ref_string: str):
+        # Validate the BNG reference string
+        if not _is_valid_bng(bng_ref_string):
+            raise BNGReferenceError(f"Invalid BNG reference: '{bng_ref_string}'")
+
+        # Remove all whitespace for internal storage
+        self._bng_ref_compact = bng_ref_string.replace(" ", "")
+
+    @property
+    def bng_ref_compact(self) -> str:
+        """Returns the BNG reference with whitespace removed."""
+        return self._bng_ref_compact
+
+    @property
+    def bng_ref_formatted(self) -> str:
+        """Returns a pretty-formatted version of the BNG reference with single spaces between components."""
+        return _get_bng_pretty_format(self._bng_ref_compact)
+
+    @property
+    def resolution_metres(self) -> int:
+        """Returns the resolution of the BNG reference in meters."""
+        return _get_bng_resolution(self._bng_ref_compact)
+
+    @property
+    def resolution_label(self) -> str:
+        """Returns the resolution of the BNG reference expressed as a string."""
+        return _get_bng_resolution_string(self._bng_ref_compact)
