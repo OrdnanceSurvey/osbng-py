@@ -434,5 +434,280 @@
             "bng_ref_string": "SU1247834838",
             "expected": "SU 12478 34838"
         }
+    ],
+    "BNGReference": [
+        {
+            "bng_ref_string": "SU",
+            "expected_bng_ref_compact": "SU",
+            "expected_bng_ref_formatted": "SU",
+            "expected_resolution_metres": 100000,
+            "expected_resolution_label": "100km"
+        },
+        {
+            "bng_ref_string": "SU ",
+            "expected_bng_ref_compact": "SU",
+            "expected_bng_ref_formatted": "SU",
+            "expected_resolution_metres": 100000,
+            "expected_resolution_label": "100km"
+        },
+        {
+            "bng_ref_string": "SUSW",
+            "expected_bng_ref_compact": "SUSW",
+            "expected_bng_ref_formatted": "SU SW",
+            "expected_resolution_metres": 50000,
+            "expected_resolution_label": "50km"
+        },
+        {
+            "bng_ref_string": "SU SW",
+            "expected_bng_ref_compact": "SUSW",
+            "expected_bng_ref_formatted": "SU SW",
+            "expected_resolution_metres": 50000,
+            "expected_resolution_label": "50km"
+        },
+        {
+            "bng_ref_string": "SU12",
+            "expected_bng_ref_compact": "SU12",
+            "expected_bng_ref_formatted": "SU 1 2",
+            "expected_resolution_metres": 10000,
+            "expected_resolution_label": "10km"
+        },
+        {
+            "bng_ref_string": "SU 1 2",
+            "expected_bng_ref_compact": "SU12",
+            "expected_bng_ref_formatted": "SU 1 2",
+            "expected_resolution_metres": 10000,
+            "expected_resolution_label": "10km"
+        },
+        {
+            "bng_ref_string": "SU 12",
+            "expected_bng_ref_compact": "SU12",
+            "expected_bng_ref_formatted": "SU 1 2",
+            "expected_resolution_metres": 10000,
+            "expected_resolution_label": "10km"
+        },
+        {
+            "bng_ref_string": "SU12SW",
+            "expected_bng_ref_compact": "SU12SW",
+            "expected_bng_ref_formatted": "SU 1 2 SW",
+            "expected_resolution_metres": 5000,
+            "expected_resolution_label": "5km"
+        },
+        {
+            "bng_ref_string": "SU 1 2 SW",
+            "expected_bng_ref_compact": "SU12SW",
+            "expected_bng_ref_formatted": "SU 1 2 SW",
+            "expected_resolution_metres": 5000,
+            "expected_resolution_label": "5km"
+        },
+        {
+            "bng_ref_string": "SU 12 SW",
+            "expected_bng_ref_compact": "SU12SW",
+            "expected_bng_ref_formatted": "SU 1 2 SW",
+            "expected_resolution_metres": 5000,
+            "expected_resolution_label": "5km"
+        },
+        {
+            "bng_ref_string": "SU12 SW",
+            "expected_bng_ref_compact": "SU12SW",
+            "expected_bng_ref_formatted": "SU 1 2 SW",
+            "expected_resolution_metres": 5000,
+            "expected_resolution_label": "5km"
+        },
+        {
+            "bng_ref_string": "SU1234",
+            "expected_bng_ref_compact": "SU1234",
+            "expected_bng_ref_formatted": "SU 12 34",
+            "expected_resolution_metres": 1000,
+            "expected_resolution_label": "1km"
+        },
+        {
+            "bng_ref_string": "SU 12 34",
+            "expected_bng_ref_compact": "SU1234",
+            "expected_bng_ref_formatted": "SU 12 34",
+            "expected_resolution_metres": 1000,
+            "expected_resolution_label": "1km"
+        },
+        {
+            "bng_ref_string": "SU 1234",
+            "expected_bng_ref_compact": "SU1234",
+            "expected_bng_ref_formatted": "SU 12 34",
+            "expected_resolution_metres": 1000,
+            "expected_resolution_label": "1km"
+        },
+        {
+            "bng_ref_string": "SU1234 ",
+            "expected_bng_ref_compact": "SU1234",
+            "expected_bng_ref_formatted": "SU 12 34",
+            "expected_resolution_metres": 1000,
+            "expected_resolution_label": "1km"
+        },
+        {
+            "bng_ref_string": "SU1234NW",
+            "expected_bng_ref_compact": "SU1234NW",
+            "expected_bng_ref_formatted": "SU 12 34 NW",
+            "expected_resolution_metres": 500,
+            "expected_resolution_label": "500m"
+        },
+        {
+            "bng_ref_string": "SU 12 34 NW",
+            "expected_bng_ref_compact": "SU1234NW",
+            "expected_bng_ref_formatted": "SU 12 34 NW",
+            "expected_resolution_metres": 500,
+            "expected_resolution_label": "500m"
+        },
+        {
+            "bng_ref_string": "SU 1234 NW",
+            "expected_bng_ref_compact": "SU1234NW",
+            "expected_bng_ref_formatted": "SU 12 34 NW",
+            "expected_resolution_metres": 500,
+            "expected_resolution_label": "500m"
+        },
+        {
+            "bng_ref_string": "SU1234 NW",
+            "expected_bng_ref_compact": "SU1234NW",
+            "expected_bng_ref_formatted": "SU 12 34 NW",
+            "expected_resolution_metres": 500,
+            "expected_resolution_label": "500m"
+        },
+        {
+            "bng_ref_string": "SU124348",
+            "expected_bng_ref_compact": "SU124348",
+            "expected_bng_ref_formatted": "SU 124 348",
+            "expected_resolution_metres": 100,
+            "expected_resolution_label": "100m"
+        },
+        {
+            "bng_ref_string": "SU 124 348",
+            "expected_bng_ref_compact": "SU124348",
+            "expected_bng_ref_formatted": "SU 124 348",
+            "expected_resolution_metres": 100,
+            "expected_resolution_label": "100m"
+        },
+        {
+            "bng_ref_string": "SU 124348",
+            "expected_bng_ref_compact": "SU124348",
+            "expected_bng_ref_formatted": "SU 124 348",
+            "expected_resolution_metres": 100,
+            "expected_resolution_label": "100m"
+        },
+        {
+            "bng_ref_string": "SU124348 ",
+            "expected_bng_ref_compact": "SU124348",
+            "expected_bng_ref_formatted": "SU 124 348",
+            "expected_resolution_metres": 100,
+            "expected_resolution_label": "100m"
+        },
+        {
+            "bng_ref_string": "SU124348SE",
+            "expected_bng_ref_compact": "SU124348SE",
+            "expected_bng_ref_formatted": "SU 124 348 SE",
+            "expected_resolution_metres": 50,
+            "expected_resolution_label": "50m"
+        },
+        {
+            "bng_ref_string": "SU 124 348 SE",
+            "expected_bng_ref_compact": "SU124348SE",
+            "expected_bng_ref_formatted": "SU 124 348 SE",
+            "expected_resolution_metres": 50,
+            "expected_resolution_label": "50m"
+        },
+        {
+            "bng_ref_string": "SU 124348 SE",
+            "expected_bng_ref_compact": "SU124348SE",
+            "expected_bng_ref_formatted": "SU 124 348 SE",
+            "expected_resolution_metres": 50,
+            "expected_resolution_label": "50m"
+        },
+        {
+            "bng_ref_string": "SU124348 SE",
+            "expected_bng_ref_compact": "SU124348SE",
+            "expected_bng_ref_formatted": "SU 124 348 SE",
+            "expected_resolution_metres": 50,
+            "expected_resolution_label": "50m"
+        },
+        {
+            "bng_ref_string": "SU12473483",
+            "expected_bng_ref_compact": "SU12473483",
+            "expected_bng_ref_formatted": "SU 1247 3483",
+            "expected_resolution_metres": 10,
+            "expected_resolution_label": "10m"
+        },
+        {
+            "bng_ref_string": "SU 1247 3483",
+            "expected_bng_ref_compact": "SU12473483",
+            "expected_bng_ref_formatted": "SU 1247 3483",
+            "expected_resolution_metres": 10,
+            "expected_resolution_label": "10m"
+        },
+        {
+            "bng_ref_string": "SU 12473483",
+            "expected_bng_ref_compact": "SU12473483",
+            "expected_bng_ref_formatted": "SU 1247 3483",
+            "expected_resolution_metres": 10,
+            "expected_resolution_label": "10m"
+        },
+        {
+            "bng_ref_string": "SU12473483 ",
+            "expected_bng_ref_compact": "SU12473483",
+            "expected_bng_ref_formatted": "SU 1247 3483",
+            "expected_resolution_metres": 10,
+            "expected_resolution_label": "10m"
+        },
+        {
+            "bng_ref_string": "SU12473483NE",
+            "expected_bng_ref_compact": "SU12473483NE",
+            "expected_bng_ref_formatted": "SU 1247 3483 NE",
+            "expected_resolution_metres": 5,
+            "expected_resolution_label": "5m"
+        },
+        {
+            "bng_ref_string": "SU 1247 3483 NE",
+            "expected_bng_ref_compact": "SU12473483NE",
+            "expected_bng_ref_formatted": "SU 1247 3483 NE",
+            "expected_resolution_metres": 5,
+            "expected_resolution_label": "5m"
+        },
+        {
+            "bng_ref_string": "SU 12473483 NE",
+            "expected_bng_ref_compact": "SU12473483NE",
+            "expected_bng_ref_formatted": "SU 1247 3483 NE",
+            "expected_resolution_metres": 5,
+            "expected_resolution_label": "5m"
+        },
+        {
+            "bng_ref_string": "SU12473483 NE",
+            "expected_bng_ref_compact": "SU12473483NE",
+            "expected_bng_ref_formatted": "SU 1247 3483 NE",
+            "expected_resolution_metres": 5,
+            "expected_resolution_label": "5m"
+        },
+        {
+            "bng_ref_string": "SU1247834838",
+            "expected_bng_ref_compact": "SU1247834838",
+            "expected_bng_ref_formatted": "SU 12478 34838",
+            "expected_resolution_metres": 1,
+            "expected_resolution_label": "1m"
+        },
+        {
+            "bng_ref_string": "SU 12478 34838",
+            "expected_bng_ref_compact": "SU1247834838",
+            "expected_bng_ref_formatted": "SU 12478 34838",
+            "expected_resolution_metres": 1,
+            "expected_resolution_label": "1m"
+        },
+        {
+            "bng_ref_string": "SU 1247834838",
+            "expected_bng_ref_compact": "SU1247834838",
+            "expected_bng_ref_formatted": "SU 12478 34838",
+            "expected_resolution_metres": 1,
+            "expected_resolution_label": "1m"
+        },
+        {
+            "bng_ref_string": "SU1247834838 ",
+            "expected_bng_ref_compact": "SU1247834838",
+            "expected_bng_ref_formatted": "SU 12478 34838",
+            "expected_resolution_metres": 1,
+            "expected_resolution_label": "1m"
+        }
     ]
 }
