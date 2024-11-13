@@ -1,5 +1,5 @@
 {
-    "_is_valid_bng": [
+    "_validate_bng": [
         {
             "bng_ref_string": "HP",
             "expected": true
@@ -297,7 +297,7 @@
             "expected": false
         }
     ],
-    "_get_bng_resolution": [
+    "_get_bng_resolution_metres": [
         {
             "bng_ref_string": "SU",
             "expected": 100000
@@ -343,7 +343,7 @@
             "expected": 1
         }
     ],
-    "_get_bng_resolution_string": [
+    "_get_bng_resolution_label": [
         {
             "bng_ref_string": "SU",
             "expected": "100km"

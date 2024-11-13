@@ -106,7 +106,7 @@ _resolution_to_string = {
 }
 
 
-def _is_valid_bng(bng_ref_string: str) -> bool:
+def _validate_bng(bng_ref_string: str) -> bool:
     """Validates a BNG reference string using a regular expression pattern.
 
     Args:
@@ -116,17 +116,17 @@ def _is_valid_bng(bng_ref_string: str) -> bool:
         bool: True if the BNG reference is valid, False otherwise.
 
     Examples:
-        >>> _is_valid_bng("TQ 12 34")
+        >>> _validate_bng("TQ 12 34")
         True
-        >>> is_valid_bng("TQ1234")
+        >>> _validate_bng("TQ1234")
         True
-        >>> is_valid_bng("tq123")
+        >>> _validate_bng("tq123")
         False
     """
     return bool(_pattern.match(bng_ref_string))
 
 
-def _get_bng_resolution(bng_ref_string: str) -> int:
+def _get_bng_resolution_metres(bng_ref_string: str) -> int:
     """Gets the resolution of a BNG reference string in meters.
 
     The resolution is determined based on the length of the easting
@@ -139,7 +139,7 @@ def _get_bng_resolution(bng_ref_string: str) -> int:
         resolution (int): The resolution of the BNG reference in meters.
 
     Examples:
-        >>> get_bng_resolution("TQ1234")
+        >>> _get_bng_resolution_metres("TQ1234")
         1000
     """
     # Match BNG reference string against regex pattern
@@ -166,7 +166,7 @@ def _get_bng_resolution(bng_ref_string: str) -> int:
     return resolution
 
 
-def _get_bng_resolution_string(bng_ref_string: str) -> str:
+def _get_bng_resolution_label(bng_ref_string: str) -> str:
     """Gets the resolution of a BNG reference expressed as a string.
 
     The resolution is returned in a human-readable format, such as '10km', '50km', etc.
@@ -178,10 +178,10 @@ def _get_bng_resolution_string(bng_ref_string: str) -> str:
         str: The resolution of the BNG reference as a string.
 
     Examples:
-        >>> get_bng_resolution_string("TQ1234")
+        >>> _get_bng_resolution_label("TQ1234")
         '1km'
     """
-    resolution_meters = _get_bng_resolution(bng_ref_string)
+    resolution_meters = _get_bng_resolution_metres(bng_ref_string)
 
     return _resolution_to_string.get(resolution_meters)
 
@@ -261,7 +261,7 @@ class BNGReference:
 
     def __init__(self, bng_ref_string: str):
         # Validate the BNG reference string
-        if not _is_valid_bng(bng_ref_string):
+        if not _validate_bng(bng_ref_string):
             raise BNGReferenceError(f"Invalid BNG reference: '{bng_ref_string}'")
 
         # Remove all whitespace for internal storage
@@ -280,9 +280,9 @@ class BNGReference:
     @property
     def resolution_metres(self) -> int:
         """Returns the resolution of the BNG reference in meters."""
-        return _get_bng_resolution(self._bng_ref_compact)
+        return _get_bng_resolution_metres(self._bng_ref_compact)
 
     @property
     def resolution_label(self) -> str:
         """Returns the resolution of the BNG reference expressed as a string."""
-        return _get_bng_resolution_string(self._bng_ref_compact)
+        return _get_bng_resolution_label(self._bng_ref_compact)
