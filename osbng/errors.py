@@ -22,3 +22,19 @@ class BNGResolutionError(Exception):
         )
         # Pass message to base class
         super().__init__(message)
+
+
+class OutsideBNGExtentError(Exception):
+    """Exception raised for easting and northing coordinates outside the BNG extent.
+
+    BNG extent defined as 0 <= easting < 700000 and 0 <= northing < 1300000"""
+
+    def __init__(self):
+        # Create message listing the easting and northing coordinate ranges
+        message = (
+            "Coordinates outside of the BNG extent. Easting and northing values must be within: \n"
+            "0 <= easting < 700000\n"
+            "0 <= northing < 1300000"
+        )
+        # Pass message to base class
+        super().__init__(message)
