@@ -54,6 +54,7 @@ This module provides functionality to parse, create and manipulate BNG reference
 
 import re
 
+from osbng.resolution import _resolution_to_string
 from osbng.errors import BNGReferenceError
 
 # Compile regular expression pattern for BNG reference
@@ -89,21 +90,6 @@ _pattern = re.compile(
     (NE|SE|SW|NW)?$""",
     re.VERBOSE,
 )
-
-# BNG resolution mappings from metres to string representations
-_resolution_to_string = {
-    100000: "100km",
-    50000: "50km",
-    10000: "10km",
-    5000: "5km",
-    1000: "1km",
-    500: "500m",
-    100: "100m",
-    50: "50m",
-    10: "10m",
-    5: "5m",
-    1: "1m",
-}
 
 
 def _validate_bng(bng_ref_string: str) -> bool:
