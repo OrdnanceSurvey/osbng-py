@@ -1,0 +1,20 @@
+{
+    "_validate_and_normalise_bng_resolution": [
+        {
+            "resolution": 100000,
+            "expected": 100000
+        },
+        {
+            "resolution": "100km",
+            "expected": 100000
+        },
+        {
+            "resolution": 50000,
+            "expected": 50000
+        },
+        {
+            "resolution": "50km",
+            "expected": 50000
+        }
+    ]
+}
