@@ -15,6 +15,42 @@
         {
             "resolution": "50km",
             "expected": 50000
+        },
+        {
+            "resolution": "50000m",
+            "expected_exception": {
+                "name": "BNGResolutionError"
+            }
+        },
+        {
+            "resolution": "10000m",
+            "expected_exception": {
+                "name": "BNGResolutionError"
+            }
+        },
+        {
+            "resolution": "1000m",
+            "expected_exception": {
+                "name": "BNGResolutionError"
+            }
+        },
+        {
+            "resolution": 0.5,
+            "expected_exception": {
+                "name": "BNGResolutionError"
+            }
+        },
+        {
+            "resolution": 250,
+            "expected_exception": {
+                "name": "BNGResolutionError"
+            }
+        },
+        {
+            "resolution": 125,
+            "expected_exception": {
+                "name": "BNGResolutionError"
+            }
         }
     ]
 }
