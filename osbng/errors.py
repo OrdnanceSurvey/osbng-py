@@ -1,4 +1,17 @@
-"""Custom exceptions supporting interactions with the British National Grid (BNG)."""
+"""Custom exceptions supporting interactions with the British National Grid (BNG).
+
+These exceptions are intended to provide clear and specific error handling for scenarios where invlaid inputs 
+or operations are encountered.
+
+Custom exceptions:
+    - BNGReferenceError: Raised when an invalid BNG reference string is provided.
+    - BNGResolutionError: Raised when an invalid BNG resolution is provided.
+    - OutsideBNGExtentError: Raised when easting and northing coordinates fall outside of the defined extent of the BNG coordinate system.
+
+Additional features:
+    - exception_map (dict): A dictionary that maps string representations of exception class names to their respective classes. This allows for 
+    dynamic exception handling in a structured manner.
+"""
 
 from osbng.resolution import _resolution_to_string
 
