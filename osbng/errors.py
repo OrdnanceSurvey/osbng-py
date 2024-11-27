@@ -9,7 +9,7 @@ Custom exceptions:
     - OutsideBNGExtentError: Raised when easting and northing coordinates fall outside of the defined extent of the BNG coordinate system.
 
 Additional features:
-    - exception_map (dict): A dictionary that maps string representations of exception class names to their respective classes. This allows for 
+    - EXCEPTION_MAP (dict): A dictionary that maps string representations of exception class names to their respective classes. This allows for 
     dynamic exception handling in a structured manner.
 """
 
@@ -53,7 +53,7 @@ class OutsideBNGExtentError(Exception):
         super().__init__(message)
 
 # Map exception strings to exception classes
-exception_map = {
+EXCEPTION_MAP = {
     "BNGReferenceError": BNGReferenceError,
     "BNGResolutionError": BNGResolutionError,
     "OutsideBNGExtentError": OutsideBNGExtentError,
