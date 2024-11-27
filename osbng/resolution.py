@@ -10,7 +10,7 @@ for each resolution level. For example, the numeric resolution 1000 is mapped to
 These resolution mappings establish the allowable values that functions and objects referencing the system can accept and process."""
 
 # BNG resolution mappings from metre-based integer values to string label representations
-_resolution_to_string = {
+_RESOLUTION_TO_STRING = {
     100000: "100km",
     50000: "50km",
     10000: "10km",
