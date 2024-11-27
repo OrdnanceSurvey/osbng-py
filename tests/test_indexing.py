@@ -17,7 +17,7 @@ from osbng.utils import load_test_cases
         "_validate_and_normalise_bng_resolution"
     ],
 )
-def test_bngreference(test_case):
+def test__validate_and_normalise_bng_resolution(test_case):
     """Test _validate_and_normalise_bng_resolution with test cases from JSON file."""
     resolution = test_case["resolution"]
     expected = test_case["expected"]
