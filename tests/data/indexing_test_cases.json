@@ -52,5 +52,61 @@
                 "name": "BNGResolutionError"
             }
         }
+    ],
+    "_validate_easting_northing": [
+        {
+            "easting": 0,
+            "northing": 0
+        },
+        {
+            "easting": 350000,
+            "northing": 650000
+        },
+        {
+            "easting": 699999,
+            "northing": 1299999
+        },
+        {
+            "easting": 700000,
+            "northing": 0,
+            "expected_exception": {
+                "name": "OutsideBNGExtentError"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": 1300000,
+            "expected_exception": {
+                "name": "OutsideBNGExtentError"
+            }
+        },
+        {
+            "easting": 700000,
+            "northing": 1300000,
+            "expected_exception": {
+                "name": "OutsideBNGExtentError"
+            }
+        },
+        {
+            "easting": -1,
+            "northing": 0,
+            "expected_exception": {
+                "name": "OutsideBNGExtentError"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": -1,
+            "expected_exception": {
+                "name": "OutsideBNGExtentError"
+            }
+        },
+        {
+            "easting": -1,
+            "northing": -1,
+            "expected_exception": {
+                "name": "OutsideBNGExtentError"
+            }
+        }
     ]
 }
