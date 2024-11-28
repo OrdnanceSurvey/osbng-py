@@ -1,7 +1,7 @@
 """
 """
 
-from osbng.errors import BNGResolutionError
+from osbng.errors import BNGResolutionError, OutsideBNGExtentError
 from osbng.resolution import _RESOLUTION_TO_STRING
 
 
@@ -42,3 +42,23 @@ def _validate_and_normalise_bng_resolution(resolution: int | str):
     # If resolution is neither an integer nor a string, raise BNGResolutionError
     else:
         raise BNGResolutionError()
+
+
+def _validate_easting_northing(easting: float, northing: float):
+    """Validates that the easting and northing coordinates are within the BNG extent.
+
+    The easting and northing coordinates must be below the upper bounds of the BNG system.
+    Coordinates of 700000 (easting) and 1300000 (northing) would correspond to a BNG reference 
+    representing the southwest (lower-left) corner of a grid square beyond the system's limits.
+
+    Args:
+        easting (float): The easting coordinate. Must be in the range 0 <= easting < 700000.
+        northing (float): The northing coordinate. Must be in the range 0 <= northing < 1300000.
+
+    Raises:
+        OutsideBNGExtentError: If the easting or northing coordinates are outside the BNG extent.
+    """
+    if not (0 <= easting < 700000):
+        raise OutsideBNGExtentError()
+    if not (0 <= northing < 1300000):
+        raise OutsideBNGExtentError()
