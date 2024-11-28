@@ -1,4 +1,23 @@
-"""
+"""Provides functionality for indexing coordinates and geometries against the British National Grid (BNG).
+
+The module supports bi-drectional conversion between easting/northing coordinate pairs and BNG references 
+at supported resolutions as defined in the 'resolution' module. Additionally, it enables the decomposition 
+of geometries, represented using Shapely objects,into simplified representations bounded by their presence 
+in each grid square at a specified resolution. Indexing functionality faciliates grid-based spatial analysis, 
+enabling applications such as statistical aggregation, data visualisation, and data interopability. 
+
+Coordinate Conversion:
+    - Convert eastng and northing coorindates to BNG references at supported resolutions.
+    - Decode BNG references to retrieve the corresponding easting and northing coordinates.
+
+Geometry Indexing: 
+    - Retrieve the BNG references of the grid squares intersected by Shapely geometries at a specified resolution.
+    - Decompose Shapely geometries of any type into the BNG grid squares they intersect at a specified resolution.
+
+Supported Resolutions:
+    - The module supports the standard BNG resolutions, inlcuding 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 
+    5m and 1m.
+    - These resolutions are validated and normalised usingthe resolution mapping defined in the 'resolution' module.
 """
 
 from osbng.errors import BNGResolutionError, OutsideBNGExtentError
@@ -48,7 +67,7 @@ def _validate_easting_northing(easting: float, northing: float):
     """Validates that the easting and northing coordinates are within the BNG extent.
 
     The easting and northing coordinates must be below the upper bounds of the BNG system.
-    Coordinates of 700000 (easting) and 1300000 (northing) would correspond to a BNG reference 
+    Coordinates of 700000 (easting) and 1300000 (northing) would correspond to a BNG reference
     representing the southwest (lower-left) corner of a grid square beyond the system's limits.
 
     Args:
