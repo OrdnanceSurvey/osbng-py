@@ -169,7 +169,7 @@ def _get_bng_resolution_label(bng_ref_string: str) -> str:
     """
     resolution_meters = _get_bng_resolution_metres(bng_ref_string)
 
-    return _RESOLUTION_TO_STRING.get(resolution_meters)
+    return _RESOLUTION_TO_STRING.get(resolution_meters)["label"]
 
 
 def _get_bng_pretty_format(bng_ref_string: str) -> str:

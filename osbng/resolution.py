@@ -11,15 +11,15 @@ These resolution mappings establish the allowable values that functions and obje
 
 # BNG resolution mappings from metre-based integer values to string label representations
 _RESOLUTION_TO_STRING = {
-    100000: "100km",
-    50000: "50km",
-    10000: "10km",
-    5000: "5km",
-    1000: "1km",
-    500: "500m",
-    100: "100m",
-    50: "50m",
-    10: "10m",
-    5: "5m",
-    1: "1m",
+    100000: {"label": "100km", "quadtree": False},
+    50000: {"label": "50km", "quadtree": True},
+    10000: {"label": "10km", "quadtree": False},
+    5000: {"label": "5km", "quadtree": True},
+    1000: {"label": "1km", "quadtree": False},
+    500: {"label": "500m", "quadtree": True},
+    100: {"label": "100m", "quadtree": False},
+    50: {"label": "50m", "quadtree": True},
+    10: {"label": "10m", "quadtree": False},
+    5: {"label": "5m", "quadtree": True},
+    1: {"label": "1m", "quadtree": False},
 }

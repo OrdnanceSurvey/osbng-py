@@ -50,12 +50,13 @@ def _validate_and_normalise_bng_resolution(resolution: int | str):
         return resolution
 
     # If resolution is a string, check if it's a valid resolution label
+
     elif isinstance(resolution, str):
-        if resolution not in _RESOLUTION_TO_STRING.values():
+        if resolution not in [value["label"] for value in _RESOLUTION_TO_STRING.values()]:
             raise BNGResolutionError()
         # Get the corresponding metre-based resolution
         return next(
-            res for res, label in _RESOLUTION_TO_STRING.items() if label == resolution
+            res for res, value in _RESOLUTION_TO_STRING.items() if value["label"] == resolution
         )
 
     # If resolution is neither an integer nor a string, raise BNGResolutionError
