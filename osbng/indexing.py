@@ -20,8 +20,29 @@ Supported Resolutions:
     - These resolutions are validated and normalised usingthe resolution mapping defined in the 'resolution' module.
 """
 
+import numpy as np
+
 from osbng.errors import BNGResolutionError, OutsideBNGExtentError
 from osbng.resolution import _RESOLUTION_TO_STRING
+
+# 100km BNG grid square letters
+_PREFIXES = np.array(
+    [
+        ["SV", "SW", "SX", "SY", "SZ", "TV", "TW"],
+        ["SQ", "SR", "SS", "ST", "SU", "TQ", "TR"],
+        ["SL", "SM", "SN", "SO", "SP", "TL", "TM"],
+        ["SF", "SG", "SH", "SJ", "SK", "TF", "TG"],
+        ["SA", "SB", "SC", "SD", "SE", "TA", "TB"],
+        ["NV", "NW", "NX", "NY", "NZ", "OV", "OW"],
+        ["NQ", "NR", "NS", "NT", "NU", "OQ", "OR"],
+        ["NL", "NM", "NN", "NO", "NP", "OL", "OM"],
+        ["NF", "NG", "NH", "NJ", "NK", "OF", "OG"],
+        ["NA", "NB", "NC", "ND", "NE", "OA", "OB"],
+        ["HV", "HW", "HX", "HY", "HZ", "JV", "JW"],
+        ["HQ", "HR", "HS", "HT", "HU", "JQ", "JR"],
+        ["HL", "HM", "HN", "HO", "HP", "JL", "JM"],
+    ]
+)
 
 
 def _validate_and_normalise_bng_resolution(resolution: int | str):
