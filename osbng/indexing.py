@@ -154,7 +154,7 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
         BNGResolutionError: If an invalid resolution is provided.
         OutsideBNGExtentError: If the easting and northing coordinates are outside the BNG extent.
 
-    Examples:
+    Example:
         >>> xy_to_bng(437289, 115541, "100km").bng_ref_formatted
         'SU'
         >>> xy_to_bng(437289, 115541, "10km").bng_ref_formatted
