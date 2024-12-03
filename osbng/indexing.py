@@ -111,3 +111,24 @@ def _validate_easting_northing(easting: float, northing: float):
         raise OutsideBNGExtentError()
     if not (0 <= northing < 1300000):
         raise OutsideBNGExtentError()
+
+
+def _get_bng_suffix(easting: float, northing: float, resolution: int) -> str:
+    """Get the BNG ordinal direction suffix for a given easting, northing and quadtree resolution.
+
+    Args:
+        easting (float): Easting coordinate.
+        northing (float): Northing coordinate.
+        resolution (int): Resolution expressed as a metre-based integer. Must be an intermediate quadtree resolution e.g. 5, 50, 500, 5000, 50000.
+
+    Returns:
+        str: The BNG ordinal direction suffix.
+    """
+    # Normalise easting and northing coordinates
+    # Calculate the fractional part of the normalised easting and northing coordinates
+    # Round fractional part to the nearest integer (0 or 1)
+    suffix_x = round((easting % 100000) / (resolution * 2) % 1)
+    suffix_y = round((northing % 100000) / (resolution * 2) % 1)
+
+    # Return the suffix from the lookup using quadtree positional index
+    return _SUFFIXES[suffix_x, suffix_y]
