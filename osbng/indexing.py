@@ -173,14 +173,14 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
     prefix_x = int(easting // 100000)
     prefix_y = int(northing // 100000)
 
-    # Get the grid letters from the _PREFIX object
+    # Return the prefix from the lookup using positional indices
     prefix = _PREFIXES[prefix_y][prefix_x]
 
-    # BNG reference for 100km resolution represents prefix only
+    # BNG reference for 100km resolution is formed from the prefix only
     if validated_resolution == 100000:
         return BNGReference(prefix)
 
-    # BNG reference for 50km resolution represents prefix and suffix
+    # BNG reference for 50km resolution is formed from both prefix and suffix
     elif validated_resolution == 50000:
         # Get BNG suffix
         suffix = _get_bng_suffix(easting, northing, validated_resolution)
@@ -192,6 +192,7 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
         if _RESOLUTION_TO_STRING[validated_resolution]["quadtree"]:
             scaled_resolution = validated_resolution * 2
         else:
+            # For non-quadtree (standard) resolutions, the scaled resolution is the same as the resolution
             scaled_resolution = validated_resolution
 
         # Calculate easting and northing bins
@@ -205,10 +206,10 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
         easting_bin = str(easting_bin).zfill(pad_length)
         northing_bin = str(northing_bin).zfill(pad_length)
 
-        # BNG reference for non-quadtree resolutions represents prefix, easting bin and northing bin
+        # BNG reference for non-quadtree resolutions is formed from the prefix, easting bin and northing bin
         if not _RESOLUTION_TO_STRING[validated_resolution]["quadtree"]:
             return BNGReference(f"{prefix}{easting_bin}{northing_bin}")
-        # BNG reference for quadtree resolutions represents prefix, easting bin, northing bin and suffix
+        # BNG reference for quadtree resolutions is formed from the prefix, easting bin, northing bin and suffix
         else:
             # Get BNG suffix
             suffix = _get_bng_suffix(easting, northing, validated_resolution)
