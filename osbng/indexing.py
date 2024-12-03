@@ -24,6 +24,7 @@ import numpy as np
 
 from osbng.errors import BNGResolutionError, OutsideBNGExtentError
 from osbng.resolution import _RESOLUTION_TO_STRING
+from osbng.bng_reference import BNGReference
 
 # 100km BNG grid square letters
 _PREFIXES = np.array(
@@ -132,3 +133,79 @@ def _get_bng_suffix(easting: float, northing: float, resolution: int) -> str:
 
     # Return the suffix from the lookup using quadtree positional index
     return _SUFFIXES[suffix_x, suffix_y]
+
+
+def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGReference:
+    """Returns a BNG reference object given easting and northing coordinates, at a specified resolution.
+
+    Args:
+        easting (float): The easting coordinate.
+        northing (float): The northing coordinate.
+        resolution (int or str): The resolution of the BNG reference expressed either as a metre-based integer or as a string label.
+
+    Returns:
+        BNGReference: The BNG reference object.
+
+    Raises:
+        BNGResolutionError: If an invalid resolution is provided.
+        OutsideBNGExtentError: If the easting and northing coordinates are outside the BNG extent.
+
+    Examples:
+        >>> xy_to_bng(437289, 115541, "100km").bng_ref_formatted
+        'SU'
+        >>> xy_to_bng(437289, 115541, "10km").bng_ref_formatted
+        'SU 3 1'
+        >>> xy_to_bng(437289, 115541, "5km").bng_ref_formatted
+        'SU 3 1 NE'
+        >>> xy_to_bng(437289, 115541, 1).bng_ref_formatted
+        'SU 37289 15541'
+    """
+    # Validate and normalise the resolution to its metre-based integer value
+    validated_resolution = _validate_and_normalise_bng_resolution(resolution)
+    # Validate the easting and northing coordinates are within the BNG extent
+    _validate_easting_northing(easting, northing)
+
+    # Calculate prefix positional indices
+    prefix_x = int(easting // 100000)
+    prefix_y = int(northing // 100000)
+
+    # Get the grid letters from the _PREFIX object
+    prefix = _PREFIXES[prefix_y][prefix_x]
+
+    # BNG reference for 100km resolution represents prefix only
+    if validated_resolution == 100000:
+        return BNGReference(prefix)
+
+    # BNG reference for 50km resolution represents prefix and suffix
+    elif validated_resolution == 50000:
+        # Get BNG suffix
+        suffix = _get_bng_suffix(easting, northing, validated_resolution)
+        return BNGReference(f"{prefix}{suffix}")
+
+    # All other BNG resolutions
+    else:
+        # Calculate scaled resolution for quadtree resolutions
+        if _RESOLUTION_TO_STRING[validated_resolution]["quadtree"]:
+            scaled_resolution = validated_resolution * 2
+        else:
+            scaled_resolution = validated_resolution
+
+        # Calculate easting and northing bins
+        easting_bin = int(easting % 100000 // scaled_resolution)
+        northing_bin = int(northing % 100000 // scaled_resolution)
+
+        # Padding length for variable easting and northing bin length
+        pad_length = 6 - len(str(scaled_resolution))
+
+        # Pad easting and northing bins
+        easting_bin = str(easting_bin).zfill(pad_length)
+        northing_bin = str(northing_bin).zfill(pad_length)
+
+        # BNG reference for non-quadtree resolutions represents prefix, easting bin and northing bin
+        if not _RESOLUTION_TO_STRING[validated_resolution]["quadtree"]:
+            return BNGReference(f"{prefix}{easting_bin}{northing_bin}")
+        # BNG reference for quadtree resolutions represents prefix, easting bin, northing bin and suffix
+        else:
+            # Get BNG suffix
+            suffix = _get_bng_suffix(easting, northing, validated_resolution)
+            return BNGReference(f"{prefix}{easting_bin}{northing_bin}{suffix}")
