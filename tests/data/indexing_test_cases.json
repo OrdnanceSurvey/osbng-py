@@ -108,5 +108,67 @@
                 "name": "OutsideBNGExtentError"
             }
         }
+    ],
+    "_get_bng_suffix": [
+        {
+            "easting": 437289,
+            "northing": 115541,
+            "resolution": 50000,
+            "expected": "SW"
+        },
+        {
+            "easting": 437289,
+            "northing": 115541,
+            "resolution": 5000,
+            "expected": "NE"
+        },
+        {
+            "easting": 437289,
+            "northing": 115541,
+            "resolution": 500,
+            "expected": "NW"
+        },
+        {
+            "easting": 437289,
+            "northing": 115541,
+            "resolution": 50,
+            "expected": "SE"
+        },
+        {
+            "easting": 437289,
+            "northing": 115541,
+            "resolution": 5,
+            "expected": "SE"
+        },
+        {
+            "easting": 322582.65,
+            "northing": 672811.91,
+            "resolution": 50000,
+            "expected": "NW"
+        },
+        {
+            "easting": 322582.65,
+            "northing": 672811.91,
+            "resolution": 5000,
+            "expected": "SW"
+        },
+        {
+            "easting": 322582.65,
+            "northing": 672811.91,
+            "resolution": 500,
+            "expected": "NE"
+        },
+        {
+            "easting": 322582.65,
+            "northing": 672811.91,
+            "resolution": 50,
+            "expected": "SE"
+        },
+        {
+            "easting": 322582.65,
+            "northing": 672811.91,
+            "resolution": 5,
+            "expected": "SW"
+        }
     ]
 }
