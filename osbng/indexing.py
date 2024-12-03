@@ -76,7 +76,6 @@ def _validate_and_normalise_bng_resolution(resolution: int | str):
         return resolution
 
     # If resolution is a string, check if it's a valid resolution label
-
     elif isinstance(resolution, str):
         if resolution not in [
             value["label"] for value in _RESOLUTION_TO_STRING.values()
