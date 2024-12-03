@@ -44,6 +44,10 @@ _PREFIXES = np.array(
     ]
 )
 
+# BNG ordinal direction suffixes and corresponding positional indices
+# for intermediate quadtree resolutions
+_SUFFIXES = {(0, 0): "SW", (0, 1): "NW", (1, 0): "SE", (1, 1): "NE"}
+
 
 def _validate_and_normalise_bng_resolution(resolution: int | str):
     """Validates and normalises a BNG resolution to its metre-based integer value.
