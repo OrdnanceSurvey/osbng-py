@@ -124,6 +124,10 @@ def _get_bng_suffix(easting: float, northing: float, resolution: int) -> str:
 
     Returns:
         str: The BNG ordinal direction suffix.
+
+    Example:
+        >>> _get_bng_suffix(437289, 115541, 5000)
+        'NE'
     """
     # Normalise easting and northing coordinates
     # Calculate the fractional part of the normalised easting and northing coordinates
