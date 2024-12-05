@@ -18,7 +18,7 @@ BNG Reference Structure
 
 Each BNG reference includes a 2-letter prefix that identifies the 100 km grid square. This is followed by an 
 easting and northing value, and optionally, a suffix indicating ordinal (intercardinal) directions (NE, SE, SW, NW). 
-These suffixes represent a quadtree subdivision of the grid at the ‘standard’ resolutions (100 km, 10 km, 1 km, 100 m, and 10 m), 
+These suffixes represent a quadtree subdivision of the grid at the 'standard' resolutions (100 km, 10 km, 1 km, 100 m, and 10 m), 
 with each direction indicating a specific quadrant.
 
 There are two exceptions to this structure:
@@ -57,7 +57,7 @@ EPSG:27700 (OSGB36 / British National Grid)
 
 The BNG system is a practical application of the EPSG:27700 (OSGB36 / British National Grid) coordinate reference system 
 (https://epsg.io/27700) which provides the geodetic framework that defines how locations defined by easting and northing coordinates 
-and encoded as BNG references (e.g. ‘ST 569 714’) are projected to the grid.
+and encoded as BNG references (e.g. 'ST 569 714') are projected to the grid.
 
 Application
 ------------------------
