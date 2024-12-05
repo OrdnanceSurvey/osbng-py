@@ -1,6 +1,6 @@
 """Custom exceptions supporting interactions with the British National Grid (BNG).
 
-These exceptions are intended to provide clear and specific error handling for scenarios where invlaid inputs 
+These exceptions are intended to provide clear and specific error handling for scenarios where invalid inputs 
 or operations are encountered.
 
 Custom exceptions:
