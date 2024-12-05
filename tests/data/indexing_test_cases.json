@@ -111,6 +111,66 @@
     ],
     "_get_bng_suffix": [
         {
+            "easting": 500000,
+            "northing": 200000,
+            "resolution": 50000,
+            "expected": "SW"
+        },
+        {
+            "easting": 500000,
+            "northing": 200000,
+            "resolution": 5000,
+            "expected": "SW"
+        },
+        {
+            "easting": 500000,
+            "northing": 200000,
+            "resolution": 500,
+            "expected": "SW"
+        },
+        {
+            "easting": 500000,
+            "northing": 200000,
+            "resolution": 50,
+            "expected": "SW"
+        },
+        {
+            "easting": 500000,
+            "northing": 200000,
+            "resolution": 5,
+            "expected": "SW"
+        },
+        {
+            "easting": 400000,
+            "northing": 550000,
+            "resolution": 50000,
+            "expected": "NW"
+        },
+        {
+            "easting": 400000,
+            "northing": 550000,
+            "resolution": 5000,
+            "expected": "SW"
+        },
+        {
+            "easting": 400000,
+            "northing": 550000,
+            "resolution": 500,
+            "expected": "SW"
+        },
+        {
+            "easting": 400000,
+            "northing": 550000,
+            "resolution": 50,
+            "expected": "SW"
+        },
+        {
+            "easting": 400000,
+            "northing": 550000,
+            "resolution": 5,
+            "expected": "SW"
+        },
+        {
             "easting": 437289,
             "northing": 115541,
             "resolution": 50000,
