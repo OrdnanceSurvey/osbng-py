@@ -131,8 +131,8 @@ def _get_bng_suffix(easting: float, northing: float, resolution: int) -> str:
     # Normalise easting and northing coordinates
     # Calculate the fractional part of the normalised easting and northing coordinates
     # Round fractional part to the nearest integer (0 or 1)
-    suffix_x = round((easting % 100000) / (resolution * 2) % 1)
-    suffix_y = round((northing % 100000) / (resolution * 2) % 1)
+    suffix_x = 1 if ((easting % 100000) / (resolution * 2) % 1) >= 0.5 else 0
+    suffix_y = 1 if ((northing % 100000) / (resolution * 2) % 1) >= 0.5 else 0
 
     # Return the suffix from the lookup using quadtree positional index
     return _SUFFIXES[suffix_x, suffix_y]
