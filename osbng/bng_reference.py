@@ -1,54 +1,71 @@
 """British National Grid Reference System.
 
-This module implements a custom British National Grid (BNG) reference 
-object for working with geographic locations based on the Ordnance Survey National Grid system. 
-The BNG is a map reference system used to identify locations across Great Britain (GB). 
-It is designed as a Cartesian grid where positions are identified by a combination of (positive) easting and northing 
-values within a defined grid square.
-The origin point (0, 0) of the BNG system is located to the southwest of the Isles of Scilly.
+Implements a custom British National Grid (BNG) reference object for working with geographic 
+locations based on the Ordnance Survey (OS) National Grid system. 
 
-The BNG is structured using a hierarchical system of grid squares at various resolutions. 
-At its highest level, the grid is divided into 100 km by 100 km squares, 
-each of which is identified by a two-letter code. Successive levels of resolution further subdivide 
-the grid squares into finer detail, down to individual 1-meter squares.
+The BNG is a rectangular Cartesian 700 x 1300km grid system based upon the transverse Mercator 
+projection used to identify locations across Great Britain (GB). In the BNG, locations are specified 
+using coordinates (eastings and northings). These coordinates are measured in meters from a defined 
+origin point (0, 0) southwest of the Isles of Scilly. Values increase to the northeast, covering all 
+of mainland Great Britain and surrounding islands.
+
+The BNG is structured using a hierarchical system of grid squares at various resolutions. At its highest level, 
+the grid divides GB into 100 km by 100 km squares, each identified by a two-letter code. Successive levels 
+of resolution further subdivide the grid squares into finer detail, down to individual 1-meter squares.
 
 BNG Reference Structure
 ------------------------
 
-Each reference consists of a 2-letter prefix (identifying the 100 km grid square), 
-followed by an easting and northing value, which may be further subdivided using intermediate resolutions. 
-Additionally, an optional suffix representing ordinal (intercardinal) directions (NE, SE, SW, NW) may be 
-appended to the reference to account for quadtree subdivision of the grid at finer resolutions. 
-The grid reference can be expressed at different scales, as follows:
+Each BNG reference includes a 2-letter prefix that identifies the 100 km grid square. This is followed by an 
+easting and northing value, and optionally, a suffix indicating ordinal (intercardinal) directions (NE, SE, SW, NW). 
+These suffixes represent a quadtree subdivision of the grid at the ‘standard’ resolutions (100 km, 10 km, 1 km, 100 m, and 10 m), 
+with each direction indicating a specific quadrant.
 
-1. 100 km: Identified by a two-letter code (e.g. 'TQ').
-2. 50 km: Subdivides the 100 km grid into four quadrants. The grid reference adds an ordinal direction suffix (NE, NW, SE, SW) 
+There are two exceptions to this structure:
+
+1.  At the 100 km resolution, the reference consists only of the prefix.
+2.  At the 50 km resolution, the reference includes the prefix and the ordinal direction suffix but does not include easting 
+or northing components.
+
+A BNG reference can be expressed at different scales, as follows:
+1.  100 km: Identified by a two-letter code (e.g. 'TQ').
+2.  50 km: Subdivides the 100 km grid into four quadrants. The grid reference adds an ordinal direction suffix (NE, NW, SE, SW) 
 to indicate the quadrant within the 100 km square (e.g. 'TQ SW').
-3. 10 km: Adds one-digit easting and northing values (e.g. 'TQ 2 3').
-4. 5 km: Subdivides the 10 km square adding an ordinal suffix (e.g. 'TQ 53 SW').
-5. 1 km: Adds two-digit easting and northing values (e.g. 'TQ 23 34').
-6. 500 m: Subdivides the 1 km square adding an ordinal suffix (e.g. 'TQ 23 34 NE').
-7. 100 m: Adds three-digit easting and northing values (e.g. ' TQ 238 347').
-8. 50 m: Subdivides the 100 m square adding an ordinal suffix (e.g. ' TQ 238 347 SE').
-9. 10 m: Adds four-digit easting and northing values (e.g. ' TQ 2386 3472').
+3.  10 km: Adds one-digit easting and northing values (e.g. 'TQ 2 3').
+4.  5 km: Subdivides the 10 km square adding an ordinal suffix (e.g. 'TQ 53 SW').
+5.  1 km: Adds two-digit easting and northing values (e.g. 'TQ 23 34').
+6.  500 m: Subdivides the 1 km square adding an ordinal suffix (e.g. 'TQ 23 34 NE').
+7.  100 m: Adds three-digit easting and northing values (e.g. ' TQ 238 347').
+8.  50 m: Subdivides the 100 m square adding an ordinal suffix (e.g. ' TQ 238 347 SE').
+9.  10 m: Adds four-digit easting and northing values (e.g. ' TQ 2386 3472').
 10. 5 m: Subdivides the 10 m square adding an ordinal suffix (e.g. 'TQ 2386 3472 NW').
 11. 1 m: Adds five-digit easting and northing values (e.g. ' TQ 23863 34729').
 
-Reference Specification
+BNG Reference Specification
 ------------------------
 
-BNG references must adhere to the following format:
+User-defined input BNG reference strings must adhere to the following format:
 
-- Whitespace may or may not separate  the components of the reference (i.e. between the two-letter 100km grid square prefix, 
-easting, northing, and ordinal suffix).
+- Whitespace may or may not separate the components of the reference (i.e. between the two-letter 100km grid square prefix, easting, 
+northing, and ordinal suffix).
 - If whitespace is present, it should be a single space character.
 - Whitespace can be inconsistently used between components of the reference.
 - The two-letter 100 km grid square prefixes and ordinal direction suffixes (NE, SE, SW, NW) should be capitalised.
 
-At each resolution, a given location can be identified with increasing detail, 
-allowing for variable accuracy depending on the geospatial application, from small-scale mapping to precise survey measurements.
+EPSG:27700 (OSGB36 / British National Grid)
+------------------------
 
-The BNG system is widely used by the geospatial community across GB. 
+The BNG system is a practical application of the EPSG:27700 (OSGB36 / British National Grid) coordinate reference system 
+(https://epsg.io/27700) which provides the geodetic framework that defines how locations defined by easting and northing coordinates 
+and encoded as BNG references (e.g. ‘ST 569 714’) are projected to the grid.
+
+Application
+------------------------
+
+The BNG system is widely used by the geospatial community across GB. At each resolution, a given location can be identified with 
+increasing detail, allowing for variable accuracy depending on the geospatial application, from small-scale mapping to precise 
+survey measurements.
+
 This module provides functionality to parse, create and manipulate BNG references at a range of resolutions.
 """
 
