@@ -8,7 +8,8 @@ import pytest
 from osbng.indexing import (
     _validate_and_normalise_bng_resolution,
     _validate_easting_northing,
-    _get_bng_suffix
+    _get_bng_suffix,
+    xy_to_bng,
 )
 from osbng.errors import BNGResolutionError, EXCEPTION_MAP
 from osbng.utils import load_test_cases
@@ -56,12 +57,11 @@ def test__validate_easting_northing(test_case):
     else:
         _validate_easting_northing(easting, northing)
 
+
 # Parameterised test for _get_bng_suffix function
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/indexing_test_cases.json")[
-        "_get_bng_suffix"
-    ],
+    load_test_cases(file_path="./data/indexing_test_cases.json")["_get_bng_suffix"],
 )
 def test__get_bng_suffix(test_case):
     """Test _get_bng_suffix function with test cases from JSON file.
@@ -74,3 +74,26 @@ def test__get_bng_suffix(test_case):
     resolution = test_case["resolution"]
     expected = test_case["expected"]
     assert _get_bng_suffix(easting, northing, resolution) == expected
+
+
+# Parameterised test for xy_to_bng function
+@pytest.mark.parametrize(
+    "test_case",
+    load_test_cases(file_path="./data/indexing_test_cases.json")[
+        "xy_to_bng"
+    ],
+)
+def test_xy_to_bng(test_case):
+    """Test xy_to_bng with test cases from JSON file."""
+    easting = test_case["easting"]
+    northing = test_case["northing"]
+    resolution = test_case["resolution"]
+    if "expected_exception" in test_case:
+        exception_name = test_case["expected_exception"]["name"]
+        # Get exception class from name
+        exception_class = EXCEPTION_MAP[exception_name]
+        with pytest.raises(exception_class):
+            xy_to_bng(easting, northing, resolution)
+    else:
+        bng = xy_to_bng(easting, northing, resolution)
+        assert bng.bng_ref_formatted == test_case["expected"]["bng_ref_formatted"]
