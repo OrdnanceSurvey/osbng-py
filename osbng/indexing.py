@@ -15,9 +15,9 @@ Geometry Indexing:
     - Decompose Shapely geometries of any type into the BNG grid squares they intersect at a specified resolution.
 
 Supported Resolutions:
-    - The module supports the standard BNG resolutions, inlcuding 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 
+    - The module supports the standard BNG resolutions, including 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 
     5m and 1m.
-    - These resolutions are validated and normalised usingthe resolution mapping defined in the 'resolution' module.
+    - These resolutions are validated and normalised using the resolution mapping defined in the 'resolution' module.
 """
 
 import numpy as np
