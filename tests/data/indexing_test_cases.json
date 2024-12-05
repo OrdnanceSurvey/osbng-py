@@ -170,5 +170,487 @@
             "resolution": 5,
             "expected": "SW"
         }
+    ],
+    "xy_to_bng": [
+        {
+            "easting": 0,
+            "northing": 0,
+            "resolution": "100km",
+            "expected": {
+                "bng_ref_formatted": "SV"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": 0,
+            "resolution": "50km",
+            "expected": {
+                "bng_ref_formatted": "SV SW"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": 0,
+            "resolution": "10km",
+            "expected": {
+                "bng_ref_formatted": "SV 0 0"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": 0,
+            "resolution": "5km",
+            "expected": {
+                "bng_ref_formatted": "SV 0 0 SW"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": 0,
+            "resolution": "1km",
+            "expected": {
+                "bng_ref_formatted": "SV 00 00"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": 0,
+            "resolution": "500m",
+            "expected": {
+                "bng_ref_formatted": "SV 00 00 SW"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": 0,
+            "resolution": "100m",
+            "expected": {
+                "bng_ref_formatted": "SV 000 000"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": 0,
+            "resolution": "50m",
+            "expected": {
+                "bng_ref_formatted": "SV 000 000 SW"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": 0,
+            "resolution": "10m",
+            "expected": {
+                "bng_ref_formatted": "SV 0000 0000"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": 0,
+            "resolution": "5m",
+            "expected": {
+                "bng_ref_formatted": "SV 0000 0000 SW"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": 0,
+            "resolution": "1m",
+            "expected": {
+                "bng_ref_formatted": "SV 00000 00000"
+            }
+        },
+        {
+            "easting": 699999.99,
+            "northing": 1299999.99,
+            "resolution": 100000,
+            "expected": {
+                "bng_ref_formatted": "JM"
+            }
+        },
+        {
+            "easting": 699999.99,
+            "northing": 1299999.99,
+            "resolution": 50000,
+            "expected": {
+                "bng_ref_formatted": "JM NE"
+            }
+        },
+        {
+            "easting": 699999.99,
+            "northing": 1299999.99,
+            "resolution": 10000,
+            "expected": {
+                "bng_ref_formatted": "JM 9 9"
+            }
+        },
+        {
+            "easting": 699999.99,
+            "northing": 1299999.99,
+            "resolution": 5000,
+            "expected": {
+                "bng_ref_formatted": "JM 9 9 NE"
+            }
+        },
+        {
+            "easting": 699999.99,
+            "northing": 1299999.99,
+            "resolution": 1000,
+            "expected": {
+                "bng_ref_formatted": "JM 99 99"
+            }
+        },
+        {
+            "easting": 699999.99,
+            "northing": 1299999.99,
+            "resolution": 500,
+            "expected": {
+                "bng_ref_formatted": "JM 99 99 NE"
+            }
+        },
+        {
+            "easting": 699999.99,
+            "northing": 1299999.99,
+            "resolution": 100,
+            "expected": {
+                "bng_ref_formatted": "JM 999 999"
+            }
+        },
+        {
+            "easting": 699999.99,
+            "northing": 1299999.99,
+            "resolution": 50,
+            "expected": {
+                "bng_ref_formatted": "JM 999 999 NE"
+            }
+        },
+        {
+            "easting": 699999.99,
+            "northing": 1299999.99,
+            "resolution": 10,
+            "expected": {
+                "bng_ref_formatted": "JM 9999 9999"
+            }
+        },
+        {
+            "easting": 699999.99,
+            "northing": 1299999.99,
+            "resolution": 5,
+            "expected": {
+                "bng_ref_formatted": "JM 9999 9999 NE"
+            }
+        },
+        {
+            "easting": 699999.99,
+            "northing": 1299999.99,
+            "resolution": 1,
+            "expected": {
+                "bng_ref_formatted": "JM 99999 99999"
+            }
+        },
+        {
+            "easting": 350000,
+            "northing": 550000,
+            "resolution": "100km",
+            "expected": {
+                "bng_ref_formatted": "NY"
+            }
+        },
+        {
+            "easting": 350000,
+            "northing": 550000,
+            "resolution": "50km",
+            "expected": {
+                "bng_ref_formatted": "NY NE"
+            }
+        },
+        {
+            "easting": 350000,
+            "northing": 550000,
+            "resolution": "10km",
+            "expected": {
+                "bng_ref_formatted": "NY 5 5"
+            }
+        },
+        {
+            "easting": 350000,
+            "northing": 550000,
+            "resolution": 5000,
+            "expected": {
+                "bng_ref_formatted": "NY 5 5 SW"
+            }
+        },
+        {
+            "easting": 350000,
+            "northing": 550000,
+            "resolution": 1000,
+            "expected": {
+                "bng_ref_formatted": "NY 50 50"
+            }
+        },
+        {
+            "easting": 350000,
+            "northing": 550000,
+            "resolution": 500,
+            "expected": {
+                "bng_ref_formatted": "NY 50 50 SW"
+            }
+        },
+        {
+            "easting": 350000,
+            "northing": 550000,
+            "resolution": 100,
+            "expected": {
+                "bng_ref_formatted": "NY 500 500"
+            }
+        },
+        {
+            "easting": 350000,
+            "northing": 550000,
+            "resolution": 50,
+            "expected": {
+                "bng_ref_formatted": "NY 500 500 SW"
+            }
+        },
+        {
+            "easting": 350000,
+            "northing": 550000,
+            "resolution": 10,
+            "expected": {
+                "bng_ref_formatted": "NY 5000 5000"
+            }
+        },
+        {
+            "easting": 350000,
+            "northing": 550000,
+            "resolution": 5,
+            "expected": {
+                "bng_ref_formatted": "NY 5000 5000 SW"
+            }
+        },
+        {
+            "easting": 350000,
+            "northing": 550000,
+            "resolution": 1,
+            "expected": {
+                "bng_ref_formatted": "NY 50000 50000"
+            }
+        },
+        {
+            "easting": 300000,
+            "northing": 350000,
+            "resolution": "100km",
+            "expected": {
+                "bng_ref_formatted": "SJ"
+            }
+        },
+        {
+            "easting": 300000,
+            "northing": 350000,
+            "resolution": "50km",
+            "expected": {
+                "bng_ref_formatted": "SJ NW"
+            }
+        },
+        {
+            "easting": 300000,
+            "northing": 350000,
+            "resolution": "10km",
+            "expected": {
+                "bng_ref_formatted": "SJ 0 5"
+            }
+        },
+        {
+            "easting": 300000,
+            "northing": 350000,
+            "resolution": 5000,
+            "expected": {
+                "bng_ref_formatted": "SJ 0 5 SW"
+            }
+        },
+        {
+            "easting": 300000,
+            "northing": 350000,
+            "resolution": 1000,
+            "expected": {
+                "bng_ref_formatted": "SJ 00 50"
+            }
+        },
+        {
+            "easting": 300000,
+            "northing": 350000,
+            "resolution": 500,
+            "expected": {
+                "bng_ref_formatted": "SJ 00 50 SW"
+            }
+        },
+        {
+            "easting": 300000,
+            "northing": 350000,
+            "resolution": 100,
+            "expected": {
+                "bng_ref_formatted": "SJ 000 500"
+            }
+        },
+        {
+            "easting": 300000,
+            "northing": 350000,
+            "resolution": 50,
+            "expected": {
+                "bng_ref_formatted": "SJ 000 500 SW"
+            }
+        },
+        {
+            "easting": 300000,
+            "northing": 350000,
+            "resolution": 10,
+            "expected": {
+                "bng_ref_formatted": "SJ 0000 5000"
+            }
+        },
+        {
+            "easting": 300000,
+            "northing": 350000,
+            "resolution": 5,
+            "expected": {
+                "bng_ref_formatted": "SJ 0000 5000 SW"
+            }
+        },
+        {
+            "easting": 300000,
+            "northing": 350000,
+            "resolution": 1,
+            "expected": {
+                "bng_ref_formatted": "SJ 00000 50000"
+            }
+        },
+        {
+            "easting": 356976.015,
+            "northing": 171421.587,
+            "resolution": "100km",
+            "expected": {
+                "bng_ref_formatted": "ST"
+            }
+        },
+        {
+            "easting": 356976.015,
+            "northing": 171421.587,
+            "resolution": "50km",
+            "expected": {
+                "bng_ref_formatted": "ST NE"
+            }
+        },
+        {
+            "easting": 356976.015,
+            "northing": 171421.587,
+            "resolution": "10km",
+            "expected": {
+                "bng_ref_formatted": "ST 5 7"
+            }
+        },
+        {
+            "easting": 356976.015,
+            "northing": 171421.587,
+            "resolution": 5000,
+            "expected": {
+                "bng_ref_formatted": "ST 5 7 SE"
+            }
+        },
+        {
+            "easting": 356976.015,
+            "northing": 171421.587,
+            "resolution": 1000,
+            "expected": {
+                "bng_ref_formatted": "ST 56 71"
+            }
+        },
+        {
+            "easting": 356976.015,
+            "northing": 171421.587,
+            "resolution": 500,
+            "expected": {
+                "bng_ref_formatted": "ST 56 71 SE"
+            }
+        },
+        {
+            "easting": 356976.015,
+            "northing": 171421.587,
+            "resolution": 100,
+            "expected": {
+                "bng_ref_formatted": "ST 569 714"
+            }
+        },
+        {
+            "easting": 356976.015,
+            "northing": 171421.587,
+            "resolution": 50,
+            "expected": {
+                "bng_ref_formatted": "ST 569 714 SE"
+            }
+        },
+        {
+            "easting": 356976.015,
+            "northing": 171421.587,
+            "resolution": 10,
+            "expected": {
+                "bng_ref_formatted": "ST 5697 7142"
+            }
+        },
+        {
+            "easting": 356976.015,
+            "northing": 171421.587,
+            "resolution": 5,
+            "expected": {
+                "bng_ref_formatted": "ST 5697 7142 SE"
+            }
+        },
+        {
+            "easting": 356976.015,
+            "northing": 171421.587,
+            "resolution": 1,
+            "expected": {
+                "bng_ref_formatted": "ST 56976 71421"
+            }
+        },
+        {
+            "easting": 0,
+            "northing": -1,
+            "resolution": 1000,
+            "expected_exception": {
+                "name": "OutsideBNGExtentError"
+            }
+        },
+        {
+            "easting": -1,
+            "northing": 0,
+            "resolution": 1000,
+            "expected_exception": {
+                "name": "OutsideBNGExtentError"
+            }
+        },
+        {
+            "easting": 700000,
+            "northing": 1300000,
+            "resolution": 1000,
+            "expected_exception": {
+                "name": "OutsideBNGExtentError"
+            }
+        },
+        {
+            "easting": 1,
+            "northing": 1,
+            "resolution": 0.5,
+            "expected_exception": {
+                "name": "BNGResolutionError"
+            }
+        },
+        {
+            "easting": 1,
+            "northing": 1,
+            "resolution": "5000m",
+            "expected_exception": {
+                "name": "BNGResolutionError"
+            }
+        }
     ]
 }
