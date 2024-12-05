@@ -1,13 +1,17 @@
-"""This module defines the supported British National Grid (BNG) resolution mappings.
+"""Defines the supported British National Grid (BNG) resolution mappings.
 
-It relates metre-based integer values to their respective string label representations. These mappings
-are used to indicate differe precision levels in BNG references and serve as the basis for validating 
+Relates metre-based integer values to their respective string label representations. These mappings
+are used to indicate different precision levels in BNG references and serve as the basis for validating 
 and normalising resolutions within the system.
 
 The integer values represent spatial resolutions in metres, while the string labels provide a human-readable descriptor
 for each resolution level. For example, the numeric resolution 1000 is mapped to the label '1km'.
 
-These resolution mappings establish the allowable values that functions and objects referencing the system can accept and process."""
+The resolution mappings also include a flag indicating whether a given resolution represents an (intermediate) quadtree resolution.
+Quadtree resolutions are used to subdivide BNG grid squares at (standard) powers of ten resolutions into four equal quadrants, providing additional levels of precision for spatial indexing.
+
+These resolution mappings establish the allowable values that functions and objects referencing the system can accept and process.
+"""
 
 # BNG resolution mappings from metre-based integer values to string label representations
 _RESOLUTION_TO_STRING = {
