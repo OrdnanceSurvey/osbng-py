@@ -78,7 +78,7 @@ from osbng.errors import BNGReferenceError
 # The geographical extent of the BNG reference system is defined as:
 # easting >= 0 and easting < 700000 and northing >= 0 and northing < 1300000
 # Supports the following resolutions: 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 5m, 1m
-_pattern = re.compile(
+_PATTERN = re.compile(
     r"""
     ^
     # 100km grid square prefix
@@ -126,7 +126,7 @@ def _validate_bng(bng_ref_string: str) -> bool:
         >>> _validate_bng("tq123")
         False
     """
-    return bool(_pattern.match(bng_ref_string))
+    return bool(_PATTERN.match(bng_ref_string))
 
 
 def _get_bng_resolution_metres(bng_ref_string: str) -> int:
@@ -146,7 +146,7 @@ def _get_bng_resolution_metres(bng_ref_string: str) -> int:
         1000
     """
     # Match BNG reference string against regex pattern
-    match = _pattern.match(bng_ref_string)
+    match = _PATTERN.match(bng_ref_string)
 
     # Extract components of the BNG reference
     en_components = match.group(2)
@@ -208,7 +208,7 @@ def _get_bng_pretty_format(bng_ref_string: str) -> str:
         'TQ 12 34 NE'
     """
     # Match BNG reference string against regex pattern
-    match = _pattern.match(bng_ref_string)
+    match = _PATTERN.match(bng_ref_string)
 
     # Extract components of the BNG reference
     prefix = match.group(1)
