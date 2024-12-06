@@ -673,6 +673,94 @@
             }
         },
         {
+            "easting": 200499.01,
+            "northing": 868870.50,
+            "resolution": "100km",
+            "expected": {
+                "bng_ref_formatted": "NH"
+            }
+        },
+        {
+            "easting": 200499.01,
+            "northing": 868870.50,
+            "resolution": "50km",
+            "expected": {
+                "bng_ref_formatted": "NH NW"
+            }
+        },
+        {
+            "easting": 200499.01,
+            "northing": 868870.50,
+            "resolution": "10km",
+            "expected": {
+                "bng_ref_formatted": "NH 0 6"
+            }
+        },
+        {
+            "easting": 200499.01,
+            "northing": 868870.50,
+            "resolution": 5000,
+            "expected": {
+                "bng_ref_formatted": "NH 0 6 NW"
+            }
+        },
+        {
+            "easting": 200499.01,
+            "northing": 868870.50,
+            "resolution": 1000,
+            "expected": {
+                "bng_ref_formatted": "NH 00 69"
+            }
+        },
+        {
+            "easting": 200499.01,
+            "northing": 868870.50,
+            "resolution": 500,
+            "expected": {
+                "bng_ref_formatted": "NH 00 69 SW"
+            }
+        },
+        {
+            "easting": 200499.01,
+            "northing": 868870.50,
+            "resolution": 100,
+            "expected": {
+                "bng_ref_formatted": "NH 004 688"
+            }
+        },
+        {
+            "easting": 200499.01,
+            "northing": 868870.50,
+            "resolution": 50,
+            "expected": {
+                "bng_ref_formatted": "NH 004 688 NE"
+            }
+        },
+        {
+            "easting": 200499.01,
+            "northing": 868870.50,
+            "resolution": 10,
+            "expected": {
+                "bng_ref_formatted": "NH 0049 6887"
+            }
+        },
+        {
+            "easting": 200499.01,
+            "northing": 868870.50,
+            "resolution": 5,
+            "expected": {
+                "bng_ref_formatted": "NH 0049 6887 SE"
+            }
+        },
+        {
+            "easting": 200499.01,
+            "northing": 868870.50,
+            "resolution": 1,
+            "expected": {
+                "bng_ref_formatted": "NH 00499 68870"
+            }
+        },
+        {
             "easting": 0,
             "northing": -1,
             "resolution": 1000,
