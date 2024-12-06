@@ -12,7 +12,7 @@ from osbng.bng_reference import (
     _get_bng_pretty_format,
     BNGReference,
 )
-from osbng.errors import BNGReferenceError, _EXCEPTION_MAP
+from osbng.errors import _EXCEPTION_MAP
 from osbng.utils import load_test_cases
 
 

@@ -11,7 +11,7 @@ from osbng.indexing import (
     _get_bng_suffix,
     xy_to_bng,
 )
-from osbng.errors import BNGResolutionError, _EXCEPTION_MAP
+from osbng.errors import _EXCEPTION_MAP
 from osbng.utils import load_test_cases
 
 
