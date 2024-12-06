@@ -12,7 +12,7 @@ from osbng.bng_reference import (
     _get_bng_pretty_format,
     BNGReference,
 )
-from osbng.errors import BNGReferenceError, EXCEPTION_MAP
+from osbng.errors import BNGReferenceError, _EXCEPTION_MAP
 from osbng.utils import load_test_cases
 
 
@@ -105,7 +105,7 @@ def test_bngreference(test_case):
     if "expected_exception" in test_case:
         exception_name = test_case["expected_exception"]["name"]
         # Get exception class from name
-        exception_class = EXCEPTION_MAP[exception_name]
+        exception_class = _EXCEPTION_MAP[exception_name]
         with pytest.raises(exception_class):
             BNGReference(test_case["bng_ref_string"])
     else:

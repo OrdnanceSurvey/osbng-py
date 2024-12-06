@@ -53,7 +53,7 @@ class OutsideBNGExtentError(Exception):
         super().__init__(message)
 
 # Map exception strings to exception classes
-EXCEPTION_MAP = {
+_EXCEPTION_MAP = {
     "BNGReferenceError": BNGReferenceError,
     "BNGResolutionError": BNGResolutionError,
     "OutsideBNGExtentError": OutsideBNGExtentError,

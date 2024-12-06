@@ -11,7 +11,7 @@ from osbng.indexing import (
     _get_bng_suffix,
     xy_to_bng,
 )
-from osbng.errors import BNGResolutionError, EXCEPTION_MAP
+from osbng.errors import BNGResolutionError, _EXCEPTION_MAP
 from osbng.utils import load_test_cases
 
 
@@ -28,7 +28,7 @@ def test__validate_and_normalise_bng_resolution(test_case):
     if "expected_exception" in test_case:
         exception_name = test_case["expected_exception"]["name"]
         # Get exception class from name
-        exception_class = EXCEPTION_MAP[exception_name]
+        exception_class = _EXCEPTION_MAP[exception_name]
         with pytest.raises(exception_class):
             _validate_and_normalise_bng_resolution(resolution)
     else:
@@ -51,7 +51,7 @@ def test__validate_easting_northing(test_case):
     if "expected_exception" in test_case:
         exception_name = test_case["expected_exception"]["name"]
         # Get exception class from name
-        exception_class = EXCEPTION_MAP[exception_name]
+        exception_class = _EXCEPTION_MAP[exception_name]
         with pytest.raises(exception_class):
             _validate_easting_northing(easting, northing)
     else:
@@ -91,7 +91,7 @@ def test_xy_to_bng(test_case):
     if "expected_exception" in test_case:
         exception_name = test_case["expected_exception"]["name"]
         # Get exception class from name
-        exception_class = EXCEPTION_MAP[exception_name]
+        exception_class = _EXCEPTION_MAP[exception_name]
         with pytest.raises(exception_class):
             xy_to_bng(easting, northing, resolution)
     else:
