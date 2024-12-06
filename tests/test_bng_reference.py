@@ -12,7 +12,7 @@ from osbng.bng_reference import (
     _get_bng_pretty_format,
     BNGReference,
 )
-from osbng.errors import BNGReferenceError
+from osbng.errors import BNGReferenceError, EXCEPTION_MAP
 from osbng.utils import load_test_cases
 
 
@@ -102,17 +102,18 @@ def test_bngreference(test_case):
             - expected_resolution_metres
             - expected_resolution_label
     """
-    try:
+    if "expected_exception" in test_case:
+        exception_name = test_case["expected_exception"]["name"]
+        # Get exception class from name
+        exception_class = EXCEPTION_MAP[exception_name]
+        with pytest.raises(exception_class):
+            BNGReference(test_case["bng_ref_string"])
+    else:
         # Initialise BNGReference object with the test case input
         bng = BNGReference(test_case["bng_ref_string"])
 
         # Test each property against expected values
-        assert bng.bng_ref_compact == test_case["expected_bng_ref_compact"], f"Failed on bng_ref_compact with input: '{test_case["bng_ref_string"]}'"
-        assert bng.bng_ref_formatted == test_case["expected_bng_ref_formatted"], f"Failed on bng_ref_formatted with input: '{test_case["bng_ref_string"]}'"
-        assert bng.resolution_metres == test_case["expected_resolution_metres"], f"Failed on resolution_metres with input: '{test_case["bng_ref_string"]}'"
-        assert bng.resolution_label == test_case["expected_resolution_label"], f"Failed on resolution_label with input: '{test_case["bng_ref_string"]}'"
-
-    except BNGReferenceError:
-        pytest.fail(
-            f"BNGReferenceError raised with input: '{test_case["bng_ref_string"]}'"
-        )
+        assert bng.bng_ref_compact == test_case["expected_bng_ref_compact"]
+        assert bng.bng_ref_formatted == test_case["expected_bng_ref_formatted"]
+        assert bng.resolution_metres == test_case["expected_resolution_metres"]
+        assert bng.resolution_label == test_case["expected_resolution_label"]
