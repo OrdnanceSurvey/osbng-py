@@ -709,7 +709,7 @@
             "northing": 868870.50,
             "resolution": 1000,
             "expected": {
-                "bng_ref_formatted": "NH 00 69"
+                "bng_ref_formatted": "NH 00 68"
             }
         },
         {
@@ -717,7 +717,7 @@
             "northing": 868870.50,
             "resolution": 500,
             "expected": {
-                "bng_ref_formatted": "NH 00 69 SW"
+                "bng_ref_formatted": "NH 00 68 NW"
             }
         },
         {
