@@ -701,6 +701,36 @@
             "expected_bng_ref_formatted": "SU 12478 34838",
             "expected_resolution_metres": 1,
             "expected_resolution_label": "1m"
+        },
+        {
+            "bng_ref_string": "S",
+            "expected_exception": {
+                "name": "BNGReferenceError"
+            }
+        },
+        {
+            "bng_ref_string": "S",
+            "expected_exception": {
+                "name": "BNGReferenceError"
+            }
+        },
+        {
+            "bng_ref_string": "ST 56 713",
+            "expected_exception": {
+                "name": "BNGReferenceError"
+            }
+        },
+        {
+            "bng_ref_string": "st 56 71",
+            "expected_exception": {
+                "name": "BNGReferenceError"
+            }
+        },
+        {
+            "bng_ref_string": "ST 56 71 ne",
+            "expected_exception": {
+                "name": "BNGReferenceError"
+            }
         }
     ]
 }
