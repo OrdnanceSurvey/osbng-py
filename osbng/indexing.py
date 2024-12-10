@@ -54,7 +54,7 @@ def _validate_and_normalise_bng_resolution(resolution: int | str):
     """Validates and normalises a BNG resolution to its metre-based integer value.
 
     Args:
-        resolution (int or str): The Resolution, either as a metre-based integer or string label.
+        resolution (int | str): The Resolution, either as a metre-based integer or string label.
 
     Returns:
         int: The numeric metre-based resolution.
@@ -144,7 +144,7 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
     Args:
         easting (float): The easting coordinate.
         northing (float): The northing coordinate.
-        resolution (int or str): The resolution of the BNG reference expressed either as a metre-based integer or as a string label.
+        resolution (int | str): The resolution of the BNG reference expressed either as a metre-based integer or as a string label.
 
     Returns:
         BNGReference: The BNG reference object.
