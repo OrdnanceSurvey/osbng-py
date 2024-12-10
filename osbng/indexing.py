@@ -24,7 +24,7 @@ import numpy as np
 
 from osbng.errors import BNGResolutionError, OutsideBNGExtentError
 from osbng.resolution import _RESOLUTION_TO_STRING
-from osbng.bng_reference import BNGReference
+from osbng.bng_reference import _PATTERN, BNGReference
 
 # 100km BNG grid square letters
 _PREFIXES = np.array(
@@ -206,3 +206,118 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
     # BNG reference for 100km resolution consist of the prefix only
     elif validated_resolution == 100000:
         return BNGReference(prefix)
+
+    def bng_to_xy(
+        bng_ref: BNGReference, position: str = "lower-left"
+    ) -> tuple[int | float, int | float]:
+        """Returns the easting and northing coordinates given a BNG reference object, at a specified grid cell position.
+
+        Args:
+            bng_ref (BNGReference): The BNG Reference object.
+            position (str): The grid cell position expressed as a string.
+                            One of: 'lower-left', 'upper-left', 'upper-right', 'lower-right', 'centre'.
+
+        Returns:
+            easting, northing (tuple[int | float, int | float]): The easting and northing coordinates as a tuple.
+
+        Raises:
+            ValueError: If invalid position provided.
+
+        Example:
+            >>> bng_to_xy(BNGReference("SU"), "lower-left")
+            (400000, 100000)
+            >>> bng_to_xy(BNGReference("SU 3 1"), "lower-left")
+            (430000, 110000)
+            >>> bng_to_xy(BNGReference("SU 3 1 NE"), "centre")
+            (437500, 117500)
+            >>> bng_to_xy(BNGReference("SU 37289 15541"), "centre)
+            (437289.5, 115541.5)
+        """
+        # validate position string
+        valid_positions = [
+            "lower-left",
+            "upper-left",
+            "upper-right",
+            "lower-right",
+            "centre",
+        ]
+
+        if position not in valid_positions:
+            raise ValueError(
+                f"Invalid position provided. Supported positions are: {", ".join(p for p in valid_positions)}"
+            )
+
+        # Extract resolution in metres from BNG reference
+        resolution = bng_ref.resolution_metres
+
+        # Get the pattern match for the BNG reference in the compact format
+        match = _PATTERN.match(bng_ref.bng_ref_compact)
+        # Extract prefix, numerical component and suffix of the BNG reference
+        prefix = match.group(1)
+        en_components = match.group(2)
+        suffix = match.group(3)
+
+        # Get the prefix indices from prefix position in _PREFIXES array
+        prefix_indices = np.argwhere(_PREFIXES == prefix)[0]
+
+        # Convert the prefix indices to easting and northing coordinates of 100km grid square
+        prefix_easting = prefix_indices[1] * 100000
+        prefix_northing = prefix_indices[0] * 100000
+
+        # For quadtree resolutions, scale the resolution value by 2
+        if _RESOLUTION_TO_STRING[resolution]["quadtree"]:
+            scaled_resolution = resolution * 2
+
+        # For non-quadtree (standard) resolutions, the scaled resolution is the same as the resolution
+        else:
+            scaled_resolution = resolution
+
+        # Generate the offset values from the en_components
+        if en_components:
+            length = len(en_components)
+            easting_offset = int(en_components[: length // 2]) * scaled_resolution
+            northing_offset = int(en_components[length // 2 :]) * scaled_resolution
+
+        # For 100km grid square, no additional offset is required
+        else:
+            easting_offset = 0
+            northing_offset = 0
+
+        # Generate the suffix values from the position in the _SUFFIXES array
+        if suffix:
+            suffix_indices = np.argwhere(_SUFFIXES == suffix)[0]
+            # Convert the suffix indices to coordinate values by multiplying by the resolution
+            suffix_easting = suffix_indices[0] * resolution
+            suffix_northing = suffix_indices[1] * resolution
+
+        # For standard resolutions, no suffix easting or northing is required
+        else:
+            suffix_easting = 0
+            suffix_northing = 0
+
+        # Compile the easting and northing values of the lower-left corner of the grid cell
+        easting = prefix_easting + easting_offset + suffix_easting
+        northing = prefix_northing + northing_offset + suffix_northing
+
+        # If position is lower-left, coordinates remain unchanged
+        if position == "lower-left":
+            return easting, northing
+        # If position is upper-left, add resolution value to northing
+        elif position == "upper-left":
+            return easting, northing + resolution
+        # If position is upper-right, add resolution value to easting and northing
+        elif position == "upper-right":
+            return easting + resolution, northing + resolution
+        # If postion is lower-right, add resolution value to easting
+        elif position == "lower-right":
+            return easting + resolution, northing
+        # If position is centre, add half the resolution value to easting and northing
+        elif position == "centre":
+            easting = easting + (resolution / 2)
+            northing = northing + (resolution / 2)
+            # Cast as integer type if fractional part is equal to .0
+            if easting % 1 == 0:
+                easting = np.int64(easting)
+            if northing % 1 == 0:
+                northing = np.int64(northing)
+            return easting, northing
