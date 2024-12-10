@@ -262,8 +262,8 @@ def bng_to_xy(
     prefix_indices = np.argwhere(_PREFIXES == prefix)[0]
 
     # Convert the prefix indices to easting and northing coordinates of 100km grid square
-    prefix_easting = prefix_indices[1] * 100000
-    prefix_northing = prefix_indices[0] * 100000
+    prefix_easting = int(prefix_indices[1] * 100000)
+    prefix_northing = int(prefix_indices[0] * 100000)
 
     # For quadtree resolutions, scale the resolution value by 2
     if _RESOLUTION_TO_STRING[resolution]["quadtree"]:
@@ -288,8 +288,8 @@ def bng_to_xy(
     if suffix:
         suffix_indices = np.argwhere(_SUFFIXES == suffix)[0]
         # Convert the suffix indices to coordinate values by multiplying by the resolution
-        suffix_easting = suffix_indices[0] * resolution
-        suffix_northing = suffix_indices[1] * resolution
+        suffix_easting = int(suffix_indices[0] * resolution)
+        suffix_northing = int(suffix_indices[1] * resolution)
 
     # For standard resolutions, no suffix easting or northing is required
     else:
@@ -318,7 +318,7 @@ def bng_to_xy(
         northing = northing + (resolution / 2)
         # Cast as integer type if fractional part is equal to .0
         if easting % 1 == 0:
-            easting = np.int64(easting)
+            easting = int(easting)
         if northing % 1 == 0:
-            northing = np.int64(northing)
+            northing = int(northing)
         return easting, northing
