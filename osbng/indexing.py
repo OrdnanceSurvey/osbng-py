@@ -324,3 +324,33 @@ def bng_to_xy(
         if northing % 1 == 0:
             northing = int(northing)
         return easting, northing
+
+
+@_validate_bngreference
+def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
+    """Returns bounding box coordinates given a BNG Reference object.
+
+    Args:
+        bng_ref (BNGReference): The BNG Reference object.
+
+    Returns:
+        tuple[int, int, int, int]: The bounding box coordinates (min x, min y, max x, max y) as a tuple.
+
+    Raises:
+        TypeError: If first argumnet is not BNG Reference object.
+
+    Example:
+        >>> bng_to_bbox(BNGReference("SU"))
+        (400000, 100000, 500000, 200000)
+        >>> bng_to_bbox(BNGReference("SU 3 1"))
+        (430000, 110000, 440000, 120000)
+        >>> bng_to_bbox(BNGReference("SU 3 1 NE"))
+        (435000, 115000, 440000, 120000)
+        >>> bng_to_bbox(BNGReference("SU 37289 15541"))
+        (437289, 115541, 437290, 115542)
+    """
+    # Extract lower left and upper right coordinates of grid square
+    min_xy = bng_to_xy(bng_ref, "lower-left")
+    max_xy = bng_to_xy(bng_ref, "upper-right")
+
+    return min_xy + max_xy
