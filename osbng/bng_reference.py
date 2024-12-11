@@ -70,6 +70,7 @@ This module provides functionality to parse, create and manipulate BNG reference
 """
 
 import re
+from functools import wraps
 
 from osbng.resolution import _RESOLUTION_TO_STRING
 from osbng.errors import BNGReferenceError
@@ -289,3 +290,17 @@ class BNGReference:
     def resolution_label(self) -> str:
         """Returns the resolution of the BNG reference expressed as a string."""
         return _get_bng_resolution_label(self._bng_ref_compact)
+
+
+def validate_bngreference(func):
+    """Decorator to validate that the first positional argument of a function is a BNGReference object."""
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if not isinstance(args[0], BNGReference):
+            raise TypeError(
+                f"First argument must be a BNGReference object, got: {type(args[0])}"
+            )
+        return func(*args, **kwargs)
+
+    return wrapper

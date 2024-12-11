@@ -24,7 +24,7 @@ import numpy as np
 
 from osbng.errors import BNGResolutionError, OutsideBNGExtentError
 from osbng.resolution import _RESOLUTION_TO_STRING
-from osbng.bng_reference import _PATTERN, BNGReference
+from osbng.bng_reference import _PATTERN, BNGReference, _validate_bngreference
 
 # 100km BNG grid square letters
 _PREFIXES = np.array(
@@ -208,6 +208,7 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
         return BNGReference(prefix)
 
 
+@_validate_bngreference
 def bng_to_xy(
     bng_ref: BNGReference, position: str = "lower-left"
 ) -> tuple[int | float, int | float]:
