@@ -21,6 +21,8 @@ Supported Resolutions:
 """
 
 import numpy as np
+from shapely.geometry import Polygon
+from shapely import box
 
 from osbng.errors import BNGResolutionError, OutsideBNGExtentError
 from osbng.resolution import _RESOLUTION_TO_STRING
@@ -354,3 +356,29 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
     max_xy = bng_to_xy(bng_ref, "upper-right")
 
     return min_xy + max_xy
+
+
+@_validate_bngreference
+def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
+    """Returns a grid square as a Shapely Polygon given a BNG Reference object.
+
+    Args:
+        bng_ref (BNGReference): The BNG Reference object.
+
+    Returns:
+        Polygon: Grid square as Shapely Polygon object.
+
+    Raises:
+        TypeError: If first argument is not BNG Reference object.
+
+    Example:
+        >>> bng_to_grid_geom(BNGReference("SU")).wkt
+        'POLYGON ((500000 100000, 500000 200000, 400000 200000, 400000 100000, 500000 100000))'
+        >>> bng_to_grid_geom(BNGReference("SU 3 1")).wkt
+        'POLYGON ((440000 110000, 440000 120000, 430000 120000, 430000 110000, 440000 110000))'
+        >>> bng_to_grid_geom(BNGReference("SU 3 1 NE")).wkt
+        'POLYGON ((440000 115000, 440000 120000, 435000 120000, 435000 115000, 440000 115000))'
+        >>> bng_to_grid_geom(BNGReference("SU 37289 15541")).wkt
+        'POLYGON ((437290 115541, 437290 115542, 437289 115542, 437289 115541, 437290 115541))'
+    """
+    return box(*bng_to_bbox(bng_ref))
