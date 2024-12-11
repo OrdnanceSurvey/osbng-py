@@ -292,7 +292,7 @@ class BNGReference:
         return _get_bng_resolution_label(self._bng_ref_compact)
 
 
-def validate_bngreference(func):
+def _validate_bngreference(func):
     """Decorator to validate that the first positional argument of a function is a BNGReference object."""
 
     @wraps(func)
