@@ -220,9 +220,10 @@ def bng_to_xy(
                         One of: 'lower-left', 'upper-left', 'upper-right', 'lower-right', 'centre'.
 
     Returns:
-        easting, northing (tuple[int | float, int | float]): The easting and northing coordinates as a tuple.
+        tuple[int | float, int | float]: The easting and northing coordinates as a tuple.
 
     Raises:
+        TypeError: If first argumnet is not BNG Reference object.
         ValueError: If invalid position provided.
 
     Example:
