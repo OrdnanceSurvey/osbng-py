@@ -382,3 +382,60 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
         'POLYGON ((437290 115541, 437290 115542, 437289 115542, 437289 115541, 437290 115541))'
     """
     return box(*bng_to_bbox(bng_ref))
+
+
+def bbox_to_bng(
+    xmin: float, ymin: float, xmax: float, ymax: float, resolution: int | str
+) -> list[BNGReference]:
+    """Returns a list of BNGReference objects given bounding box coordinates and resolution.
+
+    <Commentary on the relationship between grid squares and bounding box>.
+
+    Args:
+        xmin (float): The minimum easting coordinate of the bounding box.
+        ymin (float): The minimum northing coordinate of the bounding box.
+        xmax (float): The maximum easting coordinate of the bounding box.
+        ymax (float): The maximum northing coordinate of the bounding box.
+        resolution (int | str): The resolution of the BNG reference expressed either as a metre-based integer or as a string label.
+
+    Returns:
+        list[BNGReference]: List of BNGReference objects.
+
+    Raises:
+        BNGResolutionError: If an invalid resolution is provided.
+        OutsideBNGExtentError: If the bounding box coordinates are outside the BNG extent.
+
+    Example:
+        >>> [x.bng_ref_formatted for x in bbox_to_bng(400000, 100000, 500000, 200000, "50km")]
+        ['SU SW', 'SU SE', 'SU NW', 'SU NE']
+        >>> [x.bng_ref_formatted for x in bbox_to_bng(285137.06, 78633.75, 299851.01, 86427.96, 5000)]
+        ['SX 8 7 NE', 'SX 9 7 NW', 'SX 9 7 NE', 'SX 8 8 SE', 'SX 9 8 SW', 'SX 9 8 SE', 'SX 8 8 NE', 'SX 9 8 NW', 'SX 9 8 NE']
+    """
+
+    # Validate and normalise the resolution to its metre-based integer value
+    validated_resolution = _validate_and_normalise_bng_resolution(resolution)
+
+    # Validate the bounding box coordinates are within the BNG extent
+    _validate_easting_northing(xmin, ymin)
+    _validate_easting_northing(xmax, ymax)
+
+    # Snap the maximum easting and maximum northing coordinates to an integer multiple of resolution
+    xmax_snapped = int(np.ceil(xmax / validated_resolution) * validated_resolution)
+    ymax_snapped = int(np.ceil(ymax / validated_resolution) * validated_resolution)
+
+    # Generate a grid of easting and northing coordinates
+    eastings = np.arange(xmin, xmax_snapped, validated_resolution)
+    northings = np.arange(ymin, ymax_snapped, validated_resolution)
+    easting_grid, northing_grid = np.meshgrid(eastings, northings)
+
+    # Flatten grids for iteration
+    easting_grid = easting_grid.ravel()
+    northing_grid = northing_grid.ravel()
+
+    # Convert grid coordinates to BNGReference objects
+    bng_refs = [
+        xy_to_bng(easting, northing, validated_resolution)
+        for easting, northing in zip(easting_grid, northing_grid)
+    ]
+
+    return bng_refs
