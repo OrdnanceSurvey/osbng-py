@@ -71,6 +71,7 @@ This module provides functionality to parse, create and manipulate BNG reference
 
 import re
 from functools import wraps
+from shapely.geometry import Polygon
 
 from osbng.resolution import _RESOLUTION_TO_STRING
 from osbng.errors import BNGReferenceError
@@ -290,6 +291,75 @@ class BNGReference:
     def resolution_label(self) -> str:
         """Returns the resolution of the BNG reference expressed as a string."""
         return _get_bng_resolution_label(self._bng_ref_compact)
+
+    def bng_to_xy(
+        self, position: str = "lower-left"
+    ) -> tuple[int | float, int | float]:
+        """Returns the easting and northing coordinates for the current BNGReference object, at a specified grid cell position.
+
+        Args:
+            position (str): The grid cell position expressed as a string.
+                            One of: 'lower-left', 'upper-left', 'upper-right', 'lower-right', 'centre'.
+
+        Returns:
+            tuple[int | float, int | float]: The easting and northing coordinates as a tuple.
+
+        Raises:
+            ValueError: If invalid position provided.
+
+        Example:
+            >>> BNGReference("SU").bng_to_xy("lower-left")
+            (400000, 100000)
+            >>> BNGReference("SU 3 1").bng_to_xy("lower-left")
+            (430000, 110000)
+            >>> BNGReference("SU 3 1 NE").bng_to_xy("centre")
+            (437500, 117500)
+            >>> BNGReference("SU 37289 15541").bng_to_xy("centre")
+            (437289.5, 115541.5)
+        """
+        from osbng.indexing import bng_to_xy as _bng_to_xy
+
+        return _bng_to_xy(self, position)
+
+    def bng_to_bbox(self) -> tuple[int, int, int, int]:
+        """Returns bounding box coordinates for the current BNGReference object.
+
+        Returns:
+            tuple[int, int, int, int]: The bounding box coordinates (min x, min y, max x, max y) as a tuple.
+
+        Example:
+            >>> BNGReference("SU").bng_to_bbox()
+            (400000, 100000, 500000, 200000)
+            >>> BNGReference("SU 3 1").bng_to_bbox()
+            (430000, 110000, 440000, 120000)
+            >>> BNGReference("SU 3 1 NE").bng_to_bbox()
+            (435000, 115000, 440000, 120000)
+            >>> BNGReference("SU 37289 15541").bng_to_bbox()
+            (437289, 115541, 437290, 115542)
+        """
+        from osbng.indexing import bng_to_bbox as _bng_to_bbox
+
+        return _bng_to_bbox(self)
+
+    def bng_to_grid_geom(self) -> Polygon:
+        """Returns a grid square as a Shapely Polygon for the current BNGReference object.
+
+        Returns:
+            Polygon: Grid square as Shapely Polygon object.
+
+        Example:
+            >>> BNGReference("SU").bng_to_grid_geom().wkt
+            'POLYGON ((500000 100000, 500000 200000, 400000 200000, 400000 100000, 500000 100000))'
+            >>> BNGReference("SU 3 1").bng_to_grid_geom().wkt
+            'POLYGON ((440000 110000, 440000 120000, 430000 120000, 430000 110000, 440000 110000))'
+            >>> BNGReference("SU 3 1 NE").bng_to_grid_geom().wkt
+            'POLYGON ((440000 115000, 440000 120000, 435000 120000, 435000 115000, 440000 115000))'
+            >>> BNGReference("SU 37289 15541").bng_to_grid_geom().wkt
+            'POLYGON ((437290 115541, 437290 115542, 437289 115542, 437289 115541, 437290 115541))'
+        """
+        from osbng.indexing import bng_to_grid_geom as _bng_to_grid_geom
+
+        return _bng_to_grid_geom(self)
 
 
 def _validate_bngreference(func):
