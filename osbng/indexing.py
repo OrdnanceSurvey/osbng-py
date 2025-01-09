@@ -22,7 +22,7 @@ Supported Resolutions:
 
 import numpy as np
 from shapely.geometry import Polygon
-from shapely import box
+from shapely import box, Geometry
 
 from osbng.errors import BNGResolutionError, OutsideBNGExtentError
 from osbng.resolution import _RESOLUTION_TO_STRING
@@ -439,3 +439,38 @@ def bbox_to_bng(
     ]
 
     return bng_refs
+
+
+def _decompose_geom(geom: Geometry) -> list[Geometry]:
+    """Recursively decompose a Shapely geometry into its constituent parts.
+
+    Args:
+        geom (Geometry): Shapely geometry object.
+
+    Returns:
+        list[Geometry]: List of Shapely geometry object parts.
+
+    Raises:
+        ValueError: If the geometry type is not supported.
+    """
+    # Single part geometries are returned as-is
+    if geom.geom_type in ["Point", "LineString", "Polygon"]:
+        return [geom]
+    
+    # Multi-part geometries are decomposed into their constituent parts
+    elif geom.geom_type in [
+        "MultiPoint",
+        "MultiLineString",
+        "MultiPolygon",
+        "GeometryCollection",
+    ]:
+        # Initialise list to store decomposed geometries
+        geometries = []
+        # Recursively decompose each part of the multi-part geometry
+        for part in geom.geoms:
+            geometries.extend(_decompose_geom(part))
+        return geometries
+    
+    # Raise an error if the geometry type is not supported
+    else:
+        raise ValueError("Unsupported geometry type: {geom.geom_type}")
