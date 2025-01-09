@@ -21,6 +21,7 @@ Supported Resolutions:
 """
 
 import numpy as np
+import shapely
 from shapely.geometry import Polygon
 from shapely import box, Geometry
 
@@ -456,7 +457,7 @@ def _decompose_geom(geom: Geometry) -> list[Geometry]:
     # Single part geometries are returned as-is
     if geom.geom_type in ["Point", "LineString", "Polygon"]:
         return [geom]
-    
+
     # Multi-part geometries are decomposed into their constituent parts
     elif geom.geom_type in [
         "MultiPoint",
@@ -470,7 +471,57 @@ def _decompose_geom(geom: Geometry) -> list[Geometry]:
         for part in geom.geoms:
             geometries.extend(_decompose_geom(part))
         return geometries
-    
+
     # Raise an error if the geometry type is not supported
     else:
         raise ValueError("Unsupported geometry type: {geom.geom_type}")
+
+
+def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
+    """Returns a list of BNG Reference objects given a Shapely geometry and a specified resolution.
+
+    Args:
+        geom (Geometry): Shapely Geometry object.
+        resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
+
+    Returns:
+        list[BNGReference]: List of BNG Reference objects.
+
+    Raises:
+        BNGResolutionError: If an invalid resolution is provided.
+        ValueError: If the geometry type is not supported.
+        OutsideBNGExtentError: If the bounding box coordinates are outside the BNG extent.
+
+    Example:
+        >>> [x.bng_ref_formatted for x in geom_to_bng(Point(430000, 110000), resolution="100km")]
+        ["SU"]
+        >>> [x.bng_ref_formatted for x in geom_to_bng(LineString([[430000, 110000],[430010, 110000],[430010, 110010]]), resolution="5m")]
+        ['SU 3000 1000 SW', 'SU 3000 1000 SE', 'SU 3000 1000 NE']
+    """
+    # Validate and normalise the resolution to its metre-based integer value
+    validated_resolution = _validate_and_normalise_bng_resolution(resolution)
+
+    # Create an empty list to store the BNGReference objects
+    bng_refs = []
+
+    # Recursively decompose geometry into its constituent parts
+    for part in _decompose_geom(geom):
+        # If the geometry is a point
+        if part.geom_type == "Point":
+            # Convert the point to BNGReference object and append to bng_refs list
+            bng_refs.append(xy_to_bng(part.x, part.y, validated_resolution))
+        # For all other geometry types
+        else:
+            # Generate the bounding box of the geometry
+            bbox = part.bounds
+            # Convert the bounding box to BNGReference objects
+            _bng_refs = np.array(bbox_to_bng(*bbox, validated_resolution))
+            # Get the geometry of the BNGReference objects
+            bng_geoms = np.array([bng_to_grid_geom(bng_ref) for bng_ref in _bng_refs])
+            # Test the intersection between the geometry and the BNGReference objects
+            bng_bool = shapely.intersects(part, bng_geoms)
+            # Compare the two arrays to return those which are true and add to bng_refs list
+            bng_refs.extend(_bng_refs[bng_bool].tolist())
+
+    # Deduplicate the list of BNGReference objects
+    return list(set(bng_refs))
