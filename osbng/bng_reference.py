@@ -292,6 +292,14 @@ class BNGReference:
         """Returns the resolution of the BNG reference expressed as a string."""
         return _get_bng_resolution_label(self._bng_ref_compact)
 
+    def __eq__(self, other):
+        if isinstance(other, BNGReference):
+            return self.bng_ref_compact == other.bng_ref_compact
+        return False
+
+    def __hash__(self):
+        return hash(self.bng_ref_compact)
+
     def bng_to_xy(
         self, position: str = "lower-left"
     ) -> tuple[int | float, int | float]:
