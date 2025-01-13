@@ -52,6 +52,53 @@ _PREFIXES = np.array(
 _SUFFIXES = np.array([["SW", "NW"], ["SE", "NE"]])
 
 
+class BNGIndexedGeometry:
+    """Represents the decomposition of a Shapely geometry into BNG grid squares at a specified resolution.
+
+    The BNGIndexedGeometry class stores information about the relationship between an input geometry and the grid squares
+    it intersects. This is particularly useful for spatial indexing and analysis of geometries against the BNG system.
+
+    Attributes:
+        bng_ref (BNGReference): The BNGReference object representing the grid sqaure corresponding to the decomposition.
+        is_core (bool): A Boolean flag indicating whether the grid square geometry is entirely contained by the input
+                        geometry. This is relevant for Polygon geometries and helps distinguish between "core" (fully inside)
+                        and "edge" (partially overlapping) grid squares.
+        geom (Geometry): The Shapely Geometry representing the intersection between the input geometry and the grid square.
+                         This can one of a number of geometry types depending on the overlap.
+
+    Uasge:
+        The BNGIndexedGeometry class is instantiated as part of the geom_to_bng_intersection indexing function that decomposes a
+        Shapely geometry into grid squares at a specified resolution. The decomposition can be used for indexing, spatial analysis,
+        or visualisation."""
+
+    def __init__(self, bng_ref: BNGReference, is_core: bool, geom: Geometry):
+        """Initialises a BNGIndexedGeometry object instance."""
+        self._bng_ref = bng_ref
+        self._is_core = is_core
+        self._geom = geom
+
+    @property
+    def bng_ref(self):
+        """Returns the BNGReference object associated with this geometry."""
+        return self._bng_ref
+
+    @property
+    def is_core(self):
+        """Indicates whether the grid square geometry is contained by the input geometry."""
+        return self._is_core
+
+    @property
+    def geom(self):
+        """Returns the Shapely Geometry representing the intersection between the input geometry and the grid square."""
+        return self._geom
+
+    def __repr__(self):
+        return (
+            f"BNGIndexedGeometry(bng_ref={self._bng_ref.bng_ref_formatted}, "
+            f"is_core={self._is_core}, geom={self._geom.wkt})"
+        )
+
+
 def _validate_and_normalise_bng_resolution(resolution: int | str):
     """Validates and normalises a BNG resolution to its metre-based integer value.
 
