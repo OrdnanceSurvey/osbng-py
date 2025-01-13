@@ -238,7 +238,7 @@ def _get_bng_pretty_format(bng_ref_string: str) -> str:
 class BNGReference:
     """A custom object for handling British National Grid (BNG) references.
 
-    Converts a BNG reference string into a BNG reference object.
+    Converts a BNG reference string into a BNGReference object.
 
     Args:
         bng_ref_string (str): The BNG reference string.
@@ -274,22 +274,22 @@ class BNGReference:
 
     @property
     def bng_ref_compact(self) -> str:
-        """Returns the BNG reference with whitespace removed."""
+        """Returns the BNG reference string with whitespace removed."""
         return self._bng_ref_compact
 
     @property
     def bng_ref_formatted(self) -> str:
-        """Returns a pretty-formatted version of the BNG reference with single spaces between components."""
+        """Returns a pretty-formatted version of the BNG reference string with single spaces between components."""
         return _get_bng_pretty_format(self._bng_ref_compact)
 
     @property
     def resolution_metres(self) -> int:
-        """Returns the resolution of the BNG reference in meters."""
+        """Returns the resolution of the BNGReference in meters."""
         return _get_bng_resolution_metres(self._bng_ref_compact)
 
     @property
     def resolution_label(self) -> str:
-        """Returns the resolution of the BNG reference expressed as a string."""
+        """Returns the resolution of the BNGReference expressed as a string."""
         return _get_bng_resolution_label(self._bng_ref_compact)
 
     def __eq__(self, other):

@@ -188,7 +188,7 @@ def _get_bng_suffix(easting: float, northing: float, resolution: int) -> str:
 
 
 def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGReference:
-    """Returns a BNG reference object given easting and northing coordinates, at a specified resolution.
+    """Returns a BNGReference object given easting and northing coordinates, at a specified resolution.
 
     Args:
         easting (float): The easting coordinate.
@@ -196,7 +196,7 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
         resolution (int | str): The resolution of the BNG reference expressed either as a metre-based integer or as a string label.
 
     Returns:
-        BNGReference: The BNG reference object.
+        BNGReference: The BNGReference object.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
@@ -264,7 +264,7 @@ def bng_to_xy(
     """Returns the easting and northing coordinates given a BNG reference object, at a specified grid cell position.
 
     Args:
-        bng_ref (BNGReference): The BNG Reference object.
+        bng_ref (BNGReference): The BNG eference object.
         position (str): The grid cell position expressed as a string.
                         One of: 'lower-left', 'upper-left', 'upper-right', 'lower-right', 'centre'.
 
@@ -272,7 +272,7 @@ def bng_to_xy(
         tuple[int | float, int | float]: The easting and northing coordinates as a tuple.
 
     Raises:
-        TypeError: If first argumnet is not BNG Reference object.
+        TypeError: If first argumnet is not BNGReference object.
         ValueError: If invalid position provided.
 
     Example:
@@ -377,16 +377,16 @@ def bng_to_xy(
 
 @_validate_bngreference
 def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
-    """Returns bounding box coordinates given a BNG Reference object.
+    """Returns bounding box coordinates given a BNGReference object.
 
     Args:
-        bng_ref (BNGReference): The BNG Reference object.
+        bng_ref (BNGReference): The BNGReference object.
 
     Returns:
         tuple[int, int, int, int]: The bounding box coordinates (min x, min y, max x, max y) as a tuple.
 
     Raises:
-        TypeError: If first argumnet is not BNG Reference object.
+        TypeError: If first argumnet is not BNGReference object.
 
     Example:
         >>> bng_to_bbox(BNGReference("SU"))
@@ -410,7 +410,7 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
     """Returns a grid square as a Shapely Polygon given a BNG Reference object.
 
     Args:
-        bng_ref (BNGReference): The BNG Reference object.
+        bng_ref (BNGReference): The BNGReference object.
 
     Returns:
         Polygon: Grid square as Shapely Polygon object.
@@ -524,7 +524,7 @@ def _decompose_geom(geom: Geometry) -> list[Geometry]:
 
 
 def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
-    """Returns a list of BNG Reference objects given a Shapely geometry and a specified resolution.
+    """Returns a list of BNGReference objects given a Shapely geometry and a specified resolution.
 
        The BNGReference objects returned represent the grid squares intersected by the input geometry. 
        For multi-part geometries, only distinct grid squares are returned. This function is useful for 
@@ -536,7 +536,7 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
         resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
 
     Returns:
-        list[BNGReference]: List of BNG Reference objects.
+        list[BNGReference]: List of BNGReference objects.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.

@@ -17,7 +17,7 @@ from osbng.resolution import _RESOLUTION_TO_STRING
 
 
 class BNGReferenceError(Exception):
-    """Exception rasied for errors in BNG references."""
+    """Exception rasied for errors in BNGReference object creation."""
 
     pass
 
