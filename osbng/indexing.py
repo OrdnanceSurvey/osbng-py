@@ -94,7 +94,7 @@ class BNGIndexedGeometry:
 
     def __repr__(self):
         return (
-            f"BNGIndexedGeometry(bng_ref={self._bng_ref.bng_ref_formatted}, "
+            f"BNGIndexedGeometry(bng_ref={self._bng_ref}, "
             f"is_core={self._is_core}, geom={self._geom.wkt})"
         )
 
