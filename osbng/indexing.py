@@ -22,7 +22,7 @@ Supported Resolutions:
 
 import numpy as np
 from shapely.geometry import Polygon
-from shapely import box, Geometry, prepare, intersects
+from shapely import box, Geometry, prepare, intersects, contains, intersection
 
 from osbng.errors import BNGResolutionError, OutsideBNGExtentError
 from osbng.resolution import _RESOLUTION_TO_STRING
