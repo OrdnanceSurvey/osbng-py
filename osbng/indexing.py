@@ -520,7 +520,7 @@ def _decompose_geom(geom: Geometry) -> list[Geometry]:
 
     # Raise an error if the geometry type is not supported
     else:
-        raise ValueError("Unsupported geometry type: {geom.geom_type}")
+        raise ValueError(f"Unsupported geometry type: {geom.geom_type}")
 
 
 def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
