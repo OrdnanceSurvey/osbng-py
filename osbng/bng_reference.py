@@ -300,6 +300,9 @@ class BNGReference:
     def __hash__(self):
         return hash(self.bng_ref_compact)
 
+    def __repr__(self):
+        return f"BNGReference(bng_ref_formatted={self.bng_ref_formatted}, resolution_label={self.resolution_label})"
+
     def bng_to_xy(
         self, position: str = "lower-left"
     ) -> tuple[int | float, int | float]:
