@@ -580,6 +580,12 @@ def geom_to_bng_intersection(
 ) -> list[BNGIndexedGeometry]:
     """Returns a list of BNGIndexedGeometry objects given a Shapely geometry and a specified resolution.
 
+       Decomposes a Shapely geometry into BNG grid squares at a specified resolution. Unlike geom_to_bng which only returns 
+       BNGReference objects representing the grid squares intersected by the input geometry, geom_to_bng_intersection returns 
+       BNGIndexedGeometry objects that store the intersection between the input geometry and the grid square geometries. 
+       This is particularly useful for spatial analysis and visualisation that requires the decomposition of geometries into 
+       their constituent parts bounded by the BNG grid system.
+
     Args:
         geom (Geometry): Shapely Geometry object.
         resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
