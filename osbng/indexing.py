@@ -436,7 +436,18 @@ def bbox_to_bng(
 ) -> list[BNGReference]:
     """Returns a list of BNGReference objects given bounding box coordinates and resolution.
 
-    <Commentary on the relationship between grid squares and bounding box>.
+    The relationship between the bounding box and the returned BNG grid squares depends on the 
+    alignment of the bounding box with the BNG system:
+ 
+    - **Aligned Bounding Box**: If the bounding box edges align with the BNGsystem 
+        (e.g. xmin, ymin, xmax, ymax are multiples of the specified resolution), only the grid 
+        squares entirely contained within the bounding box are returned. Grid squares that intersect 
+        but are not fully contained within the bounding box are excluded.
+
+    - **Non-Aligned Bounding Box**: If the bounding box edges are not aligned with the BNG system, 
+        grid squares that are partially overlapped by the bounding box are also included. In this case, 
+        the function ensures all relevant grid squares that the bounding box touches are returned, 
+        including those at the edges.
 
     Args:
         xmin (float): The minimum easting coordinate of the bounding box.
