@@ -526,6 +526,11 @@ def _decompose_geom(geom: Geometry) -> list[Geometry]:
 def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
     """Returns a list of BNG Reference objects given a Shapely geometry and a specified resolution.
 
+       The BNGReference objects returned represent the grid squares intersected by the input geometry. 
+       For multi-part geometries, only distinct grid squares are returned. This function is useful for 
+       spatial indexing and aggregation of geometries against the BNG. For geometry decomposition by 
+       the BNG index system, use geom_to_bng_intersection.
+
     Args:
         geom (Geometry): Shapely Geometry object.
         resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
