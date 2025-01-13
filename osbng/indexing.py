@@ -573,3 +573,76 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
 
     # Deduplicate the list of BNGReference objects
     return list(set(bng_refs))
+
+
+def geom_to_bng_intersection(
+    geom: Geometry, resolution: int | str
+) -> list[BNGIndexedGeometry]:
+    """Returns a list of BNGIndexedGeometry objects given a Shapely geometry and a specified resolution.
+
+    Args:
+        geom (Geometry): Shapely Geometry object.
+        resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
+
+    Returns:
+        list[BNGIndexedGeometry]: List of BNGIndexedGeometry objects.
+
+    Raises:
+        BNGResolutionError: If an invalid resolution is provided.
+        ValueError: If the geometry type is not supported.
+        OutsideBNGExtentError: If the bounding box coordinates are outside the BNG extent.
+    """
+    # Create an empty list to store the BNGIndexedGeometry objects
+    bng_idx_geoms = []
+
+    # Recursively decompose geometry into its constituent parts
+    for part in _decompose_geom(geom):
+        # Create the list of BNGReference objects
+        bng_refs = np.array(geom_to_bng(part, resolution))
+
+        if part.geom_type == "Point":
+            # Convert the point to a BNGIndexedGeometry object and append to bng_idx_geoms list
+            bng_idx_geoms.append(BNGIndexedGeometry(bng_refs[0], False, part))
+
+        elif part.geom_type == "LineString":
+            # Get the grid square geometries of the BNGReference objects
+            bng_geoms = np.array([bng_to_grid_geom(bng_ref) for bng_ref in bng_refs])
+            # Prepare the part geometry
+            prepare(part)
+            # Derive the intersection between the part geometry and the grid square geometry
+            intersections = intersection(part, bng_geoms)
+            # Derive BNGIndexedGeometry objects for geometry part and add to the bng_idx_geoms list
+            bng_idx_geoms.extend(
+                [
+                    BNGIndexedGeometry(bng_ref, False, geometry)
+                    for bng_ref, geometry in zip(bng_refs, intersections)
+                ]
+            )
+
+        elif part.geom_type == "Polygon":
+            # Get the grid square geometries of the BNGReference objects
+            bng_geoms = np.array([bng_to_grid_geom(bng_ref) for bng_ref in bng_refs])
+            # Prepare the part geometry
+            prepare(part)
+            # Test whether a grid square geometry is contained by the geometry part
+            bng_bool = contains(part, bng_geoms)
+            # Subset bng_refs array based on positive containment
+            core = bng_refs[bng_bool]
+            # Subset bng_refs array based on negative containment
+            edge = bng_refs[~bng_bool]
+            # Derive BNGIndexedGeometry objects for core cases and add to the bng_idx_geoms list
+            bng_idx_geom_core = [
+                BNGIndexedGeometry(bng_ref, True, bng_ref.bng_to_grid_geom())
+                for bng_ref in core
+            ]
+            # Derive the intersection between the part geometry and the bng grid square geometry
+            intersections = intersection(part, bng_geoms[~bng_bool])
+            # Derive BNGIndexedGeometry objects for edge cases and add to the bng_idx_geoms list
+            bng_idx_geom_edge = [
+                BNGIndexedGeometry(bng_ref, False, geometry)
+                for bng_ref, geometry in zip(edge, intersections)
+            ]
+            # Add the core and edge BNGIndexedGeometry objects to the bng_idx_geoms list
+            bng_idx_geoms.extend(bng_idx_geom_core + bng_idx_geom_edge)
+
+    return bng_idx_geoms
