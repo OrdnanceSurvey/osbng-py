@@ -21,9 +21,8 @@ Supported Resolutions:
 """
 
 import numpy as np
-import shapely
 from shapely.geometry import Polygon
-from shapely import box, Geometry, prepare
+from shapely import box, Geometry, prepare, intersects
 
 from osbng.errors import BNGResolutionError, OutsideBNGExtentError
 from osbng.resolution import _RESOLUTION_TO_STRING
@@ -521,7 +520,7 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
             # Prepare the part geometry
             prepare(part)
             # Test the intersection between the geometry and the BNGReference objects
-            bng_bool = shapely.intersects(part, bng_geoms)
+            bng_bool = intersects(part, bng_geoms)
             # Compare the two arrays to return those which are true and add to bng_refs list
             bng_refs.extend(_bng_refs[bng_bool].tolist())
 
