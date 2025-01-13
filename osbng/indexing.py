@@ -588,8 +588,8 @@ def geom_to_bng_intersection(
        Decomposes a Shapely geometry into BNG grid squares at a specified resolution. Unlike geom_to_bng which only returns 
        BNGReference objects representing the grid squares intersected by the input geometry, geom_to_bng_intersection returns 
        BNGIndexedGeometry objects that store the intersection between the input geometry and the grid square geometries. 
-       This is particularly useful for spatial analysis and visualisation that requires the decomposition of geometries into 
-       their constituent parts bounded by the BNG grid system.
+       This is particularly useful for spatial indexing, aggregation and visualisation use cases that requires the decomposition 
+       of geometries into their constituent parts bounded by the BNG grid system.
 
     Args:
         geom (Geometry): Shapely Geometry object.
