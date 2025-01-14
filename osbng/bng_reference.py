@@ -236,7 +236,13 @@ def _get_bng_pretty_format(bng_ref_string: str) -> str:
 class BNGReference:
     """A custom object for handling British National Grid (BNG) references.
 
-    Converts a BNG reference string into a BNGReference object.
+    Converts a BNG reference string into a BNGReference object, ensuring type consistency 
+    across the package. All functions accepting or returning BNG references enforce the use of this class.   
+    BNGReference methods are available both as instance methods and standalone functions, 
+    providing users with the flexibility to either:
+
+    - Create a BNGReference object and pass it to a function.
+    - Create a BNGReference object and use its instance methods.
 
     Args:
         bng_ref_string (str): The BNG reference string.
