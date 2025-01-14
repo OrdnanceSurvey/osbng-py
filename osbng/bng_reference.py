@@ -134,9 +134,6 @@ def _validate_bng(bng_ref_string: str) -> bool:
 def _get_bng_resolution_metres(bng_ref_string: str) -> int:
     """Gets the resolution of a BNG reference string in metres.
 
-    The resolution is determined based on the length of the easting
-    and northing components and whether an ordinal suffix is present.
-
     Args:
         bng_ref_string (str): The BNG reference string.
 
@@ -155,6 +152,7 @@ def _get_bng_resolution_metres(bng_ref_string: str) -> int:
     suffix = match.group(3)
 
     # Determine resolution based on length of easting and northing components
+    # and whether an ordinal suffix is present.
     if en_components is None:
         resolution = 100000
     else:
