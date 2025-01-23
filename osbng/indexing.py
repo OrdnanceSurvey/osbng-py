@@ -42,6 +42,7 @@ __all__ = [
     "bbox_to_bng",
     "geom_to_bng",
     "geom_to_bng_intersection",
+    "BNGIndexedGeometry",
 ]
 
 # Set warnings to always display
