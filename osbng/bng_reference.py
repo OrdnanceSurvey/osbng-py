@@ -87,6 +87,8 @@ from shapely.geometry import Polygon, mapping
 from osbng.resolution import _RESOLUTION_TO_STRING
 from osbng.errors import BNGReferenceError
 
+__all__ = ["BNGReference"]
+
 # Compile regular expression pattern for BNG reference
 # The geographical extent of the BNG reference system is defined as:
 # easting >= 0 and easting < 700000 and northing >= 0 and northing < 1300000
