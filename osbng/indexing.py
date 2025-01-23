@@ -21,6 +21,7 @@ Supported Resolutions:
 """
 
 import numpy as np
+import warnings
 from shapely.geometry import Polygon
 from shapely import box, Geometry, prepare, intersects, contains, intersection
 
@@ -160,6 +161,50 @@ def _validate_easting_northing(easting: float, northing: float):
         raise OutsideBNGExtentError()
     if not (0 <= northing < 1300000):
         raise OutsideBNGExtentError()
+
+
+def _validate_and_normalise_bbox(
+    xmin: float, ymin: float, xmax: float, ymax: float
+) -> tuple[float, float, float, float]:
+    """Validates and normalises bounding box coordinates to the BNG index system extent.
+
+    Args:
+        xmin (float): The minimum easting coordinate of the bounding box.
+        ymin (float): The minimum northing coordinate of the bounding box.
+        xmax (float): The maximum easting coordinate of the bounding box.
+        ymax (float): The maximum northing coordinate of the bounding box.
+
+    Returns:
+        tuple[float, float, float, float]: The normalised bounding box coordinates.
+    """
+    # Initialise list to store warning messages
+    messages = []
+
+    # Normalise xmin and ymin to 0 if xmin < 0 or ymin < 0
+    if xmin < 0:
+        messages.append("xmin < 0, normalising to 0")
+        xmin = 0
+    if ymin < 0:
+        messages.append("ymin < 0, normalising to 0")
+        ymin = 0
+
+    # Normalise xmax to 700000 if xmax > 700000
+    if xmax > 700000:
+        messages.append("xmax > 700000, normalising to 700000")
+        xmax = 700000
+
+    # Normalise ymax to 1300000 if ymax > 1300000
+    if ymax > 1300000:
+        messages.append("ymax > 1300000, normalising to 1300000")
+        ymax = 1300000
+
+    if messages:
+        warnings.warn(
+            "Bounding box coordinates fall outside of the BNG index system extent: \n"
+            + "\n".join(messages)
+        )
+
+    return xmin, ymin, xmax, ymax
 
 
 def _get_bng_suffix(easting: float, northing: float, resolution: int) -> str:
