@@ -592,6 +592,14 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
        spatial indexing and aggregation of geometries against the BNG. For geometry decomposition by
        the BNG index system, use geom_to_bng_intersection.
 
+       A note on the type of the input geometry. This also applies to the parts within a multi-part geometry:
+         - For Point geometries, the function returns a list comprising a single BNGReference object. An OutsideBNGExtentError
+           exception is raised if the coordinates are outside of the BNG index system extent.
+         - For LineString and Polygon geometry types, the function returns a list of BNGReference objects representing the
+           grid squares intersected by the geometry. When the geometry extends beyond the BNG system extent, the function
+           will show a feature bounding box warning but will still return the BNGReference objects for the intersected grid
+           squares.
+
     Args:
         geom (Geometry): Shapely Geometry object.
         resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
@@ -602,7 +610,7 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
         ValueError: If the geometry type is not supported.
-        OutsideBNGExtentError: If the bounding box coordinates are outside the BNG extent.
+        OutsideBNGExtentError: If the coordinates of a point geometry are outside of the BNG index system extent.
 
     Example:
         >>> [x.bng_ref_formatted for x in geom_to_bng(Point(430000, 110000), resolution="100km")]
@@ -652,6 +660,14 @@ def geom_to_bng_intersection(
        This is particularly useful for spatial indexing, aggregation and visualisation use cases that requires the decomposition
        of geometries into their constituent parts bounded by the BNG grid system.
 
+       A note on the type of the input geometry. This also applies to the parts within a multi-part geometry:
+        - For Point geometries, the function returns a list comprising a single BNGIndexedGeometry object. An OutsideBNGExtentError
+          exception is raised if the coordinates are outside of the BNG index system extent.
+        - For LineString and Polygon geometry types, the function returns a list of BNGIndexedGeometry objects representing the
+          intersections between the grid squares and the geometry. When the geometry extends beyond the BNG system extent, the function
+          will show a feature bounding box warning but will still return the BNGIndexedGeometry objects for the intersected grid
+          squares.
+
     Args:
         geom (Geometry): Shapely Geometry object.
         resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
@@ -662,7 +678,7 @@ def geom_to_bng_intersection(
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
         ValueError: If the geometry type is not supported.
-        OutsideBNGExtentError: If the bounding box coordinates are outside the BNG extent.
+        OutsideBNGExtentError: If the coordinates of a point geometry are outside of the BNG index system extent.
     """
     # Create an empty list to store the BNGIndexedGeometry objects
     bng_idx_geoms = []
