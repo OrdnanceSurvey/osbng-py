@@ -266,6 +266,11 @@ class BNGReference:
         resolution_metres (int): The resolution of the BNG reference in meters.
         resolution_label (str): The resolution of the BNG reference expressed as a descriptive string.
 
+    Methods:
+        bng_to_xy(position: str) -> tuple[int | float, int | float]: Returns the easting and northing coordinates for the current BNGReference object.
+        bng_to_bbox() -> tuple[int, int, int, int]: Returns bounding box coordinates for the current BNGReference object.
+        bng_to_grid_geom() -> Polygon: Returns a grid square as a Shapely Polygon for the current BNGReference object.
+
     Raises:
         BNGReferenceError: If the BNG reference string is invalid.
 
