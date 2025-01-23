@@ -494,6 +494,10 @@ def bbox_to_bng(
         the function ensures all relevant grid squares that the bounding box touches are returned,
         including those at the edges.
 
+    Validates and normalises the bounding box coordinates to the BNG index system extent. If bounding box
+    coordinates fall outside of the BNG system extent, then a warning is raised and the coordinates are snapped
+    to the bounds of the BNG system.
+
     Args:
         xmin (float): The minimum easting coordinate of the bounding box.
         ymin (float): The minimum northing coordinate of the bounding box.
