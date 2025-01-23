@@ -1,23 +1,28 @@
-"""Provides functionality for indexing coordinates and geometries against the British National Grid (BNG).
+"""Provides functionality to index and work with coordinates and Shapely geometries within the British National Grid (BNG) index system.
 
-The module supports bi-drectional conversion between easting/northing coordinate pairs and BNG references 
-at supported resolutions as defined in the 'resolution' module. Additionally, it enables the decomposition 
-of geometries, represented using Shapely objects,into simplified representations bounded by their presence 
-in each grid square at a specified resolution. Indexing functionality faciliates grid-based spatial analysis, 
-enabling applications such as statistical aggregation, data visualisation, and data interopability. 
+The module supports bi-drectional conversion between easting/northing coordinate pairs and BNGReference objects
+at supported resolutions as defined in the 'resolution' module. Additionally, it enables the indexing of geoemtries, 
+represented using Shapely objects, into grid squares at a specified resolution. Shapely geometries can also be decomposed
+into simplified representations bounded by their presence in each grid square at a specified resolution.
 
-Coordinate Conversion:
-    - Convert eastng and northing coorindates to BNG references at supported resolutions.
-    - Decode BNG references to retrieve the corresponding easting and northing coordinates.
+Indexing functionality faciliates grid-based spatial analysis, enabling applications such as statistical aggregation, 
+data visualisation, and data interopability. 
 
-Geometry Indexing: 
-    - Retrieve the BNG references of the grid squares intersected by Shapely geometries at a specified resolution.
-    - Decompose Shapely geometries of any type into the BNG grid squares they intersect at a specified resolution.
+Summary of functionaility:
 
-Supported Resolutions:
-    - The module supports the standard BNG resolutions, including 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 
-    5m and 1m.
-    - These resolutions are validated and normalised using the resolution mapping defined in the 'resolution' module.
+    - Encoding easting and northing coordinates into BNGReference objects at a specified resolution.
+    - Decoding BNGReference objects back into easting/nothing coordinates, bounding boxes and grid squares as Shapely geometries.
+    - Indexing bounding boxes into grid squares at a specified resolution.
+    - Indexing Shapely geometries into grid squares at a specified resolution.
+    - Decomposing Shapely geometries into simplified representations bounded by their presence in each grid square at 
+      a specified resolution.
+
+Supported resolutions:
+
+    - The module supports the 'standard' and 'intermediate' quadtree resolutions: 100km, 50km, 10km, 5km, 1km, 500m, 100m, 
+      50m, 10m, 5m and 1m.
+    - These resolutions passed to indexing functions are validated and normalised using the resolution mapping defined in the 
+      'resolution' module.
 """
 
 import numpy as np
