@@ -481,17 +481,17 @@ def bbox_to_bng(
 ) -> list[BNGReference]:
     """Returns a list of BNGReference objects given bounding box coordinates and resolution.
 
-    The relationship between the bounding box and the returned BNG grid squares depends on the 
+    The relationship between the bounding box and the returned BNG grid squares depends on the
     alignment of the bounding box with the BNG system:
- 
-    - **Aligned Bounding Box**: If the bounding box edges align with the BNGsystem 
-        (e.g. xmin, ymin, xmax, ymax are multiples of the specified resolution), only the grid 
-        squares entirely contained within the bounding box are returned. Grid squares that intersect 
+
+    - **Aligned Bounding Box**: If the bounding box edges align with the BNGsystem
+        (e.g. xmin, ymin, xmax, ymax are multiples of the specified resolution), only the grid
+        squares entirely contained within the bounding box are returned. Grid squares that intersect
         but are not fully contained within the bounding box are excluded.
 
-    - **Non-Aligned Bounding Box**: If the bounding box edges are not aligned with the BNG system, 
-        grid squares that are partially overlapped by the bounding box are also included. In this case, 
-        the function ensures all relevant grid squares that the bounding box touches are returned, 
+    - **Non-Aligned Bounding Box**: If the bounding box edges are not aligned with the BNG system,
+        grid squares that are partially overlapped by the bounding box are also included. In this case,
+        the function ensures all relevant grid squares that the bounding box touches are returned,
         including those at the edges.
 
     Args:
@@ -582,9 +582,9 @@ def _decompose_geom(geom: Geometry) -> list[Geometry]:
 def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
     """Returns a list of BNGReference objects given a Shapely geometry and a specified resolution.
 
-       The BNGReference objects returned represent the grid squares intersected by the input geometry. 
-       For multi-part geometries, only distinct grid squares are returned. This function is useful for 
-       spatial indexing and aggregation of geometries against the BNG. For geometry decomposition by 
+       The BNGReference objects returned represent the grid squares intersected by the input geometry.
+       For multi-part geometries, only distinct grid squares are returned. This function is useful for
+       spatial indexing and aggregation of geometries against the BNG. For geometry decomposition by
        the BNG index system, use geom_to_bng_intersection.
 
     Args:
@@ -641,10 +641,10 @@ def geom_to_bng_intersection(
 ) -> list[BNGIndexedGeometry]:
     """Returns a list of BNGIndexedGeometry objects given a Shapely geometry and a specified resolution.
 
-       Decomposes a Shapely geometry into BNG grid squares at a specified resolution. Unlike geom_to_bng which only returns 
-       BNGReference objects representing the grid squares intersected by the input geometry, geom_to_bng_intersection returns 
-       BNGIndexedGeometry objects that store the intersection between the input geometry and the grid square geometries. 
-       This is particularly useful for spatial indexing, aggregation and visualisation use cases that requires the decomposition 
+       Decomposes a Shapely geometry into BNG grid squares at a specified resolution. Unlike geom_to_bng which only returns
+       BNGReference objects representing the grid squares intersected by the input geometry, geom_to_bng_intersection returns
+       BNGIndexedGeometry objects that store the intersection between the input geometry and the grid square geometries.
+       This is particularly useful for spatial indexing, aggregation and visualisation use cases that requires the decomposition
        of geometries into their constituent parts bounded by the BNG grid system.
 
     Args:
