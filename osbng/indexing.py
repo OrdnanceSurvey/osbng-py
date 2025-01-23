@@ -506,7 +506,6 @@ def bbox_to_bng(
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
-        OutsideBNGExtentError: If the bounding box coordinates are outside the BNG extent.
 
     Example:
         >>> [x.bng_ref_formatted for x in bbox_to_bng(400000, 100000, 500000, 200000, "50km")]
@@ -518,9 +517,8 @@ def bbox_to_bng(
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
 
-    # Validate the bounding box coordinates are within the BNG extent
-    _validate_easting_northing(xmin, ymin)
-    _validate_easting_northing(xmax, ymax)
+    # Validate and normalise bounding box coordinates to the BNG index system extent
+    xmin, ymin, xmax, ymax = _validate_and_normalise_bbox(xmin, ymin, xmax, ymax)
 
     # Snap the maximum easting and maximum northing coordinates to an integer multiple of resolution
     xmax_snapped = int(np.ceil(xmax / validated_resolution) * validated_resolution)
