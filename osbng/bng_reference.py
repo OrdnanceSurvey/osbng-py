@@ -1,13 +1,22 @@
-"""British National Grid Reference System.
+"""Provides functionality to parse, create and manipulate British National Grid (BNG) references via a custom BNGReference object.
 
-Implements a custom British National Grid (BNG) reference object for working with geographic 
-locations based on the Ordnance Survey (OS) National Grid system. 
+BNGReference Object
+------------------------
 
-The BNG is a rectangular Cartesian 700 x 1300km grid system based upon the transverse Mercator 
-projection used to identify locations across Great Britain (GB). In the BNG, locations are specified 
-using coordinates (eastings and northings). These coordinates are measured in meters from a defined 
+The BNG index system uses BNG references, also known as a grid references, to identify and index locations across Great Britain 
+into grid squares at various resolutions. 
+
+The BNGReference object is a custom class that encapsulates a BNG reference string, providing properties and methods to access 
+and manipulate the reference.
+
+British National Grid Index System
+------------------------
+
+The Ordnance Survey (OS) BNG index system (also called the OS National Grid) is a rectangular 
+Cartesian 700 x 1300km grid system based upon the transverse Mercator projection. In the BNG, locations 
+are specified using coordinates, eastings (x) and northings (y), measured in meters from a defined 
 origin point (0, 0) southwest of the Isles of Scilly. Values increase to the northeast, covering all 
-of mainland Great Britain and surrounding islands.
+of mainland Great Britain (GB) and surrounding islands.
 
 The BNG is structured using a hierarchical system of grid squares at various resolutions. At its highest level, 
 the grid divides GB into 100 km by 100 km squares, each identified by a two-letter code. Successive levels 
@@ -16,18 +25,22 @@ of resolution further subdivide the grid squares into finer detail, down to indi
 BNG Reference Structure
 ------------------------
 
-Each BNG reference includes a 2-letter prefix that identifies the 100 km grid square. This is followed by an 
-easting and northing value, and optionally, a suffix indicating ordinal (intercardinal) directions (NE, SE, SW, NW). 
+Each BNG reference string consists of a series of alphanumeric characters that encode the easting and northing at 
+a given resolution.
+
+A BNG reference includes a 2-letter prefix that identifies the 100 km grid square. This is followed by an 
+easting and northing value, and optionally, a suffix indicating an ordinal (intercardinal) direction (NE, SE, SW, NW). 
 These suffixes represent a quadtree subdivision of the grid at the 'standard' resolutions (100 km, 10 km, 1 km, 100 m, and 10 m), 
 with each direction indicating a specific quadrant.
 
 There are two exceptions to this structure:
 
-1.  At the 100 km resolution, the reference consists only of the prefix.
-2.  At the 50 km resolution, the reference includes the prefix and the ordinal direction suffix but does not include easting 
+1.  At the 100 km resolution, a BNG reference consists only of the prefix.
+2.  At the 50 km resolution, a BNG reference includes the prefix and the ordinal direction suffix but does not include easting 
 or northing components.
 
 A BNG reference can be expressed at different scales, as follows:
+
 1.  100 km: Identified by a two-letter code (e.g. 'TQ').
 2.  50 km: Subdivides the 100 km grid into four quadrants. The grid reference adds an ordinal direction suffix (NE, NW, SE, SW) 
 to indicate the quadrant within the 100 km square (e.g. 'TQ SW').
@@ -41,10 +54,10 @@ to indicate the quadrant within the 100 km square (e.g. 'TQ SW').
 10. 5 m: Subdivides the 10 m square adding an ordinal suffix (e.g. 'TQ 2386 3472 NW').
 11. 1 m: Adds five-digit easting and northing values (e.g. ' TQ 23863 34729').
 
-BNG Reference Specification
+BNG Reference Formatting
 ------------------------
 
-User-defined input BNG reference strings must adhere to the following format:
+User-defined input BNG reference strings passed to a BNGReference object must adhere to the following format:
 
 - Whitespace may or may not separate the components of the reference (i.e. between the two-letter 100km grid square prefix, easting, 
 northing, and ordinal suffix).
@@ -59,19 +72,17 @@ The BNG system is a practical application of the EPSG:27700 (OSGB36 / British Na
 (https://epsg.io/27700) which provides the geodetic framework that defines how locations defined by easting and northing coordinates 
 and encoded as BNG references (e.g. 'ST 569 714') are projected to the grid.
 
-Application
+BNG Reference Application
 ------------------------
 
-The BNG system is widely used by the geospatial community across GB. At each resolution, a given location can be identified with 
+The BNG index system is widely used by the geospatial community across GB. At each resolution, a given location can be identified with 
 increasing detail, allowing for variable accuracy depending on the geospatial application, from small-scale mapping to precise 
 survey measurements.
-
-This module provides functionality to parse, create and manipulate BNG references at a range of resolutions.
 """
 
 import re
 from functools import wraps
-from shapely.geometry import Polygon
+from shapely.geometry import Polygon, mapping
 
 from osbng.resolution import _RESOLUTION_TO_STRING
 from osbng.errors import BNGReferenceError
@@ -236,9 +247,9 @@ def _get_bng_pretty_format(bng_ref_string: str) -> str:
 class BNGReference:
     """A custom object for handling British National Grid (BNG) references.
 
-    Converts a BNG reference string into a BNGReference object, ensuring type consistency 
-    across the package. All functions accepting or returning BNG references enforce the use of this class.   
-    BNGReference methods are available both as instance methods and standalone functions, 
+    Converts a BNG reference string into a BNGReference object, ensuring type consistency
+    across the package. All functions accepting or returning BNG references enforce the use of this class.
+    BNGReference methods are available both as instance methods and standalone functions,
     providing users with the flexibility to either:
 
     - Create a BNGReference object and pass it to a function.
