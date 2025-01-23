@@ -29,6 +29,9 @@ from osbng.errors import BNGResolutionError, OutsideBNGExtentError
 from osbng.resolution import _RESOLUTION_TO_STRING
 from osbng.bng_reference import _PATTERN, BNGReference, _validate_bngreference
 
+# Set warnings to always display
+warnings.simplefilter("always")
+
 # 100km BNG grid square letters
 _PREFIXES = np.array(
     [
