@@ -8,7 +8,7 @@ into simplified representations bounded by their presence in each grid square at
 Indexing functionality faciliates grid-based spatial analysis, enabling applications such as statistical aggregation, 
 data visualisation, and data interopability. 
 
-Summary of functionaility:
+Summary of functionality:
 
     - Encoding easting and northing coordinates into BNGReference objects at a specified resolution.
     - Decoding BNGReference objects back into easting/nothing coordinates, bounding boxes and grid squares as Shapely geometries.
