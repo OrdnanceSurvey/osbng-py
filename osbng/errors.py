@@ -19,7 +19,7 @@ from osbng.resolution import BNG_RESOLUTIONS
 
 
 class BNGReferenceError(Exception):
-    """Exception rasied for errors in BNGReference object creation."""
+    """Exception rasied for invalid BNG reference strings during BNGReference object creation."""
 
     pass
 
@@ -40,7 +40,7 @@ class BNGResolutionError(Exception):
 
 
 class BNGExtentError(Exception):
-    """Exception raised for easting and northing coordinates outside the BNG extent.
+    """Exception raised for easting and northing coordinates outside the BNG index system extent.
 
     BNG extent defined as 0 <= easting < 700000 and 0 <= northing < 1300000"""
 
