@@ -338,8 +338,8 @@ def bng_to_xy(
         tuple[int | float, int | float]: The easting and northing coordinates as a tuple.
 
     Raises:
-        TypeError: If first argumnet is not BNGReference object.
-        ValueError: If invalid position provided.
+        TypeError: If the first argumnet is not BNGReference object.
+        ValueError: If an invalid position provided.
 
     Example:
         >>> bng_to_xy(BNGReference("SU"), "lower-left")
