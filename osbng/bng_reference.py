@@ -89,10 +89,11 @@ from osbng.errors import BNGReferenceError
 
 __all__ = ["BNGReference"]
 
-# Compile regular expression pattern for BNG reference
+# Compile regular expression pattern for BNG reference string validation
 # The geographical extent of the BNG reference system is defined as:
-# easting >= 0 and easting < 700000 and northing >= 0 and northing < 1300000
-# Supports the following resolutions: 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 5m, 1m
+# 0 <= easting < 700000 and 0 <= northing < 1300000
+# Supports the following resolutions: 
+# 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 5m, 1m
 _PATTERN = re.compile(
     r"""
     ^
