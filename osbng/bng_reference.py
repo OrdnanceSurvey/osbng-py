@@ -30,29 +30,29 @@ a given resolution.
 
 A BNG reference includes a 2-letter prefix that identifies the 100 km grid square. This is followed by an 
 easting and northing value, and optionally, a suffix indicating an ordinal (intercardinal) direction (NE, SE, SW, NW). 
-These suffixes represent a quadtree subdivision of the grid at the 'standard' resolutions (100 km, 10 km, 1 km, 100 m, and 10 m), 
+These suffixes represent a quadtree subdivision of the grid at the 'standard' resolutions (100km, 10km, 1km, 100m, and 10m), 
 with each direction indicating a specific quadrant.
 
 There are two exceptions to this structure:
 
-1.  At the 100 km resolution, a BNG reference consists only of the prefix.
-2.  At the 50 km resolution, a BNG reference includes the prefix and the ordinal direction suffix but does not include easting 
+1.  At the 100km resolution, a BNG reference consists only of the prefix.
+2.  At the 50km resolution, a BNG reference includes the prefix and the ordinal direction suffix but does not include easting 
 or northing components.
 
 A BNG reference can be expressed at different scales, as follows:
 
-1.  100 km: Identified by a two-letter code (e.g. 'TQ').
-2.  50 km: Subdivides the 100 km grid into four quadrants. The grid reference adds an ordinal direction suffix (NE, NW, SE, SW) 
+1.  100km: Identified by a two-letter code (e.g. 'TQ').
+2.  50km: Subdivides the 100 km grid into four quadrants. The grid reference adds an ordinal direction suffix (NE, NW, SE, SW) 
     to indicate the quadrant within the 100 km square (e.g. 'TQ SW').
-3.  10 km: Adds one-digit easting and northing values (e.g. 'TQ 2 3').
-4.  5 km: Subdivides the 10 km square adding an ordinal suffix (e.g. 'TQ 53 SW').
-5.  1 km: Adds two-digit easting and northing values (e.g. 'TQ 23 34').
-6.  500 m: Subdivides the 1 km square adding an ordinal suffix (e.g. 'TQ 23 34 NE').
-7.  100 m: Adds three-digit easting and northing values (e.g. ' TQ 238 347').
-8.  50 m: Subdivides the 100 m square adding an ordinal suffix (e.g. ' TQ 238 347 SE').
-9.  10 m: Adds four-digit easting and northing values (e.g. ' TQ 2386 3472').
-10. 5 m: Subdivides the 10 m square adding an ordinal suffix (e.g. 'TQ 2386 3472 NW').
-11. 1 m: Adds five-digit easting and northing values (e.g. ' TQ 23863 34729').
+3.  10km: Adds one-digit easting and northing values (e.g. 'TQ 2 3').
+4.  5km: Subdivides the 10 km square adding an ordinal suffix (e.g. 'TQ 53 SW').
+5.  1km: Adds two-digit easting and northing values (e.g. 'TQ 23 34').
+6.  500m: Subdivides the 1 km square adding an ordinal suffix (e.g. 'TQ 23 34 NE').
+7.  100m: Adds three-digit easting and northing values (e.g. ' TQ 238 347').
+8.  50m: Subdivides the 100 m square adding an ordinal suffix (e.g. ' TQ 238 347 SE').
+9.  10m: Adds four-digit easting and northing values (e.g. ' TQ 2386 3472').
+10. 5m: Subdivides the 10 m square adding an ordinal suffix (e.g. 'TQ 2386 3472 NW').
+11. 1m: Adds five-digit easting and northing values (e.g. ' TQ 23863 34729').
 
 BNG Reference Formatting
 ------------------------
