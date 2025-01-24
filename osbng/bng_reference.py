@@ -200,6 +200,7 @@ def _get_bng_resolution_label(bng_ref_string: str) -> str:
     """
     # Get the resolution in meters
     resolution_meters = _get_bng_resolution_metres(bng_ref_string)
+    
     # Get the resolution label
     return _RESOLUTION_TO_STRING.get(resolution_meters)["label"]
 
