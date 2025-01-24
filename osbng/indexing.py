@@ -640,28 +640,28 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
 
-    # Create an empty list to store the BNGReference objects
+    # Initialise an empty list to store the BNGReference objects
     bng_refs = []
 
     # Recursively decompose geometry into its constituent parts
     for part in _decompose_geom(geom):
-        # If the geometry is a point
+
         if part.geom_type == "Point":
-            # Convert the point to BNGReference object and append to bng_refs list
+            # Convert the Point to BNGReference object and append to bng_refs list
             bng_refs.append(xy_to_bng(part.x, part.y, validated_resolution))
-        # For all other geometry types
+        # All other geometry types
         else:
-            # Generate the bounding box of the geometry
+            # Get the bounding box of the geometry
             bbox = part.bounds
             # Convert the bounding box to BNGReference objects
             _bng_refs = np.array(bbox_to_bng(*bbox, validated_resolution))
-            # Get the geometry of the BNGReference objects
+            # Get the grid square geometries of the BNGReference objects
             bng_geoms = np.array([bng_to_grid_geom(bng_ref) for bng_ref in _bng_refs])
-            # Prepare the part geometry
+            # Prepare the geometry to speed up intersects spatial predicate tests
             prepare(part)
-            # Test the intersection between the geometry and the BNGReference objects
+            # Test where the geometry intersects the grid square geometries
             bng_bool = intersects(part, bng_geoms)
-            # Compare the two arrays to return those which are true and add to bng_refs list
+            # Append the intersected BNGReference objects to the bng_refs list
             bng_refs.extend(_bng_refs[bng_bool].tolist())
 
     # Deduplicate the list of BNGReference objects
