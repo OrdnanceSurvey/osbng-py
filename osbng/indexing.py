@@ -601,15 +601,18 @@ def bbox_to_bng(
 
 
 def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
-    """Returns a list of BNGReference objects given a Shapely geometry and a specified resolution.
+    """Returns a list of BNGReference objects given a Shapely Geometry and a specified resolution.
 
        The BNGReference objects returned represent the grid squares intersected by the input geometry.
-       For multi-part geometries, only distinct grid squares are returned. This function is useful for
-       spatial indexing and aggregation of geometries against the BNG. For geometry decomposition by
-       the BNG index system, use geom_to_bng_intersection.
+       BNGReference objects are deduplicated in cases where two or more parts of a multi-part geometry
+       intersect the same grid square.
+       
+       This function is useful for spatial indexing and aggregation of geometries against the BNG. 
+       For geometry decomposition by the BNG index system, use geom_to_bng_intersection instead.
 
        A note on the type of the input geometry. This also applies to the parts within a multi-part geometry:
-         - For Point geometries, the function returns a list comprising a single BNGReference object. An BNGExtentError
+
+         - For Point geometries, the function returns a list comprising a single BNGReference object. A BNGExtentError
            exception is raised if the coordinates are outside of the BNG index system extent.
          - For LineString and Polygon geometry types, the function returns a list of BNGReference objects representing the
            grid squares intersected by the geometry. When the geometry extends beyond the BNG system extent, the function
