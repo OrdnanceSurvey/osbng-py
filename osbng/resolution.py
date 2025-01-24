@@ -16,7 +16,9 @@ These resolution mappings establish the allowable values that functions and obje
 
 __all__ = ["BNG_RESOLUTIONS"]
 
-# BNG resolution mappings from metre-based integer values to string label representations
+# Supported BNG resolutions
+# Mappings from metre-based integer values to string label representations
+# Quadtree flag indicates whether resolution represents an intermediate quadtree level
 BNG_RESOLUTIONS = {
     100000: {"label": "100km", "quadtree": False},
     50000: {"label": "50km", "quadtree": True},
