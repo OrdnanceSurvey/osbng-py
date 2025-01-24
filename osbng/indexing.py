@@ -671,16 +671,18 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
 def geom_to_bng_intersection(
     geom: Geometry, resolution: int | str
 ) -> list[BNGIndexedGeometry]:
-    """Returns a list of BNGIndexedGeometry objects given a Shapely geometry and a specified resolution.
+    """Returns a list of BNGIndexedGeometry objects given a Shapely Geometry and a specified resolution.
 
-       Decomposes a Shapely geometry into BNG grid squares at a specified resolution. Unlike geom_to_bng which only returns
+       Decomposes a Shapely Geometry into BNG grid squares at a specified resolution. Unlike geom_to_bng which only returns
        BNGReference objects representing the grid squares intersected by the input geometry, geom_to_bng_intersection returns
        BNGIndexedGeometry objects that store the intersection between the input geometry and the grid square geometries.
+
        This is particularly useful for spatial indexing, aggregation and visualisation use cases that requires the decomposition
-       of geometries into their constituent parts bounded by the BNG grid system.
+       of geometries into their constituent parts bounded by the BNG system.
 
        A note on the type of the input geometry. This also applies to the parts within a multi-part geometry:
-        - For Point geometries, the function returns a list comprising a single BNGIndexedGeometry object. An BNGExtentError
+
+        - For Point geometries, the function returns a list comprising a single BNGIndexedGeometry object. A BNGExtentError
           exception is raised if the coordinates are outside of the BNG index system extent.
         - For LineString and Polygon geometry types, the function returns a list of BNGIndexedGeometry objects representing the
           intersections between the grid squares and the geometry. When the geometry extends beyond the BNG system extent, the function
