@@ -1,6 +1,6 @@
 """Testing for the bng_reference module.
 
-Test cases are loaded from a JSON file using the load_test_cases function from the utils module.
+Test cases are loaded from a JSON file using the _load_test_cases function from the utils module.
 """
 
 import pytest
@@ -13,13 +13,13 @@ from osbng.bng_reference import (
     BNGReference,
 )
 from osbng.errors import _EXCEPTION_MAP
-from osbng.utils import load_test_cases
+from osbng.utils import _load_test_cases
 
 
 # Parameterised test for _validate_bng_ref_string function
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/bng_reference_test_cases.json")["_validate_bng_ref_string"],
+    _load_test_cases(file_path="./data/bng_reference_test_cases.json")["_validate_bng_ref_string"],
 )
 def test__validate_bng_ref_string(test_case):
     """Test _validate_bng_ref_string function with test cases from JSON file.
@@ -35,7 +35,7 @@ def test__validate_bng_ref_string(test_case):
 # Parameterised test for _get_bng_resolution_metres function
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/bng_reference_test_cases.json")[
+    _load_test_cases(file_path="./data/bng_reference_test_cases.json")[
         "_get_bng_resolution_metres"
     ],
 )
@@ -53,7 +53,7 @@ def test__get_bng_resolution_metres(test_case):
 # Parameterised test for _get_bng_resolution_label function
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/bng_reference_test_cases.json")[
+    _load_test_cases(file_path="./data/bng_reference_test_cases.json")[
         "_get_bng_resolution_label"
     ],
 )
@@ -71,7 +71,7 @@ def test__get_bng_resolution_label(test_case):
 # Parameterised test for _format_bng_ref_string function
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/bng_reference_test_cases.json")[
+    _load_test_cases(file_path="./data/bng_reference_test_cases.json")[
         "_format_bng_ref_string"
     ],
 )
@@ -89,7 +89,7 @@ def test__format_bng_ref_string(test_case):
 # Parameterised test for BNGReference object
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/bng_reference_test_cases.json")["BNGReference"],
+    _load_test_cases(file_path="./data/bng_reference_test_cases.json")["BNGReference"],
 )
 def test_bngreference(test_case):
     """Test BNGReference object with test cases from JSON file.

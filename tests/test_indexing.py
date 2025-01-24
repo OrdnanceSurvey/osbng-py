@@ -1,6 +1,6 @@
 """Testing for the indexing module.
 
-Test cases are loaded from a JSON file using the load_test_cases function from the utils module.
+Test cases are loaded from a JSON file using the _load_test_cases function from the utils module.
 """
 
 import pytest
@@ -12,13 +12,13 @@ from osbng.indexing import (
     xy_to_bng,
 )
 from osbng.errors import _EXCEPTION_MAP
-from osbng.utils import load_test_cases
+from osbng.utils import _load_test_cases
 
 
 # Parameterised test for _validate_and_normalise_bng_resolution function
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/indexing_test_cases.json")[
+    _load_test_cases(file_path="./data/indexing_test_cases.json")[
         "_validate_and_normalise_bng_resolution"
     ],
 )
@@ -40,7 +40,7 @@ def test__validate_and_normalise_bng_resolution(test_case):
 # Parameterised test for _validate_easting_northing function
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/indexing_test_cases.json")[
+    _load_test_cases(file_path="./data/indexing_test_cases.json")[
         "_validate_easting_northing"
     ],
 )
@@ -61,7 +61,7 @@ def test__validate_easting_northing(test_case):
 # Parameterised test for _get_bng_suffix function
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/indexing_test_cases.json")["_get_bng_suffix"],
+    _load_test_cases(file_path="./data/indexing_test_cases.json")["_get_bng_suffix"],
 )
 def test__get_bng_suffix(test_case):
     """Test _get_bng_suffix function with test cases from JSON file.
@@ -79,7 +79,7 @@ def test__get_bng_suffix(test_case):
 # Parameterised test for xy_to_bng function
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/indexing_test_cases.json")[
+    _load_test_cases(file_path="./data/indexing_test_cases.json")[
         "xy_to_bng"
     ],
 )

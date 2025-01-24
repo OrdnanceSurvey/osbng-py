@@ -3,7 +3,7 @@
 import json
 
 
-def load_test_cases(file_path: str) -> dict:
+def _load_test_cases(file_path: str) -> dict:
     """Load test cases from a JSON file.
 
     Args:
