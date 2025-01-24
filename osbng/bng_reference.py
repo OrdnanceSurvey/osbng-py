@@ -292,7 +292,7 @@ class BNGReference:
     def __init__(self, bng_ref_string: str):
         # Validate the BNG reference string
         if not _validate_bng_ref_string(bng_ref_string):
-            raise BNGReferenceError(f"Invalid BNG reference: '{bng_ref_string}'")
+            raise BNGReferenceError(f"Invalid BNG reference string: '{bng_ref_string}'")
 
         # Remove all whitespace for internal storage
         self._bng_ref_compact = bng_ref_string.replace(" ", "")
