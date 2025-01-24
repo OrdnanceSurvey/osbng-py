@@ -84,7 +84,7 @@ class BNGIndexedGeometry:
                         geometry. This is relevant for Polygon geometries and helps distinguish between "core" (fully inside)
                         and "edge" (partially overlapping) grid squares.
         geom (Geometry): The Shapely Geometry representing the intersection between the input geometry and the grid square.
-                         This can one of a number of geometry types depending on the overlap. When is_core is True, 
+                         This can one of a number of geometry types depending on the overlap. When is_core is True,
                          geom is the same as the grid square geometry.
 
     Usage:
@@ -147,9 +147,7 @@ def _validate_and_normalise_bng_resolution(resolution: int | str):
 
     # If resolution is a string, check if it's a valid resolution label
     elif isinstance(resolution, str):
-        if resolution not in [
-            value["label"] for value in BNG_RESOLUTIONS.values()
-        ]:
+        if resolution not in [value["label"] for value in BNG_RESOLUTIONS.values()]:
             raise BNGResolutionError()
         # Get the corresponding metre-based resolution
         return next(
@@ -233,7 +231,7 @@ def _get_bng_suffix(easting: float, northing: float, resolution: int) -> str:
     Args:
         easting (float): Easting coordinate.
         northing (float): Northing coordinate.
-        resolution (int): Resolution expressed as a metre-based integer. Must be an intermediate quadtree 
+        resolution (int): Resolution expressed as a metre-based integer. Must be an intermediate quadtree
                           resolution e.g. 5, 50, 500, 5000, 50000.
 
     Returns:
