@@ -48,7 +48,7 @@ __all__ = [
 # Set warnings to always display
 warnings.simplefilter("always")
 
-# 100km BNG grid square letters
+# 100km BNG grid square letter prefixes and corresponding positional indices
 _PREFIXES = np.array(
     [
         ["SV", "SW", "SX", "SY", "SZ", "TV", "TW"],
@@ -68,7 +68,7 @@ _PREFIXES = np.array(
 )
 
 # BNG ordinal direction suffixes and corresponding positional indices
-# for intermediate quadtree resolutions
+# Used to identify intermediate quadtree resolutions
 _SUFFIXES = np.array([["SW", "NW"], ["SE", "NE"]])
 
 
