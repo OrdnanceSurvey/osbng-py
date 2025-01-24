@@ -125,7 +125,7 @@ _PATTERN = re.compile(
 )
 
 
-def _validate_bng(bng_ref_string: str) -> bool:
+def _validate_bng_ref_string(bng_ref_string: str) -> bool:
     """Validates a BNG reference string using a regular expression pattern.
 
     Args:
@@ -289,7 +289,7 @@ class BNGReference:
 
     def __init__(self, bng_ref_string: str):
         # Validate the BNG reference string
-        if not _validate_bng(bng_ref_string):
+        if not _validate_bng_ref_string(bng_ref_string):
             raise BNGReferenceError(f"Invalid BNG reference: '{bng_ref_string}'")
 
         # Remove all whitespace for internal storage

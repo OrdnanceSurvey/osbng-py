@@ -1,5 +1,5 @@
 {
-    "_validate_bng": [
+    "_validate_bng_ref_string": [
         {
             "bng_ref_string": "HP",
             "expected": true
