@@ -253,6 +253,41 @@ def _get_bng_suffix(easting: float, northing: float, resolution: int) -> str:
     return _SUFFIXES[suffix_x, suffix_y]
 
 
+def _decompose_geom(geom: Geometry) -> list[Geometry]:
+    """Recursively decompose a Shapely Geometry into its constituent parts.
+
+    Args:
+        geom (Geometry): Shapely Geometry object.
+
+    Returns:
+        list[Geometry]: List of Shapely Geometry object parts.
+
+    Raises:
+        ValueError: If the geometry type is not supported.
+    """
+    # Single part geometries are returned as-is
+    if geom.geom_type in ["Point", "LineString", "Polygon"]:
+        return [geom]
+
+    # Multi-part geometries are decomposed into their constituent parts
+    elif geom.geom_type in [
+        "MultiPoint",
+        "MultiLineString",
+        "MultiPolygon",
+        "GeometryCollection",
+    ]:
+        # Initialise list to store decomposed geometries
+        geometries = []
+        # Recursively decompose each part of the multi-part geometry
+        for part in geom.geoms:
+            geometries.extend(_decompose_geom(part))
+        return geometries
+
+    # Raise an error if the geometry type is not supported
+    else:
+        raise ValueError(f"Unsupported geometry type: {geom.geom_type}")
+
+
 def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGReference:
     """Returns a BNGReference object given easting and northing coordinates, at a specified resolution.
 
@@ -565,41 +600,6 @@ def bbox_to_bng(
     ]
 
     return bng_refs
-
-
-def _decompose_geom(geom: Geometry) -> list[Geometry]:
-    """Recursively decompose a Shapely Geometry into its constituent parts.
-
-    Args:
-        geom (Geometry): Shapely Geometry object.
-
-    Returns:
-        list[Geometry]: List of Shapely Geometry object parts.
-
-    Raises:
-        ValueError: If the geometry type is not supported.
-    """
-    # Single part geometries are returned as-is
-    if geom.geom_type in ["Point", "LineString", "Polygon"]:
-        return [geom]
-
-    # Multi-part geometries are decomposed into their constituent parts
-    elif geom.geom_type in [
-        "MultiPoint",
-        "MultiLineString",
-        "MultiPolygon",
-        "GeometryCollection",
-    ]:
-        # Initialise list to store decomposed geometries
-        geometries = []
-        # Recursively decompose each part of the multi-part geometry
-        for part in geom.geoms:
-            geometries.extend(_decompose_geom(part))
-        return geometries
-
-    # Raise an error if the geometry type is not supported
-    else:
-        raise ValueError(f"Unsupported geometry type: {geom.geom_type}")
 
 
 def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
