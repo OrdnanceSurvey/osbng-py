@@ -16,7 +16,7 @@ from osbng.errors import _EXCEPTION_MAP
 from osbng.utils import load_test_cases
 
 
-# Parameterised test for _validate_bng function
+# Parameterised test for _validate_bng_ref_string function
 @pytest.mark.parametrize(
     "test_case",
     load_test_cases(file_path="./data/bng_reference_test_cases.json")["_validate_bng_ref_string"],
