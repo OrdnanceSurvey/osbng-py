@@ -649,6 +649,7 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
         if part.geom_type == "Point":
             # Convert the Point to BNGReference object and append to bng_refs list
             bng_refs.append(xy_to_bng(part.x, part.y, validated_resolution))
+
         # All other geometry types
         else:
             # Get the bounding box of the geometry part
@@ -706,6 +707,7 @@ def geom_to_bng_intersection(
 
     # Recursively decompose geometry into its constituent parts
     for part in _decompose_geom(geom):
+        
         # Convert the geometry part to BNGReference objects
         bng_refs = np.array(geom_to_bng(part, resolution))
 
