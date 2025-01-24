@@ -3,8 +3,8 @@
 BNGReference Object
 ------------------------
 
-The BNG index system uses BNG references, also known as a grid references, to identify and index locations across Great Britain 
-into grid squares at various resolutions. 
+The BNG index system uses BNG references, also known more simply as grid or tile references, to identify and index locations across 
+Great Britain (GB) into grid squares at various resolutions. 
 
 The BNGReference object is a custom class that encapsulates a BNG reference string, providing properties and methods to access 
 and manipulate the reference.
@@ -12,11 +12,11 @@ and manipulate the reference.
 British National Grid Index System
 ------------------------
 
-The Ordnance Survey (OS) BNG index system (also called the OS National Grid) is a rectangular 
+The Ordnance Survey (OS) BNG index system (also known as the OS National Grid) is a rectangular 
 Cartesian 700 x 1300km grid system based upon the transverse Mercator projection. In the BNG, locations 
 are specified using coordinates, eastings (x) and northings (y), measured in meters from a defined 
-origin point (0, 0) southwest of the Isles of Scilly. Values increase to the northeast, covering all 
-of mainland Great Britain (GB) and surrounding islands.
+origin point (0, 0) southwest of the Isles of Scilly off the coast of Cornwall, England. Values increase 
+to the northeast, covering all of mainland GB and surrounding islands.
 
 The BNG is structured using a hierarchical system of grid squares at various resolutions. At its highest level, 
 the grid divides GB into 100 km by 100 km squares, each identified by a two-letter code. Successive levels 
@@ -43,7 +43,7 @@ A BNG reference can be expressed at different scales, as follows:
 
 1.  100 km: Identified by a two-letter code (e.g. 'TQ').
 2.  50 km: Subdivides the 100 km grid into four quadrants. The grid reference adds an ordinal direction suffix (NE, NW, SE, SW) 
-to indicate the quadrant within the 100 km square (e.g. 'TQ SW').
+    to indicate the quadrant within the 100 km square (e.g. 'TQ SW').
 3.  10 km: Adds one-digit easting and northing values (e.g. 'TQ 2 3').
 4.  5 km: Subdivides the 10 km square adding an ordinal suffix (e.g. 'TQ 53 SW').
 5.  1 km: Adds two-digit easting and northing values (e.g. 'TQ 23 34').
@@ -57,10 +57,10 @@ to indicate the quadrant within the 100 km square (e.g. 'TQ SW').
 BNG Reference Formatting
 ------------------------
 
-User-defined input BNG reference strings passed to a BNGReference object must adhere to the following format:
+BNG reference strings passed to a BNGReference object must adhere to the following format:
 
 - Whitespace may or may not separate the components of the reference (i.e. between the two-letter 100km grid square prefix, easting, 
-northing, and ordinal suffix).
+  northing, and ordinal suffix).
 - If whitespace is present, it should be a single space character.
 - Whitespace can be inconsistently used between components of the reference.
 - The two-letter 100 km grid square prefixes and ordinal direction suffixes (NE, SE, SW, NW) should be capitalised.
