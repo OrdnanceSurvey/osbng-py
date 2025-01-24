@@ -1,8 +1,8 @@
 """Provides functionality to index and work with coordinates and Shapely geometries within the British National Grid (BNG) index system.
 
-The module supports bi-drectional conversion between easting/northing coordinate pairs and BNGReference objects
-at supported resolutions as defined in the 'resolution' module. Additionally, it enables the indexing of geoemtries, 
-represented using Shapely objects, into grid squares at a specified resolution. Shapely geometries can also be decomposed
+The module supports bi-directional conversion between easting/northing coordinate pairs and BNGReference objects
+at supported resolutions as defined in the 'resolution' module. Additionally, it enables the indexing of geometries, 
+represented using Shapely Geometry objects, into grid squares at a specified resolution. Shapely geometries can also be decomposed
 into simplified representations bounded by their presence in each grid square at a specified resolution.
 
 Indexing functionality faciliates grid-based spatial analysis, enabling applications such as statistical aggregation, 
