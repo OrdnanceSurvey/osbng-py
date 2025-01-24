@@ -9,6 +9,15 @@ from typing import Iterator, Union
 
 from osbng.indexing import bbox_to_bng
 
+__all__ = [
+    "BNG_BOUNDS",
+    "bbox_to_bng_iterfeatures",
+    "bng_grid_100km",
+    "bng_grid_50km",
+    "bng_grid_10km",
+    "bng_grid_5km",
+]
+
 # BNG index system bounds
 BNG_BOUNDS = (0, 0, 700000, 1300000)
 
