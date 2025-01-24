@@ -1,5 +1,19 @@
 """Defines the supported British National Grid (BNG) resolutions.
 
+Supported BNG resolutions are: 
+
+- 100km
+- 50km
+- 10km
+- 5km
+- 1km
+- 500m
+- 100m
+- 50m
+- 10m
+- 5m
+- 1m
+
 Relates metre-based BNG resolutions, expressed as integer values, to their respective string label representations. 
 These mappings are used to indicate different resolution precision levels in BNG references and serve as the basis for validating 
 and normalising resolutions within the system.
