@@ -30,7 +30,7 @@ import warnings
 from shapely.geometry import Polygon
 from shapely import box, Geometry, prepare, intersects, contains, intersection
 
-from osbng.errors import BNGResolutionError, OutsideBNGExtentError
+from osbng.errors import BNGResolutionError, BNGExtentError
 from osbng.resolution import BNG_RESOLUTIONS
 from osbng.bng_reference import _PATTERN, BNGReference, _validate_bngreference
 
@@ -174,12 +174,12 @@ def _validate_easting_northing(easting: float, northing: float):
         northing (float): The northing coordinate. Must be in the range 0 <= northing < 1300000.
 
     Raises:
-        OutsideBNGExtentError: If the easting or northing coordinates are outside the BNG extent.
+        BNGExtentError: If the easting or northing coordinates are outside the BNG extent.
     """
     if not (0 <= easting < 700000):
-        raise OutsideBNGExtentError()
+        raise BNGExtentError()
     if not (0 <= northing < 1300000):
-        raise OutsideBNGExtentError()
+        raise BNGExtentError()
 
 
 def _validate_and_normalise_bbox(
@@ -264,7 +264,7 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
-        OutsideBNGExtentError: If the easting and northing coordinates are outside the BNG extent.
+        BNGExtentError: If the easting and northing coordinates are outside the BNG extent.
 
     Example:
         >>> xy_to_bng(437289, 115541, "100km").bng_ref_formatted
@@ -609,7 +609,7 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
        the BNG index system, use geom_to_bng_intersection.
 
        A note on the type of the input geometry. This also applies to the parts within a multi-part geometry:
-         - For Point geometries, the function returns a list comprising a single BNGReference object. An OutsideBNGExtentError
+         - For Point geometries, the function returns a list comprising a single BNGReference object. An BNGExtentError
            exception is raised if the coordinates are outside of the BNG index system extent.
          - For LineString and Polygon geometry types, the function returns a list of BNGReference objects representing the
            grid squares intersected by the geometry. When the geometry extends beyond the BNG system extent, the function
@@ -626,7 +626,7 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
         ValueError: If the geometry type is not supported.
-        OutsideBNGExtentError: If the coordinates of a point geometry are outside of the BNG index system extent.
+        BNGExtentError: If the coordinates of a point geometry are outside of the BNG index system extent.
 
     Example:
         >>> [x.bng_ref_formatted for x in geom_to_bng(Point(430000, 110000), resolution="100km")]
@@ -677,7 +677,7 @@ def geom_to_bng_intersection(
        of geometries into their constituent parts bounded by the BNG grid system.
 
        A note on the type of the input geometry. This also applies to the parts within a multi-part geometry:
-        - For Point geometries, the function returns a list comprising a single BNGIndexedGeometry object. An OutsideBNGExtentError
+        - For Point geometries, the function returns a list comprising a single BNGIndexedGeometry object. An BNGExtentError
           exception is raised if the coordinates are outside of the BNG index system extent.
         - For LineString and Polygon geometry types, the function returns a list of BNGIndexedGeometry objects representing the
           intersections between the grid squares and the geometry. When the geometry extends beyond the BNG system extent, the function
@@ -694,7 +694,7 @@ def geom_to_bng_intersection(
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
         ValueError: If the geometry type is not supported.
-        OutsideBNGExtentError: If the coordinates of a point geometry are outside of the BNG index system extent.
+        BNGExtentError: If the coordinates of a point geometry are outside of the BNG index system extent.
     """
     # Create an empty list to store the BNGIndexedGeometry objects
     bng_idx_geoms = []

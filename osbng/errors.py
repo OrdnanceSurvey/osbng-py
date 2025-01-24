@@ -7,7 +7,7 @@ Custom exceptions:
 
     - BNGReferenceError: Raised when an invalid BNG reference string is provided.
     - BNGResolutionError: Raised when an invalid BNG resolution is provided.
-    - OutsideBNGExtentError: Raised when easting and northing coordinates fall outside of the defined extent of the BNG index system.
+    - BNGExtentError: Raised when easting and northing coordinates fall outside of the defined extent of the BNG index system.
 
 Additional features:
 
@@ -39,7 +39,7 @@ class BNGResolutionError(Exception):
         super().__init__(message)
 
 
-class OutsideBNGExtentError(Exception):
+class BNGExtentError(Exception):
     """Exception raised for easting and northing coordinates outside the BNG extent.
 
     BNG extent defined as 0 <= easting < 700000 and 0 <= northing < 1300000"""
@@ -58,5 +58,5 @@ class OutsideBNGExtentError(Exception):
 _EXCEPTION_MAP = {
     "BNGReferenceError": BNGReferenceError,
     "BNGResolutionError": BNGResolutionError,
-    "OutsideBNGExtentError": OutsideBNGExtentError,
+    "BNGExtentError": BNGExtentError,
 }

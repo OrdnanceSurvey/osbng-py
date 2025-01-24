@@ -70,42 +70,42 @@
             "easting": 700000,
             "northing": 0,
             "expected_exception": {
-                "name": "OutsideBNGExtentError"
+                "name": "BNGExtentError"
             }
         },
         {
             "easting": 0,
             "northing": 1300000,
             "expected_exception": {
-                "name": "OutsideBNGExtentError"
+                "name": "BNGExtentError"
             }
         },
         {
             "easting": 700000,
             "northing": 1300000,
             "expected_exception": {
-                "name": "OutsideBNGExtentError"
+                "name": "BNGExtentError"
             }
         },
         {
             "easting": -1,
             "northing": 0,
             "expected_exception": {
-                "name": "OutsideBNGExtentError"
+                "name": "BNGExtentError"
             }
         },
         {
             "easting": 0,
             "northing": -1,
             "expected_exception": {
-                "name": "OutsideBNGExtentError"
+                "name": "BNGExtentError"
             }
         },
         {
             "easting": -1,
             "northing": -1,
             "expected_exception": {
-                "name": "OutsideBNGExtentError"
+                "name": "BNGExtentError"
             }
         }
     ],
@@ -765,7 +765,7 @@
             "northing": -1,
             "resolution": 1000,
             "expected_exception": {
-                "name": "OutsideBNGExtentError"
+                "name": "BNGExtentError"
             }
         },
         {
@@ -773,7 +773,7 @@
             "northing": 0,
             "resolution": 1000,
             "expected_exception": {
-                "name": "OutsideBNGExtentError"
+                "name": "BNGExtentError"
             }
         },
         {
@@ -781,7 +781,7 @@
             "northing": 1300000,
             "resolution": 1000,
             "expected_exception": {
-                "name": "OutsideBNGExtentError"
+                "name": "BNGExtentError"
             }
         },
         {
