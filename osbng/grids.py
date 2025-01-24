@@ -5,5 +5,39 @@ Uses a GeoJSON-like mapping for grid squares implementing the __geo_interface__ 
 Use of this protocol enables integration with geospatial data processing libraries and tools.
 """
 
+from typing import Iterator, Union
+
+from osbng.indexing import bbox_to_bng
+
 # BNG index system bounds
 BNG_BOUNDS = (0, 0, 700000, 1300000)
+
+
+def bbox_to_bng_iterfeatures(
+    xmin: float, ymin: float, xmax: float, ymax: float, resolution: int | str
+) -> Iterator[dict[str, Union[str, dict]]]:
+    """Returns an iterator of BNGReference objects represented using a GeoJSON-like 
+       mapping within specified bounds at a specified resolution.
+
+    Implements the __geo_interface__ protocol. The returned data structure represents 
+    the BNGReference object as a GeoJSON-like Feature.
+
+    Args:
+        xmin (float): The minimum x-coordinate of the bounding box.
+        ymin (float): The minimum y-coordinate of the bounding box.
+        xmax (float): The maximum x-coordinate of the bounding box.
+        ymax (float): The maximum y-coordinate of the bounding box.
+        resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
+
+    Yields:
+        dict: A GeoJSON-like representation of a BNGReference object.
+
+    Raises:
+        BNGResolutionError: If the resolution is not a valid resolution.
+    """
+    # Convert the bounding box to BNGReference objects
+    bng_refs = bbox_to_bng(xmin, ymin, xmax, ymax, resolution)
+
+    # Yield BNGReference object GeoJSON-like Features
+    for bng_ref in bng_refs:
+        yield bng_ref.__geo_interface__
