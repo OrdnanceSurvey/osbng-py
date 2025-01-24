@@ -1,8 +1,4 @@
-"""Provides various utility functions to support the project.
-
-Includes functionality for loading test cases from a JSON file,
-which can is used to facilitate parameterised testing and validation processes.
-"""
+"""Provides utility functions to support testing."""
 
 import json
 
