@@ -41,3 +41,12 @@ def bbox_to_bng_iterfeatures(
     # Yield BNGReference object GeoJSON-like Features
     for bng_ref in bng_refs:
         yield bng_ref.__geo_interface__
+
+
+# Generate BNGReference object Features covering the BNG index system bounds 
+# Grid square data provided at 100km, 50km, 10km and 5km resolutions
+# Resolution capped at 5km to prevent excessive data generation
+bng_grid_100km = list(bbox_to_bng_iterfeatures(*BNG_BOUNDS, "100km"))
+bng_grid_50km = list(bbox_to_bng_iterfeatures(*BNG_BOUNDS, "50km"))
+bng_grid_10km = list(bbox_to_bng_iterfeatures(*BNG_BOUNDS, "10km"))
+bng_grid_5km = list(bbox_to_bng_iterfeatures(*BNG_BOUNDS, "5km"))
