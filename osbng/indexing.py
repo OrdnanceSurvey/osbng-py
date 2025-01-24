@@ -500,12 +500,12 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
 def bbox_to_bng(
     xmin: float, ymin: float, xmax: float, ymax: float, resolution: int | str
 ) -> list[BNGReference]:
-    """Returns a list of BNGReference objects given bounding box coordinates and resolution.
+    """Returns a list of BNGReference objects given bounding box coordinates and a resolution.
 
     The relationship between the bounding box and the returned BNG grid squares depends on the
-    alignment of the bounding box with the BNG system:
+    alignment of the bounding box with the BNG index system:
 
-    - **Aligned Bounding Box**: If the bounding box edges align with the BNGsystem
+    - **Aligned Bounding Box**: If the bounding box edges align with the BNG system
         (e.g. xmin, ymin, xmax, ymax are multiples of the specified resolution), only the grid
         squares entirely contained within the bounding box are returned. Grid squares that intersect
         but are not fully contained within the bounding box are excluded.
