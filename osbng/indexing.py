@@ -120,7 +120,7 @@ class BNGIndexedGeometry:
         )
 
 
-def _validate_and_normalise_bng_resolution(resolution: int | str):
+def _validate_and_normalise_bng_resolution(resolution: int | str) -> int:
     """Validates and normalises a BNG resolution to its metre-based integer value.
 
     Args:
