@@ -14,8 +14,10 @@ providing additional levels of precision for spatial indexing.
 These resolution mappings establish the allowable values that functions and objects referencing the system can accept and process.
 """
 
+__all__ = ["BNG_RESOLUTIONS"]
+
 # BNG resolution mappings from metre-based integer values to string label representations
-_RESOLUTION_TO_STRING = {
+BNG_RESOLUTIONS = {
     100000: {"label": "100km", "quadtree": False},
     50000: {"label": "50km", "quadtree": True},
     10000: {"label": "10km", "quadtree": False},

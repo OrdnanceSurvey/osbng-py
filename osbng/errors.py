@@ -13,7 +13,7 @@ Additional features:
     dynamic exception handling in a structured manner.
 """
 
-from osbng.resolution import _RESOLUTION_TO_STRING
+from osbng.resolution import BNG_RESOLUTIONS
 
 
 class BNGReferenceError(Exception):
@@ -26,12 +26,12 @@ class BNGResolutionError(Exception):
     """Exception raised for unsupported BNG resolutions."""
 
     def __init__(self):
-        # Extract the numeric and string resolutions from _resolution_to_string
+        # Extract the numeric and string resolutions from BNG_RESOLUTIONS
         # Create message listing supported resolutions
         message = (
             "Invalid BNG resolution provided. Supported resolutions are: \n"
-            f"Metres: {", ".join(map(str, _RESOLUTION_TO_STRING.keys()))}\n"
-            f"Labels: {", ".join(value["label"] for value in _RESOLUTION_TO_STRING.values())}"
+            f"Metres: {", ".join(map(str, BNG_RESOLUTIONS.keys()))}\n"
+            f"Labels: {", ".join(value["label"] for value in BNG_RESOLUTIONS.values())}"
         )
         # Pass message to base class
         super().__init__(message)

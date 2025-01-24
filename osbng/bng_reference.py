@@ -84,7 +84,7 @@ import re
 from functools import wraps
 from shapely.geometry import Polygon, mapping
 
-from osbng.resolution import _RESOLUTION_TO_STRING
+from osbng.resolution import BNG_RESOLUTIONS
 from osbng.errors import BNGReferenceError
 
 __all__ = ["BNGReference"]
@@ -202,7 +202,7 @@ def _get_bng_resolution_label(bng_ref_string: str) -> str:
     resolution_meters = _get_bng_resolution_metres(bng_ref_string)
     
     # Get the resolution label
-    return _RESOLUTION_TO_STRING.get(resolution_meters)["label"]
+    return BNG_RESOLUTIONS.get(resolution_meters)["label"]
 
 
 def _format_bng_ref_string(bng_ref_string: str) -> str:

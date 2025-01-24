@@ -31,7 +31,7 @@ from shapely.geometry import Polygon
 from shapely import box, Geometry, prepare, intersects, contains, intersection
 
 from osbng.errors import BNGResolutionError, OutsideBNGExtentError
-from osbng.resolution import _RESOLUTION_TO_STRING
+from osbng.resolution import BNG_RESOLUTIONS
 from osbng.bng_reference import _PATTERN, BNGReference, _validate_bngreference
 
 __all__ = [
@@ -140,20 +140,20 @@ def _validate_and_normalise_bng_resolution(resolution: int | str):
 
     # If resolution is an integer, check if it's a valid metre-based resolution
     if isinstance(resolution, int):
-        if resolution not in _RESOLUTION_TO_STRING.keys():
+        if resolution not in BNG_RESOLUTIONS.keys():
             raise BNGResolutionError()
         return resolution
 
     # If resolution is a string, check if it's a valid resolution label
     elif isinstance(resolution, str):
         if resolution not in [
-            value["label"] for value in _RESOLUTION_TO_STRING.values()
+            value["label"] for value in BNG_RESOLUTIONS.values()
         ]:
             raise BNGResolutionError()
         # Get the corresponding metre-based resolution
         return next(
             res
-            for res, value in _RESOLUTION_TO_STRING.items()
+            for res, value in BNG_RESOLUTIONS.items()
             if value["label"] == resolution
         )
 
@@ -289,7 +289,7 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
     prefix = _PREFIXES[prefix_y][prefix_x]
 
     # Calculate scaled resolution for quadtree resolutions
-    if _RESOLUTION_TO_STRING[validated_resolution]["quadtree"]:
+    if BNG_RESOLUTIONS[validated_resolution]["quadtree"]:
         scaled_resolution = validated_resolution * 2
         # Get BNG ordinal suffix
         suffix = _get_bng_suffix(easting, northing, validated_resolution)
@@ -381,7 +381,7 @@ def bng_to_xy(
     prefix_northing = int(prefix_indices[0] * 100000)
 
     # For quadtree resolutions, scale the resolution value by 2
-    if _RESOLUTION_TO_STRING[resolution]["quadtree"]:
+    if BNG_RESOLUTIONS[resolution]["quadtree"]:
         scaled_resolution = resolution * 2
 
     # For non-quadtree (standard) resolutions, the scaled resolution is the same as the resolution
