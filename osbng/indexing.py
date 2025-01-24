@@ -164,7 +164,7 @@ def _validate_and_normalise_bng_resolution(resolution: int | str):
 
 
 def _validate_easting_northing(easting: float, northing: float):
-    """Validates that the easting and northing coordinates are within the BNG extent.
+    """Validates that easting and northing coordinates are within the bounds of the BNG index system extent.
 
     The easting and northing coordinates must be below the upper bounds of the BNG system.
     Coordinates of 700000 (easting) and 1300000 (northing) would correspond to a BNG reference
