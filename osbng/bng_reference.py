@@ -253,12 +253,12 @@ class BNGReference:
     """A custom object for handling British National Grid (BNG) references.
 
     Converts a BNG reference string into a BNGReference object, ensuring type consistency
-    across the package. All functions accepting or returning BNG references enforce the use of this class.
-    BNGReference methods are available both as instance methods and standalone functions,
+    across the package. All functions accepteding or returning BNG references enforce the use of this class.
+    These functions are available both as instance methods of the BNGReference object and as standalone functions,
     providing users with the flexibility to either:
 
     - Create a BNGReference object and pass it to a function.
-    - Create a BNGReference object and use its instance methods.
+    - Create a BNGReference object and use one of its instance methods.
 
     Args:
         bng_ref_string (str): The BNG reference string.
