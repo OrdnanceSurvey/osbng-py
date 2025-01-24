@@ -701,24 +701,24 @@ def geom_to_bng_intersection(
         ValueError: If the geometry type is not supported.
         BNGExtentError: If the coordinates of a point geometry are outside of the BNG index system extent.
     """
-    # Create an empty list to store the BNGIndexedGeometry objects
+    # Initialise an empty list to store the BNGIndexedGeometry objects
     bng_idx_geoms = []
 
     # Recursively decompose geometry into its constituent parts
     for part in _decompose_geom(geom):
-        # Create the list of BNGReference objects
+        # Convert the geometry part to BNGReference objects
         bng_refs = np.array(geom_to_bng(part, resolution))
 
         if part.geom_type == "Point":
-            # Convert the point to a BNGIndexedGeometry object and append to bng_idx_geoms list
+            # Convert the Point to a BNGIndexedGeometry object and append to bng_idx_geoms list
             bng_idx_geoms.append(BNGIndexedGeometry(bng_refs[0], False, part))
 
         elif part.geom_type == "LineString":
             # Get the grid square geometries of the BNGReference objects
             bng_geoms = np.array([bng_to_grid_geom(bng_ref) for bng_ref in bng_refs])
-            # Prepare the part geometry
+            # Prepare the geometry to speed up intersects spatial predicate tests
             prepare(part)
-            # Derive the intersection between the part geometry and the grid square geometry
+            # Derive the intersection between the part geometry and the grid square geometries
             intersections = intersection(part, bng_geoms)
             # Derive BNGIndexedGeometry objects for geometry part and add to the bng_idx_geoms list
             bng_idx_geoms.extend(
@@ -731,9 +731,9 @@ def geom_to_bng_intersection(
         elif part.geom_type == "Polygon":
             # Get the grid square geometries of the BNGReference objects
             bng_geoms = np.array([bng_to_grid_geom(bng_ref) for bng_ref in bng_refs])
-            # Prepare the part geometry
+            # Prepare the geometry to speed up contains spatial predicate tests
             prepare(part)
-            # Test whether a grid square geometry is contained by the geometry part
+            # Test whether grid square geometries are contained by the geometry part
             bng_bool = contains(part, bng_geoms)
             # Subset bng_refs array based on positive containment
             core = bng_refs[bng_bool]
@@ -744,14 +744,14 @@ def geom_to_bng_intersection(
                 BNGIndexedGeometry(bng_ref, True, bng_ref.bng_to_grid_geom())
                 for bng_ref in core
             ]
-            # Derive the intersection between the part geometry and the bng grid square geometry
+            # Derive the intersection between the part geometry and the 'edge' grid square geometries
             intersections = intersection(part, bng_geoms[~bng_bool])
-            # Derive BNGIndexedGeometry objects for edge cases and add to the bng_idx_geoms list
+            # Derive BNGIndexedGeometry objects for 'edge' grid squares and add to the bng_idx_geoms list
             bng_idx_geom_edge = [
                 BNGIndexedGeometry(bng_ref, False, geometry)
                 for bng_ref, geometry in zip(edge, intersections)
             ]
-            # Add the core and edge BNGIndexedGeometry objects to the bng_idx_geoms list
+            # Combine the core and edge BNGIndexedGeometry objects
             bng_idx_geoms.extend(bng_idx_geom_core + bng_idx_geom_edge)
 
     return bng_idx_geoms
