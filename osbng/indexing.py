@@ -443,13 +443,13 @@ def bng_to_xy(
 
 @_validate_bngreference
 def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
-    """Returns bounding box coordinates given a BNGReference object.
+    """Returns grid square bounding box coordinates given a BNGReference object.
 
     Args:
         bng_ref (BNGReference): The BNGReference object.
 
     Returns:
-        tuple[int, int, int, int]: The bounding box coordinates (min x, min y, max x, max y) as a tuple.
+        tuple[int, int, int, int]: The grid square bounding box coordinates (min x, min y, max x, max y) as a tuple.
 
     Raises:
         TypeError: If first argumnet is not BNGReference object.
