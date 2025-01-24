@@ -83,6 +83,7 @@ survey measurements.
 import re
 from functools import wraps
 from shapely.geometry import Polygon, mapping
+from typing import Union
 
 from osbng.resolution import BNG_RESOLUTIONS
 from osbng.errors import BNGReferenceError
@@ -268,6 +269,7 @@ class BNGReference:
         bng_ref_formatted (str): The pretty-formatted version of the BNG reference with single spaces between components.
         resolution_metres (int): The resolution of the BNG reference in meters.
         resolution_label (str): The resolution of the BNG reference expressed as a descriptive string.
+        __geo_interface__ (dict): A GeoJSON-like mapping for a BNGReference object.
 
     Methods:
         bng_to_xy(position: str) -> tuple[int | float, int | float]: Returns the easting and northing coordinates for the current BNGReference object.
@@ -316,6 +318,20 @@ class BNGReference:
     def resolution_label(self) -> str:
         """Returns the resolution of the BNGReference expressed as a string."""
         return _get_bng_resolution_label(self._bng_ref_compact)
+
+    @property
+    def __geo_interface__(self) -> dict[str, Union[str, dict]]:
+        """Returns a GeoJSON-like mapping for a BNGReference object.
+
+        Implements the __geo_interface__ protocol. The returned data structure represents the
+        BNGReference object as a GeoJSON-like Feature."""
+        return {
+            "type": "Feature",
+            "properties": {
+                "bng_ref": self.bng_ref_compact,
+            },
+            "geometry": mapping(self.bng_to_grid_geom()),
+        }
 
     def __eq__(self, other):
         if isinstance(other, BNGReference):
