@@ -568,13 +568,13 @@ def bbox_to_bng(
 
 
 def _decompose_geom(geom: Geometry) -> list[Geometry]:
-    """Recursively decompose a Shapely geometry into its constituent parts.
+    """Recursively decompose a Shapely Geometry into its constituent parts.
 
     Args:
-        geom (Geometry): Shapely geometry object.
+        geom (Geometry): Shapely Geometry object.
 
     Returns:
-        list[Geometry]: List of Shapely geometry object parts.
+        list[Geometry]: List of Shapely Geometry object parts.
 
     Raises:
         ValueError: If the geometry type is not supported.
