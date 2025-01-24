@@ -205,7 +205,7 @@ def _get_bng_resolution_label(bng_ref_string: str) -> str:
     return _RESOLUTION_TO_STRING.get(resolution_meters)["label"]
 
 
-def _get_bng_pretty_format(bng_ref_string: str) -> str:
+def _format_bng_ref_string(bng_ref_string: str) -> str:
     """Parses a BNG reference string and returns a pretty formatted BNG reference.
 
     Pretty formatting is defined as a single whitespace between the reference components
@@ -305,7 +305,7 @@ class BNGReference:
     @property
     def bng_ref_formatted(self) -> str:
         """Returns a pretty-formatted version of the BNG reference string with single spaces between components."""
-        return _get_bng_pretty_format(self._bng_ref_compact)
+        return _format_bng_ref_string(self._bng_ref_compact)
 
     @property
     def resolution_metres(self) -> int:

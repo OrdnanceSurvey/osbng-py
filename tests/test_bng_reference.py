@@ -9,7 +9,7 @@ from osbng.bng_reference import (
     _validate_bng_ref_string,
     _get_bng_resolution_metres,
     _get_bng_resolution_label,
-    _get_bng_pretty_format,
+    _format_bng_ref_string,
     BNGReference,
 )
 from osbng.errors import _EXCEPTION_MAP
@@ -68,22 +68,22 @@ def test__get_bng_resolution_label(test_case):
     assert _get_bng_resolution_label(bng_ref_string) == expected
 
 
-# Parameterised test for _get_bng_pretty_format function
+# Parameterised test for _format_bng_ref_string function
 @pytest.mark.parametrize(
     "test_case",
     load_test_cases(file_path="./data/bng_reference_test_cases.json")[
-        "_get_bng_pretty_format"
+        "_format_bng_ref_string"
     ],
 )
-def test__get_bng_pretty_format(test_case):
-    """Test _get_bng_pretty_format function with test cases from JSON file.
+def test__format_bng_ref_string(test_case):
+    """Test _format_bng_ref_string function with test cases from JSON file.
 
     Args:
         test_case (dict): Test case from JSON file.
     """
     bng_ref_string = test_case["bng_ref_string"]
     expected = test_case["expected"]
-    assert _get_bng_pretty_format(bng_ref_string) == expected
+    assert _format_bng_ref_string(bng_ref_string) == expected
 
 
 # Parameterised test for BNGReference object

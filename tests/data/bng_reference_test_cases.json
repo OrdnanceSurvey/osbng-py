@@ -389,7 +389,7 @@
             "expected": "1m"
         }
     ],
-    "_get_bng_pretty_format": [
+    "_format_bng_ref_string": [
         {
             "bng_ref_string": "SU",
             "expected": "SU"
