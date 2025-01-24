@@ -233,7 +233,8 @@ def _get_bng_suffix(easting: float, northing: float, resolution: int) -> str:
     Args:
         easting (float): Easting coordinate.
         northing (float): Northing coordinate.
-        resolution (int): Resolution expressed as a metre-based integer. Must be an intermediate quadtree resolution e.g. 5, 50, 500, 5000, 50000.
+        resolution (int): Resolution expressed as a metre-based integer. Must be an intermediate quadtree 
+                          resolution e.g. 5, 50, 500, 5000, 50000.
 
     Returns:
         str: The BNG ordinal direction suffix.
