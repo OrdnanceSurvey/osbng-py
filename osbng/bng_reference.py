@@ -206,32 +206,32 @@ def _get_bng_resolution_label(bng_ref_string: str) -> str:
 
 
 def _format_bng_ref_string(bng_ref_string: str) -> str:
-    """Parses a BNG reference string and returns a pretty formatted BNG reference.
+    """Returns a pretty formatted BNG reference string.
 
     Pretty formatting is defined as a single whitespace between the reference components
-    including prefix, easting and northing, and suffix.
+    including prefix, easting and northing, and suffix if present.
 
     Args:
         bng_ref_string (str): The BNG reference string.
 
     Returns:
-        pretty_format (str): The pretty formatted BNG reference.
+        pretty_format (str): The pretty formatted BNG reference string.
 
     Examples:
-        >>> _get_bng_pretty_format("TQ1234")
+        >>> _format_bng_ref_string("TQ1234")
         'TQ 12 34'
-        >>> _get_bng_pretty_format("TQ1234NE")
+        >>> _format_bng_ref_string("TQ1234NE")
         'TQ 12 34 NE'
     """
     # Match BNG reference string against regex pattern
     match = _PATTERN.match(bng_ref_string)
 
-    # Extract components of the BNG reference
+    # Extract components of the BNG reference string
     prefix = match.group(1)
     en_components = match.group(2)
     suffix = match.group(3)
 
-    # Pretty format the BNG reference
+    # Pretty format the BNG reference string
     if en_components is None:
         pretty_format = prefix
     else:
