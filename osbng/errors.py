@@ -7,6 +7,7 @@ Custom exceptions:
 
     - BNGReferenceError: Raised when an invalid BNG reference string is provided.
     - BNGResolutionError: Raised when an invalid BNG resolution is provided.
+    - BNGHierarchyError: Raised when an invalid parent/child derivation is attempted.
     - BNGExtentError: Raised when easting and northing coordinates fall outside of the defined extent of the BNG index system.
 
 Additional features:
