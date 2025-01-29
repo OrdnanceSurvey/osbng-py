@@ -11,9 +11,10 @@ Note:
 - While parent and child derivation defaults to the next higher and lower resolution, any supported resolution in the hierarchy can be specified.
 
 Supported Resolutions:
-    - The module supports the standard BNG resolutions, including 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 
+    - The module supports the 'standard' and 'intermediate' quadtree resolutions, including 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 
     5m and 1m.
-    - These resolutions are validated and normalised using the resolution mapping defined in the 'resolution' module.
+    - These resolutions passed to indexing functions are validated and normalised using the resolution mapping defined in the 
+      'resolution' module.
 """
 
 from osbng.indexing import xy_to_bng, bng_to_xy, bbox_to_bng
