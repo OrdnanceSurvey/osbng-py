@@ -415,7 +415,7 @@ class BNGReference:
 
         return _bng_to_grid_geom(self)
 
-    def bng_to_children(self, resolution=None) -> list["BNGReference"]:
+    def bng_to_children(self, resolution: int | str | None = None) -> list["BNGReference"]:
         """Returns a list of BNGReference objects that are children of the input BNGReference object.
 
         By default, the children of the BNGReference object is defined as the BNGReference objects in the
@@ -426,7 +426,7 @@ class BNGReference:
 
         Args:
             bng_ref (BNGReference): The BNGReference object to derive children from.
-            resolution (int, optional): The resolution of the children BNGReference objects. Defaults to None.
+            resolution (int | str | None, optional): The resolution of the children BNGReference objects. Defaults to None.
 
         Returns:
             list[BNGReference]: A list of BNGReference objects that are children of the input BNGReference object.
@@ -453,7 +453,7 @@ class BNGReference:
 
         return _bng_to_children(self, resolution)
 
-    def bng_to_parent(self, resolution=None) -> "BNGReference":
+    def bng_to_parent(self, resolution: int | str | None = None) -> "BNGReference":
         """Returns a BNGReference object that is the parent of the input BNGReference object.
 
         By default, the parent of the BNGReference object is defined as the BNGReference in the next BNG
@@ -464,7 +464,7 @@ class BNGReference:
 
         Args:
             bng_ref (BNGReference): The BNGReference object to derive parent from.
-            resolution (int, optional): The resolution of the parent BNGReference. Defaults to None.
+            resolution (int | str | None, optional): The resolution of the parent BNGReference. Defaults to None.
 
         Returns:
             BNGReference: A BNGReference object that is the parent of the input BNGReference object.
