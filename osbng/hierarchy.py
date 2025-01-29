@@ -2,9 +2,11 @@
  
 The BNG is structured using a hierarchical system of grid squares at various resolutions. At its highest level, the grid divides GB into 100 km by 100 km squares, each identified by a two-letter code. Successive levels of resolution further subdivide the grid squares into finer detail, down to individual 1-meter squares.
 This module allows for the traversal of this hierarchy by providing methods to return the parent and children of BNGReference objects at specified resolutions.
+
 Parent and child definitions:
 - **Parent**: The parent of a BNGReference object is the grid square at the next higher (coarser) resolution level that contains the current reference. For example, the parent of a 1km grid square reference would be the 5km grid square that contains it.
 - **Children**: The children of a BNGReference object are the grid squares at the next lower (finer) resolution level that are contained within the current reference. For example, the children of a 10km grid square reference would be the 5km grid squares that it contains.
+
 Note:
 - While parent and child derivation defaults to the next higher and lower resolution, any supported resolution in the hierarchy can be specified.
 
