@@ -27,7 +27,7 @@ __all__ = ["bng_to_children", "bng_to_parent"]
 
 
 @_validate_bngreference
-def bng_to_children(bng_ref: BNGReference, resolution=None) -> list[BNGReference]:
+def bng_to_children(bng_ref: BNGReference, resolution: int | str | None = None) -> list[BNGReference]:
     """Returns a list of BNGReference objects that are children of the input BNGReference object.
 
     By default, the children of the BNGReference object is defined as the BNGReference objects in the
@@ -38,7 +38,7 @@ def bng_to_children(bng_ref: BNGReference, resolution=None) -> list[BNGReference
 
     Args:
         bng_ref (BNGReference): The BNGReference object to derive children from.
-        resolution (int, optional): The resolution of the children BNGReference objects. Defaults to None.
+        resolution (int | str | None): The resolution of the children BNGReference objects expressed either as a metre-based integer or as a string label. Defaults to None.
 
     Returns:
         list[BNGReference]: A list of BNGReference objects that are children of the input BNGReference object.
@@ -96,7 +96,7 @@ def bng_to_children(bng_ref: BNGReference, resolution=None) -> list[BNGReference
 
 
 @_validate_bngreference
-def bng_to_parent(bng_ref: BNGReference, resolution=None) -> BNGReference:
+def bng_to_parent(bng_ref: BNGReference, resolution: int | str | None = None) -> BNGReference:
     """Returns a BNGReference object that is the parent of the input BNGReference object.
 
     By default, the parent of the BNGReference object is defined as the BNGReference in the next BNG
@@ -107,7 +107,7 @@ def bng_to_parent(bng_ref: BNGReference, resolution=None) -> BNGReference:
 
     Args:
         bng_ref (BNGReference): The BNGReference object to derive parent from.
-        resolution (int, optional): The resolution of the parent BNGReference. Defaults to None.
+        resolution (int | str | None): The resolution of the parent BNGReference objects expressed either as a metre-based integer or as a string label. Defaults to None.
 
     Returns:
         BNGReference: A BNGReference object that is the parent of the input BNGReference object.
