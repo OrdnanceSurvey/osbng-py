@@ -15,6 +15,8 @@ from osbng.indexing import _validate_and_normalise_bng_resolution
 from osbng.resolution import _RESOLUTION_TO_STRING
 from osbng.errors import BNGHierarchyError
 
+__all__ = ["bng_to_children", "bng_to_parent"]
+
 
 @_validate_bngreference
 def bng_to_children(bng_ref: BNGReference, resolution=None) -> list[BNGReference]:
