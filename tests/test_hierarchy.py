@@ -8,12 +8,12 @@ import pytest
 from osbng.hierarchy import bng_to_children, bng_to_parent
 from osbng.bng_reference import BNGReference
 from osbng.errors import _EXCEPTION_MAP
-from osbng.utils import load_test_cases
+from osbng.utils import _load_test_cases
 
 
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_children"],
+    _load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_children"],
 )
 def test__bng_to_children(test_case):
     """Test bng_to_children with test cases from JSON file.
@@ -46,7 +46,7 @@ def test__bng_to_children(test_case):
 
 @pytest.mark.parametrize(
     "test_case",
-    load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_parent"],
+    _load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_parent"],
 )
 def test__bng_to_parent(test_case):
     """Test bng_to_parent with test cases from JSON file.
