@@ -20,7 +20,7 @@ Supported Resolutions:
 from osbng.indexing import xy_to_bng, bng_to_xy, bbox_to_bng
 from osbng.bng_reference import BNGReference, _validate_bngreference
 from osbng.indexing import _validate_and_normalise_bng_resolution
-from osbng.resolution import _RESOLUTION_TO_STRING
+from osbng.resolution import BNG_RESOLUTIONS
 from osbng.errors import BNGHierarchyError
 
 __all__ = ["bng_to_children", "bng_to_parent"]
@@ -69,7 +69,7 @@ def bng_to_children(bng_ref: BNGReference, resolution=None) -> list[BNGReference
     if resolution is None:
         resolution = bng_ref.resolution_metres
 
-        if _RESOLUTION_TO_STRING[resolution]["quadtree"]:
+        if BNG_RESOLUTIONS[resolution]["quadtree"]:
             resolution = int((bng_ref.resolution_metres / 5))
         else:
             resolution = int((bng_ref.resolution_metres / 2))
@@ -137,7 +137,7 @@ def bng_to_parent(bng_ref: BNGReference, resolution=None) -> BNGReference:
     if resolution is None:
         resolution = bng_ref.resolution_metres
 
-        if _RESOLUTION_TO_STRING[resolution]["quadtree"]:
+        if BNG_RESOLUTIONS[resolution]["quadtree"]:
             resolution = int((bng_ref.resolution_metres * 2))
         else:
             resolution = int((bng_ref.resolution_metres * 5))
