@@ -93,7 +93,7 @@ __all__ = ["BNGReference"]
 # Compile regular expression pattern for BNG reference string validation
 # The geographical extent of the BNG reference system is defined as:
 # 0 <= easting < 700000 and 0 <= northing < 1300000
-# Supports the following resolutions: 
+# Supports the following resolutions:
 # 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 5m, 1m
 _PATTERN = re.compile(
     r"""
@@ -201,7 +201,7 @@ def _get_bng_resolution_label(bng_ref_string: str) -> str:
     """
     # Get the resolution in meters
     resolution_meters = _get_bng_resolution_metres(bng_ref_string)
-    
+
     # Get the resolution label
     return BNG_RESOLUTIONS.get(resolution_meters)["label"]
 
@@ -412,6 +412,44 @@ class BNGReference:
         from osbng.indexing import bng_to_grid_geom as _bng_to_grid_geom
 
         return _bng_to_grid_geom(self)
+
+    def bng_to_children(self, resolution=None) -> list["BNGReference"]:
+        """Returns a list of BNGReference objects that are children of the input BNGReference object.
+
+        By default, the children of the BNGReference object is defined as the BNGReference objects in the
+        next resolution down from the input BNGReference resolution. For example, 100km -> 50km.
+
+        Any valid resolution can be provided as the child resolution, provided it is less than the
+        resolution of the input BNGReference.
+
+        Args:
+            bng_ref (BNGReference): The BNGReference object to derive children from.
+            resolution (int, optional): The resolution of the children BNGReference objects. Defaults to None.
+
+        Returns:
+            list[BNGReference]: A list of BNGReference objects that are children of the input BNGReference object.
+
+        Raises:
+            BNGHierarchyError: If the resolotuion of the input BNGReference object is 1m.
+            BNGHIerarchyError: If the resolution is greater than or equal to the resolution of the input BNGReference object.
+            BNGResolutionError: If an invalid resolution is provided.
+
+        Examples:
+            >>> bng_to_children(BNGReference("SU"))
+            [BNGReference(bng_ref_formatted=SU SW, resolution_label=50km),
+            BNGReference(bng_ref_formatted=SU SE, resolution_label=50km),
+            BNGReference(bng_ref_formatted=SU NW, resolution_label=50km),
+            BNGReference(bng_ref_formatted=SU NE, resolution_label=50km)]
+            >>> bng_to_children(BNGReference("SU36"))
+            [BNGReference(bng_ref_formatted=SU 3 6 SW, resolution_label=5km),
+            BNGReference(bng_ref_formatted=SU 3 6 SE, resolution_label=5km),
+            BNGReference(bng_ref_formatted=SU 3 6 NW, resolution_label=5km),
+            BNGReference(bng_ref_formatted=SU 3 6 NE, resolution_label=5km)]
+        """
+
+        from osbng.hierarchy import bng_to_children as _bng_to_children
+
+        return _bng_to_children(self, resolution)
 
 
 def _validate_bngreference(func):
