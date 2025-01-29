@@ -437,12 +437,12 @@ class BNGReference:
             BNGResolutionError: If an invalid resolution is provided.
 
         Examples:
-            >>> bng_to_children(BNGReference("SU"))
+            >>> BNGReference("SU").bng_to_children()
             [BNGReference(bng_ref_formatted=SU SW, resolution_label=50km),
             BNGReference(bng_ref_formatted=SU SE, resolution_label=50km),
             BNGReference(bng_ref_formatted=SU NW, resolution_label=50km),
             BNGReference(bng_ref_formatted=SU NE, resolution_label=50km)]
-            >>> bng_to_children(BNGReference("SU36"))
+            >>> BNGReference("SU36").bng_to_children()
             [BNGReference(bng_ref_formatted=SU 3 6 SW, resolution_label=5km),
             BNGReference(bng_ref_formatted=SU 3 6 SE, resolution_label=5km),
             BNGReference(bng_ref_formatted=SU 3 6 NW, resolution_label=5km),
@@ -475,9 +475,9 @@ class BNGReference:
             BNGResolutionError: If an invalid resolution is provided.
 
         Examples:
-            >>> bng_to_parent(BNGReference("SU 3 6 SW"))
+            >>> BNGReference("SU 3 6 SW").bng_to_parent()
             BNGReference(bng_ref_formatted=SU 3 6, resolution_label=10km)
-            >>> bng_to_parent(BNGReference("SU 342 567"))
+            >>> BNGReference("SU 342 567").bng_to_parent()
             BNGReference(bng_ref_formatted=SU 34 56 NW, resolution_label=500m)
             >>> bng_to_parent(BNGReference("SU 342 567"), resolution=10000)
             BNGReference(bng_ref_formatted=SU 3 5, resolution_label=10km)
