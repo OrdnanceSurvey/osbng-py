@@ -39,6 +39,12 @@ class BNGResolutionError(Exception):
         super().__init__(message)
 
 
+class BNGHierarchyError(Exception):
+    """Exception raised for invalid parent/child derivation"""
+
+    pass
+
+
 class BNGExtentError(Exception):
     """Exception raised for easting and northing coordinates outside the BNG index system extent.
 
@@ -54,9 +60,11 @@ class BNGExtentError(Exception):
         # Pass message to base class
         super().__init__(message)
 
+
 # Map exception strings to exception classes
 _EXCEPTION_MAP = {
     "BNGReferenceError": BNGReferenceError,
     "BNGResolutionError": BNGResolutionError,
+    "BNGHierarchyError": BNGHierarchyError,
     "BNGExtentError": BNGExtentError,
 }
