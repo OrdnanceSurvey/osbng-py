@@ -4,371 +4,963 @@
             "bng_ref_string": "SU",
             "resolution": "50km",
             "expected": [
-                    {"bng_ref_formatted": "SU SW"},
-                    {"bng_ref_formatted": "SU SE"},
-                    {"bng_ref_formatted": "SU NW"},
-                    {"bng_ref_formatted": "SU NE"}
-                
+                {
+                    "bng_ref_formatted": "SU SW"
+                },
+                {
+                    "bng_ref_formatted": "SU SE"
+                },
+                {
+                    "bng_ref_formatted": "SU NW"
+                },
+                {
+                    "bng_ref_formatted": "SU NE"
+                }
             ]
-            
         },
         {
             "bng_ref_string": "SU",
             "resolution": 50000,
             "expected": [
-                    {"bng_ref_formatted": "SU SW"},
-                    {"bng_ref_formatted": "SU SE"},
-                    {"bng_ref_formatted": "SU NW"},
-                    {"bng_ref_formatted": "SU NE"}
-                ]
-            
+                {
+                    "bng_ref_formatted": "SU SW"
+                },
+                {
+                    "bng_ref_formatted": "SU SE"
+                },
+                {
+                    "bng_ref_formatted": "SU NW"
+                },
+                {
+                    "bng_ref_formatted": "SU NE"
+                }
+            ]
         },
         {
             "bng_ref_string": "SU",
             "resolution": "NULL",
             "expected": [
-                    {"bng_ref_formatted": "SU SW"},
-                    {"bng_ref_formatted": "SU SE"},
-                    {"bng_ref_formatted": "SU NW"},
-                    {"bng_ref_formatted": "SU NE"}
-                ]
-            
+                {
+                    "bng_ref_formatted": "SU SW"
+                },
+                {
+                    "bng_ref_formatted": "SU SE"
+                },
+                {
+                    "bng_ref_formatted": "SU NW"
+                },
+                {
+                    "bng_ref_formatted": "SU NE"
+                }
+            ]
         },
         {
             "bng_ref_string": "SU46",
             "resolution": "5km",
-            "expected":  [
-                    {"bng_ref_formatted": "SU 4 6 SW"},
-                    {"bng_ref_formatted": "SU 4 6 SE"},
-                    {"bng_ref_formatted": "SU 4 6 NW"},
-                    {"bng_ref_formatted": "SU 4 6 NE"}
-                ]
+            "expected": [
+                {
+                    "bng_ref_formatted": "SU 4 6 SW"
+                },
+                {
+                    "bng_ref_formatted": "SU 4 6 SE"
+                },
+                {
+                    "bng_ref_formatted": "SU 4 6 NW"
+                },
+                {
+                    "bng_ref_formatted": "SU 4 6 NE"
+                }
+            ]
         },
         {
             "bng_ref_string": "SU46",
             "resolution": 5000,
             "expected": [
-                    {"bng_ref_formatted": "SU 4 6 SW"},
-                    {"bng_ref_formatted": "SU 4 6 SE"},
-                    {"bng_ref_formatted": "SU 4 6 NW"},
-                    {"bng_ref_formatted": "SU 4 6 NE"}
-                ]
+                {
+                    "bng_ref_formatted": "SU 4 6 SW"
+                },
+                {
+                    "bng_ref_formatted": "SU 4 6 SE"
+                },
+                {
+                    "bng_ref_formatted": "SU 4 6 NW"
+                },
+                {
+                    "bng_ref_formatted": "SU 4 6 NE"
+                }
+            ]
         },
         {
             "bng_ref_string": "SU46",
             "resolution": "NULL",
             "expected": [
-                    {"bng_ref_formatted": "SU 4 6 SW"},
-                    {"bng_ref_formatted": "SU 4 6 SE"},
-                    {"bng_ref_formatted": "SU 4 6 NW"},
-                    {"bng_ref_formatted": "SU 4 6 NE"}
-                ]
+                {
+                    "bng_ref_formatted": "SU 4 6 SW"
+                },
+                {
+                    "bng_ref_formatted": "SU 4 6 SE"
+                },
+                {
+                    "bng_ref_formatted": "SU 4 6 NW"
+                },
+                {
+                    "bng_ref_formatted": "SU 4 6 NE"
+                }
+            ]
         },
         {
             "bng_ref_string": "SU46NW",
             "resolution": "1km",
-            "expected":[
-                    {"bng_ref_formatted": "SU 40 65"},
-                    {"bng_ref_formatted": "SU 41 65"},
-                    {"bng_ref_formatted": "SU 42 65"},
-                    {"bng_ref_formatted": "SU 43 65"},
-                    {"bng_ref_formatted": "SU 44 65"},
-                    {"bng_ref_formatted": "SU 40 66"},
-                    {"bng_ref_formatted": "SU 41 66"},
-                    {"bng_ref_formatted": "SU 42 66"},
-                    {"bng_ref_formatted": "SU 43 66"},
-                    {"bng_ref_formatted": "SU 44 66"},
-                    {"bng_ref_formatted": "SU 40 67"},
-                    {"bng_ref_formatted": "SU 41 67"},
-                    {"bng_ref_formatted": "SU 42 67"},
-                    {"bng_ref_formatted": "SU 43 67"},
-                    {"bng_ref_formatted": "SU 44 67"},
-                    {"bng_ref_formatted": "SU 40 68"},
-                    {"bng_ref_formatted": "SU 41 68"},
-                    {"bng_ref_formatted": "SU 42 68"},
-                    {"bng_ref_formatted": "SU 43 68"},
-                    {"bng_ref_formatted": "SU 44 68"},
-                    {"bng_ref_formatted": "SU 40 69"},
-                    {"bng_ref_formatted": "SU 41 69"},
-                    {"bng_ref_formatted": "SU 42 69"},
-                    {"bng_ref_formatted": "SU 43 69"},
-                    {"bng_ref_formatted": "SU 44 69"}
-                ]
+            "expected": [
+                {
+                    "bng_ref_formatted": "SU 40 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 69"
+                }
+            ]
         },
         {
             "bng_ref_string": "SU46NW",
             "resolution": 1000,
-            "expected":[
-                    {"bng_ref_formatted": "SU 40 65"},
-                    {"bng_ref_formatted": "SU 41 65"},
-                    {"bng_ref_formatted": "SU 42 65"},
-                    {"bng_ref_formatted": "SU 43 65"},
-                    {"bng_ref_formatted": "SU 44 65"},
-                    {"bng_ref_formatted": "SU 40 66"},
-                    {"bng_ref_formatted": "SU 41 66"},
-                    {"bng_ref_formatted": "SU 42 66"},
-                    {"bng_ref_formatted": "SU 43 66"},
-                    {"bng_ref_formatted": "SU 44 66"},
-                    {"bng_ref_formatted": "SU 40 67"},
-                    {"bng_ref_formatted": "SU 41 67"},
-                    {"bng_ref_formatted": "SU 42 67"},
-                    {"bng_ref_formatted": "SU 43 67"},
-                    {"bng_ref_formatted": "SU 44 67"},
-                    {"bng_ref_formatted": "SU 40 68"},
-                    {"bng_ref_formatted": "SU 41 68"},
-                    {"bng_ref_formatted": "SU 42 68"},
-                    {"bng_ref_formatted": "SU 43 68"},
-                    {"bng_ref_formatted": "SU 44 68"},
-                    {"bng_ref_formatted": "SU 40 69"},
-                    {"bng_ref_formatted": "SU 41 69"},
-                    {"bng_ref_formatted": "SU 42 69"},
-                    {"bng_ref_formatted": "SU 43 69"},
-                    {"bng_ref_formatted": "SU 44 69"}
-                ]
+            "expected": [
+                {
+                    "bng_ref_formatted": "SU 40 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 69"
+                }
+            ]
         },
         {
             "bng_ref_string": "SU46NW",
             "resolution": "NULL",
-            "expected":[
-                    {"bng_ref_formatted": "SU 40 65"},
-                    {"bng_ref_formatted": "SU 41 65"},
-                    {"bng_ref_formatted": "SU 42 65"},
-                    {"bng_ref_formatted": "SU 43 65"},
-                    {"bng_ref_formatted": "SU 44 65"},
-                    {"bng_ref_formatted": "SU 40 66"},
-                    {"bng_ref_formatted": "SU 41 66"},
-                    {"bng_ref_formatted": "SU 42 66"},
-                    {"bng_ref_formatted": "SU 43 66"},
-                    {"bng_ref_formatted": "SU 44 66"},
-                    {"bng_ref_formatted": "SU 40 67"},
-                    {"bng_ref_formatted": "SU 41 67"},
-                    {"bng_ref_formatted": "SU 42 67"},
-                    {"bng_ref_formatted": "SU 43 67"},
-                    {"bng_ref_formatted": "SU 44 67"},
-                    {"bng_ref_formatted": "SU 40 68"},
-                    {"bng_ref_formatted": "SU 41 68"},
-                    {"bng_ref_formatted": "SU 42 68"},
-                    {"bng_ref_formatted": "SU 43 68"},
-                    {"bng_ref_formatted": "SU 44 68"},
-                    {"bng_ref_formatted": "SU 40 69"},
-                    {"bng_ref_formatted": "SU 41 69"},
-                    {"bng_ref_formatted": "SU 42 69"},
-                    {"bng_ref_formatted": "SU 43 69"},
-                    {"bng_ref_formatted": "SU 44 69"}
-                ]
+            "expected": [
+                {
+                    "bng_ref_formatted": "SU 40 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 65"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 66"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 67"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 68"
+                },
+                {
+                    "bng_ref_formatted": "SU 40 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 41 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 42 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 43 69"
+                },
+                {
+                    "bng_ref_formatted": "SU 44 69"
+                }
+            ]
         },
         {
             "bng_ref_string": "NZ6906",
             "resolution": 100,
-            "expected":[
-                {"bng_ref_formatted": "NZ 690 060"},
-                {"bng_ref_formatted": "NZ 691 060"},
-                {"bng_ref_formatted": "NZ 692 060"},
-                {"bng_ref_formatted": "NZ 693 060"},
-                {"bng_ref_formatted": "NZ 694 060"},
-                {"bng_ref_formatted": "NZ 695 060"},
-                {"bng_ref_formatted": "NZ 696 060"},
-                {"bng_ref_formatted": "NZ 697 060"},
-                {"bng_ref_formatted": "NZ 698 060"},
-                {"bng_ref_formatted": "NZ 699 060"},
-                {"bng_ref_formatted": "NZ 690 061"},
-                {"bng_ref_formatted": "NZ 691 061"},
-                {"bng_ref_formatted": "NZ 692 061"},
-                {"bng_ref_formatted": "NZ 693 061"},
-                {"bng_ref_formatted": "NZ 694 061"},
-                {"bng_ref_formatted": "NZ 695 061"},
-                {"bng_ref_formatted": "NZ 696 061"},
-                {"bng_ref_formatted": "NZ 697 061"},
-                {"bng_ref_formatted": "NZ 698 061"},
-                {"bng_ref_formatted": "NZ 699 061"},
-                {"bng_ref_formatted": "NZ 690 062"},
-                {"bng_ref_formatted": "NZ 691 062"},
-                {"bng_ref_formatted": "NZ 692 062"},
-                {"bng_ref_formatted": "NZ 693 062"},
-                {"bng_ref_formatted": "NZ 694 062"},
-                {"bng_ref_formatted": "NZ 695 062"},
-                {"bng_ref_formatted": "NZ 696 062"},
-                {"bng_ref_formatted": "NZ 697 062"},
-                {"bng_ref_formatted": "NZ 698 062"},
-                {"bng_ref_formatted": "NZ 699 062"},
-                {"bng_ref_formatted": "NZ 690 063"},
-                {"bng_ref_formatted": "NZ 691 063"},
-                {"bng_ref_formatted": "NZ 692 063"},
-                {"bng_ref_formatted": "NZ 693 063"},
-                {"bng_ref_formatted": "NZ 694 063"},
-                {"bng_ref_formatted": "NZ 695 063"},
-                {"bng_ref_formatted": "NZ 696 063"},
-                {"bng_ref_formatted": "NZ 697 063"},
-                {"bng_ref_formatted": "NZ 698 063"},
-                {"bng_ref_formatted": "NZ 699 063"},
-                {"bng_ref_formatted": "NZ 690 064"},
-                {"bng_ref_formatted": "NZ 691 064"},
-                {"bng_ref_formatted": "NZ 692 064"},
-                {"bng_ref_formatted": "NZ 693 064"},
-                {"bng_ref_formatted": "NZ 694 064"},
-                {"bng_ref_formatted": "NZ 695 064"},
-                {"bng_ref_formatted": "NZ 696 064"},
-                {"bng_ref_formatted": "NZ 697 064"},
-                {"bng_ref_formatted": "NZ 698 064"},
-                {"bng_ref_formatted": "NZ 699 064"},
-                {"bng_ref_formatted": "NZ 690 065"},
-                {"bng_ref_formatted": "NZ 691 065"},
-                {"bng_ref_formatted": "NZ 692 065"},
-                {"bng_ref_formatted": "NZ 693 065"},
-                {"bng_ref_formatted": "NZ 694 065"},
-                {"bng_ref_formatted": "NZ 695 065"},
-                {"bng_ref_formatted": "NZ 696 065"},
-                {"bng_ref_formatted": "NZ 697 065"},
-                {"bng_ref_formatted": "NZ 698 065"},
-                {"bng_ref_formatted": "NZ 699 065"},
-                {"bng_ref_formatted": "NZ 690 066"},
-                {"bng_ref_formatted": "NZ 691 066"},
-                {"bng_ref_formatted": "NZ 692 066"},
-                {"bng_ref_formatted": "NZ 693 066"},
-                {"bng_ref_formatted": "NZ 694 066"},
-                {"bng_ref_formatted": "NZ 695 066"},
-                {"bng_ref_formatted": "NZ 696 066"},
-                {"bng_ref_formatted": "NZ 697 066"},
-                {"bng_ref_formatted": "NZ 698 066"},
-                {"bng_ref_formatted": "NZ 699 066"},
-                {"bng_ref_formatted": "NZ 690 067"},
-                {"bng_ref_formatted": "NZ 691 067"},
-                {"bng_ref_formatted": "NZ 692 067"},
-                {"bng_ref_formatted": "NZ 693 067"},
-                {"bng_ref_formatted": "NZ 694 067"},
-                {"bng_ref_formatted": "NZ 695 067"},
-                {"bng_ref_formatted": "NZ 696 067"},
-                {"bng_ref_formatted": "NZ 697 067"},
-                {"bng_ref_formatted": "NZ 698 067"},
-                {"bng_ref_formatted": "NZ 699 067"},
-                {"bng_ref_formatted": "NZ 690 068"},
-                {"bng_ref_formatted": "NZ 691 068"},
-                {"bng_ref_formatted": "NZ 692 068"},
-                {"bng_ref_formatted": "NZ 693 068"},
-                {"bng_ref_formatted": "NZ 694 068"},
-                {"bng_ref_formatted": "NZ 695 068"},
-                {"bng_ref_formatted": "NZ 696 068"},
-                {"bng_ref_formatted": "NZ 697 068"},
-                {"bng_ref_formatted": "NZ 698 068"},
-                {"bng_ref_formatted": "NZ 699 068"},
-                {"bng_ref_formatted": "NZ 690 069"},
-                {"bng_ref_formatted": "NZ 691 069"},
-                {"bng_ref_formatted": "NZ 692 069"},
-                {"bng_ref_formatted": "NZ 693 069"},
-                {"bng_ref_formatted": "NZ 694 069"},
-                {"bng_ref_formatted": "NZ 695 069"},
-                {"bng_ref_formatted": "NZ 696 069"},
-                {"bng_ref_formatted": "NZ 697 069"},
-                {"bng_ref_formatted": "NZ 698 069"},
-                {"bng_ref_formatted": "NZ 699 069"}
-
+            "expected": [
+                {
+                    "bng_ref_formatted": "NZ 690 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 069"
+                }
             ]
         },
         {
             "bng_ref_string": "NZ6906",
             "resolution": "100m",
-            "expected":[
-                {"bng_ref_formatted": "NZ 690 060"},
-                {"bng_ref_formatted": "NZ 691 060"},
-                {"bng_ref_formatted": "NZ 692 060"},
-                {"bng_ref_formatted": "NZ 693 060"},
-                {"bng_ref_formatted": "NZ 694 060"},
-                {"bng_ref_formatted": "NZ 695 060"},
-                {"bng_ref_formatted": "NZ 696 060"},
-                {"bng_ref_formatted": "NZ 697 060"},
-                {"bng_ref_formatted": "NZ 698 060"},
-                {"bng_ref_formatted": "NZ 699 060"},
-                {"bng_ref_formatted": "NZ 690 061"},
-                {"bng_ref_formatted": "NZ 691 061"},
-                {"bng_ref_formatted": "NZ 692 061"},
-                {"bng_ref_formatted": "NZ 693 061"},
-                {"bng_ref_formatted": "NZ 694 061"},
-                {"bng_ref_formatted": "NZ 695 061"},
-                {"bng_ref_formatted": "NZ 696 061"},
-                {"bng_ref_formatted": "NZ 697 061"},
-                {"bng_ref_formatted": "NZ 698 061"},
-                {"bng_ref_formatted": "NZ 699 061"},
-                {"bng_ref_formatted": "NZ 690 062"},
-                {"bng_ref_formatted": "NZ 691 062"},
-                {"bng_ref_formatted": "NZ 692 062"},
-                {"bng_ref_formatted": "NZ 693 062"},
-                {"bng_ref_formatted": "NZ 694 062"},
-                {"bng_ref_formatted": "NZ 695 062"},
-                {"bng_ref_formatted": "NZ 696 062"},
-                {"bng_ref_formatted": "NZ 697 062"},
-                {"bng_ref_formatted": "NZ 698 062"},
-                {"bng_ref_formatted": "NZ 699 062"},
-                {"bng_ref_formatted": "NZ 690 063"},
-                {"bng_ref_formatted": "NZ 691 063"},
-                {"bng_ref_formatted": "NZ 692 063"},
-                {"bng_ref_formatted": "NZ 693 063"},
-                {"bng_ref_formatted": "NZ 694 063"},
-                {"bng_ref_formatted": "NZ 695 063"},
-                {"bng_ref_formatted": "NZ 696 063"},
-                {"bng_ref_formatted": "NZ 697 063"},
-                {"bng_ref_formatted": "NZ 698 063"},
-                {"bng_ref_formatted": "NZ 699 063"},
-                {"bng_ref_formatted": "NZ 690 064"},
-                {"bng_ref_formatted": "NZ 691 064"},
-                {"bng_ref_formatted": "NZ 692 064"},
-                {"bng_ref_formatted": "NZ 693 064"},
-                {"bng_ref_formatted": "NZ 694 064"},
-                {"bng_ref_formatted": "NZ 695 064"},
-                {"bng_ref_formatted": "NZ 696 064"},
-                {"bng_ref_formatted": "NZ 697 064"},
-                {"bng_ref_formatted": "NZ 698 064"},
-                {"bng_ref_formatted": "NZ 699 064"},
-                {"bng_ref_formatted": "NZ 690 065"},
-                {"bng_ref_formatted": "NZ 691 065"},
-                {"bng_ref_formatted": "NZ 692 065"},
-                {"bng_ref_formatted": "NZ 693 065"},
-                {"bng_ref_formatted": "NZ 694 065"},
-                {"bng_ref_formatted": "NZ 695 065"},
-                {"bng_ref_formatted": "NZ 696 065"},
-                {"bng_ref_formatted": "NZ 697 065"},
-                {"bng_ref_formatted": "NZ 698 065"},
-                {"bng_ref_formatted": "NZ 699 065"},
-                {"bng_ref_formatted": "NZ 690 066"},
-                {"bng_ref_formatted": "NZ 691 066"},
-                {"bng_ref_formatted": "NZ 692 066"},
-                {"bng_ref_formatted": "NZ 693 066"},
-                {"bng_ref_formatted": "NZ 694 066"},
-                {"bng_ref_formatted": "NZ 695 066"},
-                {"bng_ref_formatted": "NZ 696 066"},
-                {"bng_ref_formatted": "NZ 697 066"},
-                {"bng_ref_formatted": "NZ 698 066"},
-                {"bng_ref_formatted": "NZ 699 066"},
-                {"bng_ref_formatted": "NZ 690 067"},
-                {"bng_ref_formatted": "NZ 691 067"},
-                {"bng_ref_formatted": "NZ 692 067"},
-                {"bng_ref_formatted": "NZ 693 067"},
-                {"bng_ref_formatted": "NZ 694 067"},
-                {"bng_ref_formatted": "NZ 695 067"},
-                {"bng_ref_formatted": "NZ 696 067"},
-                {"bng_ref_formatted": "NZ 697 067"},
-                {"bng_ref_formatted": "NZ 698 067"},
-                {"bng_ref_formatted": "NZ 699 067"},
-                {"bng_ref_formatted": "NZ 690 068"},
-                {"bng_ref_formatted": "NZ 691 068"},
-                {"bng_ref_formatted": "NZ 692 068"},
-                {"bng_ref_formatted": "NZ 693 068"},
-                {"bng_ref_formatted": "NZ 694 068"},
-                {"bng_ref_formatted": "NZ 695 068"},
-                {"bng_ref_formatted": "NZ 696 068"},
-                {"bng_ref_formatted": "NZ 697 068"},
-                {"bng_ref_formatted": "NZ 698 068"},
-                {"bng_ref_formatted": "NZ 699 068"},
-                {"bng_ref_formatted": "NZ 690 069"},
-                {"bng_ref_formatted": "NZ 691 069"},
-                {"bng_ref_formatted": "NZ 692 069"},
-                {"bng_ref_formatted": "NZ 693 069"},
-                {"bng_ref_formatted": "NZ 694 069"},
-                {"bng_ref_formatted": "NZ 695 069"},
-                {"bng_ref_formatted": "NZ 696 069"},
-                {"bng_ref_formatted": "NZ 697 069"},
-                {"bng_ref_formatted": "NZ 698 069"},
-                {"bng_ref_formatted": "NZ 699 069"}
-
+            "expected": [
+                {
+                    "bng_ref_formatted": "NZ 690 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 060"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 061"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 062"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 063"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 064"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 065"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 066"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 067"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 068"
+                },
+                {
+                    "bng_ref_formatted": "NZ 690 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 691 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 692 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 693 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 694 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 695 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 696 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 697 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 698 069"
+                },
+                {
+                    "bng_ref_formatted": "NZ 699 069"
+                }
             ]
         },
         {
@@ -449,6 +1041,219 @@
                 "name": "BNGResolutionError"
             }
         }
+    ],
+    "bng_to_parent": [
+        {
+            "bng_ref_string": "SU46",
+            "resolution": "50km",
+            "expected": {
+                "bng_ref_formatted": "SU NW"
+            }
+        },
+        {
+            "bng_ref_string": "SU46",
+            "resolution": 50000,
+            "expected": {
+                "bng_ref_formatted": "SU NW"
+            }
+        },
+        {
+            "bng_ref_string": "SU46",
+            "resolution": "NULL",
+            "expected": {
+                "bng_ref_formatted": "SU NW"
+            }
+        },
+        {
+            "bng_ref_string": "SU46NW",
+            "resolution": "10km",
+            "expected": {
+                "bng_ref_formatted": "SU 4 6"
+            }
+        },
+        {
+            "bng_ref_string": "SU46NW",
+            "resolution": 10000,
+            "expected": {
+                "bng_ref_formatted": "SU 4 6"
+            }
+        },
+        {
+            "bng_ref_string": "SU46NW",
+            "resolution": "NULL",
+            "expected": {
+                "bng_ref_formatted": "SU 4 6"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": "1km",
+            "expected": {
+                "bng_ref_formatted": "NZ 69 06"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": 1000,
+            "expected": {
+                "bng_ref_formatted": "NZ 69 06"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": "5km",
+            "expected": {
+                "bng_ref_formatted": "NZ 6 0 NE"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": 5000,
+            "expected": {
+                "bng_ref_formatted": "NZ 6 0 NE"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": "10km",
+            "expected": {
+                "bng_ref_formatted": "NZ 6 0"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": 10000,
+            "expected": {
+                "bng_ref_formatted": "NZ 6 0"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": 50000,
+            "expected": {
+                "bng_ref_formatted": "NZ SE"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": "50km",
+            "expected": {
+                "bng_ref_formatted": "NZ SE"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": "100km",
+            "expected": {
+                "bng_ref_formatted": "NZ"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": 100000,
+            "expected": {
+                "bng_ref_formatted": "NZ"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": "NULL",
+            "expected": {
+                "bng_ref_formatted": "NZ 69 06 NW"
+            }
+        },
+        {
+            "bng_ref_string": "NZ69120673",
+            "resolution": "NULL",
+            "expected": {
+                "bng_ref_formatted": "NZ 691 067 SW"
+            }
+        },
+        {
+            "bng_ref_string": "SU",
+            "resolution": "NULL",
+            "expected_exception": {
+                "name": "BNGHierarchyError",
+                "message": "Cannot derive parent from the coarsest 100km resolution"
+            }
+        },
+        {
+            "bng_ref_string": "SU",
+            "resolution": "500km",
+            "expected_exception": {
+                "name": "BNGHierarchyError",
+                "message": "Cannot derive parent from the coarsest 100km resolution"
+            }
+        },
+        {
+            "bng_ref_string": "SU",
+            "resolution": 500000,
+            "expected_exception": {
+                "name": "BNGHierarchyError",
+                "message": "Cannot derive parent from the coarsest 100km resolution"
+            }
+        },
+        {
+            "bng_ref_string": "SU46",
+            "resolution": 10000,
+            "expected_exception": {
+                "name": "BNGHierarchyError",
+                "message": "Resolution must be greater than the resolution of input BNGReference object"
+            }
+        },
+        {
+            "bng_ref_string": "SU46",
+            "resolution": "10km",
+            "expected_exception": {
+                "name": "BNGHierarchyError",
+                "message": "Resolution must be greater than the resolution of input BNGReference object"
+            }
+        },
+        {
+            "bng_ref_string": "SU46",
+            "resolution": 5000,
+            "expected_exception": {
+                "name": "BNGHierarchyError",
+                "message": "Resolution must be greater than the resolution of input BNGReference object"
+            }
+        },
+        {
+            "bng_ref_string": "SU46",
+            "resolution": "5km",
+            "expected_exception": {
+                "name": "BNGHierarchyError",
+                "message": "Resolution must be greater than the resolution of input BNGReference object"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": 10,
+            "expected_exception": {
+                "name": "BNGHierarchyError",
+                "message": "Resolution must be greater than the resolution of input BNGReference object"
+            }
+        },
+        {
+            "bng_ref_string": "NZ691067",
+            "resolution": "10m",
+            "expected_exception": {
+                "name": "BNGHierarchyError",
+                "message": "Resolution must be greater than the resolution of input BNGReference object"
+            }
+        },
+        {
+            "bng_ref_string": "SU46",
+            "resolution": "1000m",
+            "expected_exception": {
+                "name": "BNGResolutionError"
+            }
+        },
+        {
+            "bng_ref_string": "SU46",
+            "resolution": "500om",
+            "expected_exception": {
+                "name": "BNGResolutionError"
+            }
+        }
     ]
 }
-    
