@@ -451,6 +451,41 @@ class BNGReference:
 
         return _bng_to_children(self, resolution)
 
+    def bng_to_parent(self, resolution=None) -> "BNGReference":
+        """Returns a BNGReference object that is the parent of the input BNGReference object.
+
+        By default, the parent of the BNGReference object is defined as the BNGReference in the next BNG
+        resolution up from the input BNGReference resolution. For example, 50km -> 100km.
+
+        Any valid resolution can be provided as the parent resolution, provided it is greater than the
+        resolution of the input BNGReference.
+
+        Args:
+            bng_ref (BNGReference): The BNGReference object to derive parent from.
+            resolution (int, optional): The resolution of the parent BNGReference. Defaults to None.
+
+        Returns:
+            BNGReference: A BNGReference object that is the parent of the input BNGReference object.
+
+        Raises:
+            BNGHierarchyError: If the resolution of the input BNGReference object is 100km.
+            BNGHierarchyError: If the resolution is less than or equal to the resolution of the input BNGReference object.
+            BNGResolutionError: If an invalid resolution is provided.
+
+        Examples:
+            >>> bng_to_parent(BNGReference("SU 3 6 SW"))
+            BNGReference(bng_ref_formatted=SU 3 6, resolution_label=10km)
+            >>> bng_to_parent(BNGReference("SU 342 567"))
+            BNGReference(bng_ref_formatted=SU 34 56 NW, resolution_label=500m)
+            >>> bng_to_parent(BNGReference("SU 342 567"), resolution=10000)
+            BNGReference(bng_ref_formatted=SU 3 5, resolution_label=10km)
+
+        """
+
+        from osbng.hierarchy import bng_to_parent as _bng_to_parent
+
+        return _bng_to_parent(self, resolution)
+
 
 def _validate_bngreference(func):
     """Decorator to validate that the first positional argument of a function is a BNGReference object."""
