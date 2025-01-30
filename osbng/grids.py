@@ -3,7 +3,9 @@
 Uses a GeoJSON-like mapping for grid squares implementing the __geo_interface__ protocol (https://gist.github.com/sgillies/2217756).
 Use of this protocol enables integration with geospatial data processing libraries and tools.
 
-Grid square data covering the BNG index system bounds is provided at 100km, 50km, 10km and 5km resolutions.
+Grid square data covering the BNG index system bounds is provided as an iterator at 100km, 50km, 10km, 5km and 1km resolutions.
+GeoPandas can be used to read the iterator data directly into a GeoDataFrame for further processing using geopandas.GeoDataFrame.from_features().
+Iterators can be converted to lists to generate all grid square GeoJSON-like Features at a given resolution.
 """
 
 from typing import Iterator, Union
@@ -17,6 +19,7 @@ __all__ = [
     "bng_grid_50km",
     "bng_grid_10km",
     "bng_grid_5km",
+    "bng_grid_1km",
 ]
 
 # BNG index system bounds
@@ -53,10 +56,11 @@ def bbox_to_bng_iterfeatures(
         yield bng_ref.__geo_interface__
 
 
-# Generate BNGReference object Features covering the BNG index system bounds 
-# Grid square data provided at 100km, 50km, 10km and 5km resolutions
-# Resolution capped at 5km to prevent excessive data generation
-bng_grid_100km = list(bbox_to_bng_iterfeatures(*BNG_BOUNDS, "100km"))
-bng_grid_50km = list(bbox_to_bng_iterfeatures(*BNG_BOUNDS, "50km"))
-bng_grid_10km = list(bbox_to_bng_iterfeatures(*BNG_BOUNDS, "10km"))
-bng_grid_5km = list(bbox_to_bng_iterfeatures(*BNG_BOUNDS, "5km"))
+# Grid square data covering the BNG index system bounds provided at 100km, 50km, 10km, 5km and 1km resolutions as iterators
+# Iterators can be converted to a list to trigger generation of BNGReference object Features 
+# Resolution capped at 1km to prevent excessive data generation for lower (finer) resolutions
+bng_grid_100km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "100km")
+bng_grid_50km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "50km")
+bng_grid_10km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "10km")
+bng_grid_5km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "5km")
+bng_grid_1km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "1km")
