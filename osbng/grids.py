@@ -29,10 +29,10 @@ BNG_BOUNDS = (0, 0, 700000, 1300000)
 def bbox_to_bng_iterfeatures(
     xmin: float, ymin: float, xmax: float, ymax: float, resolution: int | str
 ) -> Iterator[dict[str, Union[str, dict]]]:
-    """Returns an iterator of BNGReference objects represented using a GeoJSON-like 
+    """Returns an iterator of BNGReference objects represented using a GeoJSON-like
        mapping within specified bounds at a specified resolution.
 
-    Implements the __geo_interface__ protocol. The returned data structure represents 
+    Implements the __geo_interface__ protocol. The returned data structure represents
     the BNGReference object as a GeoJSON-like Feature.
 
     Args:
@@ -57,7 +57,7 @@ def bbox_to_bng_iterfeatures(
 
 
 # Grid square data covering the BNG index system bounds provided at 100km, 50km, 10km, 5km and 1km resolutions as iterators
-# Iterators can be converted to a list to trigger generation of BNGReference object Features 
+# Iterators can be converted to a list to trigger generation of BNGReference object Features
 # Resolution capped at 1km to prevent excessive data generation for lower (finer) resolutions
 bng_grid_100km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "100km")
 bng_grid_50km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "50km")
