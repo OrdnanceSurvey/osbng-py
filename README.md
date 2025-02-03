@@ -6,7 +6,7 @@ A Python library for Ordnance Survey's British National Grid (BNG) index system.
 
 The OSBNG Python package provides a programmatic interface to the British National Grid (BNG), supporting efficient grid-based indexing and spatial analysis. This enables applications such as statistical aggregation, data visualisation, and data interoperability using BNG grid references. Designed for developers working with geospatial data in the context of Great Britain, the library offers tools to simplify working with the BNG, facilitating both technical integration into geospatial workflows and practical exploration of the index system's structure.
 
-The package supports the 'standard' BNG metre-based resolutions, which represent powers of ten from 1m to 100km (1m, 10m, 100m, 1km, 10km, 100km). It also supports the 'intermediate' quadtree resolutions (5m, 50m, 500m, 5km, 50km), identified by an ordinal (SW, NW, SE, NE) BNG reference direction suffix.
+The package supports the 'standard' BNG metre-based resolutions, which represent powers of ten from 1m to 100km (`1m, 10m, 100m, 1km, 10km, 100km`). It also supports the 'intermediate' quadtree resolutions (`5m, 50m, 500m, 5km, 50km`), identified by an ordinal (`SW, NW, SE, NE`) BNG reference direction suffix.
 
 ## Installation
 
