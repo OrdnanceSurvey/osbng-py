@@ -69,7 +69,7 @@ Provides functionality to navigate the hierarchical structure of the BNG index s
 
 * Returning parents and children of `BNGReference` objects at specified resolutions.
 
-The following example demonstrate the construction of a `BNGReference` object from a reference string and returns a parent of the `BNGReference`:
+The following example demonstrates the construction of a `BNGReference` object from a reference string and returns a parent of the `BNGReference`:
 
 ``` python
 >>> bng_ref = BNGReference(bng_ref_string="ST5671SE")
@@ -84,7 +84,7 @@ Provides functionality to generate BNG grid square data within specified bounds.
 * Returning a GeoJSON-like mapping for grid squares implementing the [`__geo_interface__`](https://gist.github.com/sgillies/2217756) protocol.
 * Grid square data covering the BNG index system bounds is provided as an iterator at 100km, 50km, 10km, 5km and 1km resolutions.
 
-The following example demonstrate the construction of a `BNGReference` object from a reference string and returns the `__geo_interface__` representation of the `BNGReference`:
+The following example demonstrates the construction of a `BNGReference` object from a reference string and returns the `__geo_interface__` representation of the `BNGReference`:
 
 ``` python
 >>> bng_ref = BNGReference(bng_ref_string="TQ27")
