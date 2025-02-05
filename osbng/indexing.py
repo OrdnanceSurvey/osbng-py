@@ -124,7 +124,7 @@ def _validate_and_normalise_bng_resolution(resolution: int | str) -> int:
     """Validates and normalises a BNG resolution to its metre-based integer value.
 
     Args:
-        resolution (int | str): The Resolution, either as a metre-based integer or string label.
+        resolution (int | str): The resolution, either as a metre-based integer or string label.
 
     Returns:
         int: The numeric metre-based resolution.
