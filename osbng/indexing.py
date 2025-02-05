@@ -1,4 +1,4 @@
-"""Provides functionality to index and work with coordinates and Shapely geometries within the British National Grid (BNG) index system.
+"""Provides functionality to index coordinates and Shapely geometries within the British National Grid (BNG) index system.
 
 The module supports bi-directional conversion between easting/northing coordinate pairs and BNGReference objects
 at supported resolutions as defined in the 'resolution' module. Additionally, it enables the indexing of geometries, 
