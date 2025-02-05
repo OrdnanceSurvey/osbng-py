@@ -13,7 +13,7 @@ Note:
 Supported Resolutions:
     - The module supports the 'standard' and 'intermediate' quadtree resolutions, including 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 
     5m and 1m.
-    - These resolutions passed to indexing functions are validated and normalised using the resolution mapping defined in the 
+    - These resolutions passed to hierarchy functions are validated and normalised using the resolution mapping defined in the 
       'resolution' module.
 """
 
@@ -44,6 +44,7 @@ def bng_to_children(bng_ref: BNGReference, resolution: int | str | None = None) 
         list[BNGReference]: A list of BNGReference objects that are children of the input BNGReference object.
 
     Raises:
+        BNGReferenceError: If the first positional argument is not a BNGReference object.
         BNGHierarchyError: If the resolotuion of the input BNGReference object is 1m.
         BNGHIerarchyError: If the resolution is greater than or equal to the resolution of the input BNGReference object.
         BNGResolutionError: If an invalid resolution is provided.
@@ -113,6 +114,7 @@ def bng_to_parent(bng_ref: BNGReference, resolution: int | str | None = None) ->
         BNGReference: A BNGReference object that is the parent of the input BNGReference object.
 
     Raises:
+        BNGReferenceError: If the first positional argument is not a BNGReference object.
         BNGHierarchyError: If the resolution of the input BNGReference object is 100km.
         BNGHierarchyError: If the resolution is less than or equal to the resolution of the input BNGReference object.
         BNGResolutionError: If an invalid resolution is provided.

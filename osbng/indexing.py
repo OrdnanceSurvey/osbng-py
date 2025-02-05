@@ -371,6 +371,7 @@ def bng_to_xy(
         tuple[int | float, int | float]: The easting and northing coordinates as a tuple.
 
     Raises:
+        BNGReferenceError: If the first positional argument is not a BNGReference object.
         TypeError: If the first argumnet is not BNGReference object.
         ValueError: If an invalid position provided.
 
@@ -515,6 +516,7 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
         Polygon: Grid square as Shapely Polygon object.
 
     Raises:
+        BNGReferenceError: If the first positional argument is not a BNGReference object.
         TypeError: If first argument is not BNG Reference object.
 
     Example:
