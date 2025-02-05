@@ -302,14 +302,14 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
         BNGExtentError: If the easting and northing coordinates are outside the BNG extent.
 
     Example:
-        >>> xy_to_bng(437289, 115541, "100km").bng_ref_formatted
-        'SU'
-        >>> xy_to_bng(437289, 115541, "10km").bng_ref_formatted
-        'SU 3 1'
-        >>> xy_to_bng(437289, 115541, "5km").bng_ref_formatted
-        'SU 3 1 NE'
-        >>> xy_to_bng(437289, 115541, 1).bng_ref_formatted
-        'SU 37289 15541'
+        >>> xy_to_bng(437289, 115541, "100km")
+        BNGReference(bng_ref_formatted=SU, resolution_label=100km)
+        >>> xy_to_bng(437289, 115541, "10km")
+        BNGReference(bng_ref_formatted=SU 3 1, resolution_label=10km)
+        >>> xy_to_bng(437289, 115541, "5km")
+        BNGReference(bng_ref_formatted=SU 3 1 NE, resolution_label=5km)
+        >>> xy_to_bng(437289, 115541, 1)
+        BNGReference(bng_ref_formatted=SU 37289 15541, resolution_label=1m)
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
@@ -568,10 +568,21 @@ def bbox_to_bng(
         BNGResolutionError: If an invalid resolution is provided.
 
     Example:
-        >>> [x.bng_ref_formatted for x in bbox_to_bng(400000, 100000, 500000, 200000, "50km")]
-        ['SU SW', 'SU SE', 'SU NW', 'SU NE']
-        >>> [x.bng_ref_formatted for x in bbox_to_bng(285137.06, 78633.75, 299851.01, 86427.96, 5000)]
-        ['SX 8 7 NE', 'SX 9 7 NW', 'SX 9 7 NE', 'SX 8 8 SE', 'SX 9 8 SW', 'SX 9 8 SE', 'SX 8 8 NE', 'SX 9 8 NW', 'SX 9 8 NE']
+        >>> bbox_to_bng(400000, 100000, 500000, 200000, "50km")
+        [BNGReference(bng_ref_formatted=SU SW, resolution_label=50km), 
+         BNGReference(bng_ref_formatted=SU SE, resolution_label=50km),
+         BNGReference(bng_ref_formatted=SU NW, resolution_label=50km),
+         BNGReference(bng_ref_formatted=SU NE, resolution_label=50km)]
+        >>> bbox_to_bng(285137.06, 78633.75, 299851.01, 86427.96, 5000)
+        [BNGReference(bng_ref_formatted=SX 8 7 NE, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 7 NW, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 7 NE, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 8 8 SE, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 8 SW, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 8 SE, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 8 8 NE, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 8 NW, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 8 NE, resolution_label=5km)] 
     """
 
     # Validate and normalise the resolution to its metre-based integer value
@@ -634,10 +645,12 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
         BNGExtentError: If the coordinates of a point geometry are outside of the BNG index system extent.
 
     Example:
-        >>> [x.bng_ref_formatted for x in geom_to_bng(Point(430000, 110000), resolution="100km")]
-        ["SU"]
-        >>> [x.bng_ref_formatted for x in geom_to_bng(LineString([[430000, 110000],[430010, 110000],[430010, 110010]]), resolution="5m")]
-        ['SU 3000 1000 SW', 'SU 3000 1000 SE', 'SU 3000 1000 NE']
+        >>> geom_to_bng(Point(430000, 110000), "100km")
+        [BNGReference(bng_ref_formatted=SU, resolution_label=100km)]
+        >>> geom_to_bng(LineString([[430000, 110000],[430010, 110000],[430010, 110010]]), "5m")
+        [BNGReference(bng_ref_formatted=SU 3000 1000 SE, resolution_label=5m),
+         BNGReference(bng_ref_formatted=SU 3000 1000 SW, resolution_label=5m),
+         BNGReference(bng_ref_formatted=SU 3000 1000 NE, resolution_label=5m)]
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
