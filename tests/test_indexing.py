@@ -95,5 +95,5 @@ def test_xy_to_bng(test_case):
         with pytest.raises(exception_class):
             xy_to_bng(easting, northing, resolution)
     else:
-        bng = xy_to_bng(easting, northing, resolution)
-        assert bng.bng_ref_formatted == test_case["expected"]["bng_ref_formatted"]
+        bng_ref = xy_to_bng(easting, northing, resolution)
+        assert bng_ref.bng_ref_formatted == test_case["expected"]["bng_ref_formatted"]
