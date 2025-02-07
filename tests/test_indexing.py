@@ -5,13 +5,13 @@ Test cases are loaded from a JSON file using the _load_test_cases function from 
 
 import pytest
 
+from osbng.errors import _EXCEPTION_MAP
 from osbng.indexing import (
     _validate_and_normalise_bng_resolution,
     _validate_easting_northing,
     _get_bng_suffix,
     xy_to_bng,
 )
-from osbng.errors import _EXCEPTION_MAP
 from osbng.utils import _load_test_cases
 
 

@@ -5,9 +5,9 @@ Test cases are loaded from a JSON file using the load_test_cases function from t
 
 import pytest
 
-from osbng.hierarchy import bng_to_children, bng_to_parent
 from osbng.bng_reference import BNGReference
 from osbng.errors import _EXCEPTION_MAP
+from osbng.hierarchy import bng_to_children, bng_to_parent
 from osbng.utils import _load_test_cases
 
 

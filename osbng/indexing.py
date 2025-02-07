@@ -30,9 +30,9 @@ import warnings
 from shapely import box, Geometry, prepare, intersects, contains, intersection
 from shapely.geometry import Polygon
 
+from osbng.bng_reference import _PATTERN, BNGReference, _validate_bngreference
 from osbng.errors import BNGResolutionError, BNGExtentError
 from osbng.resolution import BNG_RESOLUTIONS
-from osbng.bng_reference import _PATTERN, BNGReference, _validate_bngreference
 
 __all__ = [
     "xy_to_bng",

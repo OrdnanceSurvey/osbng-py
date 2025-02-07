@@ -17,11 +17,10 @@ Supported Resolutions:
       'resolution' module.
 """
 
-from osbng.indexing import xy_to_bng, bng_to_xy, bbox_to_bng
 from osbng.bng_reference import BNGReference, _validate_bngreference
-from osbng.indexing import _validate_and_normalise_bng_resolution
-from osbng.resolution import BNG_RESOLUTIONS
 from osbng.errors import BNGHierarchyError
+from osbng.indexing import _validate_and_normalise_bng_resolution, xy_to_bng, bng_to_xy, bbox_to_bng
+from osbng.resolution import BNG_RESOLUTIONS
 
 __all__ = ["bng_to_children", "bng_to_parent"]
 

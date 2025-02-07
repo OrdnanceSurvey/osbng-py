@@ -87,8 +87,8 @@ from functools import wraps
 from shapely.geometry import Polygon, mapping
 from typing import Union
 
-from osbng.resolution import BNG_RESOLUTIONS
 from osbng.errors import BNGReferenceError
+from osbng.resolution import BNG_RESOLUTIONS
 
 __all__ = ["BNGReference"]
 
