@@ -29,7 +29,7 @@ def test__validate_and_normalise_bng_resolution(test_case):
     """Test _validate_and_normalise_bng_resolution with test cases from JSON file."""
     # Load test case data
     resolution = test_case["resolution"]
-    
+
     # Check if the test case expects an exception
     if "expected_exception" in test_case:
         # Get exception name from test case
@@ -40,9 +40,12 @@ def test__validate_and_normalise_bng_resolution(test_case):
         with pytest.raises(exception_class):
             _validate_and_normalise_bng_resolution(resolution)
     else:
+        # Get expected result
+        expected = test_case["expected"]
+        
         # Check that the function returns the expected result
         assert (
-            _validate_and_normalise_bng_resolution(resolution) == test_case["expected"]
+            _validate_and_normalise_bng_resolution(resolution) == expected
         )
 
 
@@ -122,11 +125,14 @@ def test_xy_to_bng(test_case):
         with pytest.raises(exception_class):
             xy_to_bng(easting, northing, resolution)
     else:
+        # Get expected result
+        expected = test_case["expected"]["bng_ref_formatted"]
+
         # Create BNGReference object
         bng_ref = xy_to_bng(easting, northing, resolution)
 
         # Check that the function does not raise any exception
-        assert bng_ref.bng_ref_formatted == test_case["expected"]["bng_ref_formatted"]
+        assert bng_ref.bng_ref_formatted == expected
 
 
 # Parameterised test for bng_to_xy function
