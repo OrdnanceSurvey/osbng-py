@@ -57,7 +57,11 @@ def test__validate_easting_northing(test_case):
         with pytest.raises(exception_class):
             _validate_easting_northing(easting, northing)
     else:
-        _validate_easting_northing(easting, northing)
+        # Check that the function does not raise any exception
+        try:
+            _validate_easting_northing(easting, northing)
+        except Exception as e:
+            pytest.fail(f"Unexpected exception raised: {e}")
 
 
 # Parameterised test for _get_bng_suffix function
