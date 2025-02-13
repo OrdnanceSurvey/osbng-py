@@ -29,6 +29,7 @@ def test__validate_and_normalise_bng_resolution(test_case):
     """Test _validate_and_normalise_bng_resolution with test cases from JSON file."""
     # Load test case data
     resolution = test_case["resolution"]
+    
     # Check if the test case expects an exception
     if "expected_exception" in test_case:
         # Get exception name from test case
@@ -58,6 +59,7 @@ def test__validate_easting_northing(test_case):
     # Load test case data
     easting = test_case["easting"]
     northing = test_case["northing"]
+
     # Check if the test case expects an exception
     if "expected_exception" in test_case:
         # Get exception name from test case
@@ -92,6 +94,7 @@ def test__get_bng_suffix(test_case):
     northing = test_case["northing"]
     resolution = test_case["resolution"]
     expected = test_case["expected"]
+
     # Check that the function returns the expected result
     assert _get_bng_suffix(easting, northing, resolution) == expected
 
@@ -108,6 +111,7 @@ def test_xy_to_bng(test_case):
     easting = test_case["easting"]
     northing = test_case["northing"]
     resolution = test_case["resolution"]
+
     # Check if the test case expects an exception
     if "expected_exception" in test_case:
         # Get exception name from test case
