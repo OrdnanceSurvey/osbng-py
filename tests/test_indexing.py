@@ -5,12 +5,14 @@ Test cases are loaded from a JSON file using the _load_test_cases function from 
 
 import pytest
 
+from osbng.bng_reference import BNGReference 
 from osbng.errors import _EXCEPTION_MAP
 from osbng.indexing import (
     _validate_and_normalise_bng_resolution,
     _validate_easting_northing,
     _get_bng_suffix,
     xy_to_bng,
+    bng_to_xy
 )
 from osbng.utils import _load_test_cases
 
@@ -97,3 +99,25 @@ def test_xy_to_bng(test_case):
     else:
         bng_ref = xy_to_bng(easting, northing, resolution)
         assert bng_ref.bng_ref_formatted == test_case["expected"]["bng_ref_formatted"]
+
+# Parameterised test for bng_to_xy function
+@pytest.mark.parametrize(
+    "test_case",
+    # Load test cases from JSON file
+    _load_test_cases(file_path="./data/indexing_test_cases.json")[
+        "bng_to_xy"
+    ],
+)
+def test_bng_to_xy(test_case):
+    """Test bng_to_xy with test cases from JSON file."""
+    # Load test case data
+    bng_ref_string = test_case["bng_ref_string"]
+    position = test_case["position"]
+    # Get expected result as tuple
+    expected = tuple(test_case["expected"]) 
+
+    # Create BNGReference object
+    bng_ref = BNGReference(bng_ref_string)
+
+    # Assert that the function returns the expected result
+    assert bng_to_xy(bng_ref, position) == expected
