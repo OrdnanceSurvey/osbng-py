@@ -800,5 +800,471 @@
                 "name": "BNGResolutionError"
             }
         }
+    ],
+    "bng_to_xy": [
+        {
+            "bng_ref_string": "SV",
+            "position": "lower-left",
+            "expected": [
+                0,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV",
+            "position": "upper-left",
+            "expected": [
+                0,
+                100000
+            ]
+        },
+        {
+            "bng_ref_string": "SV",
+            "position": "centre",
+            "expected": [
+                50000,
+                50000
+            ]
+        },
+        {
+            "bng_ref_string": "SV",
+            "position": "upper-right",
+            "expected": [
+                100000,
+                100000
+            ]
+        },
+        {
+            "bng_ref_string": "SV",
+            "position": "lower-right",
+            "expected": [
+                100000,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV SW",
+            "position": "lower-left",
+            "expected": [
+                0,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV SW",
+            "position": "centre",
+            "expected": [
+                25000,
+                25000
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0 0",
+            "position": "lower-left",
+            "expected": [
+                0,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0 0",
+            "position": "upper-right",
+            "expected": [
+                10000,
+                10000
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0 0 SW",
+            "position": "lower-left",
+            "expected": [
+                0,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0 0 SW",
+            "position": "upper-left",
+            "expected": [
+                0,
+                5000
+            ]
+        },
+        {
+            "bng_ref_string": "SV 00 00",
+            "position": "lower-left",
+            "expected": [
+                0,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV 00 00",
+            "position": "lower-right",
+            "expected": [
+                1000,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV 00 00 SW",
+            "position": "lower-left",
+            "expected": [
+                0,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV 00 00 SW",
+            "position": "centre",
+            "expected": [
+                250,
+                250
+            ]
+        },
+        {
+            "bng_ref_string": "SV 000 000",
+            "position": "lower-left",
+            "expected": [
+                0,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV 000 000",
+            "position": "upper-left",
+            "expected": [
+                0,
+                100
+            ]
+        },
+        {
+            "bng_ref_string": "SV 000 000 SW",
+            "position": "lower-left",
+            "expected": [
+                0,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV 000 000 SW",
+            "position": "centre",
+            "expected": [
+                25,
+                25
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0000 0000",
+            "position": "lower-left",
+            "expected": [
+                0,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0000 0000",
+            "position": "lower-right",
+            "expected": [
+                10,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0000 0000 SW",
+            "position": "lower-left",
+            "expected": [
+                0,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0000 0000 SW",
+            "position": "centre",
+            "expected": [
+                2.5,
+                2.5
+            ]
+        },
+        {
+            "bng_ref_string": "SV 00000 00000",
+            "position": "lower-left",
+            "expected": [
+                0,
+                0
+            ]
+        },
+        {
+            "bng_ref_string": "SV 00000 00000",
+            "position": "centre",
+            "expected": [
+                0.5,
+                0.5
+            ]
+        },
+        {
+            "bng_ref_string": "JM",
+            "position": "lower-left",
+            "expected": [
+                600000,
+                1200000
+            ]
+        },
+        {
+            "bng_ref_string": "JM",
+            "position": "upper-right",
+            "expected": [
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM NE",
+            "position": "lower-left",
+            "expected": [
+                650000,
+                1250000
+            ]
+        },
+        {
+            "bng_ref_string": "JM NE",
+            "position": "upper-right",
+            "expected": [
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9 9",
+            "position": "lower-left",
+            "expected": [
+                690000,
+                1290000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9 9",
+            "position": "centre",
+            "expected": [
+                695000,
+                1295000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9 9 NE",
+            "position": "lower-left",
+            "expected": [
+                695000,
+                1295000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9 9 NE",
+            "position": "upper-left",
+            "expected": [
+                695000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 99 99",
+            "position": "lower-left",
+            "expected": [
+                699000,
+                1299000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 99 99",
+            "position": "centre",
+            "expected": [
+                699500,
+                1299500
+            ]
+        },
+        {
+            "bng_ref_string": "JM 99 99 NE",
+            "position": "lower-left",
+            "expected": [
+                699500,
+                1299500
+            ]
+        },
+        {
+            "bng_ref_string": "JM 99 99 NE",
+            "position": "upper-right",
+            "expected": [
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 999 999",
+            "position": "lower-left",
+            "expected": [
+                699900,
+                1299900
+            ]
+        },
+        {
+            "bng_ref_string": "JM 999 999",
+            "position": "centre",
+            "expected": [
+                699950,
+                1299950
+            ]
+        },
+        {
+            "bng_ref_string": "JM 999 999 NE",
+            "position": "lower-left",
+            "expected": [
+                699950,
+                1299950
+            ]
+        },
+        {
+            "bng_ref_string": "JM 999 999 NE",
+            "position": "lower-right",
+            "expected": [
+                700000,
+                1299950
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9999 9999",
+            "position": "lower-left",
+            "expected": [
+                699990,
+                1299990
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9999 9999",
+            "position": "centre",
+            "expected": [
+                699995,
+                1299995
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9999 9999 NE",
+            "position": "lower-left",
+            "expected": [
+                699995,
+                1299995
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9999 9999 NE",
+            "position": "centre",
+            "expected": [
+                699997.5,
+                1299997.5
+            ]
+        },
+        {
+            "bng_ref_string": "JM 99999 99999",
+            "position": "lower-left",
+            "expected": [
+                699999,
+                1299999
+            ]
+        },
+        {
+            "bng_ref_string": "JM 99999 99999",
+            "position": "centre",
+            "expected": [
+                699999.5,
+                1299999.5
+            ]
+        },
+        {
+            "bng_ref_string": "OV",
+            "position": "lower-left",
+            "expected": [
+                500000,
+                500000
+            ]
+        },
+        {
+            "bng_ref_string": "OV NE",
+            "position": "lower-left",
+            "expected": [
+                550000,
+                550000
+            ]
+        },
+        {
+            "bng_ref_string": "OV 5 5",
+            "position": "lower-left",
+            "expected": [
+                550000,
+                550000
+            ]
+        },
+        {
+            "bng_ref_string": "OV 5 5 NE",
+            "position": "lower-left",
+            "expected": [
+                555000,
+                555000
+            ]
+        },
+        {
+            "bng_ref_string": "OV 55 55",
+            "position": "lower-left",
+            "expected": [
+                555000,
+                555000
+            ]
+        },
+        {
+            "bng_ref_string": "OV 55 55 NE",
+            "position": "lower-left",
+            "expected": [
+                555500,
+                555500
+            ]
+        },
+        {
+            "bng_ref_string": "OV 555 555",
+            "position": "lower-left",
+            "expected": [
+                555500,
+                555500
+            ]
+        },
+        {
+            "bng_ref_string": "OV 555 555 NE",
+            "position": "lower-left",
+            "expected": [
+                555550,
+                555550
+            ]
+        },
+        {
+            "bng_ref_string": "OV 5555 5555",
+            "position": "lower-left",
+            "expected": [
+                555550,
+                555550
+            ]
+        },
+        {
+            "bng_ref_string": "OV 5555 5555 NE",
+            "position": "lower-left",
+            "expected": [
+                555555,
+                555555
+            ]
+        },
+        {
+            "bng_ref_string": "OV 55555 55555",
+            "position": "lower-left",
+            "expected": [
+                555555,
+                555555
+            ]
+        }
     ]
 }
