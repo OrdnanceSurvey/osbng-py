@@ -503,3 +503,17 @@ def _validate_bngreference(func):
         return func(*args, **kwargs)
 
     return wrapper
+
+
+def _validate_bngreference_pair(func):
+    """Decorator to validate that the first and second positional arguments of a function are BNGReference objects."""
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if not isinstance(args[0], BNGReference) & isinstance(args[1], BNGReference):
+            raise TypeError(
+                f"First and second arguments must be a BNGReference object, got: {type(args[0])}, {type(args[1])}"
+            )
+        return func(*args, **kwargs)
+
+    return wrapper
