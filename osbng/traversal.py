@@ -1,4 +1,10 @@
-"""Provides functionality to traverse the BNG grid system
+"""Provides functionality for traversing and calculating distances within the British National Grid (BNG) index system.
+It supports spatial analyses such as distance-constrained nearest neighbour searches and 'distance within' queries by offering:
+- **Grid traversal**: Generate k-discs and k-rings around a given grid square.
+- **Neighbourhood operations**: Identify neighbouring grid squares and checking adjacency.
+- **Distance computation**: Calculate the distance between grid square centroids.
+- **Proximity queries**: Retrieve all grid squares within a specified absolute distance.
+ 
 """
 
 from shapely import distance
