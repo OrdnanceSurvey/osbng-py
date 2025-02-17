@@ -46,6 +46,12 @@ class BNGHierarchyError(Exception):
     pass
 
 
+class BNGNeighbourError(Exception):
+    """Exception raised for invalid BNG Resolution objects, either they are not the same grid resolution or are identical objects."""
+
+    pass
+
+
 class BNGExtentError(Exception):
     """Exception raised for easting and northing coordinates outside the BNG index system extent.
 
@@ -67,5 +73,6 @@ _EXCEPTION_MAP = {
     "BNGReferenceError": BNGReferenceError,
     "BNGResolutionError": BNGResolutionError,
     "BNGHierarchyError": BNGHierarchyError,
+    "BNGNeighbourError": BNGNeighbourError,
     "BNGExtentError": BNGExtentError,
 }
