@@ -1266,5 +1266,304 @@
                 555555
             ]
         }
+    ],
+    "bng_to_bbox": [
+        {
+            "bng_ref_string": "SV",
+            "expected": [
+                0,
+                0,
+                100000,
+                100000
+            ]
+        },
+        {
+            "bng_ref_string": "SV SW",
+            "expected": [
+                0,
+                0,
+                50000,
+                50000
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0 0",
+            "expected": [
+                0,
+                0,
+                10000,
+                10000
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0 0 SW",
+            "expected": [
+                0,
+                0,
+                5000,
+                5000
+            ]
+        },
+        {
+            "bng_ref_string": "SV 00 00",
+            "expected": [
+                0,
+                0,
+                1000,
+                1000
+            ]
+        },
+        {
+            "bng_ref_string": "SV 00 00 SW",
+            "expected": [
+                0,
+                0,
+                500,
+                500
+            ]
+        },
+        {
+            "bng_ref_string": "SV 000 000",
+            "expected": [
+                0,
+                0,
+                100,
+                100
+            ]
+        },
+        {
+            "bng_ref_string": "SV 000 000 SW",
+            "expected": [
+                0,
+                0,
+                50,
+                50
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0000 0000",
+            "expected": [
+                0,
+                0,
+                10,
+                10
+            ]
+        },
+        {
+            "bng_ref_string": "SV 0000 0000 SW",
+            "expected": [
+                0,
+                0,
+                5,
+                5
+            ]
+        },
+        {
+            "bng_ref_string": "SV 00000 00000",
+            "expected": [
+                0,
+                0,
+                1,
+                1
+            ]
+        },
+        {
+            "bng_ref_string": "JM",
+            "expected": [
+                600000,
+                1200000,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM NE",
+            "expected": [
+                650000,
+                1250000,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9 9",
+            "expected": [
+                690000,
+                1290000,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9 9 NE",
+            "expected": [
+                695000,
+                1295000,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 99 99",
+            "expected": [
+                699000,
+                1299000,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 99 99 NE",
+            "expected": [
+                699500,
+                1299500,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 999 999",
+            "expected": [
+                699900,
+                1299900,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 999 999 NE",
+            "expected": [
+                699950,
+                1299950,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9999 9999",
+            "expected": [
+                699990,
+                1299990,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 9999 9999 NE",
+            "expected": [
+                699995,
+                1299995,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "JM 99999 99999",
+            "expected": [
+                699999,
+                1299999,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "bng_ref_string": "TQ",
+            "expected": [
+                500000,
+                100000,
+                600000,
+                200000
+            ]
+        },
+        {
+            "bng_ref_string": "TQ NW",
+            "expected": [
+                500000,
+                150000,
+                550000,
+                200000
+            ]
+        },
+        {
+            "bng_ref_string": "TQ 3 7",
+            "expected": [
+                530000,
+                170000,
+                540000,
+                180000
+            ]
+        },
+        {
+            "bng_ref_string": "TQ 3 7 NE",
+            "expected": [
+                535000,
+                175000,
+                540000,
+                180000
+            ]
+        },
+        {
+            "bng_ref_string": "TQ 38 79",
+            "expected": [
+                538000,
+                179000,
+                539000,
+                180000
+            ]
+        },
+        {
+            "bng_ref_string": "TQ 38 79 SE",
+            "expected": [
+                538500,
+                179000,
+                539000,
+                179500
+            ]
+        },
+        {
+            "bng_ref_string": "TQ 387 794",
+            "expected": [
+                538700,
+                179400,
+                538800,
+                179500
+            ]
+        },
+        {
+            "bng_ref_string": "TQ 387 794 SW",
+            "expected": [
+                538700,
+                179400,
+                538750,
+                179450
+            ]
+        },
+        {
+            "bng_ref_string": "TQ 3870 7942",
+            "expected": [
+                538700,
+                179420,
+                538710,
+                179430
+            ]
+        },
+        {
+            "bng_ref_string": "TQ 3870 7942 NE",
+            "expected": [
+                538705,
+                179425,
+                538710,
+                179430
+            ]
+        },
+        {
+            "bng_ref_string": "TQ 38705 79426",
+            "expected": [
+                538705,
+                179426,
+                538706,
+                179427
+            ]
+        }
     ]
 }
