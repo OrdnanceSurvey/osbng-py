@@ -13,6 +13,7 @@ from osbng.indexing import (
     _get_bng_suffix,
     xy_to_bng,
     bng_to_xy,
+    bng_to_bbox
 )
 from osbng.utils import _load_test_cases
 
@@ -154,3 +155,23 @@ def test_bng_to_xy(test_case):
 
     # Assert that the function returns the expected result
     assert bng_to_xy(bng_ref, position) == expected
+
+
+# Parameterised test for bng_to_bbox function
+@pytest.mark.parametrize(
+    "test_case",
+    # Load test cases from JSON file
+    _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_bbox"],
+)
+def test_bng_to_bbox(test_case):
+    """Test bng_to_bbox with test cases from JSON file."""
+    # Load test case data
+    bng_ref_string = test_case["bng_ref_string"]
+    # Get expected result as tuple
+    expected = tuple(test_case["expected"])
+
+    # Create BNGReference object
+    bng_ref = BNGReference(bng_ref_string)
+
+    # Assert that the function returns the expected result
+    assert bng_to_bbox(bng_ref) == expected
