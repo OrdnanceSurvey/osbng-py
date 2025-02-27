@@ -10,10 +10,9 @@ It supports spatial analyses such as distance-constrained nearest neighbour sear
 
 from shapely import distance
 from osbng.indexing import bng_to_xy
-from osbng.bng_reference import BNGReference, _validate_bngreference_pair
+from osbng.bng_reference import BNGReference, _validate_bngreference, _validate_bngreference_pair
 from shapely.geometry import Point
 from osbng.errors import BNGNeighbourError
-
 
 @_validate_bngreference_pair
 def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference) -> float:
