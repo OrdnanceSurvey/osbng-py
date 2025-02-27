@@ -2557,5 +2557,83 @@
                 ]
             }
         }
+    ],
+    "_validate_and_normalise_bbox": [
+        {
+            "xmin": 0,
+            "ymin": 0,
+            "xmax": 700000,
+            "ymax": 1300000,
+            "expected": [
+                0,
+                0,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "xmin": 0.1,
+            "ymin": 0.1,
+            "xmax": 699999.9,
+            "ymax": 1299999.9,
+            "expected": [
+                0.1,
+                0.1,
+                699999.9,
+                1299999.9
+            ]
+        },
+        {
+            "xmin": -0.1,
+            "ymin": -0.1,
+            "xmax": 700000.1,
+            "ymax": 1300000.1,
+            "expected_warning": true,
+            "expected": [
+                0,
+                0,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "xmin": -1,
+            "ymin": -1,
+            "xmax": 700001,
+            "ymax": 1300001,
+            "expected_warning": true,
+            "expected": [
+                0,
+                0,
+                700000,
+                1300000
+            ]
+        },
+        {
+            "xmin": -100,
+            "ymin": 1000,
+            "xmax": 600000,
+            "ymax": 1200000,
+            "expected_warning": true,
+            "expected": [
+                0,
+                1000,
+                600000,
+                1200000
+            ]
+        },
+        {
+            "xmin": 1000,
+            "ymin": 1000,
+            "xmax": 600000,
+            "ymax": 1400000,
+            "expected_warning": true,
+            "expected": [
+                1000,
+                1000,
+                600000,
+                1300000
+            ]
+        }
     ]
 }
