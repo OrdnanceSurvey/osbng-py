@@ -9,10 +9,90 @@ It supports spatial analyses such as distance-constrained nearest neighbour sear
 """
 
 from shapely import distance
-from osbng.indexing import bng_to_xy
+from osbng.indexing import bng_to_xy, xy_to_bng
 from osbng.bng_reference import BNGReference, _validate_bngreference, _validate_bngreference_pair
 from shapely.geometry import Point
-from osbng.errors import BNGNeighbourError
+from osbng.errors import BNGExtentError, BNGNeighbourError
+import warnings
+
+@_validate_bngreference
+def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
+    """Returns a list of BNG references representing a hollow ring around a given grid square
+    at a grid distance k.
+
+    Args:
+        bng_ref (BNGReference): A BNGReference object.
+        k (int): Grid distance in units of grid cells.
+
+    Returns:
+
+    """
+
+    # Check that k is a positive integer
+    if k<=0:
+        raise ValueError(
+            "k must be a positive integer."
+        )
+
+    # Derive point location of root square
+    xc, yc = bng_to_xy(bng_ref, "centre")
+
+    # Initialise list of ring references
+    kring_refs = []
+
+    raise_warning = False
+    
+    # Add left and right columns of ring
+    for dy in range(-k,k+1): # Includes corners
+        for dx in [-k, k]:
+            try:
+                ring_ref = xy_to_bng(
+                                xc+(dx*bng_ref.resolution_metres),
+                                yc+(dy*bng_ref.resolution_metres),
+                                bng_ref.resolution_metres
+                            )
+            except BNGExtentError:
+                raise_warning = True
+            else:
+                kring_refs.append(
+                    xy_to_bng(
+                        xc+(dx*bng_ref.resolution_metres),
+                        yc+(dy*bng_ref.resolution_metres),
+                        bng_ref.resolution_metres
+                    )
+                )
+
+    # Add top and bottom rows of ring
+    for dy in [-k, k]:
+        for dx in range(-k+1,k): # Excludes corners
+            try:
+                ring_ref = xy_to_bng(
+                                xc+(dx*bng_ref.resolution_metres),
+                                yc+(dy*bng_ref.resolution_metres),
+                                bng_ref.resolution_metres
+                            )
+            except BNGExtentError:
+                None
+            else:
+                kring_refs.append(
+                    xy_to_bng(
+                        xc+(dx*bng_ref.resolution_metres),
+                        yc+(dy*bng_ref.resolution_metres),
+                        bng_ref.resolution_metres
+                    )
+                )
+
+    
+    if raise_warning:
+        warnings.warn(
+            "One or more of the requested cells falls outside of the BNG index"
+            +"system extent and will not be returned."
+        )
+    return kring_refs
+
+# @_validate_bngreference
+# def 
+
 
 @_validate_bngreference_pair
 def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference) -> float:
