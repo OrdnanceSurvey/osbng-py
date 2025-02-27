@@ -12,6 +12,7 @@ from osbng.errors import _EXCEPTION_MAP
 from osbng.indexing import (
     _validate_and_normalise_bng_resolution,
     _validate_easting_northing,
+    _validate_and_normalise_bbox,
     _get_bng_suffix,
     xy_to_bng,
     bng_to_xy,
@@ -82,6 +83,33 @@ def test__validate_easting_northing(test_case):
             _validate_easting_northing(easting, northing)
         except Exception as e:
             pytest.fail(f"Unexpected exception raised: {e}")
+
+
+# Parameterised test for _validate_and_normalise_bbox function
+@pytest.mark.parametrize(
+    "test_case",
+    # Load test cases from JSON file
+    _load_test_cases(file_path="./data/indexing_test_cases.json")["_validate_and_normalise_bbox"],
+)
+def test__validate_and_normalise_bbox(test_case):
+    """Test _validate_and_normalise_bbox with test cases from JSON file."""
+    # Load test case data
+    xmin = test_case["xmin"]
+    ymin = test_case["ymin"]
+    xmax = test_case["xmax"]
+    ymax = test_case["ymax"]
+    # Get expected result as tuple
+    expected = tuple(test_case["expected"])
+
+    # Check if the test case expects an warning
+    if "expected_warning" in test_case:
+        # Assert that the function returns a warning and the expected result
+        with pytest.warns(UserWarning):
+            assert _validate_and_normalise_bbox(xmin, ymin, xmax, ymax) == expected
+
+    else:
+        # Assert that the function returns the expected result
+        assert _validate_and_normalise_bbox(xmin, ymin, xmax, ymax) == expected
 
 
 # Parameterised test for _get_bng_suffix function
