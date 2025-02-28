@@ -10,10 +10,9 @@ It supports spatial analyses such as distance-constrained nearest neighbour sear
 
 from osbng.indexing import bng_to_xy, xy_to_bng
 from osbng.bng_reference import BNGReference, _validate_bngreference, _validate_bngreference_pair
-from shapely.geometry import Point
 from osbng.errors import BNGExtentError, BNGNeighbourError
-import warnings
 import numpy as np
+import warnings
 
 
 def _ring_or_disk_(bng_ref: BNGReference, k: int, is_disk: bool) -> list[BNGReference]:
