@@ -79,8 +79,12 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
 
     return _ring_or_disk_(bng_ref, k, False)
 
-# @_validate_bngreference
-# def 
+@_validate_bngreference
+def bng_kdisk(bng_ref: BNGReference, k: int) -> list[BNGReference]:
+    """
+    """
+
+    return _ring_or_disk_(bng_ref, k, True)
 
 
 @_validate_bngreference_pair
