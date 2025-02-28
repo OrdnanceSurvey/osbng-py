@@ -15,6 +15,55 @@ from shapely.geometry import Point
 from osbng.errors import BNGExtentError, BNGNeighbourError
 import warnings
 
+
+def _ring_or_disk_(bng_ref: BNGReference, k: int, is_disk: bool) -> list[BNGReference]:
+    """
+    """
+    
+    # Check that k is a positive integer
+    if k<=0:
+        raise ValueError(
+            "k must be a positive integer."
+        )
+    
+    
+    # Derive point location of root square
+    xc, yc = bng_to_xy(bng_ref, "centre")
+
+    # Initialise list of ring references
+    kring_refs = []
+
+    # Track whether we need to raise an extent warning
+    raise_extent_warning = False
+
+    # Iterate over all dx/dy within range
+    for dy in range(-k,k+1):
+        for dx in range(-k,k+1):
+            # Include all dx/dy combinations for disks
+            # Only include edges for rings
+            if is_disk | (abs(dy)==k) | (abs(dx)==k):
+                try:
+                    ring_ref = xy_to_bng(
+                        xc+(dx*bng_ref.resolution_metres),
+                        yc+(dy*bng_ref.resolution_metres),
+                        bng_ref.resolution_metres
+                    )
+                # Catch extent errors and track whether warning is needed
+                except BNGExtentError:
+                    raise_extent_warning = True
+                else:
+                    kring_refs.append(ring_ref)
+
+    # Raise an extent warning if an error has been caught
+    # Note: do this after the above, otherwise repeated warnings will be raised!
+    if raise_extent_warning:
+        warnings.warn(
+            "One or more of the requested cells falls outside of the BNG index "
+            +"system extent and will not be returned."
+        )
+
+    return kring_refs
+
 @_validate_bngreference
 def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
     """Returns a list of BNG references representing a hollow ring around a given grid square
@@ -28,67 +77,7 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
 
     """
 
-    # Check that k is a positive integer
-    if k<=0:
-        raise ValueError(
-            "k must be a positive integer."
-        )
-
-    # Derive point location of root square
-    xc, yc = bng_to_xy(bng_ref, "centre")
-
-    # Initialise list of ring references
-    kring_refs = []
-
-    raise_warning = False
-    
-    # Add left and right columns of ring
-    for dy in range(-k,k+1): # Includes corners
-        for dx in [-k, k]:
-            try:
-                ring_ref = xy_to_bng(
-                                xc+(dx*bng_ref.resolution_metres),
-                                yc+(dy*bng_ref.resolution_metres),
-                                bng_ref.resolution_metres
-                            )
-            except BNGExtentError:
-                raise_warning = True
-            else:
-                kring_refs.append(
-                    xy_to_bng(
-                        xc+(dx*bng_ref.resolution_metres),
-                        yc+(dy*bng_ref.resolution_metres),
-                        bng_ref.resolution_metres
-                    )
-                )
-
-    # Add top and bottom rows of ring
-    for dy in [-k, k]:
-        for dx in range(-k+1,k): # Excludes corners
-            try:
-                ring_ref = xy_to_bng(
-                                xc+(dx*bng_ref.resolution_metres),
-                                yc+(dy*bng_ref.resolution_metres),
-                                bng_ref.resolution_metres
-                            )
-            except BNGExtentError:
-                None
-            else:
-                kring_refs.append(
-                    xy_to_bng(
-                        xc+(dx*bng_ref.resolution_metres),
-                        yc+(dy*bng_ref.resolution_metres),
-                        bng_ref.resolution_metres
-                    )
-                )
-
-    
-    if raise_warning:
-        warnings.warn(
-            "One or more of the requested cells falls outside of the BNG index"
-            +"system extent and will not be returned."
-        )
-    return kring_refs
+    return _ring_or_disk_(bng_ref, k, False)
 
 # @_validate_bngreference
 # def 
