@@ -5,7 +5,7 @@ Test cases are loaded from a JSON file using the _load_test_cases function from 
 
 import pytest
 
-from osbng.traversal import bng_distance, bng_is_neighbour
+from osbng.traversal import *
 from osbng.errors import _EXCEPTION_MAP
 from osbng.utils import _load_test_cases
 from osbng.bng_reference import BNGReference
@@ -26,7 +26,12 @@ def test_bng_distance(test_case):
         exception_class = _EXCEPTION_MAP[exception_name]
         with pytest.raises(exception_class):
             bng_distance(BNGReference(bng_ref1), BNGReference(bng_ref2))
+    elif "edge_to_edge" in test_case:
+        edge_to_edge = test_case["edge_to_edge"]
+        distance = bng_distance(BNGReference(bng_ref1), BNGReference(bng_ref2), edge_to_edge=edge_to_edge)
+        assert distance == test_case["expected"]
     else:
+        edge_to_edge = test_case["edge_to_edge"]
         distance = bng_distance(BNGReference(bng_ref1), BNGReference(bng_ref2))
         assert distance == test_case["expected"]
 
@@ -54,3 +59,19 @@ def test_bng_is_neighbour(test_case):
     else:
         distance = bng_is_neighbour(BNGReference(bng_ref1), BNGReference(bng_ref2))
         assert distance == test_case["expected"]
+
+
+# Parameterised test for bng_is_neighbour function
+@pytest.mark.parametrize(
+    "test_case",
+    _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_kring"],
+)
+def test_bng_kring(test_case):
+    """Test bng_kring with test cases from JSON file."""
+
+    if "expected_length" in test_case:
+        assert len(bng_kring(BNGReference(test_case["bng_ref"], test_case["k"]))) == test_case["expected_length"]
+    else:
+        kring = bng_kring(BNGReference(test_case["bng_ref"]))
+        assert set([r.bng_ref_formatted for r in kring]) == set([r["bng_ref_formatted"] for r in test_case["expected"]])
+
