@@ -155,16 +155,11 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
     centroid2 = bng_to_xy(bng_ref2, "centre")
 
     if edge_to_edge:       
-
-        # Determine whether 1 is due north of 2
-        n = 0 if centroid1[1] == centroid2[1] else 1 if centroid1[1] > centroid2[1] else -1
-
-        # Determine whether 1 is due east of 2
-        e = 0 if centroid1[0] == centroid2[0] else 1 if centroid1[0] > centroid2[0] else -1
-
-        # Determine x and y offsets between nearest corners
-        dx = (centroid1[0]-(0.5*e*bng_ref1.resolution_metres)) - (centroid2[0]+(0.5*e*bng_ref2.resolution_metres))
-        dy = (centroid1[1]-(0.5*n*bng_ref1.resolution_metres)) - (centroid2[1]+(0.5*n*bng_ref2.resolution_metres))
+        
+        # For edge-to-edge distances, the x-distance and y-distance are the centroid-to-centroid
+        # distance minus half the box width/height at either end
+        dx = 0 if centroid1[0]==centroid2[0] else abs(centroid1[0]-centroid2[0])-0.5*(bng_ref1.resolution_metres+bng_ref2.resolution_metres)
+        dy = 0 if centroid1[1]==centroid2[1] else abs(centroid1[1]-centroid2[1])-0.5*(bng_ref1.resolution_metres+bng_ref2.resolution_metres)
 
     else:
         dx = centroid1[0]-centroid2[0]
