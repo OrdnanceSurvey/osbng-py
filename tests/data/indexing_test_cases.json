@@ -2635,5 +2635,193 @@
                 ]
             }
         }
+    ],
+    "bbox_to_bng": [
+        {
+            "xmin": 0,
+            "ymin": 0,
+            "xmax": 0,
+            "ymax": 0,
+            "resolution": "1km",
+            "expected": {
+                "bng_ref_string": []
+            }
+        },
+        {
+            "xmin": 0,
+            "ymin": 0,
+            "xmax": 100000,
+            "ymax": 100000,
+            "resolution": "100km",
+            "expected": {
+                "bng_ref_string": [
+                    "SV"
+                ]
+            }
+        },
+        {
+            "xmin": 0,
+            "ymin": 0,
+            "xmax": 100000,
+            "ymax": 100000,
+            "resolution": "50km",
+            "expected": {
+                "bng_ref_string": [
+                    "SV NE",
+                    "SV SE",
+                    "SV SW",
+                    "SV NW"
+                ]
+            }
+        },
+        {
+            "xmin": 0,
+            "ymin": 0,
+            "xmax": 10,
+            "ymax": 10,
+            "resolution": 10,
+            "expected": {
+                "bng_ref_string": [
+                    "SV 0000 0000"
+                ]
+            }
+        },
+        {
+            "xmin": 0,
+            "ymin": 0,
+            "xmax": 10,
+            "ymax": 10,
+            "resolution": 5,
+            "expected": {
+                "bng_ref_string": [
+                    "SV 0000 0000 NE",
+                    "SV 0000 0000 SE",
+                    "SV 0000 0000 SW",
+                    "SV 0000 0000 NW"
+                ]
+            }
+        },
+        {
+            "xmin": 0,
+            "ymin": 0,
+            "xmax": 3,
+            "ymax": 3,
+            "resolution": 1,
+            "expected": {
+                "bng_ref_string": [
+                    "SV 00000 00000",
+                    "SV 00001 00000",
+                    "SV 00002 00000",
+                    "SV 00000 00001",
+                    "SV 00000 00002",
+                    "SV 00001 00001",
+                    "SV 00001 00002",
+                    "SV 00002 00001",
+                    "SV 00002 00002"
+                ]
+            }
+        },
+        {
+            "xmin": 699000,
+            "ymin": 1299000,
+            "xmax": 700000,
+            "ymax": 1300000,
+            "resolution": "1km",
+            "expected": {
+                "bng_ref_string": [
+                    "JM 99 99"
+                ]
+            }
+        },
+        {
+            "xmin": 699000,
+            "ymin": 1299000,
+            "xmax": 700000,
+            "ymax": 1300000,
+            "resolution": 500,
+            "expected": {
+                "bng_ref_string": [
+                    "JM 99 99 NE",
+                    "JM 99 99 SE",
+                    "JM 99 99 SW",
+                    "JM 99 99 NW"
+                ]
+            }
+        },
+        {
+            "xmin": 259745,
+            "ymin": 353695,
+            "xmax": 262608,
+            "ymax": 355183,
+            "resolution": "100km",
+            "expected": {
+                "bng_ref_string": [
+                    "SH"
+                ]
+            }
+        },
+        {
+            "xmin": 259745,
+            "ymin": 353695,
+            "xmax": 262608,
+            "ymax": 355183,
+            "resolution": "50km",
+            "expected": {
+                "bng_ref_string": [
+                    "SH NE"
+                ]
+            }
+        },
+        {
+            "xmin": 259745,
+            "ymin": 353695,
+            "xmax": 262608,
+            "ymax": 355183,
+            "resolution": "10km",
+            "expected": {
+                "bng_ref_string": [
+                    "SH 5 5",
+                    "SH 6 5"
+                ]
+            }
+        },
+        {
+            "xmin": 259745,
+            "ymin": 353695,
+            "xmax": 262608,
+            "ymax": 355183,
+            "resolution": "5km",
+            "expected": {
+                "bng_ref_string": [
+                    "SH 5 5 NE",
+                    "SH 5 5 SE",
+                    "SH 6 5 NW",
+                    "SH 6 5 SW"
+                ]
+            }
+        },
+        {
+            "xmin": 259745,
+            "ymin": 353695,
+            "xmax": 262608,
+            "ymax": 355183,
+            "resolution": "1km",
+            "expected": {
+                "bng_ref_string": [
+                    "SH 59 53",
+                    "SH 59 54",
+                    "SH 59 55",
+                    "SH 60 53",
+                    "SH 60 54",
+                    "SH 60 55",
+                    "SH 61 53",
+                    "SH 61 54",
+                    "SH 61 55",
+                    "SH 62 53",
+                    "SH 62 54",
+                    "SH 62 55"
+                ]
+            }
+        }
     ]
 }
