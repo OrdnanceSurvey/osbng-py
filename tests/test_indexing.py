@@ -216,7 +216,7 @@ def test_bng_to_bbox(test_case):
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_grid_geom"],
 )
 def test_bng_to_grid_geom(test_case):
-    """Test bng_to_bbox with test cases from JSON file."""
+    """Test bng_to_grid_geom with test cases from JSON file."""
     # Load test case data
     bng_ref_string = test_case["bng_ref_string"]
     # Convert expected result from GeoJSON to Shapely geometry object
