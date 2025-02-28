@@ -195,11 +195,6 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
         raise BNGNeighbourError(
             "The input BNG Resolution objects are not the same grid resolution. The input BNG Resolution objects must be the same grid resolution."
         )
-    # # Check if the two BNGReference objects are the same
-    # elif bng_ref1 == bng_ref2:
-    #     raise BNGNeighbourError(
-    #         "The input BNG Resolution objects are the same. The input BNG Resolution objects must be different."
-    #     )
     # Otherwise check if the two BNGReference objects are neighbours
     else:
         return bng_ref2 in bng_neighbours(bng_ref1)
