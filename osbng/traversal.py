@@ -87,13 +87,16 @@ def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
 
 
 @_validate_bngreference_pair
-def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference) -> float:
+def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: bool = False) -> float:
     """Returns the euclidean distance between the centroids of two BNGReference objects.
 
     Args:
         bng_ref1 (BNGReference): A BNGReference object.
         bng_ref2 (BNGReference): A BNGReference object.
 
+    Kwargs:
+        edge_to_edge (bool): If False (default), distance will be centroid-to-centroid distance.
+            If True, distance will be the shortest distance between any point in the grid squares.
     Returns:
         float: The euclidean distance between the centroids of the two BNGReference objects.
 
@@ -119,8 +122,23 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference) -> float:
     # Derive the centroid of the second BNGReference object
     centroid2 = bng_to_xy(bng_ref2, "centre")
 
-    # Return the distance between the two centroids
-    return float(np.sqrt((centroid1[0]-centroid2[0])**2 + (centroid1[1]-centroid2[1])**2))
+    if edge_to_edge:       
+
+        # Determine whether 1 is due north of 2
+        n = 0 if centroid1[1] == centroid2[1] else 1 if centroid1[1] > centroid2[1] else -1
+
+        # Determine whether 1 is due east of 2
+        e = 0 if centroid1[0] == centroid2[0] else 1 if centroid1[0] > centroid2[0] else -1
+
+        # Determine x and y offsets between nearest corners
+        dx = (centroid1[0]-(0.5*e*bng_ref1.resolution_metres)) - (centroid2[0]+(0.5*e*bng_ref2.resolution_metres))
+        dy = (centroid1[1]-(0.5*n*bng_ref1.resolution_metres)) - (centroid2[1]+(0.5*n*bng_ref2.resolution_metres))
+
+    else:
+        dx = centroid1[0]-centroid2[0]
+        dy = centroid1[1]-centroid2[1]
+
+    return float(np.sqrt(dx**2 + dy**2))
 
 
 @_validate_bngreference
@@ -200,22 +218,7 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
     
 
 
-def _distance_between_squares_(centroid1, centroid2, resolution):
-    """
-    """
 
-    # Determine whether 1 is due north of 2
-    n = 0 if centroid1[1] == centroid2[1] else 1 if centroid1[1] > centroid2[1] else -1
-
-    # Determine whether 1 is due east of 2
-    e = 0 if centroid1[0] == centroid2[0] else 1 if centroid1[0] > centroid2[0] else -1
-
-    # Determine x and y offsets between nearest corners
-    dx = (centroid1[0]-(0.5*e*resolution)) - (centroid2[0]+(0.5*e*resolution))
-    dy = (centroid1[1]-(0.5*n*resolution)) - (centroid2[1]+(0.5*n*resolution))
-
-    return float(np.sqrt(dx**2 + dy**2))
-    
 
 @_validate_bngreference
 def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
@@ -226,10 +229,7 @@ def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
     k = int(np.ceil(d/bng_ref.resolution_metres))
 
     # Get full kdisc
-    disc_refs = bng_kdisc(bng_ref, k)
-
-    # Find reference centroid
-    centroid = bng_to_xy(bng_ref)    
+    disc_refs = bng_kdisc(bng_ref, k) 
 
     # Return only those whose centroids are within distance
-    return [r for r in disc_refs if _distance_between_squares_(centroid, bng_to_xy(r), bng_ref.resolution_metres)<=d]
+    return [r for r in disc_refs if bng_distance(bng_ref, r, edge_to_edge=True)<=d]
