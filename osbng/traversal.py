@@ -15,7 +15,7 @@ import numpy as np
 import warnings
 
 
-def _ring_or_disk_(bng_ref: BNGReference, k: int, is_disk: bool) -> list[BNGReference]:
+def _ring_or_disc_(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGReference]:
     """
     """
     
@@ -40,7 +40,7 @@ def _ring_or_disk_(bng_ref: BNGReference, k: int, is_disk: bool) -> list[BNGRefe
         for dx in range(-k,k+1):
             # Include all dx/dy combinations for disks
             # Only include edges for rings
-            if is_disk | (abs(dy)==k) | (abs(dx)==k):
+            if is_disc | (abs(dy)==k) | (abs(dx)==k):
                 try:
                     ring_ref = xy_to_bng(
                         xc+(dx*bng_ref.resolution_metres),
@@ -76,14 +76,14 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
 
     """
 
-    return _ring_or_disk_(bng_ref, k, False)
+    return _ring_or_disc_(bng_ref, k, False)
 
 @_validate_bngreference
-def bng_kdisk(bng_ref: BNGReference, k: int) -> list[BNGReference]:
+def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
     """
     """
 
-    return _ring_or_disk_(bng_ref, k, True)
+    return _ring_or_disc_(bng_ref, k, True)
 
 
 @_validate_bngreference_pair
@@ -120,7 +120,7 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference) -> float:
     centroid2 = bng_to_xy(bng_ref2, "centre")
 
     # Return the distance between the two centroids
-    return np.sqrt((centroid1[0]-centroid2[0])**2 + (centroid1[1]-centroid2[1])**2)
+    return float(np.sqrt((centroid1[0]-centroid2[0])**2 + (centroid1[1]-centroid2[1])**2))
 
 
 @_validate_bngreference
@@ -197,3 +197,42 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
     # Otherwise check if the two BNGReference objects are neighbours
     else:
         return bng_ref2 in bng_neighbours(bng_ref1)
+    
+
+
+def _distance_between_squares_(centroid1, centroid2, resolution):
+    """
+    """
+
+    # Determine whether 1 is due north of 2
+    n = 0 if centroid1[1] == centroid2[1] else 1 if centroid1[1] > centroid2[1] else -1
+
+    # Determine whether 1 is due east of 2
+    e = 0 if centroid1[0] == centroid2[0] else 1 if centroid1[0] > centroid2[0] else -1
+
+    # Determine x and y offsets between nearest corners
+    dx = (centroid1[0]-(0.5*e*resolution)) - (centroid2[0]+(0.5*e*resolution))
+    dy = (centroid1[1]-(0.5*n*resolution)) - (centroid2[1]+(0.5*n*resolution))
+
+    return float(np.sqrt(dx**2 + dy**2))
+    
+
+# @_validate_bngreference
+# def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
+#     """
+#     """
+
+#     # Convert distance to units of k
+#     k = int(np.ceil(d/bng_ref.resolution_metres))
+
+#     # Get full kdisc
+#     disc_refs = bng_kdisc(bng_ref, k)
+
+#     # Find central centroid
+#     xc, yc = bng_to_xy(bng_ref, position="centre")
+
+#     centroids = [bng_to_xy(r, position="centre") for r in disc_refs]
+#     distances = 
+
+#     # Return only those whose centroids are within distance
+#     return [r for r in disc_refs if bng_distance(bng_ref, r)<=d]
