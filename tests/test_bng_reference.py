@@ -117,4 +117,3 @@ def test_bngreference(test_case):
         assert bng_ref.bng_ref_formatted == test_case["expected_bng_ref_formatted"]
         assert bng_ref.resolution_metres == test_case["expected_resolution_metres"]
         assert bng_ref.resolution_label == test_case["expected_resolution_label"]
-    
