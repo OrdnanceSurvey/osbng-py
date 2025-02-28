@@ -17,7 +17,8 @@ from osbng.indexing import (
     xy_to_bng,
     bng_to_xy,
     bng_to_bbox,
-    bng_to_grid_geom
+    bng_to_grid_geom,
+    bbox_to_bng
 )
 from osbng.utils import _load_test_cases
 
@@ -227,3 +228,29 @@ def test_bng_to_grid_geom(test_case):
     # Assert that the the two geometries are equal
     # Normalise geometries to account for coordinate order differences
     assert_geometries_equal(bng_to_grid_geom(bng_ref), expected, normalize=True)
+
+
+# Parameterised test for bbox_to_bng function
+@pytest.mark.parametrize(
+    "test_case",
+    # Load test cases from JSON file
+    _load_test_cases(file_path="./data/indexing_test_cases.json")["bbox_to_bng"],
+)
+def test_bbox_to_bng(test_case):
+    """Test bbox_to_bng with test cases from JSON file."""
+    # Load test case data
+    xmin = test_case["xmin"]
+    ymin = test_case["ymin"]
+    xmax = test_case["xmax"]
+    ymax = test_case["ymax"]
+    resolution = test_case["resolution"]
+    # Get expected result
+    expected = test_case["expected"]["bng_ref_string"]
+
+    # Return a list of BNGReference objects
+    bng_refs = bbox_to_bng(xmin, ymin, xmax, ymax, resolution)
+  
+    # Assert that the function returns the expected result
+    # Sort lists to account for order differences
+    bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
+    assert sorted(bng_ref_strings) == sorted(expected)
