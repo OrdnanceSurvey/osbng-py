@@ -1,4 +1,4 @@
-"""Defines the supported British National Grid (BNG) resolutions.
+"""Defines the supported resolutions for the British National Grid (BNG) index system.
 
 Supported BNG resolutions are: 
 

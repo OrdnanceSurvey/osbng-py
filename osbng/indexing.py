@@ -1,4 +1,4 @@
-"""Provides functionality to index and work with coordinates and Shapely geometries within the British National Grid (BNG) index system.
+"""Provides functionality to index coordinates and Shapely geometries within the British National Grid (BNG) index system.
 
 The module supports bi-directional conversion between easting/northing coordinate pairs and BNGReference objects
 at supported resolutions as defined in the 'resolution' module. Additionally, it enables the indexing of geometries, 
@@ -30,9 +30,9 @@ import warnings
 from shapely import box, Geometry, prepare, intersects, contains, intersection
 from shapely.geometry import Polygon
 
+from osbng.bng_reference import _PATTERN, BNGReference, _validate_bngreference
 from osbng.errors import BNGResolutionError, BNGExtentError
 from osbng.resolution import BNG_RESOLUTIONS
-from osbng.bng_reference import _PATTERN, BNGReference, _validate_bngreference
 
 __all__ = [
     "xy_to_bng",
@@ -124,7 +124,7 @@ def _validate_and_normalise_bng_resolution(resolution: int | str) -> int:
     """Validates and normalises a BNG resolution to its metre-based integer value.
 
     Args:
-        resolution (int | str): The Resolution, either as a metre-based integer or string label.
+        resolution (int | str): The resolution, either as a metre-based integer or string label.
 
     Returns:
         int: The numeric metre-based resolution.
@@ -302,14 +302,14 @@ def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGRefe
         BNGExtentError: If the easting and northing coordinates are outside the BNG extent.
 
     Example:
-        >>> xy_to_bng(437289, 115541, "100km").bng_ref_formatted
-        'SU'
-        >>> xy_to_bng(437289, 115541, "10km").bng_ref_formatted
-        'SU 3 1'
-        >>> xy_to_bng(437289, 115541, "5km").bng_ref_formatted
-        'SU 3 1 NE'
-        >>> xy_to_bng(437289, 115541, 1).bng_ref_formatted
-        'SU 37289 15541'
+        >>> xy_to_bng(437289, 115541, "100km")
+        BNGReference(bng_ref_formatted=SU, resolution_label=100km)
+        >>> xy_to_bng(437289, 115541, "10km")
+        BNGReference(bng_ref_formatted=SU 3 1, resolution_label=10km)
+        >>> xy_to_bng(437289, 115541, "5km")
+        BNGReference(bng_ref_formatted=SU 3 1 NE, resolution_label=5km)
+        >>> xy_to_bng(437289, 115541, 1)
+        BNGReference(bng_ref_formatted=SU 37289 15541, resolution_label=1m)
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
@@ -371,6 +371,7 @@ def bng_to_xy(
         tuple[int | float, int | float]: The easting and northing coordinates as a tuple.
 
     Raises:
+        BNGReferenceError: If the first positional argument is not a BNGReference object.
         TypeError: If the first argumnet is not BNGReference object.
         ValueError: If an invalid position provided.
 
@@ -515,6 +516,7 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
         Polygon: Grid square as Shapely Polygon object.
 
     Raises:
+        BNGReferenceError: If the first positional argument is not a BNGReference object.
         TypeError: If first argument is not BNG Reference object.
 
     Example:
@@ -566,10 +568,21 @@ def bbox_to_bng(
         BNGResolutionError: If an invalid resolution is provided.
 
     Example:
-        >>> [x.bng_ref_formatted for x in bbox_to_bng(400000, 100000, 500000, 200000, "50km")]
-        ['SU SW', 'SU SE', 'SU NW', 'SU NE']
-        >>> [x.bng_ref_formatted for x in bbox_to_bng(285137.06, 78633.75, 299851.01, 86427.96, 5000)]
-        ['SX 8 7 NE', 'SX 9 7 NW', 'SX 9 7 NE', 'SX 8 8 SE', 'SX 9 8 SW', 'SX 9 8 SE', 'SX 8 8 NE', 'SX 9 8 NW', 'SX 9 8 NE']
+        >>> bbox_to_bng(400000, 100000, 500000, 200000, "50km")
+        [BNGReference(bng_ref_formatted=SU SW, resolution_label=50km), 
+         BNGReference(bng_ref_formatted=SU SE, resolution_label=50km),
+         BNGReference(bng_ref_formatted=SU NW, resolution_label=50km),
+         BNGReference(bng_ref_formatted=SU NE, resolution_label=50km)]
+        >>> bbox_to_bng(285137.06, 78633.75, 299851.01, 86427.96, 5000)
+        [BNGReference(bng_ref_formatted=SX 8 7 NE, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 7 NW, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 7 NE, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 8 8 SE, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 8 SW, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 8 SE, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 8 8 NE, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 8 NW, resolution_label=5km),
+         BNGReference(bng_ref_formatted=SX 9 8 NE, resolution_label=5km)] 
     """
 
     # Validate and normalise the resolution to its metre-based integer value
@@ -632,10 +645,12 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
         BNGExtentError: If the coordinates of a point geometry are outside of the BNG index system extent.
 
     Example:
-        >>> [x.bng_ref_formatted for x in geom_to_bng(Point(430000, 110000), resolution="100km")]
-        ["SU"]
-        >>> [x.bng_ref_formatted for x in geom_to_bng(LineString([[430000, 110000],[430010, 110000],[430010, 110010]]), resolution="5m")]
-        ['SU 3000 1000 SW', 'SU 3000 1000 SE', 'SU 3000 1000 NE']
+        >>> geom_to_bng(Point(430000, 110000), "100km")
+        [BNGReference(bng_ref_formatted=SU, resolution_label=100km)]
+        >>> geom_to_bng(LineString([[430000, 110000],[430010, 110000],[430010, 110010]]), "5m")
+        [BNGReference(bng_ref_formatted=SU 3000 1000 SE, resolution_label=5m),
+         BNGReference(bng_ref_formatted=SU 3000 1000 SW, resolution_label=5m),
+         BNGReference(bng_ref_formatted=SU 3000 1000 NE, resolution_label=5m)]
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
@@ -701,6 +716,25 @@ def geom_to_bng_intersection(
         BNGResolutionError: If an invalid resolution is provided.
         ValueError: If the geometry type is not supported.
         BNGExtentError: If the coordinates of a point geometry are outside of the BNG index system extent.
+
+    Example:
+        >>> geom_to_bng_intersection(Point(430000, 110000), "100km")
+        [BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU, resolution_label=100km), is_core=False, geom=POINT (430000 110000))]
+        >>> geom_to_bng_intersection(LineString([[430000, 110000],[430010, 110000],[430010, 110010]]), "5m")
+        [BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU 3000 1000 SE, resolution_label=5m), is_core=False, geom=MULTILINESTRING ((430005 110000, 430010 110000), (430010 110000, 430010 110005))),
+         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU 3000 1000 SW, resolution_label=5m), is_core=False, geom=LINESTRING (430000 110000, 430005 110000)),
+         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU 3000 1000 NE, resolution_label=5m), is_core=False, geom=LINESTRING (430010 110005, 430010 110010))]
+        >>> from shapely import wkt
+        >>> geom_to_bng_intersection(wkt.loads("Polygon ((375480.64511692 144999.23691181, 426949.67604058 160255.02751493, 465166.20199588 153320.57724078, 453762.88376729 94454.79935802, 393510.2158297 91989.21703833, 375480.64511692 144999.23691181))"), "50km")
+        [BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU SW, resolution_label=50km), is_core=True, geom=POLYGON ((450000 100000, 450000 150000, 400000 150000, 400000 100000, 450000 100000))),
+         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=ST NE, resolution_label=50km), is_core=False, geom=POLYGON ((400000 152266.94988613573, 400000 150000, 392351.90644475375 150000, 400000 152266.94988613573))),
+         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=ST SE, resolution_label=50km), is_core=False, geom=POLYGON ((392351.90644475375 150000, 400000 150000, 400000 100000, 390785.6181363417 100000, 375480.64511692 144999.23691181, 392351.90644475375 150000))),
+         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SZ NW, resolution_label=50km), is_core=False, geom=POLYGON ((400000 92254.78365399371, 400000 100000, 450000 100000, 450000 94300.8194596147, 400000 92254.78365399371))),
+         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SZ NE, resolution_label=50km), is_core=False, geom=POLYGON ((453762.88376729 94454.79935802, 450000 94300.8194596147, 450000 100000, 454837.0849387723 100000, 453762.88376729 94454.79935802))),
+         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU SE, resolution_label=50km), is_core=False, geom=POLYGON ((454837.0849387723 100000, 450000 100000, 450000 150000, 464522.9488131115 150000, 454837.0849387723 100000))),
+         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU NE, resolution_label=50km), is_core=False, geom=POLYGON ((465166.20199588 153320.57724078, 464522.9488131115 150000, 450000 150000, 450000 156072.50905454965, 465166.20199588 153320.57724078))),
+         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU NW, resolution_label=50km), is_core=False, geom=POLYGON ((426949.67604058 160255.02751493, 450000 156072.50905454965, 450000 150000, 400000 150000, 400000 152266.94988613573, 426949.67604058 160255.02751493))),
+         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SY NE, resolution_label=50km), is_core=False, geom=POLYGON ((393510.2158297 91989.21703833, 390785.6181363417 100000, 400000 100000, 400000 92254.78365399371, 393510.2158297 91989.21703833)))]
     """
     # Initialise an empty list to store the BNGIndexedGeometry objects
     bng_idx_geoms = []

@@ -110,10 +110,10 @@ def test_bngreference(test_case):
             BNGReference(test_case["bng_ref_string"])
     else:
         # Initialise BNGReference object with the test case input
-        bng = BNGReference(test_case["bng_ref_string"])
+        bng_ref = BNGReference(test_case["bng_ref_string"])
 
         # Test each property against expected values
-        assert bng.bng_ref_compact == test_case["expected_bng_ref_compact"]
-        assert bng.bng_ref_formatted == test_case["expected_bng_ref_formatted"]
-        assert bng.resolution_metres == test_case["expected_resolution_metres"]
-        assert bng.resolution_label == test_case["expected_resolution_label"]
+        assert bng_ref.bng_ref_compact == test_case["expected_bng_ref_compact"]
+        assert bng_ref.bng_ref_formatted == test_case["expected_bng_ref_formatted"]
+        assert bng_ref.resolution_metres == test_case["expected_resolution_metres"]
+        assert bng_ref.resolution_label == test_case["expected_resolution_label"]
