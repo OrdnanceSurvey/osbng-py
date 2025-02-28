@@ -91,10 +91,7 @@
         {
             "bng_ref_string_1": "SPSE",
             "bng_ref_string_2": "SPSE",
-            "expected_exception": {
-                "name": "BNGNeighbourError",
-                "message": "The input BNG Resolution objects are the same. The input BNG Resolution objects must be different."
-            }
+            "expected": false
         }
     ]
 }
