@@ -124,6 +124,47 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference) -> float:
     return np.sqrt((centroid1[0]-centroid2[0])**2 + (centroid1[1]-centroid2[1])**2)
 
 
+@_validate_bngreference
+def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
+    """Returns a list of BNGReferences representing the four neighbouring grid squares
+    sharing an edge with the input BNGReference.
+
+
+    """
+
+    # Get the centroid of the bng square
+    x, y = bng_to_xy(bng_ref, "centre")
+    
+    # Initialise a neighbours list
+    neighbours_list = []
+
+    # Track whether we need to raise an extent warning
+    raise_extent_warning = False
+
+    # Iterate through N,E,S,W neighbours
+    for dx,dy in [[0,1], [1,0], [0,-1], [-1,0]]:
+        try:
+            neighbour = xy_to_bng(
+                x+(dx*bng_ref.resolution_metres),
+                y+(dy*bng_ref.resolution_metres),
+                bng_ref.resolution_metres
+            )
+        # Catch extent errors and track whether we need to warn
+        except BNGExtentError:
+            raise_extent_warning = True
+        else:
+            neighbours_list.append(neighbour)
+
+    # Raise an extent warning if an error has been caught
+    # Note: do this after the above, otherwise repeated warnings will be raised!
+    if raise_extent_warning:
+        warnings.warn(
+            "One or more of the requested cells falls outside of the BNG index "
+            +"system extent and will not be returned."
+        )
+
+    return neighbours_list
+
 @_validate_bngreference_pair
 def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
     """Returns True if the two BNGReference objects are neighbours, otherwise False.
@@ -154,31 +195,11 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
         raise BNGNeighbourError(
             "The input BNG Resolution objects are not the same grid resolution. The input BNG Resolution objects must be the same grid resolution."
         )
-    # Check if the two BNGReference objects are the same
-    elif bng_ref1 == bng_ref2:
-        raise BNGNeighbourError(
-            "The input BNG Resolution objects are the same. The input BNG Resolution objects must be different."
-        )
+    # # Check if the two BNGReference objects are the same
+    # elif bng_ref1 == bng_ref2:
+    #     raise BNGNeighbourError(
+    #         "The input BNG Resolution objects are the same. The input BNG Resolution objects must be different."
+    #     )
     # Otherwise check if the two BNGReference objects are neighbours
     else:
-
-        # Get the x and y coordinates of the centroid of the first BNGReference object
-        x, y = bng_to_xy(bng_ref1, "centre")
-
-        # Get the resolution of the first BNGReference object
-        resolution = bng_ref1.resolution_metres
-
-        # Add the resolution to the easting and northing to get the centroid of the four neighbouring grid cells
-        north = (x, y + resolution)
-        east = (x + resolution, y)
-        south = (x, y - resolution)
-        west = (x - resolution, y)
-
-        # Get the centroid of the second BNGReference object
-        centroid = bng_to_xy(bng_ref2, "centre")
-
-        # Check if the centroid of the second BNGReference object equals any of the four neighbouring grid cell centroids of the first BNGReference object
-        if centroid in [north, east, south, west]:
-            return True
-        else:
-            return False
+        return bng_ref2 in bng_neighbours(bng_ref1)
