@@ -217,22 +217,19 @@ def _distance_between_squares_(centroid1, centroid2, resolution):
     return float(np.sqrt(dx**2 + dy**2))
     
 
-# @_validate_bngreference
-# def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
-#     """
-#     """
+@_validate_bngreference
+def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
+    """
+    """
 
-#     # Convert distance to units of k
-#     k = int(np.ceil(d/bng_ref.resolution_metres))
+    # Convert distance to units of k
+    k = int(np.ceil(d/bng_ref.resolution_metres))
 
-#     # Get full kdisc
-#     disc_refs = bng_kdisc(bng_ref, k)
+    # Get full kdisc
+    disc_refs = bng_kdisc(bng_ref, k)
 
-#     # Find central centroid
-#     xc, yc = bng_to_xy(bng_ref, position="centre")
+    # Find reference centroid
+    centroid = bng_to_xy(bng_ref)    
 
-#     centroids = [bng_to_xy(r, position="centre") for r in disc_refs]
-#     distances = 
-
-#     # Return only those whose centroids are within distance
-#     return [r for r in disc_refs if bng_distance(bng_ref, r)<=d]
+    # Return only those whose centroids are within distance
+    return [r for r in disc_refs if _distance_between_squares_(centroid, bng_to_xy(r), bng_ref.resolution_metres)<=d]
