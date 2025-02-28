@@ -1,4 +1,4 @@
-"""Provides utility functions to support testing."""
+"""Provides utility functions to support parameterised testing."""
 
 import json
 

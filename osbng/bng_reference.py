@@ -12,7 +12,7 @@ and manipulate the reference.
 British National Grid Index System
 ------------------------
 
-The Ordnance Survey (OS) BNG index system (also known as the OS National Grid) is a rectangular 
+The Ordnance Survey (OS) BNG index system, also known as the OS National Grid, is a rectangular 
 Cartesian 700 x 1300km grid system based upon the transverse Mercator projection. In the BNG, locations 
 are specified using coordinates, eastings (x) and northings (y), measured in meters from a defined 
 origin point (0, 0) southwest of the Isles of Scilly off the coast of Cornwall, England. Values increase 
@@ -32,6 +32,8 @@ A BNG reference includes a 2-letter prefix that identifies the 100 km grid squar
 easting and northing value, and optionally, a suffix indicating an ordinal (intercardinal) direction (NE, SE, SW, NW). 
 These suffixes represent a quadtree subdivision of the grid at the 'standard' resolutions (100km, 10km, 1km, 100m, and 10m), 
 with each direction indicating a specific quadrant.
+
+<prefix><easting value><northing value><suffix>
 
 There are two exceptions to this structure:
 
@@ -85,8 +87,8 @@ from functools import wraps
 from shapely.geometry import Polygon, mapping
 from typing import Union
 
-from osbng.resolution import BNG_RESOLUTIONS
 from osbng.errors import BNGReferenceError
+from osbng.resolution import BNG_RESOLUTIONS
 
 __all__ = ["BNGReference"]
 
@@ -272,7 +274,7 @@ class BNGReference:
         __geo_interface__ (dict): A GeoJSON-like mapping for a BNGReference object.
 
     Methods:
-        bng_to_xy(position: str) -> tuple[int | float, int | float]: Returns the easting and northing coordinates for the current BNGReference object.
+        bng_to_xy(position: str, optional) -> tuple[int | float, int | float]: Returns the easting and northing coordinates for the current BNGReference object.
         bng_to_bbox() -> tuple[int, int, int, int]: Returns bounding box coordinates for the current BNGReference object.
         bng_to_grid_geom() -> Polygon: Returns a grid square as a Shapely Polygon for the current BNGReference object.
         bng_to_children(resolution: int | str | None, optional) -> list[BNGReference]: Returns a list of BNGReference objects that are children of the input BNGReference object.
@@ -291,6 +293,12 @@ class BNGReference:
         1000
         >>> bng_ref.resolution_label
         '1km'
+        >>> bng_ref.bng_to_xy()
+        (512000, 134000)
+        >>> bng_ref.bng_to_bbox()
+        (512000, 134000, 513000, 135000)
+        >>> bng_ref.bng_to_parent()
+        BNGReference(bng_ref_formatted=TQ 1 3 SW, resolution_label=5km)
     """
 
     def __init__(self, bng_ref_string: str):
@@ -418,7 +426,7 @@ class BNGReference:
     def bng_to_children(
         self, resolution: int | str | None = None
     ) -> list["BNGReference"]:
-        """Returns a list of BNGReference objects that are children of the input BNGReference object.
+        """Returns a list of BNGReference objects that are children of the current BNGReference object.
 
         By default, the children of the BNGReference object is defined as the BNGReference objects in the
         next resolution down from the input BNGReference resolution. For example, 100km -> 50km.
@@ -427,15 +435,14 @@ class BNGReference:
         resolution of the input BNGReference.
 
         Args:
-            bng_ref (BNGReference): The BNGReference object to derive children from.
             resolution (int | str | None, optional): The resolution of the children BNGReference objects. Defaults to None.
 
         Returns:
-            list[BNGReference]: A list of BNGReference objects that are children of the input BNGReference object.
+            list[BNGReference]: A list of BNGReference objects that are children of the current BNGReference object.
 
         Raises:
-            BNGHierarchyError: If the resolotuion of the input BNGReference object is 1m.
-            BNGHIerarchyError: If the resolution is greater than or equal to the resolution of the input BNGReference object.
+            BNGHierarchyError: If the resolution of the current BNGReference object is 1m.
+            BNGHierarchyError: If the resolution is greater than or equal to the resolution of the current BNGReference object.
             BNGResolutionError: If an invalid resolution is provided.
 
         Examples:
@@ -456,24 +463,23 @@ class BNGReference:
         return _bng_to_children(self, resolution)
 
     def bng_to_parent(self, resolution: int | str | None = None) -> "BNGReference":
-        """Returns a BNGReference object that is the parent of the input BNGReference object.
+        """Returns a BNGReference object that is the parent of the current BNGReference object.
 
         By default, the parent of the BNGReference object is defined as the BNGReference in the next BNG
-        resolution up from the input BNGReference resolution. For example, 50km -> 100km.
+        resolution up from the current BNGReference resolution. For example, 50km -> 100km.
 
         Any valid resolution can be provided as the parent resolution, provided it is greater than the
-        resolution of the input BNGReference.
+        resolution of the current BNGReference.
 
         Args:
-            bng_ref (BNGReference): The BNGReference object to derive parent from.
             resolution (int | str | None, optional): The resolution of the parent BNGReference. Defaults to None.
 
         Returns:
-            BNGReference: A BNGReference object that is the parent of the input BNGReference object.
+            BNGReference: A BNGReference object that is the parent of the current BNGReference object.
 
         Raises:
-            BNGHierarchyError: If the resolution of the input BNGReference object is 100km.
-            BNGHierarchyError: If the resolution is less than or equal to the resolution of the input BNGReference object.
+            BNGHierarchyError: If the resolution of the current BNGReference object is 100km.
+            BNGHierarchyError: If the resolution is less than or equal to the resolution of the current BNGReference object.
             BNGResolutionError: If an invalid resolution is provided.
 
         Examples:
@@ -499,20 +505,6 @@ def _validate_bngreference(func):
         if not isinstance(args[0], BNGReference):
             raise TypeError(
                 f"First argument must be a BNGReference object, got: {type(args[0])}"
-            )
-        return func(*args, **kwargs)
-
-    return wrapper
-
-
-def _validate_bngreference_pair(func):
-    """Decorator to validate that the first and second positional arguments of a function are BNGReference objects."""
-
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        if not isinstance(args[0], BNGReference) & isinstance(args[1], BNGReference):
-            raise TypeError(
-                f"First and second arguments must be a BNGReference object, got: {type(args[0])}, {type(args[1])}"
             )
         return func(*args, **kwargs)
 

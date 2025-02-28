@@ -5,9 +5,9 @@ Test cases are loaded from a JSON file using the load_test_cases function from t
 
 import pytest
 
-from osbng.hierarchy import bng_to_children, bng_to_parent
 from osbng.bng_reference import BNGReference
 from osbng.errors import _EXCEPTION_MAP
+from osbng.hierarchy import bng_to_children, bng_to_parent
 from osbng.utils import _load_test_cases
 
 
@@ -40,8 +40,8 @@ def test__bng_to_children(test_case):
 
         bng_refs = bng_to_children(BNGReference(bng_ref_string), resolution)
 
-        for bng, expected in zip(bng_refs, test_case["expected"]):
-            assert bng.bng_ref_formatted == expected["bng_ref_formatted"]
+        for bng_ref, expected in zip(bng_refs, test_case["expected"]):
+            assert bng_ref.bng_ref_formatted == expected["bng_ref_formatted"]
 
 
 @pytest.mark.parametrize(
@@ -72,5 +72,5 @@ def test__bng_to_parent(test_case):
 
     else:
 
-        bng = bng_to_parent(BNGReference(bng_ref_string), resolution)
-        assert bng.bng_ref_formatted == test_case["expected"]["bng_ref_formatted"]
+        bng_ref = bng_to_parent(BNGReference(bng_ref_string), resolution)
+        assert bng_ref.bng_ref_formatted == test_case["expected"]["bng_ref_formatted"]
