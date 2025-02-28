@@ -102,7 +102,7 @@
     ],
     "bng_kring": [
         {
-            "bng_ref": "SU1234",
+            "bng_ref_string": "SU1234",
             "k": 1,
             "expected": [
                 {
@@ -132,9 +132,89 @@
             ]
         },
         {
-            "bng_ref": "SU1234",
+            "bng_ref_string": "SU1234",
             "k": 3,
             "expected_length": 24
+        }
+    ],
+    "bng_kdisc": [
+        {
+            "bng_ref_string": "SU1234",
+            "k": 1,
+            "expected": [
+                {
+                    "bng_ref_formatted": "SU 11 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 11 34"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 34"
+                },
+                {
+                    "bng_ref_formatted": "SU 11 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 34"
+                }
+            ]
+        },
+        {
+            "bng_ref_string": "SU1234",
+            "k": 3,
+            "expected_length": 49
+        }
+    ],
+    "bng_dwithin": [
+        {
+            "bng_ref_string": "SU1234",
+            "d": 999,
+            "expected": [
+                {
+                    "bng_ref_formatted": "SU 11 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 11 34"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 34"
+                },
+                {
+                    "bng_ref_formatted": "SU 11 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 34"
+                }
+            ]
+        },
+        {
+            "bng_ref_string": "SU1234",
+            "d": 1001,
+            "expected_length": 21
         }
     ]
 }

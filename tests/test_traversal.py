@@ -60,7 +60,7 @@ def test_bng_is_neighbour(test_case):
         assert distance == test_case["expected"]
 
 
-# Parameterised test for bng_is_neighbour function
+# Parameterised test for bng_kring function
 @pytest.mark.parametrize(
     "test_case",
     _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_kring"],
@@ -69,8 +69,38 @@ def test_bng_kring(test_case):
     """Test bng_kring with test cases from JSON file."""
 
     if "expected_length" in test_case:
-        assert len(bng_kring(BNGReference(test_case["bng_ref"], test_case["k"]))) == test_case["expected_length"]
+        assert len(bng_kring(BNGReference(test_case["bng_ref_string"]), test_case["k"])) == test_case["expected_length"]
     else:
-        kring = bng_kring(BNGReference(test_case["bng_ref"]), test_case["k"])
+        kring = bng_kring(BNGReference(test_case["bng_ref_string"]), test_case["k"])
+        assert set([r.bng_ref_formatted for r in kring]) == set([r["bng_ref_formatted"] for r in test_case["expected"]])
+
+
+# Parameterised test for bng_kdisc function
+@pytest.mark.parametrize(
+    "test_case",
+    _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_kdisc"],
+)
+def test_bng_kdisc(test_case):
+    """Test bng_kdisc with test cases from JSON file."""
+
+    if "expected_length" in test_case:
+        assert len(bng_kdisc(BNGReference(test_case["bng_ref_string"]), test_case["k"])) == test_case["expected_length"]
+    else:
+        kring = bng_kdisc(BNGReference(test_case["bng_ref_string"]), test_case["k"])
+        assert set([r.bng_ref_formatted for r in kring]) == set([r["bng_ref_formatted"] for r in test_case["expected"]])
+
+
+# Parameterised test for bng_dwithin function
+@pytest.mark.parametrize(
+    "test_case",
+    _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_dwithin"],
+)
+def test_bng_dwithin(test_case):
+    """Test bng_dwithin with test cases from JSON file."""
+
+    if "expected_length" in test_case:
+        assert len(bng_dwithin(BNGReference(test_case["bng_ref_string"]), test_case["d"])) == test_case["expected_length"]
+    else:
+        kring = bng_dwithin(BNGReference(test_case["bng_ref_string"]), test_case["d"])
         assert set([r.bng_ref_formatted for r in kring]) == set([r["bng_ref_formatted"] for r in test_case["expected"]])
 
