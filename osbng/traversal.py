@@ -8,12 +8,12 @@ It supports spatial analyses such as distance-constrained nearest neighbour sear
  
 """
 
-from shapely import distance
 from osbng.indexing import bng_to_xy, xy_to_bng
 from osbng.bng_reference import BNGReference, _validate_bngreference, _validate_bngreference_pair
 from shapely.geometry import Point
 from osbng.errors import BNGExtentError, BNGNeighbourError
 import warnings
+import numpy as np
 
 
 def _ring_or_disk_(bng_ref: BNGReference, k: int, is_disk: bool) -> list[BNGReference]:
@@ -121,7 +121,7 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference) -> float:
     centroid2 = bng_to_xy(bng_ref2, "centre")
 
     # Return the distance between the two centroids
-    return distance(Point(centroid1), Point(centroid2))
+    return np.sqrt((centroid1[0]-centroid2[0])**2 + (centroid1[1]-centroid2[1])**2)
 
 
 @_validate_bngreference_pair
