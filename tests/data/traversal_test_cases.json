@@ -6,6 +6,12 @@
             "expected": 1000.0
         },
         {
+            "bng_ref_string_1": "SE1822",
+            "bng_ref_string_2": "SE1922",
+            "edge_to_edge": true,
+            "expected": 0.0
+        },
+        {
             "bng_ref_string_1": "SE12",
             "bng_ref_string_2": "SE13",
             "expected": 10000.0
