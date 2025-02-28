@@ -1,0 +1,220 @@
+{
+    "bng_distance": [
+        {
+            "bng_ref_string_1": "SE1822",
+            "bng_ref_string_2": "SE1922",
+            "expected": 1000.0
+        },
+        {
+            "bng_ref_string_1": "SE1822",
+            "bng_ref_string_2": "SE1922",
+            "edge_to_edge": true,
+            "expected": 0.0
+        },
+        {
+            "bng_ref_string_1": "SE12",
+            "bng_ref_string_2": "SE13",
+            "expected": 10000.0
+        },
+        {
+            "bng_ref_string_1": "SE12",
+            "bng_ref_string_2": "SE14",
+            "expected": 20000.0
+        },
+        {
+            "bng_ref_string_1": "TL2029",
+            "bng_ref_string_2": "TL2130",
+            "expected": 1414.213562373095
+        },
+        {
+            "bng_ref_string_1": "TL1928",
+            "bng_ref_string_2": "TL2231",
+            "expected": 4242.640687119285
+        },
+        {
+            "bng_ref_string_1": "SE0718",
+            "bng_ref_string_2": "SE0922",
+            "expected": 4472.13595499958
+        },
+        {
+            "bng_ref_string_1": "SE1118",
+            "bng_ref_string_2": "SE22NW",
+            "expected": 14212.670403551896
+        },
+        {
+            "bng_ref_string_1": "STSW",
+            "bng_ref_string_2": "TASW",
+            "expected": 360555.1275463989
+        },
+        {
+            "bng_ref_string_1": "TL1928",
+            "bng_ref_string_2": "STSW",
+            "expected": 220323.62560560773
+        }
+    ],
+    "bng_is_neighbour": [
+        {
+            "bng_ref_string_1": "SE1822",
+            "bng_ref_string_2": "SE1922",
+            "expected": true
+        },
+        {
+            "bng_ref_string_1": "SE1822",
+            "bng_ref_string_2": "SE1721",
+            "expected": false
+        },
+        {
+            "bng_ref_string_1": "SV",
+            "bng_ref_string_2": "SQ",
+            "expected": true
+        },
+        {
+            "bng_ref_string_1": "SV",
+            "bng_ref_string_2": "SR",
+            "expected": false
+        },
+        {
+            "bng_ref_string_1": "JM",
+            "bng_ref_string_2": "JR",
+            "expected": true
+        },
+        {
+            "bng_ref_string_1": "SE",
+            "bng_ref_string_2": "TA0030",
+            "expected_exception": {
+                "name": "BNGNeighbourError",
+                "message": "The input BNG Resolution objects are not the same grid resolution. The input BNG Resolution objects must be the same grid resolution."
+            }
+        },
+        {
+            "bng_ref_string_1": "SPSE",
+            "bng_ref_string_2": "TL02",
+            "expected_exception": {
+                "name": "BNGNeighbourError",
+                "message": "The input BNG Resolution objects are not the same grid resolution. The input BNG Resolution objects must be the same grid resolution."
+            }
+        },
+        {
+            "bng_ref_string_1": "SPSE",
+            "bng_ref_string_2": "SPSE",
+            "expected": false
+        }
+    ],
+    "bng_kring": [
+        {
+            "bng_ref_string": "SU1234",
+            "k": 1,
+            "expected": [
+                {
+                    "bng_ref_formatted": "SU 11 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 11 34"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 34"
+                },
+                {
+                    "bng_ref_formatted": "SU 11 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 35"
+                }
+            ]
+        },
+        {
+            "bng_ref_string": "SU1234",
+            "k": 3,
+            "expected_length": 24
+        }
+    ],
+    "bng_kdisc": [
+        {
+            "bng_ref_string": "SU1234",
+            "k": 1,
+            "expected": [
+                {
+                    "bng_ref_formatted": "SU 11 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 11 34"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 34"
+                },
+                {
+                    "bng_ref_formatted": "SU 11 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 34"
+                }
+            ]
+        },
+        {
+            "bng_ref_string": "SU1234",
+            "k": 3,
+            "expected_length": 49
+        }
+    ],
+    "bng_dwithin": [
+        {
+            "bng_ref_string": "SU1234",
+            "d": 999,
+            "expected": [
+                {
+                    "bng_ref_formatted": "SU 11 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 33"
+                },
+                {
+                    "bng_ref_formatted": "SU 11 34"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 34"
+                },
+                {
+                    "bng_ref_formatted": "SU 11 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 13 35"
+                },
+                {
+                    "bng_ref_formatted": "SU 12 34"
+                }
+            ]
+        },
+        {
+            "bng_ref_string": "SU1234",
+            "d": 1001,
+            "expected_length": 21
+        }
+    ]
+}
