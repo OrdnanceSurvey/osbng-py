@@ -16,7 +16,15 @@ import warnings
 
 
 def _ring_or_disc_(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGReference]:
-    """
+    """Helper function to extract grid squares in a disc or ring.
+
+    Args:
+        bng_ref (BNGReference): A BNGReference object.
+        k (int): Grid distance in units of grid cells.
+        is_disc (bool): If True, returns all cells within distance k.  If False, only returns the outer ring.
+
+    Returns:
+        list of BNGReference: All BNGReference objects representing cells in a square ring or disc of radius k.
     """
     
     # Check that k is a positive integer
@@ -73,14 +81,37 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
         k (int): Grid distance in units of grid cells.
 
     Returns:
+        list of BNGReference: All BNGReference objects representing cells in a square ring of radius k.
 
+    Examples:
+        >>> bng_kring(BNGReference('SU1234'), 1)
+        [BNGReference('SU1133'), BNGReference('SU1233'), BNGReference('SU1333'), BNGReference('SU1134'),
+        BNGReference('SU1334'), BNGReference('SU1135'), BNGReference('SU1235'), BNGReference('SU1335')]
+        >>> bng_kring(BNGReference('SU1234'), 3)
+        [list of 24 BNGReference objects]
     """
 
     return _ring_or_disc_(bng_ref, k, False)
 
 @_validate_bngreference
 def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
-    """
+    """Returns a list of BNG references representing a filled disc around a given grid square
+    up to a grid distance k, including the given central grid square.
+
+    Args:
+        bng_ref (BNGReference): A BNGReference object.
+        k (int): Grid distance in units of grid cells.
+
+    Returns:
+        list of BNGReference: All BNGReference objects representing cells in a square of radius k.
+
+    Examples:
+        >>> bng_kdisc(BNGReference('SU1234'), 1)
+        [BNGReference('SU1133'), BNGReference('SU1233'), BNGReference('SU1333'), BNGReference('SU1134'),
+        BNGReference('SU1234'), BNGReference('SU1334'), BNGReference('SU1135'), BNGReference('SU1235'),
+        BNGReference('SU1335')]
+        >>> bng_kdisc(BNGReference('SU1234'), 3)
+        [list of 49 BNGReference objects]
     """
 
     return _ring_or_disc_(bng_ref, k, True)
@@ -97,6 +128,7 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
     Kwargs:
         edge_to_edge (bool): If False (default), distance will be centroid-to-centroid distance.
             If True, distance will be the shortest distance between any point in the grid squares.
+
     Returns:
         float: The euclidean distance between the centroids of the two BNGReference objects.
 
@@ -146,7 +178,15 @@ def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
     """Returns a list of BNGReferences representing the four neighbouring grid squares
     sharing an edge with the input BNGReference.
 
+    Args:
+        bng_ref (BNGReference): A BNGReference object.
 
+    Returns:
+        list of BNGReference: The grid cells immediately North, South, East and West of bng_ref.
+
+    Examples:
+        >>> bng_neighbours(BNGReference('SU1234'))
+        [BNGReference('SU1235'), BNGReference('SU1334'), BNGReference('SU1233'), BNGReference('SU1134')]
     """
 
     # Get the centroid of the bng square
@@ -197,12 +237,13 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
     Raises:
         TypeError: If the first or second argument is not a BNGReference object.
         BNGNeighbourError: If the two BNGReference objects are not at the same resolution.
-        BNGNeighbourError: If the two BNGReference objects are the same.
 
     Examples:
         >>> bng_is_neighbour(BNGReference("SE1921"), BNGReference("SE1821"))
         True
         >>> bng_is_neighbour(BNGReference("SE1922"), BNGReference("SE1821"))
+        False
+        >>> bng_is_neighbour(BNGReference('SU1234'), BNGReference('SU1234'))
         False
 
     """
@@ -217,12 +258,27 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
         return bng_ref2 in bng_neighbours(bng_ref1)
     
 
-
-
-
 @_validate_bngreference
 def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
-    """
+    """Returns a list of BNG references around a given grid square within an absolute distance d.
+    All squares will be returned for which any part of its boundary is within distance d of any part of
+    bng_ref's boundary.
+
+    Args:
+        bng_ref (BNGReference): A BNGReference object.
+        d (int or float): The absolute distance d in metres.
+
+    Returns:
+        list of BNGReference: All grid squares which have any part of their geometry within distance
+            d of bng_ref's geometry
+
+    Examples:
+        >>> bng_dwithin(BNGReference('SU1234'), 1000)
+        [BNGReference('SU1133'), BNGReference('SU1233'), BNGReference('SU1333'), BNGReference('SU1134'),
+        BNGReference('SU1234'), BNGReference('SU1334'), BNGReference('SU1135'), BNGReference('SU1235'),
+        BNGReference('SU1335')]
+        >>> bng_dwithin(BNGReference('SU1234'), 1001)
+        [list of 21 BNGReference objects]
     """
 
     # Convert distance to units of k
