@@ -34,7 +34,11 @@ from osbng.utils import _load_test_cases
     ],
 )
 def test__validate_and_normalise_bng_resolution(test_case):
-    """Test _validate_and_normalise_bng_resolution with test cases from JSON file."""
+    """Test _validate_and_normalise_bng_resolution with test cases from JSON file.
+
+    Args:
+        test_case (dict): Test case from JSON file.
+    """
     # Load test case data
     resolution = test_case["resolution"]
 
@@ -66,7 +70,11 @@ def test__validate_and_normalise_bng_resolution(test_case):
     ],
 )
 def test__validate_easting_northing(test_case):
-    """Test _validate_and_normalise_bng_resolution with test cases from JSON file."""
+    """Test _validate_and_normalise_bng_resolution with test cases from JSON file.
+
+    Args:
+        test_case (dict): Test case from JSON file.
+    """
     # Load test case data
     easting = test_case["easting"]
     northing = test_case["northing"]
@@ -95,7 +103,11 @@ def test__validate_easting_northing(test_case):
     _load_test_cases(file_path="./data/indexing_test_cases.json")["_validate_and_normalise_bbox"],
 )
 def test__validate_and_normalise_bbox(test_case):
-    """Test _validate_and_normalise_bbox with test cases from JSON file."""
+    """Test _validate_and_normalise_bbox with test cases from JSON file.
+
+    Args:
+        test_case (dict): Test case from JSON file.
+    """
     # Load test case data
     xmin = test_case["xmin"]
     ymin = test_case["ymin"]
@@ -172,7 +184,11 @@ def test__decompose_geom(test_case):
     _load_test_cases(file_path="./data/indexing_test_cases.json")["xy_to_bng"],
 )
 def test_xy_to_bng(test_case):
-    """Test xy_to_bng with test cases from JSON file."""
+    """Test xy_to_bng with test cases from JSON file.
+
+    Args:
+        test_case (dict): Test case from JSON file.
+    """
     # Load test case data
     easting = test_case["easting"]
     northing = test_case["northing"]
@@ -205,7 +221,11 @@ def test_xy_to_bng(test_case):
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_xy"],
 )
 def test_bng_to_xy(test_case):
-    """Test bng_to_xy with test cases from JSON file."""
+    """Test bng_to_xy with test cases from JSON file.
+
+    Args:
+        test_case (dict): Test case from JSON file.
+    """
     # Load test case data
     bng_ref_string = test_case["bng_ref_string"]
     position = test_case["position"]
@@ -226,7 +246,11 @@ def test_bng_to_xy(test_case):
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_bbox"],
 )
 def test_bng_to_bbox(test_case):
-    """Test bng_to_bbox with test cases from JSON file."""
+    """Test bng_to_bbox with test cases from JSON file.
+
+    Args:
+        test_case (dict): Test case from JSON file.
+    """
     # Load test case data
     bng_ref_string = test_case["bng_ref_string"]
     # Get expected result as tuple
@@ -246,7 +270,11 @@ def test_bng_to_bbox(test_case):
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_grid_geom"],
 )
 def test_bng_to_grid_geom(test_case):
-    """Test bng_to_grid_geom with test cases from JSON file."""
+    """Test bng_to_grid_geom with test cases from JSON file.
+
+    Args:
+        test_case (dict): Test case from JSON file.
+    """
     # Load test case data
     bng_ref_string = test_case["bng_ref_string"]
     # Convert expected result from GeoJSON to Shapely geometry object
@@ -267,7 +295,11 @@ def test_bng_to_grid_geom(test_case):
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bbox_to_bng"],
 )
 def test_bbox_to_bng(test_case):
-    """Test bbox_to_bng with test cases from JSON file."""
+    """Test bbox_to_bng with test cases from JSON file.
+
+    Args:
+        test_case (dict): Test case from JSON file.
+    """
     # Load test case data
     xmin = test_case["xmin"]
     ymin = test_case["ymin"]
@@ -303,7 +335,11 @@ def test_bbox_to_bng(test_case):
     _load_test_cases(file_path="./data/indexing_test_cases.json")["geom_to_bng"],
 )
 def test_geom_to_bng(test_case):
-    """Test geom_to_bng with test cases from JSON file."""
+    """Test geom_to_bng with test cases from JSON file.
+
+    Args:
+        test_case (dict): Test case from JSON file.
+    """
     # Load test case data
     geom = test_case["geom"]
     resolution = test_case["resolution"]
