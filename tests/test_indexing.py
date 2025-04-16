@@ -14,6 +14,7 @@ from osbng.indexing import (
     _validate_easting_northing,
     _validate_and_normalise_bbox,
     _get_bng_suffix,
+    _decompose_geom,
     xy_to_bng,
     bng_to_xy,
     bng_to_bbox,
@@ -134,6 +135,34 @@ def test__get_bng_suffix(test_case):
 
     # Check that the function returns the expected result
     assert _get_bng_suffix(easting, northing, resolution) == expected
+
+
+# Parameterised test for _decompose_geom function
+@pytest.mark.parametrize(
+    "test_case",
+    # Load test cases from JSON file
+    _load_test_cases(file_path="./data/indexing_test_cases.json")["_decompose_geom"],
+)
+def test__decompose_geom(test_case):
+    """Test _decompose_geom with test cases from JSON file.
+
+    Args:
+        test_case (dict): Test case from JSON file.
+    """
+    # Load test case data
+    geom = test_case["geom"]
+    expected_count = test_case["expected"]["count"]
+    expected_types = test_case["expected"]["types"]
+
+    # Convert test case geometry from GeoJSON to Shapely Geometry object
+    # Decompose geometry into its constituent parts
+    parts = _decompose_geom(shape(geom))
+
+    # Check that the decomposition returns the expected part count
+    assert len(parts) == expected_count
+    # Check that the decomposition returns the expected part types
+    types = [part.geom_type for part in parts] 
+    assert sorted(types) == sorted(expected_types)
 
 
 # Parameterised test for xy_to_bng function
