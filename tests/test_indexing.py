@@ -246,7 +246,7 @@ def test_bbox_to_bng(test_case):
     ymax = test_case["ymax"]
     resolution = test_case["resolution"]
     # Get expected result
-    expected = test_case["expected"]["bng_ref_string"]
+    expected = test_case["expected"]["bng_ref_formatted"]
 
     # Return a list of BNGReference objects
     bng_refs = bbox_to_bng(xmin, ymin, xmax, ymax, resolution)
