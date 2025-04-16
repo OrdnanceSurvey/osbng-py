@@ -2822,6 +2822,40 @@
                     "SH 62 55"
                 ]
             }
+        },
+        {
+            "xmin": 548832,
+            "ymin": 541056,
+            "xmax": 803906,
+            "ymax": 739196,
+            "resolution": "100km",
+            "expected_warning": true,
+            "expected": {
+                "bng_ref_formatted": [
+                    "OL",
+                    "OM",
+                    "OQ",
+                    "OR",
+                    "OV",
+                    "OW"
+                ]
+            }
+        },
+        {
+            "xmin": -521.13,
+            "ymin": -491.87,
+            "xmax": 1647.90,
+            "ymax": 1742.93,
+            "resolution": "1km",
+            "expected_warning": true,
+            "expected": {
+                "bng_ref_formatted": [
+                    "SV 00 01",
+                    "SV 01 01",
+                    "SV 00 00",
+                    "SV 01 00"
+                ]
+            }
         }
     ],
     "geom_to_bng": [

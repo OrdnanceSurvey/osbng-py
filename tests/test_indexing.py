@@ -248,13 +248,23 @@ def test_bbox_to_bng(test_case):
     # Get expected result
     expected = test_case["expected"]["bng_ref_formatted"]
 
-    # Return a list of BNGReference objects
-    bng_refs = bbox_to_bng(xmin, ymin, xmax, ymax, resolution)
-  
-    # Assert that the function returns the expected result
-    # Sort lists to account for order differences
-    bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
-    assert sorted(bng_ref_strings) == sorted(expected)
+    # Check if the test case expects an warning
+    if "expected_warning" in test_case:
+        # Assert that the function returns a warning and the expected result
+        with pytest.warns(UserWarning):
+            # Return a list of BNGReference objects
+            bng_refs = bbox_to_bng(xmin, ymin, xmax, ymax, resolution)
+            # Sort lists to account for order differences
+            bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
+            assert sorted(bng_ref_strings) == sorted(expected)
+
+    else:
+        # Return a list of BNGReference objects
+        bng_refs = bbox_to_bng(xmin, ymin, xmax, ymax, resolution)
+        # Assert that the function returns the expected result
+        # Sort lists to account for order differences
+        bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
+        assert sorted(bng_ref_strings) == sorted(expected)
 
 
 # Parameterised test for geom_to_bng function
