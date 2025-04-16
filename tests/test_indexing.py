@@ -18,7 +18,8 @@ from osbng.indexing import (
     bng_to_xy,
     bng_to_bbox,
     bng_to_grid_geom,
-    bbox_to_bng
+    bbox_to_bng,
+    geom_to_bng
 )
 from osbng.utils import _load_test_cases
 
@@ -254,3 +255,48 @@ def test_bbox_to_bng(test_case):
     # Sort lists to account for order differences
     bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
     assert sorted(bng_ref_strings) == sorted(expected)
+
+
+# Parameterised test for geom_to_bng function
+@pytest.mark.parametrize(
+    "test_case",
+    # Load test cases from JSON file
+    _load_test_cases(file_path="./data/indexing_test_cases.json")["geom_to_bng"],
+)
+def test_geom_to_bng(test_case):
+    """Test geom_to_bng with test cases from JSON file."""
+    # Load test case data
+    geom = test_case["geom"]
+    resolution = test_case["resolution"]
+    # Get expected result
+    expected = None if "expected_exception" in test_case else test_case["expected"]["bng_ref_formatted"]
+
+    # Check if the test case expects an exception
+    if "expected_exception" in test_case:
+        # Get exception name from test case
+        exception_name = test_case["expected_exception"]["name"]
+        # Get exception class from name
+        exception_class = _EXCEPTION_MAP[exception_name]
+        # Check that the function raises the expected exception
+        with pytest.raises(exception_class):
+            bng_refs = geom_to_bng(shape(geom), resolution)
+
+    # Check if the test case expects an warning
+    elif "expected_warning" in test_case:
+        # Assert that the function returns a warning and the expected result
+        with pytest.warns(UserWarning):
+            # Convert test case geometry from GeoJSON to Shapely Geometry object
+            # Return a list of BNGReference objects
+            bng_refs = geom_to_bng(shape(geom), resolution)
+            # Sort lists to account for order differences
+            bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
+            assert sorted(bng_ref_strings) == sorted(expected)
+
+    else:
+        # Convert test case geometry from GeoJSON to Shapely Geometry object
+        # Return a list of BNGReference objects
+        bng_refs = geom_to_bng(shape(geom), resolution)
+        # Sort lists to account for order differences
+        bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
+        # Assert that the function returns the expected result
+        assert sorted(bng_ref_strings) == sorted(expected)
