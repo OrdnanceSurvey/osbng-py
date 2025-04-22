@@ -47,20 +47,19 @@ def test__validate_and_normalise_bng_resolution(test_case):
     # Load test case data
     resolution = test_case["resolution"]
 
-    # Check if the test case expects an exception
     if "expected_exception" in test_case:
         # Get exception name from test case
         exception_name = test_case["expected_exception"]["name"]
         # Get exception class from name
         exception_class = _EXCEPTION_MAP[exception_name]
-        # Check that the function raises the expected exception
+        # Assert that the test case raises the expected exception
         with pytest.raises(exception_class):
             _validate_and_normalise_bng_resolution(resolution)
     else:
         # Get expected result
         expected = test_case["expected"]
 
-        # Check that the function returns the expected result
+        # Assert that the function returns the expected result
         assert _validate_and_normalise_bng_resolution(resolution) == expected
 
 
@@ -82,17 +81,16 @@ def test__validate_easting_northing(test_case):
     easting = test_case["easting"]
     northing = test_case["northing"]
 
-    # Check if the test case expects an exception
     if "expected_exception" in test_case:
         # Get exception name from test case
         exception_name = test_case["expected_exception"]["name"]
         # Get exception class from name
         exception_class = _EXCEPTION_MAP[exception_name]
-        # Check that the function raises the expected exception
+        # Assert that the test case raises the expected exception
         with pytest.raises(exception_class):
             _validate_easting_northing(easting, northing)
     else:
-        # Check that the function does not raise any exception
+        # Assert that the function returns the expected result
         try:
             _validate_easting_northing(easting, northing)
         except Exception as e:
@@ -121,10 +119,10 @@ def test__validate_and_normalise_bbox(test_case):
     # Get expected result as tuple
     expected = tuple(test_case["expected"])
 
-    # Check if the test case expects an warning
     if "expected_warning" in test_case:
-        # Assert that the function returns a warning and the expected result
+        # Assert that the test case raises a warning
         with pytest.warns(UserWarning):
+            # Assert that the function returns the expected result
             assert _validate_and_normalise_bbox(xmin, ymin, xmax, ymax) == expected
 
     else:
@@ -150,7 +148,7 @@ def test__get_bng_suffix(test_case):
     resolution = test_case["resolution"]
     expected = test_case["expected"]
 
-    # Check that the function returns the expected result
+    # Assert that the function returns the expected result
     assert _get_bng_suffix(easting, northing, resolution) == expected
 
 
@@ -175,9 +173,9 @@ def test__decompose_geom(test_case):
     # Decompose geometry into its constituent parts
     parts = _decompose_geom(shape(geom))
 
-    # Check that the decomposition returns the expected part count
+    # Assert that the decomposition returns the expected part count
     assert len(parts) == expected_count
-    # Check that the decomposition returns the expected part types
+    # Assert that the decomposition returns the expected part types
     types = [part.geom_type for part in parts]
     assert sorted(types) == sorted(expected_types)
 
@@ -199,13 +197,12 @@ def test_xy_to_bng(test_case):
     northing = test_case["northing"]
     resolution = test_case["resolution"]
 
-    # Check if the test case expects an exception
     if "expected_exception" in test_case:
         # Get exception name from test case
         exception_name = test_case["expected_exception"]["name"]
         # Get exception class from name
         exception_class = _EXCEPTION_MAP[exception_name]
-        # Check that the function raises the expected exception
+        # Assert that the test case raises the expected exception
         with pytest.raises(exception_class):
             xy_to_bng(easting, northing, resolution)
     else:
@@ -215,7 +212,7 @@ def test_xy_to_bng(test_case):
         # Create BNGReference object
         bng_ref = xy_to_bng(easting, northing, resolution)
 
-        # Check that the function does not raise any exception
+        # Assert that the function returns the expected result
         assert bng_ref.bng_ref_formatted == expected
 
 
@@ -314,14 +311,14 @@ def test_bbox_to_bng(test_case):
     # Get expected result
     expected = test_case["expected"]["bng_ref_formatted"]
 
-    # Check if the test case expects an warning
     if "expected_warning" in test_case:
-        # Assert that the function returns a warning and the expected result
+        # Assert that the function raises a warning
         with pytest.warns(UserWarning):
             # Return a list of BNGReference objects
             bng_refs = bbox_to_bng(xmin, ymin, xmax, ymax, resolution)
             # Sort lists to account for order differences
             bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
+            # Assert that the function returns the expected result
             assert sorted(bng_ref_strings) == sorted(expected)
 
     else:
@@ -330,6 +327,7 @@ def test_bbox_to_bng(test_case):
         # Assert that the function returns the expected result
         # Sort lists to account for order differences
         bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
+        # Assert that the function returns the expected result
         assert sorted(bng_ref_strings) == sorted(expected)
 
 
@@ -355,25 +353,24 @@ def test_geom_to_bng(test_case):
         else test_case["expected"]["bng_ref_formatted"]
     )
 
-    # Check if the test case expects an exception
     if "expected_exception" in test_case:
         # Get exception name from test case
         exception_name = test_case["expected_exception"]["name"]
         # Get exception class from name
         exception_class = _EXCEPTION_MAP[exception_name]
-        # Check that the function raises the expected exception
+        # Assert that the test case raises the expected exception
         with pytest.raises(exception_class):
             bng_refs = geom_to_bng(shape(geom), resolution)
 
-    # Check if the test case expects an warning
     elif "expected_warning" in test_case:
-        # Assert that the function returns a warning and the expected result
+        # Assert that the function raises a warning
         with pytest.warns(UserWarning):
             # Convert test case geometry from GeoJSON to Shapely Geometry object
             # Return a list of BNGReference objects
             bng_refs = geom_to_bng(shape(geom), resolution)
             # Sort lists to account for order differences
             bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
+            # Assert that the function returns the expected result
             assert sorted(bng_ref_strings) == sorted(expected)
 
     else:
@@ -459,7 +456,9 @@ def test_geom_to_bng_intersection(test_case):
     elif "expected_warning" in test_case:
         # Assert that the test case raises a warning
         with pytest.warns(UserWarning):
+            # Assert that the function returns the expected result
             validate_and_assert_bng_intersection(geom, resolution, expected)
 
     else:
+        # Assert that the function returns the expected result
         validate_and_assert_bng_intersection(geom, resolution, expected)
