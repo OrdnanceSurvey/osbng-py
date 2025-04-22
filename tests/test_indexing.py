@@ -55,10 +55,10 @@ def test__validate_and_normalise_bng_resolution(test_case):
         # Assert that the test case raises the expected exception
         with pytest.raises(exception_class):
             _validate_and_normalise_bng_resolution(resolution)
+
     else:
         # Get expected result
         expected = test_case["expected"]
-
         # Assert that the function returns the expected result
         assert _validate_and_normalise_bng_resolution(resolution) == expected
 
@@ -89,6 +89,7 @@ def test__validate_easting_northing(test_case):
         # Assert that the test case raises the expected exception
         with pytest.raises(exception_class):
             _validate_easting_northing(easting, northing)
+
     else:
         # Assert that the function returns the expected result
         try:
@@ -205,13 +206,12 @@ def test_xy_to_bng(test_case):
         # Assert that the test case raises the expected exception
         with pytest.raises(exception_class):
             xy_to_bng(easting, northing, resolution)
+
     else:
         # Get expected result
         expected = test_case["expected"]["bng_ref_formatted"]
-
         # Create BNGReference object
         bng_ref = xy_to_bng(easting, northing, resolution)
-
         # Assert that the function returns the expected result
         assert bng_ref.bng_ref_formatted == expected
 
