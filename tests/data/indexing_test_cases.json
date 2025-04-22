@@ -3783,5 +3783,832 @@
                 ]
             }
         }
+    ],
+    "geom_to_bng_intersection": [
+        {
+            "geom": {
+                "type": "Point",
+                "coordinates": [
+                    301207.0,
+                    221582.0
+                ]
+            },
+            "resolution": "1km",
+            "expected": [
+                {
+                    "bng_ref_formatted": "SO 01 21",
+                    "is_core": false
+                }
+            ]
+        },
+        {
+            "geom": {
+                "type": "Point",
+                "coordinates": [
+                    724771.3,
+                    269210.3
+                ]
+            },
+            "resolution": "100km",
+            "expected_exception": {
+                "name": "BNGExtentError"
+            }
+        },
+        {
+            "geom": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        260986,
+                        354374
+                    ],
+                    [
+                        260986,
+                        354374
+                    ],
+                    [
+                        271109,
+                        313063
+                    ],
+                    [
+                        301207,
+                        221582
+                    ],
+                    [
+                        301207,
+                        221582
+                    ],
+                    [
+                        301207,
+                        221582
+                    ]
+                ]
+            },
+            "resolution": "1km",
+            "expected": [
+                {
+                    "bng_ref_formatted": "SO 01 21",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SO 01 21",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SO 01 21",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SH 71 13",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SH 60 54",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SH 60 54",
+                    "is_core": false
+                }
+            ]
+        },
+        {
+            "geom": {
+                "type": "MultiPoint",
+                "coordinates": [
+                    [
+                        448305,
+                        1268032
+                    ],
+                    [
+                        453577.2,
+                        1461288.1
+                    ]
+                ]
+            },
+            "resolution": "100m",
+            "expected_exception": {
+                "name": "BNGExtentError"
+            }
+        },
+        {
+            "geom": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        322151.67478431,
+                        423602.49962155
+                    ],
+                    [
+                        426164.94966458,
+                        423602.49962155
+                    ],
+                    [
+                        426164.94966458,
+                        372381.46093429
+                    ],
+                    [
+                        371801.51596583,
+                        372381.46093429
+                    ],
+                    [
+                        373372.71347157,
+                        476394.73581456
+                    ]
+                ]
+            },
+            "resolution": "50km",
+            "expected": [
+                {
+                    "bng_ref_formatted": "SD SW",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SD SE",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE SW",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SK NW",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SJ NE",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SD NE",
+                    "is_core": false
+                }
+            ]
+        },
+        {
+            "geom": {
+                "type": "LineString",
+                "coordinates": [
+                    [
+                        452204.21,
+                        240238.86
+                    ],
+                    [
+                        447899.68,
+                        -112084.88
+                    ]
+                ]
+            },
+            "resolution": "100km",
+            "expected_warning": true,
+            "expected": [
+                {
+                    "bng_ref_formatted": "SP",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SU",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SZ",
+                    "is_core": false
+                }
+            ]
+        },
+        {
+            "geom": {
+                "type": "MultiLineString",
+                "coordinates": [
+                    [
+                        [
+                            467621.77786693,
+                            191621.04676549
+                        ],
+                        [
+                            456974.45572373,
+                            191675.64841751
+                        ],
+                        [
+                            456974.45572373,
+                            187717.02864632
+                        ]
+                    ],
+                    [
+                        [
+                            457902.68380801,
+                            197354.22022722
+                        ],
+                        [
+                            471443.89350808,
+                            197217.71609718
+                        ],
+                        [
+                            462680.32835944,
+                            193013.38889191
+                        ]
+                    ]
+                ]
+            },
+            "resolution": "5km",
+            "expected": [
+                {
+                    "bng_ref_formatted": "SU 5 9 NE",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SU 6 9 NW",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SU 6 9 NE",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SU 7 9 NW",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SU 6 9 SE",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SU 6 9 SE",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SU 6 9 SW",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SU 6 9 SW",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SU 5 9 SE",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SU 5 8 NE",
+                    "is_core": false
+                }
+            ]
+        },
+        {
+            "geom": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            185590.59478921,
+                            859487.97861062
+                        ],
+                        [
+                            185556.4687567,
+                            858334.51871178
+                        ],
+                        [
+                            186593.90014501,
+                            857297.08732347
+                        ],
+                        [
+                            188573.2100306,
+                            857542.79475754
+                        ],
+                        [
+                            188750.66539966,
+                            858552.92531984
+                        ],
+                        [
+                            188743.84019315,
+                            859569.88108865
+                        ],
+                        [
+                            186634.85138402,
+                            859863.36496824
+                        ],
+                        [
+                            185590.59478921,
+                            859487.97861062
+                        ]
+                    ]
+                ]
+            },
+            "resolution": "1km",
+            "expected": [
+                {
+                    "bng_ref_formatted": "NG 85 59",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NG 86 59",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NG 87 59",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NG 88 59",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NG 85 58",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NG 86 58",
+                    "is_core": true
+                },
+                {
+                    "bng_ref_formatted": "NG 87 58",
+                    "is_core": true
+                },
+                {
+                    "bng_ref_formatted": "NG 88 58",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NG 85 57",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NG 86 57",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NG 87 57",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NG 88 57",
+                    "is_core": false
+                }
+            ]
+        },
+        {
+            "geom": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            -3735.22354298,
+                            737055.82860983
+                        ],
+                        [
+                            2014.68911133,
+                            740558.50465907
+                        ],
+                        [
+                            5994.43214936,
+                            736290.01054888
+                        ],
+                        [
+                            1236.31665595,
+                            732222.38674976
+                        ],
+                        [
+                            -2705.76319876,
+                            732887.76965517
+                        ],
+                        [
+                            -3735.22354298,
+                            737055.82860983
+                        ]
+                    ]
+                ]
+            },
+            "resolution": "5km",
+            "expected_warning": true,
+            "expected": [
+                {
+                    "bng_ref_formatted": "NL 0 4 SW",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NL 0 3 NW",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NL 0 3 NE",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "NL 0 3 SW",
+                    "is_core": false
+                }
+            ]
+        },
+        {
+            "geom": {
+                "type": "MultiPolygon",
+                "coordinates": [
+                    [
+                        [
+                            [
+                                58716.83112259,
+                                396486.44513104
+                            ],
+                            [
+                                44520.40159833,
+                                382399.2189108
+                            ],
+                            [
+                                32726.44476278,
+                                397141.66495523
+                            ],
+                            [
+                                45503.23133462,
+                                412102.51760773
+                            ],
+                            [
+                                58716.83112259,
+                                396486.44513104
+                            ]
+                        ]
+                    ],
+                    [
+                        [
+                            [
+                                34801.30753941,
+                                434161.58502235
+                            ],
+                            [
+                                65815.04588472,
+                                434816.80484655
+                            ],
+                            [
+                                76626.17298397,
+                                423350.45792311
+                            ],
+                            [
+                                75861.74985574,
+                                414286.58368838
+                            ],
+                            [
+                                46049.24785479,
+                                416579.85307307
+                            ],
+                            [
+                                45394.02803059,
+                                426189.74382796
+                            ],
+                            [
+                                34692.10423538,
+                                425206.91409166
+                            ],
+                            [
+                                34801.30753941,
+                                434161.58502235
+                            ]
+                        ]
+                    ]
+                ]
+            },
+            "resolution": "10km",
+            "expected": [
+                {
+                    "bng_ref_formatted": "SA 3 3",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 4 3",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 5 3",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 6 3",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 7 3",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 3 2",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 4 2",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 5 2",
+                    "is_core": true
+                },
+                {
+                    "bng_ref_formatted": "SA 6 2",
+                    "is_core": true
+                },
+                {
+                    "bng_ref_formatted": "SA 7 2",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 4 1",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 4 1",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 5 1",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 6 1",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 7 1",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 3 0",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 4 0",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SA 5 0",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SF 3 9",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SF 4 9",
+                    "is_core": true
+                },
+                {
+                    "bng_ref_formatted": "SF 5 9",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SF 3 8",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SF 4 8",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SF 5 8",
+                    "is_core": false
+                }
+            ]
+        },
+        {
+            "geom": {
+                "type": "GeometryCollection",
+                "geometries": [
+                    {
+                        "type": "MultiPoint",
+                        "coordinates": [
+                            [
+                                471256.20032927,
+                                496695.83329577
+                            ],
+                            [
+                                471553.09681211,
+                                496368.22338367
+                            ],
+                            [
+                                473549.46971396,
+                                495446.82050589
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "MultiLineString",
+                        "coordinates": [
+                            [
+                                [
+                                    471788.56643643,
+                                    498456.73657329
+                                ],
+                                [
+                                    471788.56643643,
+                                    496460.36367144
+                                ],
+                                [
+                                    472791.87179223,
+                                    496460.36367144
+                                ]
+                            ],
+                            [
+                                [
+                                    473662.08562124,
+                                    496501.31491046
+                                ],
+                                [
+                                    473713.27467001,
+                                    494300.18581355
+                                ]
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "MultiPolygon",
+                        "coordinates": [
+                            [
+                                [
+                                    [
+                                        472597.35340692,
+                                        496204.41842762
+                                    ],
+                                    [
+                                        472566.63997766,
+                                        494412.80172083
+                                    ],
+                                    [
+                                        470723.83422211,
+                                        494177.33209651
+                                    ],
+                                    [
+                                        469638.62638828,
+                                        494638.0335354
+                                    ],
+                                    [
+                                        469700.0532468,
+                                        496112.27813984
+                                    ],
+                                    [
+                                        471266.43813902,
+                                        496153.22937885
+                                    ],
+                                    [
+                                        472597.35340692,
+                                        496204.41842762
+                                    ]
+                                ]
+                            ],
+                            [
+                                [
+                                    [
+                                        469311.01647619,
+                                        498477.2121928
+                                    ],
+                                    [
+                                        470600.98050507,
+                                        497842.46798811
+                                    ],
+                                    [
+                                        469751.24229557,
+                                        496337.50995441
+                                    ],
+                                    [
+                                        469372.4433347,
+                                        496194.18061786
+                                    ],
+                                    [
+                                        468512.46731545,
+                                        497658.18741255
+                                    ],
+                                    [
+                                        469311.01647619,
+                                        498477.2121928
+                                    ]
+                                ]
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "resolution": "1km",
+            "expected": [
+                {
+                    "bng_ref_formatted": "SE 71 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 71 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 71 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 71 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 71 98",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 71 97",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 72 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 72 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 73 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 73 95",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 73 95",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 73 94",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 68 98",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 69 98",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 70 98",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 68 97",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 69 97",
+                    "is_core": true
+                },
+                {
+                    "bng_ref_formatted": "SE 70 97",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 68 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 69 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 69 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 70 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 70 96",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 69 95",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 70 95",
+                    "is_core": true
+                },
+                {
+                    "bng_ref_formatted": "SE 71 95",
+                    "is_core": true
+                },
+                {
+                    "bng_ref_formatted": "SE 72 95",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 69 94",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 70 94",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 71 94",
+                    "is_core": false
+                },
+                {
+                    "bng_ref_formatted": "SE 72 94",
+                    "is_core": false
+                }
+            ]
+        }
     ]
 }
