@@ -543,7 +543,7 @@ def test_geom_to_bng(test_case: TestCaseGeomToBNG):
         exception_class = _EXCEPTION_MAP[exception_name]
         # Assert that the test case raises the expected exception
         with pytest.raises(exception_class):
-            bng_refs = geom_to_bng(shape(geom), resolution)
+            geom_to_bng(shape(geom), resolution)
 
     elif "expected_warning" in test_case:
         # Assert that the function raises a warning
