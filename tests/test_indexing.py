@@ -163,13 +163,13 @@ def test__decompose_geom(test_case):
         test_case (dict): Test case from JSON file.
     """
     # Load test case data
-    geom = test_case["geom"]
+    # Convert test case geometry from GeoJSON to Shapely Geometry object
+    geom = shape(test_case["geom"])
     expected_count = test_case["expected"]["count"]
     expected_types = test_case["expected"]["types"]
 
-    # Convert test case geometry from GeoJSON to Shapely Geometry object
     # Decompose geometry into its constituent parts
-    parts = _decompose_geom(shape(geom))
+    parts = _decompose_geom(geom)
 
     # Assert that the decomposition returns the expected part count
     assert len(parts) == expected_count
