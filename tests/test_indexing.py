@@ -92,10 +92,7 @@ def test__validate_easting_northing(test_case):
 
     else:
         # Assert that the function returns the expected result
-        try:
-            _validate_easting_northing(easting, northing)
-        except Exception as e:
-            pytest.fail(f"Unexpected exception raised: {e}")
+        _validate_easting_northing(easting, northing)
 
 
 # Parameterised test for _validate_and_normalise_bbox function
