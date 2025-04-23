@@ -195,6 +195,7 @@ def test_bngreference(test_case: BNGReferenceTestCase):
         # Assert that the test case raises the expected exception
         with pytest.raises(exception_class):
             BNGReference(test_case["bng_ref_string"])
+
     else:
         # Initialise BNGReference object with the test case input
         bng_ref = BNGReference(test_case["bng_ref_string"])
