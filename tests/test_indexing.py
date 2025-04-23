@@ -506,6 +506,24 @@ class GeomToBNGTestCase(TypedDict):
     expected: dict[str, list[str]] | None
 
 
+def validate_and_assert_bng_intersects(
+    geom: Geometry, resolution: int | str, expected: list[str]
+):
+    """Helper function to validate and assert geom_to_bng function return.
+
+    Args:
+        geom (Geometry): Shapely Geometry object.
+        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
+        expected (list[str]): Expected result. A list containing the expected BNG reference formatted strings.
+    """
+    # Return a list of BNGReference objects
+    bng_refs = geom_to_bng(geom, resolution)
+    # Sort lists to account for order differences
+    bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
+    # Assert that the function returns the expected result
+    assert sorted(bng_ref_strings) == sorted(expected)
+
+
 # Parameterised test for geom_to_bng function
 @pytest.mark.parametrize(
     "test_case",
@@ -519,7 +537,8 @@ def test_geom_to_bng(test_case: GeomToBNGTestCase):
         test_case (GeomToBNGTestCase): Test case from JSON file.
     """
     # Load test case data
-    geom = test_case["geom"]
+    # Convert test case geometry from GeoJSON to Shapely Geometry object
+    geom = shape(test_case["geom"])
     resolution = test_case["resolution"]
     # Get expected result
     expected = (
@@ -535,27 +554,17 @@ def test_geom_to_bng(test_case: GeomToBNGTestCase):
         exception_class = _EXCEPTION_MAP[exception_name]
         # Assert that the test case raises the expected exception
         with pytest.raises(exception_class):
-            geom_to_bng(shape(geom), resolution)
+            geom_to_bng(geom, resolution)
 
     elif "expected_warning" in test_case:
         # Assert that the function raises a warning
         with pytest.warns(UserWarning):
-            # Convert test case geometry from GeoJSON to Shapely Geometry object
-            # Return a list of BNGReference objects
-            bng_refs = geom_to_bng(shape(geom), resolution)
-            # Sort lists to account for order differences
-            bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
             # Assert that the function returns the expected result
-            assert sorted(bng_ref_strings) == sorted(expected)
+            validate_and_assert_bng_intersects(geom, resolution, expected)
 
     else:
-        # Convert test case geometry from GeoJSON to Shapely Geometry object
-        # Return a list of BNGReference objects
-        bng_refs = geom_to_bng(shape(geom), resolution)
-        # Sort lists to account for order differences
-        bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
         # Assert that the function returns the expected result
-        assert sorted(bng_ref_strings) == sorted(expected)
+        validate_and_assert_bng_intersects(geom, resolution, expected)
 
 
 class GeomToBNGIntersectionTestCase(TypedDict):
