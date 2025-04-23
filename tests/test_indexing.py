@@ -597,7 +597,7 @@ def validate_and_assert_bng_intersection(
     """
     # Convert test case geometry from GeoJSON to Shapely Geometry object
     # Return a list of BNGIndexedGeometry objects
-    bng_idx_geoms = geom_to_bng_intersection(shape(geom), resolution)
+    bng_idx_geoms = geom_to_bng_intersection(geom, resolution)
     # Extract bng_ref_formatted and is_core properties to create a simplified representation
     # of the BNGIndexedGeometry objects for comparison with the expected output.
     result = [
@@ -653,7 +653,7 @@ def test_geom_to_bng_intersection(test_case: GeomToBNGIntersectionTestCase):
         exception_class = _EXCEPTION_MAP[exception_name]
         # Assert that the test case raises an exception
         with pytest.raises(exception_class):
-            geom_to_bng_intersection(shape(geom), resolution)
+            geom_to_bng_intersection(geom, resolution)
 
     elif "expected_warning" in test_case:
         # Assert that the test case raises a warning
