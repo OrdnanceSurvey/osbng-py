@@ -22,7 +22,9 @@ from osbng.utils import _load_test_cases
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/bng_reference_test_cases.json")["_validate_bng_ref_string"],
+    _load_test_cases(file_path="./data/bng_reference_test_cases.json")[
+        "_validate_bng_ref_string"
+    ],
 )
 def test__validate_bng_ref_string(test_case):
     """Test _validate_bng_ref_string function with test cases from JSON file.
