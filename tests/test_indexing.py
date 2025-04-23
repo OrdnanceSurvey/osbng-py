@@ -588,7 +588,7 @@ class GeomToBNGIntersectionTestCase(TypedDict):
 def validate_and_assert_bng_intersection(
     geom: Geometry, resolution: int | str, expected: dict[str, str | bool]
 ):
-    """Helper function to validate and assert BNGIndexedGeometry results.
+    """Helper function to validate and assert geom_to_bng_intersection return.
 
     Args:
         geom (Geometry): Shapely Geometry object.
