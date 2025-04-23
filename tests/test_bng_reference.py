@@ -145,7 +145,7 @@ def test__format_bng_ref_string(test_case: FormatBNGRefStringTestCase):
     Args:
         test_case (FormatBNGRefStringTestCase): Test case from JSON file.
     """
-    # Load test cases from JSON file
+    # Load test case data
     bng_ref_string = test_case["bng_ref_string"]
     expected = test_case["expected"]
     # Assert that the function returns the expected result
