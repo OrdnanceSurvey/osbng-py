@@ -157,6 +157,7 @@ class BNGReferenceTestCase(TypedDict):
 
     Attributes:
         bng_ref_string (str): The BNG reference string.
+        expected_exception (dict[str, str]): The expected exception is a dictionary with the exception name.
         expected_bng_ref_compact (str): The BNG reference with whitespace removed.
         expected_bng_ref_formatted (str): The pretty-formatted version of the BNG reference with single spaces between components.
         expected_resolution_metres (int): The resolution of the BNG reference in meters.
@@ -164,10 +165,11 @@ class BNGReferenceTestCase(TypedDict):
     """
 
     bng_ref_string: str
-    expected_bng_ref_compact: str
-    expected_bng_ref_formatted: str
-    expected_resolution_metres: int
-    expected_resolution_label: str
+    expected_exception: dict[str, str] | None
+    expected_bng_ref_compact: str | None
+    expected_bng_ref_formatted: str | None
+    expected_resolution_metres: int | None
+    expected_resolution_label: str | None
 
 
 # Parameterised test for BNGReference object
