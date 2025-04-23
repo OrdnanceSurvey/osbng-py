@@ -224,7 +224,7 @@ class DecomposeGeomTestCase(TypedDict):
     """TypedDict for _decompose_geom function test cases.
 
     Attributes:
-        geom (dict[str, Any]): Geometry rep resented in GeoJSON format.
+        geom (dict[str, Any]): Geometry reresented in GeoJSON format.
         expected (dict[str, int | list[str]]): Expected result is a dictionary with the expected part count and list of part geometry types.
     """
 
