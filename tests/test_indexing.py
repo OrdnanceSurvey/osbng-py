@@ -558,6 +558,24 @@ def test_geom_to_bng(test_case: GeomToBNGTestCase):
         assert sorted(bng_ref_strings) == sorted(expected)
 
 
+class GeomToBNGIntersectionTestCase(TypedDict):
+    """TypedDict for geom_to_bng_intersection function test cases.
+
+    Attributes:
+        geom (dict[str, Any]): Geometry represented in GeoJSON format.
+        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
+        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
+        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
+        expected (list[dict[str, str | bool]] | None): The expected result is a list of dictionaries with the expected BNG reference formatted strings and booleans indicating if a grid square is a core geometry.
+    """
+
+    geom: dict[str, Any]
+    resolution: int | str
+    expected_exception: dict[str, str] | None
+    expected_warning: bool | None
+    expected: list[dict[str, str | bool]] | None
+
+
 def validate_and_assert_bng_intersection(
     geom: Geometry, resolution: int | str, expected: dict[str, str | bool]
 ):
@@ -589,24 +607,6 @@ def validate_and_assert_bng_intersection(
         normalised_resolution = _validate_and_normalise_bng_resolution(resolution)
         # Assert that the resolution of the core indexed geometries is equal to the normalised resolution
         assert all(sqrt(area) == normalised_resolution for area in result_core_areas)
-
-
-class GeomToBNGIntersectionTestCase(TypedDict):
-    """TypedDict for geom_to_bng_intersection function test cases.
-
-    Attributes:
-        geom (dict[str, Any]): Geometry represented in GeoJSON format.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
-        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
-        expected (list[dict[str, str | bool]] | None): The expected result is a list of dictionaries with the expected BNG reference formatted strings and booleans indicating if a grid square is a core geometry.
-    """
-
-    geom: dict[str, Any]
-    resolution: int | str
-    expected_exception: dict[str, str] | None
-    expected_warning: bool | None
-    expected: list[dict[str, str | bool]] | None
 
 
 # Parameterised test for geom_to_bng_intersection function
