@@ -565,7 +565,7 @@ def validate_and_assert_bng_intersection(
 
     Args:
         geom (Geometry): Shapely Geometry object.
-        resolution (int | str): The resolution of the BNG reference expressed either as a metre-based integer or as a string label.
+        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
         expected (dict[str, str | bool]): Expected result. A dictionary containing the expected BNG reference formatted string and a boolean indicating if it is a core geometry.
     """
     # Convert test case geometry from GeoJSON to Shapely Geometry object
