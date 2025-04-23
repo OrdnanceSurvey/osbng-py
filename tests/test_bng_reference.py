@@ -187,6 +187,9 @@ def test_bngreference(test_case: BNGReferenceTestCase):
             - expected_resolution_metres
             - expected_resolution_label
     """
+    # Load test case data
+    bng_ref_string = test_case["bng_ref_string"]
+
     if "expected_exception" in test_case:
         # Get exception name from test case
         exception_name = test_case["expected_exception"]["name"]
@@ -198,7 +201,7 @@ def test_bngreference(test_case: BNGReferenceTestCase):
 
     else:
         # Initialise BNGReference object with the test case input
-        bng_ref = BNGReference(test_case["bng_ref_string"])
+        bng_ref = BNGReference(bng_ref_string)
 
         # Assert that each property returns the expected value
         assert bng_ref.bng_ref_compact == test_case["expected_bng_ref_compact"]
