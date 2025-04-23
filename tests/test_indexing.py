@@ -1,7 +1,7 @@
 """Testing for the indexing module.
 
 
-The test cases are defined in the JSON file ./data/indexing_test_cases.json and are used to parameterise the tests for various functions in the indexing module.
+The test cases are defined in the JSON file located at ./data/indexing_test_cases.json and are used to parameterise the tests for various functions in the indexing module.
 Test cases are loaded from the JSON file using the _load_test_cases function, which is defined in the utils module.
 The test cases are defined as TypedDicts, which provide a way to define the structure of the test case data.
 """
