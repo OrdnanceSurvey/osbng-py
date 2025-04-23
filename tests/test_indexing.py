@@ -34,7 +34,7 @@ from osbng.indexing import (
 from osbng.utils import _load_test_cases
 
 
-class TestCaseValidateAndNormaliseBNGResolution(TypedDict):
+class ValidateAndNormaliseBNGResolutionTestCase(TypedDict):
     """TypedDict for _validate_and_normalise_bng_resolution function test cases.
 
     Attributes:
@@ -43,7 +43,6 @@ class TestCaseValidateAndNormaliseBNGResolution(TypedDict):
         expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
     """
 
-    __test__ = False
     resolution: int | float | str
     expected: int | None
     expected_exception: dict[str, str] | None
@@ -58,12 +57,12 @@ class TestCaseValidateAndNormaliseBNGResolution(TypedDict):
     ],
 )
 def test__validate_and_normalise_bng_resolution(
-    test_case: TestCaseValidateAndNormaliseBNGResolution,
+    test_case: ValidateAndNormaliseBNGResolutionTestCase,
 ):
     """Test _validate_and_normalise_bng_resolution with test cases from JSON file.
 
     Args:
-        test_case (TestCaseValidateAndNormaliseBNGResolution): Test case from JSON file.
+        test_case (ValidateAndNormaliseBNGResolutionTestCase): Test case from JSON file.
     """
     # Load test case data
     resolution = test_case["resolution"]
@@ -84,7 +83,7 @@ def test__validate_and_normalise_bng_resolution(
         assert _validate_and_normalise_bng_resolution(resolution) == expected
 
 
-class TestCaseValidateEastingNorthing(TypedDict):
+class ValidateEastingNorthingTestCase(TypedDict):
     """TypedDict for _validate_easting_northing function test cases.
 
     Attributes:
@@ -93,7 +92,6 @@ class TestCaseValidateEastingNorthing(TypedDict):
         expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
     """
 
-    __test__ = False
     easting: int | float
     northing: int | float
     expected_exception: dict[str, str] | None
@@ -107,11 +105,11 @@ class TestCaseValidateEastingNorthing(TypedDict):
         "_validate_easting_northing"
     ],
 )
-def test__validate_easting_northing(test_case: TestCaseValidateEastingNorthing):
+def test__validate_easting_northing(test_case: ValidateEastingNorthingTestCase):
     """Test _validate_and_normalise_bng_resolution with test cases from JSON file.
 
     Args:
-        test_case (TestCaseValidateEastingNorthing): Test case from JSON file.
+        test_case (ValidateEastingNorthingTestCase): Test case from JSON file.
     """
     # Load test case data
     easting = test_case["easting"]
@@ -131,7 +129,7 @@ def test__validate_easting_northing(test_case: TestCaseValidateEastingNorthing):
         _validate_easting_northing(easting, northing)
 
 
-class TestCaseValidateAndNormaliseBBOX(TypedDict):
+class ValidateAndNormaliseBBOXTestCase(TypedDict):
     """TypedDict for _validate_and_normalise_bbox function test cases.
 
     Attributes:
@@ -143,7 +141,6 @@ class TestCaseValidateAndNormaliseBBOX(TypedDict):
         expected (list[int | float]): The expected result is a list of bounding box coordinates.
     """
 
-    __test__ = False
     xmin: int | float
     ymin: int | float
     xmax: int | float
@@ -160,11 +157,11 @@ class TestCaseValidateAndNormaliseBBOX(TypedDict):
         "_validate_and_normalise_bbox"
     ],
 )
-def test__validate_and_normalise_bbox(test_case: TestCaseValidateAndNormaliseBBOX):
+def test__validate_and_normalise_bbox(test_case: ValidateAndNormaliseBBOXTestCase):
     """Test _validate_and_normalise_bbox with test cases from JSON file.
 
     Args:
-        test_case (TestCaseValidateAndNormaliseBBOX): Test case from JSON file.
+        test_case (ValidateAndNormaliseBBOXTestCase): Test case from JSON file.
     """
     # Load test case data
     xmin = test_case["xmin"]
@@ -185,7 +182,7 @@ def test__validate_and_normalise_bbox(test_case: TestCaseValidateAndNormaliseBBO
         assert _validate_and_normalise_bbox(xmin, ymin, xmax, ymax) == expected
 
 
-class TestCaseGetBNGSuffix(TypedDict):
+class GetBNGSuffixTestCase(TypedDict):
     """TypedDict for _get_bng_suffix function test cases.
 
     Attributes:
@@ -195,7 +192,6 @@ class TestCaseGetBNGSuffix(TypedDict):
         expected (str): The expected result is a BNG reference formatted string.
     """
 
-    __test__ = False
     easting: int | float
     northing: int | float
     resolution: int
@@ -208,11 +204,11 @@ class TestCaseGetBNGSuffix(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["_get_bng_suffix"],
 )
-def test__get_bng_suffix(test_case: TestCaseGetBNGSuffix):
+def test__get_bng_suffix(test_case: GetBNGSuffixTestCase):
     """Test _get_bng_suffix function with test cases from JSON file.
 
     Args:
-        test_case (TestCaseGetBNGSuffix): Test case from JSON file.
+        test_case (GetBNGSuffixTestCase): Test case from JSON file.
     """
     # Load test case data
     easting = test_case["easting"]
@@ -224,7 +220,7 @@ def test__get_bng_suffix(test_case: TestCaseGetBNGSuffix):
     assert _get_bng_suffix(easting, northing, resolution) == expected
 
 
-class TestCaseDecomposeGeom(TypedDict):
+class DecomposeGeomTestCase(TypedDict):
     """TypedDict for _decompose_geom function test cases.
 
     Attributes:
@@ -232,7 +228,6 @@ class TestCaseDecomposeGeom(TypedDict):
         expected (dict[str, int | list[str]]): Expected result is a dictionary with the expected part count and list of part geometry types.
     """
 
-    __test__ = False
     geom: dict[str, Any]
     expected: dict[str, int | list[str]]
 
@@ -243,11 +238,11 @@ class TestCaseDecomposeGeom(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["_decompose_geom"],
 )
-def test__decompose_geom(test_case: TestCaseDecomposeGeom):
+def test__decompose_geom(test_case: DecomposeGeomTestCase):
     """Test _decompose_geom with test cases from JSON file.
 
     Args:
-        test_case (TestCaseDecomposeGeom): Test case from JSON file.
+        test_case (DecomposeGeomTestCase): Test case from JSON file.
     """
     # Load test case data
     # Convert test case geometry from GeoJSON to Shapely Geometry object
@@ -265,7 +260,7 @@ def test__decompose_geom(test_case: TestCaseDecomposeGeom):
     assert sorted(types) == sorted(expected_types)
 
 
-class TestCaseXYToBNG(TypedDict):
+class XYToBNGTestCase(TypedDict):
     """TypedDict for xy_to_bng function test cases.
 
     Attributes:
@@ -276,7 +271,6 @@ class TestCaseXYToBNG(TypedDict):
         expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
     """
 
-    __test__ = False
     easting: int | float
     northing: int | float
     resolution: int | str
@@ -290,11 +284,11 @@ class TestCaseXYToBNG(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["xy_to_bng"],
 )
-def test_xy_to_bng(test_case: TestCaseXYToBNG):
+def test_xy_to_bng(test_case: XYToBNGTestCase):
     """Test xy_to_bng with test cases from JSON file.
 
     Args:
-        test_case (TestCaseXYToBNG): Test case from JSON file.
+        test_case (XYToBNGTestCase): Test case from JSON file.
     """
     # Load test case data
     easting = test_case["easting"]
@@ -319,7 +313,7 @@ def test_xy_to_bng(test_case: TestCaseXYToBNG):
         assert bng_ref.bng_ref_formatted == expected
 
 
-class TestCaseBNGToXY(TypedDict):
+class BNGToXYTestCase(TypedDict):
     """TypedDict for bng_to_xy function test cases.
 
     Attributes:
@@ -328,7 +322,6 @@ class TestCaseBNGToXY(TypedDict):
         expected (list[float | int]): The expected result is a list of easting and northing coordinates.
     """
 
-    __test__ = False
     bng_ref_string: str
     position: int | str
     expected: list[int | float]
@@ -340,11 +333,11 @@ class TestCaseBNGToXY(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_xy"],
 )
-def test_bng_to_xy(test_case: TestCaseBNGToXY):
+def test_bng_to_xy(test_case: BNGToXYTestCase):
     """Test bng_to_xy with test cases from JSON file.
 
     Args:
-        test_case (TestCaseBNGToXY): Test case from JSON file.
+        test_case (BNGToXYTestCase): Test case from JSON file.
     """
     # Load test case data
     bng_ref_string = test_case["bng_ref_string"]
@@ -359,7 +352,7 @@ def test_bng_to_xy(test_case: TestCaseBNGToXY):
     assert bng_to_xy(bng_ref, position) == expected
 
 
-class TestCaseBNGToBBOX(TypedDict):
+class BNGToBBOXTestCase(TypedDict):
     """TypedDict for bng_to_bbox function test cases.
 
     Attributes:
@@ -367,7 +360,6 @@ class TestCaseBNGToBBOX(TypedDict):
         expected (list[int]): The expected result is a list of bounding box coordinates.
     """
 
-    __test__ = False
     bng_ref_string: str
     expected: list[int]
 
@@ -378,11 +370,11 @@ class TestCaseBNGToBBOX(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_bbox"],
 )
-def test_bng_to_bbox(test_case: TestCaseBNGToBBOX):
+def test_bng_to_bbox(test_case: BNGToBBOXTestCase):
     """Test bng_to_bbox with test cases from JSON file.
 
     Args:
-        test_case (TestCaseBNGToBBOX): Test case from JSON file.
+        test_case (BNGToBBOXTestCase): Test case from JSON file.
     """
     # Load test case data
     bng_ref_string = test_case["bng_ref_string"]
@@ -396,7 +388,7 @@ def test_bng_to_bbox(test_case: TestCaseBNGToBBOX):
     assert bng_to_bbox(bng_ref) == expected
 
 
-class TestCaseBNGToGridGeom(TypedDict):
+class BNGToGridGeomTestCase(TypedDict):
     """TypedDict for bng_to_grid_geom function test cases.
 
     Attributes:
@@ -404,7 +396,6 @@ class TestCaseBNGToGridGeom(TypedDict):
         expected (dict[str, Any]): The expected result is a dictionary with the expected geometry in GeoJSON format.
     """
 
-    __test__ = False
     bng_ref_string: str
     expected: dict[str, Any]
 
@@ -415,11 +406,11 @@ class TestCaseBNGToGridGeom(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_grid_geom"],
 )
-def test_bng_to_grid_geom(test_case: TestCaseBNGToGridGeom):
+def test_bng_to_grid_geom(test_case: BNGToGridGeomTestCase):
     """Test bng_to_grid_geom with test cases from JSON file.
 
     Args:
-        test_case (TestCaseBNGToGridGeom): Test case from JSON file.
+        test_case (BNGToGridGeomTestCase): Test case from JSON file.
     """
     # Load test case data
     bng_ref_string = test_case["bng_ref_string"]
@@ -434,7 +425,7 @@ def test_bng_to_grid_geom(test_case: TestCaseBNGToGridGeom):
     assert_geometries_equal(bng_to_grid_geom(bng_ref), expected, normalize=True)
 
 
-class TestCaseBBOXToBNG(TypedDict):
+class BBOXToBNGTestCase(TypedDict):
     """TypedDict for bbox_to_bng function test cases.
 
     Attributes:
@@ -447,7 +438,6 @@ class TestCaseBBOXToBNG(TypedDict):
         expected (dict[str, list[str]]): The expected result is a dictionary with a list of BNG reference formatted strings.
     """
 
-    __test__ = False
     xmin: int | float
     ymin: int | float
     xmax: int | float
@@ -463,11 +453,11 @@ class TestCaseBBOXToBNG(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bbox_to_bng"],
 )
-def test_bbox_to_bng(test_case: TestCaseBBOXToBNG):
+def test_bbox_to_bng(test_case: BBOXToBNGTestCase):
     """Test bbox_to_bng with test cases from JSON file.
 
     Args:
-        test_case (TestCaseBBOXToBNG): Test case from JSON file.
+        test_case (BBOXToBNGTestCase): Test case from JSON file.
     """
     # Load test case data
     xmin = test_case["xmin"]
@@ -498,7 +488,7 @@ def test_bbox_to_bng(test_case: TestCaseBBOXToBNG):
         assert sorted(bng_ref_strings) == sorted(expected)
 
 
-class TestCaseGeomToBNG(TypedDict):
+class GeomToBNGTestCase(TypedDict):
     """TypedDict for geom_to_bng function test cases.
 
     Attributes:
@@ -509,7 +499,6 @@ class TestCaseGeomToBNG(TypedDict):
         expected (dict[str, list[str]] | None): The expected result is a dictionary with a list of BNG reference formatted strings.
     """
 
-    __test__ = False
     geom: dict[str, Any]
     resolution: int | str
     expected_exception: dict[str, str] | None
@@ -523,11 +512,11 @@ class TestCaseGeomToBNG(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["geom_to_bng"],
 )
-def test_geom_to_bng(test_case: TestCaseGeomToBNG):
+def test_geom_to_bng(test_case: GeomToBNGTestCase):
     """Test geom_to_bng with test cases from JSON file.
 
     Args:
-        test_case (TestCaseGeomToBNG): Test case from JSON file.
+        test_case (GeomToBNGTestCase): Test case from JSON file.
     """
     # Load test case data
     geom = test_case["geom"]
@@ -602,7 +591,7 @@ def validate_and_assert_bng_intersection(
         assert all(sqrt(area) == normalised_resolution for area in result_core_areas)
 
 
-class TestCaseGeomToBNGIntersection(TypedDict):
+class GeomToBNGIntersectionTestCase(TypedDict):
     """TypedDict for geom_to_bng_intersection function test cases.
 
     Attributes:
@@ -613,7 +602,6 @@ class TestCaseGeomToBNGIntersection(TypedDict):
         expected (list[dict[str, str | bool]] | None): The expected result is a list of dictionaries with the expected BNG reference formatted strings and booleans indicating if a grid square is a core geometry.
     """
 
-    __test__ = False
     geom: dict[str, Any]
     resolution: int | str
     expected_exception: dict[str, str] | None
@@ -629,11 +617,11 @@ class TestCaseGeomToBNGIntersection(TypedDict):
         "geom_to_bng_intersection"
     ],
 )
-def test_geom_to_bng_intersection(test_case: TestCaseGeomToBNGIntersection):
+def test_geom_to_bng_intersection(test_case: GeomToBNGIntersectionTestCase):
     """Test geom_to_bng_intersection with test cases from JSON file.
 
     Args:
-        test_case (TestCaseGeomToBNGIntersection): Test case from JSON file.
+        test_case (GeomToBNGIntersectionTestCase): Test case from JSON file.
     """
     # Load test case data
     # Convert test case geometry from GeoJSON to Shapely Geometry object
