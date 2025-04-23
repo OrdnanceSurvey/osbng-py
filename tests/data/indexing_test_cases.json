@@ -1266,7 +1266,7 @@
     ],
     "bng_to_xy": [
         {
-            "bng_ref_string": "SV",
+            "bng_ref_formatted": "SV",
             "position": "lower-left",
             "expected": [
                 0,
@@ -1274,7 +1274,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV",
+            "bng_ref_formatted": "SV",
             "position": "upper-left",
             "expected": [
                 0,
@@ -1282,7 +1282,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV",
+            "bng_ref_formatted": "SV",
             "position": "centre",
             "expected": [
                 50000,
@@ -1290,7 +1290,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV",
+            "bng_ref_formatted": "SV",
             "position": "upper-right",
             "expected": [
                 100000,
@@ -1298,7 +1298,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV",
+            "bng_ref_formatted": "SV",
             "position": "lower-right",
             "expected": [
                 100000,
@@ -1306,7 +1306,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV SW",
+            "bng_ref_formatted": "SV SW",
             "position": "lower-left",
             "expected": [
                 0,
@@ -1314,7 +1314,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV SW",
+            "bng_ref_formatted": "SV SW",
             "position": "centre",
             "expected": [
                 25000,
@@ -1322,7 +1322,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0 0",
+            "bng_ref_formatted": "SV 0 0",
             "position": "lower-left",
             "expected": [
                 0,
@@ -1330,7 +1330,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0 0",
+            "bng_ref_formatted": "SV 0 0",
             "position": "upper-right",
             "expected": [
                 10000,
@@ -1338,7 +1338,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0 0 SW",
+            "bng_ref_formatted": "SV 0 0 SW",
             "position": "lower-left",
             "expected": [
                 0,
@@ -1346,7 +1346,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0 0 SW",
+            "bng_ref_formatted": "SV 0 0 SW",
             "position": "upper-left",
             "expected": [
                 0,
@@ -1354,7 +1354,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 00 00",
+            "bng_ref_formatted": "SV 00 00",
             "position": "lower-left",
             "expected": [
                 0,
@@ -1362,7 +1362,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 00 00",
+            "bng_ref_formatted": "SV 00 00",
             "position": "lower-right",
             "expected": [
                 1000,
@@ -1370,7 +1370,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 00 00 SW",
+            "bng_ref_formatted": "SV 00 00 SW",
             "position": "lower-left",
             "expected": [
                 0,
@@ -1378,7 +1378,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 00 00 SW",
+            "bng_ref_formatted": "SV 00 00 SW",
             "position": "centre",
             "expected": [
                 250,
@@ -1386,7 +1386,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 000 000",
+            "bng_ref_formatted": "SV 000 000",
             "position": "lower-left",
             "expected": [
                 0,
@@ -1394,7 +1394,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 000 000",
+            "bng_ref_formatted": "SV 000 000",
             "position": "upper-left",
             "expected": [
                 0,
@@ -1402,7 +1402,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 000 000 SW",
+            "bng_ref_formatted": "SV 000 000 SW",
             "position": "lower-left",
             "expected": [
                 0,
@@ -1410,7 +1410,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 000 000 SW",
+            "bng_ref_formatted": "SV 000 000 SW",
             "position": "centre",
             "expected": [
                 25,
@@ -1418,7 +1418,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0000 0000",
+            "bng_ref_formatted": "SV 0000 0000",
             "position": "lower-left",
             "expected": [
                 0,
@@ -1426,7 +1426,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0000 0000",
+            "bng_ref_formatted": "SV 0000 0000",
             "position": "lower-right",
             "expected": [
                 10,
@@ -1434,7 +1434,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0000 0000 SW",
+            "bng_ref_formatted": "SV 0000 0000 SW",
             "position": "lower-left",
             "expected": [
                 0,
@@ -1442,7 +1442,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0000 0000 SW",
+            "bng_ref_formatted": "SV 0000 0000 SW",
             "position": "centre",
             "expected": [
                 2.5,
@@ -1450,7 +1450,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 00000 00000",
+            "bng_ref_formatted": "SV 00000 00000",
             "position": "lower-left",
             "expected": [
                 0,
@@ -1458,7 +1458,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 00000 00000",
+            "bng_ref_formatted": "SV 00000 00000",
             "position": "centre",
             "expected": [
                 0.5,
@@ -1466,7 +1466,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM",
+            "bng_ref_formatted": "JM",
             "position": "lower-left",
             "expected": [
                 600000,
@@ -1474,7 +1474,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM",
+            "bng_ref_formatted": "JM",
             "position": "upper-right",
             "expected": [
                 700000,
@@ -1482,7 +1482,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM NE",
+            "bng_ref_formatted": "JM NE",
             "position": "lower-left",
             "expected": [
                 650000,
@@ -1490,7 +1490,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM NE",
+            "bng_ref_formatted": "JM NE",
             "position": "upper-right",
             "expected": [
                 700000,
@@ -1498,7 +1498,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9 9",
+            "bng_ref_formatted": "JM 9 9",
             "position": "lower-left",
             "expected": [
                 690000,
@@ -1506,7 +1506,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9 9",
+            "bng_ref_formatted": "JM 9 9",
             "position": "centre",
             "expected": [
                 695000,
@@ -1514,7 +1514,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9 9 NE",
+            "bng_ref_formatted": "JM 9 9 NE",
             "position": "lower-left",
             "expected": [
                 695000,
@@ -1522,7 +1522,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9 9 NE",
+            "bng_ref_formatted": "JM 9 9 NE",
             "position": "upper-left",
             "expected": [
                 695000,
@@ -1530,7 +1530,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 99 99",
+            "bng_ref_formatted": "JM 99 99",
             "position": "lower-left",
             "expected": [
                 699000,
@@ -1538,7 +1538,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 99 99",
+            "bng_ref_formatted": "JM 99 99",
             "position": "centre",
             "expected": [
                 699500,
@@ -1546,7 +1546,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 99 99 NE",
+            "bng_ref_formatted": "JM 99 99 NE",
             "position": "lower-left",
             "expected": [
                 699500,
@@ -1554,7 +1554,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 99 99 NE",
+            "bng_ref_formatted": "JM 99 99 NE",
             "position": "upper-right",
             "expected": [
                 700000,
@@ -1562,7 +1562,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 999 999",
+            "bng_ref_formatted": "JM 999 999",
             "position": "lower-left",
             "expected": [
                 699900,
@@ -1570,7 +1570,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 999 999",
+            "bng_ref_formatted": "JM 999 999",
             "position": "centre",
             "expected": [
                 699950,
@@ -1578,7 +1578,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 999 999 NE",
+            "bng_ref_formatted": "JM 999 999 NE",
             "position": "lower-left",
             "expected": [
                 699950,
@@ -1586,7 +1586,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 999 999 NE",
+            "bng_ref_formatted": "JM 999 999 NE",
             "position": "lower-right",
             "expected": [
                 700000,
@@ -1594,7 +1594,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9999 9999",
+            "bng_ref_formatted": "JM 9999 9999",
             "position": "lower-left",
             "expected": [
                 699990,
@@ -1602,7 +1602,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9999 9999",
+            "bng_ref_formatted": "JM 9999 9999",
             "position": "centre",
             "expected": [
                 699995,
@@ -1610,7 +1610,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9999 9999 NE",
+            "bng_ref_formatted": "JM 9999 9999 NE",
             "position": "lower-left",
             "expected": [
                 699995,
@@ -1618,7 +1618,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9999 9999 NE",
+            "bng_ref_formatted": "JM 9999 9999 NE",
             "position": "centre",
             "expected": [
                 699997.5,
@@ -1626,7 +1626,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 99999 99999",
+            "bng_ref_formatted": "JM 99999 99999",
             "position": "lower-left",
             "expected": [
                 699999,
@@ -1634,7 +1634,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 99999 99999",
+            "bng_ref_formatted": "JM 99999 99999",
             "position": "centre",
             "expected": [
                 699999.5,
@@ -1642,7 +1642,7 @@
             ]
         },
         {
-            "bng_ref_string": "OV",
+            "bng_ref_formatted": "OV",
             "position": "lower-left",
             "expected": [
                 500000,
@@ -1650,7 +1650,7 @@
             ]
         },
         {
-            "bng_ref_string": "OV NE",
+            "bng_ref_formatted": "OV NE",
             "position": "lower-left",
             "expected": [
                 550000,
@@ -1658,7 +1658,7 @@
             ]
         },
         {
-            "bng_ref_string": "OV 5 5",
+            "bng_ref_formatted": "OV 5 5",
             "position": "lower-left",
             "expected": [
                 550000,
@@ -1666,7 +1666,7 @@
             ]
         },
         {
-            "bng_ref_string": "OV 5 5 NE",
+            "bng_ref_formatted": "OV 5 5 NE",
             "position": "lower-left",
             "expected": [
                 555000,
@@ -1674,7 +1674,7 @@
             ]
         },
         {
-            "bng_ref_string": "OV 55 55",
+            "bng_ref_formatted": "OV 55 55",
             "position": "lower-left",
             "expected": [
                 555000,
@@ -1682,7 +1682,7 @@
             ]
         },
         {
-            "bng_ref_string": "OV 55 55 NE",
+            "bng_ref_formatted": "OV 55 55 NE",
             "position": "lower-left",
             "expected": [
                 555500,
@@ -1690,7 +1690,7 @@
             ]
         },
         {
-            "bng_ref_string": "OV 555 555",
+            "bng_ref_formatted": "OV 555 555",
             "position": "lower-left",
             "expected": [
                 555500,
@@ -1698,7 +1698,7 @@
             ]
         },
         {
-            "bng_ref_string": "OV 555 555 NE",
+            "bng_ref_formatted": "OV 555 555 NE",
             "position": "lower-left",
             "expected": [
                 555550,
@@ -1706,7 +1706,7 @@
             ]
         },
         {
-            "bng_ref_string": "OV 5555 5555",
+            "bng_ref_formatted": "OV 5555 5555",
             "position": "lower-left",
             "expected": [
                 555550,
@@ -1714,7 +1714,7 @@
             ]
         },
         {
-            "bng_ref_string": "OV 5555 5555 NE",
+            "bng_ref_formatted": "OV 5555 5555 NE",
             "position": "lower-left",
             "expected": [
                 555555,
@@ -1722,7 +1722,7 @@
             ]
         },
         {
-            "bng_ref_string": "OV 55555 55555",
+            "bng_ref_formatted": "OV 55555 55555",
             "position": "lower-left",
             "expected": [
                 555555,
@@ -1732,7 +1732,7 @@
     ],
     "bng_to_bbox": [
         {
-            "bng_ref_string": "SV",
+            "bng_ref_formatted": "SV",
             "expected": [
                 0,
                 0,
@@ -1741,7 +1741,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV SW",
+            "bng_ref_formatted": "SV SW",
             "expected": [
                 0,
                 0,
@@ -1750,7 +1750,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0 0",
+            "bng_ref_formatted": "SV 0 0",
             "expected": [
                 0,
                 0,
@@ -1759,7 +1759,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0 0 SW",
+            "bng_ref_formatted": "SV 0 0 SW",
             "expected": [
                 0,
                 0,
@@ -1768,7 +1768,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 00 00",
+            "bng_ref_formatted": "SV 00 00",
             "expected": [
                 0,
                 0,
@@ -1777,7 +1777,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 00 00 SW",
+            "bng_ref_formatted": "SV 00 00 SW",
             "expected": [
                 0,
                 0,
@@ -1786,7 +1786,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 000 000",
+            "bng_ref_formatted": "SV 000 000",
             "expected": [
                 0,
                 0,
@@ -1795,7 +1795,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 000 000 SW",
+            "bng_ref_formatted": "SV 000 000 SW",
             "expected": [
                 0,
                 0,
@@ -1804,7 +1804,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0000 0000",
+            "bng_ref_formatted": "SV 0000 0000",
             "expected": [
                 0,
                 0,
@@ -1813,7 +1813,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 0000 0000 SW",
+            "bng_ref_formatted": "SV 0000 0000 SW",
             "expected": [
                 0,
                 0,
@@ -1822,7 +1822,7 @@
             ]
         },
         {
-            "bng_ref_string": "SV 00000 00000",
+            "bng_ref_formatted": "SV 00000 00000",
             "expected": [
                 0,
                 0,
@@ -1831,7 +1831,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM",
+            "bng_ref_formatted": "JM",
             "expected": [
                 600000,
                 1200000,
@@ -1840,7 +1840,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM NE",
+            "bng_ref_formatted": "JM NE",
             "expected": [
                 650000,
                 1250000,
@@ -1849,7 +1849,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9 9",
+            "bng_ref_formatted": "JM 9 9",
             "expected": [
                 690000,
                 1290000,
@@ -1858,7 +1858,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9 9 NE",
+            "bng_ref_formatted": "JM 9 9 NE",
             "expected": [
                 695000,
                 1295000,
@@ -1867,7 +1867,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 99 99",
+            "bng_ref_formatted": "JM 99 99",
             "expected": [
                 699000,
                 1299000,
@@ -1876,7 +1876,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 99 99 NE",
+            "bng_ref_formatted": "JM 99 99 NE",
             "expected": [
                 699500,
                 1299500,
@@ -1885,7 +1885,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 999 999",
+            "bng_ref_formatted": "JM 999 999",
             "expected": [
                 699900,
                 1299900,
@@ -1894,7 +1894,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 999 999 NE",
+            "bng_ref_formatted": "JM 999 999 NE",
             "expected": [
                 699950,
                 1299950,
@@ -1903,7 +1903,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9999 9999",
+            "bng_ref_formatted": "JM 9999 9999",
             "expected": [
                 699990,
                 1299990,
@@ -1912,7 +1912,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 9999 9999 NE",
+            "bng_ref_formatted": "JM 9999 9999 NE",
             "expected": [
                 699995,
                 1299995,
@@ -1921,7 +1921,7 @@
             ]
         },
         {
-            "bng_ref_string": "JM 99999 99999",
+            "bng_ref_formatted": "JM 99999 99999",
             "expected": [
                 699999,
                 1299999,
@@ -1930,7 +1930,7 @@
             ]
         },
         {
-            "bng_ref_string": "TQ",
+            "bng_ref_formatted": "TQ",
             "expected": [
                 500000,
                 100000,
@@ -1939,7 +1939,7 @@
             ]
         },
         {
-            "bng_ref_string": "TQ NW",
+            "bng_ref_formatted": "TQ NW",
             "expected": [
                 500000,
                 150000,
@@ -1948,7 +1948,7 @@
             ]
         },
         {
-            "bng_ref_string": "TQ 3 7",
+            "bng_ref_formatted": "TQ 3 7",
             "expected": [
                 530000,
                 170000,
@@ -1957,7 +1957,7 @@
             ]
         },
         {
-            "bng_ref_string": "TQ 3 7 NE",
+            "bng_ref_formatted": "TQ 3 7 NE",
             "expected": [
                 535000,
                 175000,
@@ -1966,7 +1966,7 @@
             ]
         },
         {
-            "bng_ref_string": "TQ 38 79",
+            "bng_ref_formatted": "TQ 38 79",
             "expected": [
                 538000,
                 179000,
@@ -1975,7 +1975,7 @@
             ]
         },
         {
-            "bng_ref_string": "TQ 38 79 SE",
+            "bng_ref_formatted": "TQ 38 79 SE",
             "expected": [
                 538500,
                 179000,
@@ -1984,7 +1984,7 @@
             ]
         },
         {
-            "bng_ref_string": "TQ 387 794",
+            "bng_ref_formatted": "TQ 387 794",
             "expected": [
                 538700,
                 179400,
@@ -1993,7 +1993,7 @@
             ]
         },
         {
-            "bng_ref_string": "TQ 387 794 SW",
+            "bng_ref_formatted": "TQ 387 794 SW",
             "expected": [
                 538700,
                 179400,
@@ -2002,7 +2002,7 @@
             ]
         },
         {
-            "bng_ref_string": "TQ 3870 7942",
+            "bng_ref_formatted": "TQ 3870 7942",
             "expected": [
                 538700,
                 179420,
@@ -2011,7 +2011,7 @@
             ]
         },
         {
-            "bng_ref_string": "TQ 3870 7942 NE",
+            "bng_ref_formatted": "TQ 3870 7942 NE",
             "expected": [
                 538705,
                 179425,
@@ -2020,7 +2020,7 @@
             ]
         },
         {
-            "bng_ref_string": "TQ 38705 79426",
+            "bng_ref_formatted": "TQ 38705 79426",
             "expected": [
                 538705,
                 179426,
@@ -2031,7 +2031,7 @@
     ],
     "bng_to_grid_geom": [
         {
-            "bng_ref_string": "SV",
+            "bng_ref_formatted": "SV",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2061,7 +2061,7 @@
             }
         },
         {
-            "bng_ref_string": "SV SW",
+            "bng_ref_formatted": "SV SW",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2091,7 +2091,7 @@
             }
         },
         {
-            "bng_ref_string": "SV 0 0",
+            "bng_ref_formatted": "SV 0 0",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2121,7 +2121,7 @@
             }
         },
         {
-            "bng_ref_string": "SV 0 0 SW",
+            "bng_ref_formatted": "SV 0 0 SW",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2151,7 +2151,7 @@
             }
         },
         {
-            "bng_ref_string": "SV 00 00",
+            "bng_ref_formatted": "SV 00 00",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2181,7 +2181,7 @@
             }
         },
         {
-            "bng_ref_string": "SV 00 00 SW",
+            "bng_ref_formatted": "SV 00 00 SW",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2211,7 +2211,7 @@
             }
         },
         {
-            "bng_ref_string": "SV 000 000",
+            "bng_ref_formatted": "SV 000 000",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2241,7 +2241,7 @@
             }
         },
         {
-            "bng_ref_string": "SV 000 000 SW",
+            "bng_ref_formatted": "SV 000 000 SW",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2271,7 +2271,7 @@
             }
         },
         {
-            "bng_ref_string": "SV 0000 0000",
+            "bng_ref_formatted": "SV 0000 0000",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2301,7 +2301,7 @@
             }
         },
         {
-            "bng_ref_string": "SV 0000 0000 SW",
+            "bng_ref_formatted": "SV 0000 0000 SW",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2331,7 +2331,7 @@
             }
         },
         {
-            "bng_ref_string": "SV 00000 00000",
+            "bng_ref_formatted": "SV 00000 00000",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2361,7 +2361,7 @@
             }
         },
         {
-            "bng_ref_string": "JM",
+            "bng_ref_formatted": "JM",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2391,7 +2391,7 @@
             }
         },
         {
-            "bng_ref_string": "JM NE",
+            "bng_ref_formatted": "JM NE",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2421,7 +2421,7 @@
             }
         },
         {
-            "bng_ref_string": "JM 9 9",
+            "bng_ref_formatted": "JM 9 9",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2451,7 +2451,7 @@
             }
         },
         {
-            "bng_ref_string": "JM 9 9 NE",
+            "bng_ref_formatted": "JM 9 9 NE",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2481,7 +2481,7 @@
             }
         },
         {
-            "bng_ref_string": "JM 99 99",
+            "bng_ref_formatted": "JM 99 99",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2511,7 +2511,7 @@
             }
         },
         {
-            "bng_ref_string": "JM 99 99 NE",
+            "bng_ref_formatted": "JM 99 99 NE",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2541,7 +2541,7 @@
             }
         },
         {
-            "bng_ref_string": "JM 999 999",
+            "bng_ref_formatted": "JM 999 999",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2571,7 +2571,7 @@
             }
         },
         {
-            "bng_ref_string": "JM 999 999 NE",
+            "bng_ref_formatted": "JM 999 999 NE",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2601,7 +2601,7 @@
             }
         },
         {
-            "bng_ref_string": "JM 9999 9999",
+            "bng_ref_formatted": "JM 9999 9999",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2631,7 +2631,7 @@
             }
         },
         {
-            "bng_ref_string": "JM 9999 9999 NE",
+            "bng_ref_formatted": "JM 9999 9999 NE",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2661,7 +2661,7 @@
             }
         },
         {
-            "bng_ref_string": "JM 99999 99999",
+            "bng_ref_formatted": "JM 99999 99999",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2691,7 +2691,7 @@
             }
         },
         {
-            "bng_ref_string": "SX",
+            "bng_ref_formatted": "SX",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2721,7 +2721,7 @@
             }
         },
         {
-            "bng_ref_string": "SX NE",
+            "bng_ref_formatted": "SX NE",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2751,7 +2751,7 @@
             }
         },
         {
-            "bng_ref_string": "SX 9 9",
+            "bng_ref_formatted": "SX 9 9",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2781,7 +2781,7 @@
             }
         },
         {
-            "bng_ref_string": "SX 9 9 SE",
+            "bng_ref_formatted": "SX 9 9 SE",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2811,7 +2811,7 @@
             }
         },
         {
-            "bng_ref_string": "SX 96 90",
+            "bng_ref_formatted": "SX 96 90",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2841,7 +2841,7 @@
             }
         },
         {
-            "bng_ref_string": "SX 96 90 NW",
+            "bng_ref_formatted": "SX 96 90 NW",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2871,7 +2871,7 @@
             }
         },
         {
-            "bng_ref_string": "SX 964 909",
+            "bng_ref_formatted": "SX 964 909",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2901,7 +2901,7 @@
             }
         },
         {
-            "bng_ref_string": "SX 964 909 NE",
+            "bng_ref_formatted": "SX 964 909 NE",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2931,7 +2931,7 @@
             }
         },
         {
-            "bng_ref_string": "SX 9647 9099",
+            "bng_ref_formatted": "SX 9647 9099",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2961,7 +2961,7 @@
             }
         },
         {
-            "bng_ref_string": "SX 9647 9099 SE",
+            "bng_ref_formatted": "SX 9647 9099 SE",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [
@@ -2991,7 +2991,7 @@
             }
         },
         {
-            "bng_ref_string": "SX 96477 90994",
+            "bng_ref_formatted": "SX 96477 90994",
             "expected": {
                 "type": "Polygon",
                 "coordinates": [

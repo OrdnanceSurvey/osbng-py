@@ -317,12 +317,12 @@ class BNGToXYTestCase(TypedDict):
     """TypedDict for bng_to_xy function test cases.
 
     Attributes:
-        bng_ref_string (str): The BNG reference formatted string.
+        bng_ref_formatted (str): The BNG reference formatted string.
         position (str): The grid cell position expressed as a string.
         expected (list[float | int]): The expected result is a list of easting and northing coordinates.
     """
 
-    bng_ref_string: str
+    bng_ref_formatted: str
     position: int | str
     expected: list[int | float]
 
@@ -340,7 +340,7 @@ def test_bng_to_xy(test_case: BNGToXYTestCase):
         test_case (BNGToXYTestCase): Test case from JSON file.
     """
     # Load test case data
-    bng_ref_string = test_case["bng_ref_string"]
+    bng_ref_string = test_case["bng_ref_formatted"]
     position = test_case["position"]
     # Get expected result as tuple
     expected = tuple(test_case["expected"])
@@ -356,11 +356,11 @@ class BNGToBBOXTestCase(TypedDict):
     """TypedDict for bng_to_bbox function test cases.
 
     Attributes:
-        bng_ref_string (str): The BNG reference formatted string.
+        bng_ref_formatted (str): The BNG reference formatted string.
         expected (list[int]): The expected result is a list of bounding box coordinates.
     """
 
-    bng_ref_string: str
+    bng_ref_formatted: str
     expected: list[int]
 
 
@@ -377,7 +377,7 @@ def test_bng_to_bbox(test_case: BNGToBBOXTestCase):
         test_case (BNGToBBOXTestCase): Test case from JSON file.
     """
     # Load test case data
-    bng_ref_string = test_case["bng_ref_string"]
+    bng_ref_string = test_case["bng_ref_formatted"]
     # Get expected result as tuple
     expected = tuple(test_case["expected"])
 
@@ -392,11 +392,11 @@ class BNGToGridGeomTestCase(TypedDict):
     """TypedDict for bng_to_grid_geom function test cases.
 
     Attributes:
-        bng_ref_string (str): The BNG reference formatted string.
+        bng_ref_formatted (str): The BNG reference formatted string.
         expected (dict[str, Any]): The expected result is a dictionary with the expected geometry in GeoJSON format.
     """
 
-    bng_ref_string: str
+    bng_ref_formatted: str
     expected: dict[str, Any]
 
 
@@ -413,7 +413,7 @@ def test_bng_to_grid_geom(test_case: BNGToGridGeomTestCase):
         test_case (BNGToGridGeomTestCase): Test case from JSON file.
     """
     # Load test case data
-    bng_ref_string = test_case["bng_ref_string"]
+    bng_ref_string = test_case["bng_ref_formatted"]
     # Convert expected result from GeoJSON to Shapely geometry object
     expected = shape(test_case["expected"])
 
