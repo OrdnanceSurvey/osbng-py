@@ -17,7 +17,7 @@ from osbng.utils import _load_test_cases
 
 class BNGToChildrenTestCase(TypedDict):
     """TypedDict for bng_to_children test cases.
-    
+
     Attributes:
         bng_ref_string (str): The BNG reference string.
         resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
@@ -79,7 +79,7 @@ def test_bng_to_children(test_case: BNGToChildrenTestCase):
 
 class BNGToParentTestCase(TypedDict):
     """TypedDict for bng_to_parent test cases.
-    
+
     Attributes:
         bng_ref_string (str): The BNG reference string.
         resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
