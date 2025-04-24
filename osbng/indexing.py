@@ -25,9 +25,9 @@ Supported resolutions:
       'resolution' module.
 """
 
-import numpy as np
 import warnings
 
+import numpy as np
 from shapely import box, contains, Geometry, intersection, intersects, prepare
 from shapely.geometry import Polygon
 
