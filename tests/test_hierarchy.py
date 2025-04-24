@@ -13,8 +13,10 @@ from osbng.hierarchy import bng_to_children, bng_to_parent
 from osbng.utils import _load_test_cases
 
 
+# Parameterised test for bng_to_children function
 @pytest.mark.parametrize(
     "test_case",
+    # Load test cases from JSON file
     _load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_children"],
 )
 def test__bng_to_children(test_case):
@@ -23,11 +25,14 @@ def test__bng_to_children(test_case):
     Args:
         test_case (dict): Test case from JSON file.
     """
+    # Load test case data
     bng_ref_string = test_case["bng_ref_string"]
     resolution = None if test_case["resolution"] == "NULL" else test_case["resolution"]
 
     if "expected_exception" in test_case:
+        # Get exception name from test case
         exception_name = test_case["expected_exception"]["name"]
+        # Get exception message from test case
         message = (
             None
             if test_case["expected_exception"]["name"] == "BNGResolutionError"
@@ -35,6 +40,7 @@ def test__bng_to_children(test_case):
         )
         # Get exception class from name
         exception_class = _EXCEPTION_MAP[exception_name]
+        # Assert that the test case raises the expected exception and message
         with pytest.raises(exception_class, match=message):
             bng_to_children(BNGReference(bng_ref_string), resolution)
 
@@ -43,11 +49,14 @@ def test__bng_to_children(test_case):
         bng_refs = bng_to_children(BNGReference(bng_ref_string), resolution)
 
         for bng_ref, expected in zip(bng_refs, test_case["expected"]):
+            # Assert that the function returns the expected result
             assert bng_ref.bng_ref_formatted == expected["bng_ref_formatted"]
 
 
+# Parameterised test for bng_to_parent function
 @pytest.mark.parametrize(
     "test_case",
+    # Load test cases from JSON file
     _load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_parent"],
 )
 def test__bng_to_parent(test_case):
@@ -56,11 +65,14 @@ def test__bng_to_parent(test_case):
     Args:
         test_case (dict): Test case from JSON file.
     """
+    # Load test case data
     bng_ref_string = test_case["bng_ref_string"]
     resolution = None if test_case["resolution"] == "NULL" else test_case["resolution"]
 
     if "expected_exception" in test_case:
+        # Get exception name from test case
         exception_name = test_case["expected_exception"]["name"]
+        # Get exception message from test case
         message = (
             None
             if test_case["expected_exception"]["name"] == "BNGResolutionError"
@@ -69,10 +81,12 @@ def test__bng_to_parent(test_case):
 
         # Get exception class from name
         exception_class = _EXCEPTION_MAP[exception_name]
+        # Assert that the test case raises the expected exception and message
         with pytest.raises(exception_class, match=message):
             bng_to_parent(BNGReference(bng_ref_string), resolution)
 
     else:
 
         bng_ref = bng_to_parent(BNGReference(bng_ref_string), resolution)
+        # Assert that the function returns the expected result
         assert bng_ref.bng_ref_formatted == test_case["expected"]["bng_ref_formatted"]
