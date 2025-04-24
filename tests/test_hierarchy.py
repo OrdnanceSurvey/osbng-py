@@ -19,7 +19,7 @@ from osbng.utils import _load_test_cases
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_children"],
 )
-def test__bng_to_children(test_case):
+def test_bng_to_children(test_case):
     """Test bng_to_children with test cases from JSON file.
 
     Args:
@@ -65,7 +65,7 @@ def test__bng_to_children(test_case):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_parent"],
 )
-def test__bng_to_parent(test_case):
+def test_bng_to_parent(test_case):
     """Test bng_to_parent with test cases from JSON file.
 
     Args:
