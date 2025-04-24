@@ -28,6 +28,12 @@ def test__bng_to_children(test_case):
     # Load test case data
     bng_ref_string = test_case["bng_ref_string"]
     resolution = None if test_case["resolution"] == "NULL" else test_case["resolution"]
+    # Get expected result
+    expected = (
+        None
+        if "expected_exception" in test_case
+        else test_case["expected"]["bng_ref_formatted"]
+    )
 
     if "expected_exception" in test_case:
         # Get exception name from test case
@@ -45,12 +51,12 @@ def test__bng_to_children(test_case):
             bng_to_children(BNGReference(bng_ref_string), resolution)
 
     else:
-
+        # Return a list of child BNGReference objects
         bng_refs = bng_to_children(BNGReference(bng_ref_string), resolution)
-
-        for bng_ref, expected in zip(bng_refs, test_case["expected"]):
-            # Assert that the function returns the expected result
-            assert bng_ref.bng_ref_formatted == expected["bng_ref_formatted"]
+        # Sort lists to account for order differences
+        bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
+        # Assert that the function returns the expected result
+        assert sorted(bng_ref_strings) == sorted(expected)
 
 
 # Parameterised test for bng_to_parent function
@@ -78,7 +84,6 @@ def test__bng_to_parent(test_case):
             if test_case["expected_exception"]["name"] == "BNGResolutionError"
             else test_case["expected_exception"]["message"]
         )
-
         # Get exception class from name
         exception_class = _EXCEPTION_MAP[exception_name]
         # Assert that the test case raises the expected exception and message
@@ -86,7 +91,7 @@ def test__bng_to_parent(test_case):
             bng_to_parent(BNGReference(bng_ref_string), resolution)
 
     else:
-
+        # Return the parent BNGReference object
         bng_ref = bng_to_parent(BNGReference(bng_ref_string), resolution)
         # Assert that the function returns the expected result
         assert bng_ref.bng_ref_formatted == test_case["expected"]["bng_ref_formatted"]

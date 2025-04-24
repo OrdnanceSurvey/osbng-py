@@ -3,965 +3,389 @@
         {
             "bng_ref_string": "SU",
             "resolution": "50km",
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU SW"
-                },
-                {
-                    "bng_ref_formatted": "SU SE"
-                },
-                {
-                    "bng_ref_formatted": "SU NW"
-                },
-                {
-                    "bng_ref_formatted": "SU NE"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "SU SW",
+                    "SU SE",
+                    "SU NW",
+                    "SU NE"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU",
             "resolution": 50000,
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU SW"
-                },
-                {
-                    "bng_ref_formatted": "SU SE"
-                },
-                {
-                    "bng_ref_formatted": "SU NW"
-                },
-                {
-                    "bng_ref_formatted": "SU NE"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "SU SW",
+                    "SU SE",
+                    "SU NW",
+                    "SU NE"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU",
             "resolution": "NULL",
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU SW"
-                },
-                {
-                    "bng_ref_formatted": "SU SE"
-                },
-                {
-                    "bng_ref_formatted": "SU NW"
-                },
-                {
-                    "bng_ref_formatted": "SU NE"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "SU SW",
+                    "SU SE",
+                    "SU NW",
+                    "SU NE"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU46",
             "resolution": "5km",
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU 4 6 SW"
-                },
-                {
-                    "bng_ref_formatted": "SU 4 6 SE"
-                },
-                {
-                    "bng_ref_formatted": "SU 4 6 NW"
-                },
-                {
-                    "bng_ref_formatted": "SU 4 6 NE"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "SU 4 6 SW",
+                    "SU 4 6 SE",
+                    "SU 4 6 NW",
+                    "SU 4 6 NE"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU46",
             "resolution": 5000,
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU 4 6 SW"
-                },
-                {
-                    "bng_ref_formatted": "SU 4 6 SE"
-                },
-                {
-                    "bng_ref_formatted": "SU 4 6 NW"
-                },
-                {
-                    "bng_ref_formatted": "SU 4 6 NE"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "SU 4 6 SW",
+                    "SU 4 6 SE",
+                    "SU 4 6 NW",
+                    "SU 4 6 NE"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU46",
             "resolution": "NULL",
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU 4 6 SW"
-                },
-                {
-                    "bng_ref_formatted": "SU 4 6 SE"
-                },
-                {
-                    "bng_ref_formatted": "SU 4 6 NW"
-                },
-                {
-                    "bng_ref_formatted": "SU 4 6 NE"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "SU 4 6 SW",
+                    "SU 4 6 SE",
+                    "SU 4 6 NW",
+                    "SU 4 6 NE"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU46NW",
             "resolution": "1km",
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU 40 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 69"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "SU 40 65",
+                    "SU 41 65",
+                    "SU 42 65",
+                    "SU 43 65",
+                    "SU 44 65",
+                    "SU 40 66",
+                    "SU 41 66",
+                    "SU 42 66",
+                    "SU 43 66",
+                    "SU 44 66",
+                    "SU 40 67",
+                    "SU 41 67",
+                    "SU 42 67",
+                    "SU 43 67",
+                    "SU 44 67",
+                    "SU 40 68",
+                    "SU 41 68",
+                    "SU 42 68",
+                    "SU 43 68",
+                    "SU 44 68",
+                    "SU 40 69",
+                    "SU 41 69",
+                    "SU 42 69",
+                    "SU 43 69",
+                    "SU 44 69"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU46NW",
             "resolution": 1000,
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU 40 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 69"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "SU 40 65",
+                    "SU 41 65",
+                    "SU 42 65",
+                    "SU 43 65",
+                    "SU 44 65",
+                    "SU 40 66",
+                    "SU 41 66",
+                    "SU 42 66",
+                    "SU 43 66",
+                    "SU 44 66",
+                    "SU 40 67",
+                    "SU 41 67",
+                    "SU 42 67",
+                    "SU 43 67",
+                    "SU 44 67",
+                    "SU 40 68",
+                    "SU 41 68",
+                    "SU 42 68",
+                    "SU 43 68",
+                    "SU 44 68",
+                    "SU 40 69",
+                    "SU 41 69",
+                    "SU 42 69",
+                    "SU 43 69",
+                    "SU 44 69"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU46NW",
             "resolution": "NULL",
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU 40 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 65"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 66"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 67"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 68"
-                },
-                {
-                    "bng_ref_formatted": "SU 40 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 41 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 42 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 43 69"
-                },
-                {
-                    "bng_ref_formatted": "SU 44 69"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "SU 40 65",
+                    "SU 41 65",
+                    "SU 42 65",
+                    "SU 43 65",
+                    "SU 44 65",
+                    "SU 40 66",
+                    "SU 41 66",
+                    "SU 42 66",
+                    "SU 43 66",
+                    "SU 44 66",
+                    "SU 40 67",
+                    "SU 41 67",
+                    "SU 42 67",
+                    "SU 43 67",
+                    "SU 44 67",
+                    "SU 40 68",
+                    "SU 41 68",
+                    "SU 42 68",
+                    "SU 43 68",
+                    "SU 44 68",
+                    "SU 40 69",
+                    "SU 41 69",
+                    "SU 42 69",
+                    "SU 43 69",
+                    "SU 44 69"
+                ]
+            }
         },
         {
             "bng_ref_string": "NZ6906",
             "resolution": 100,
-            "expected": [
-                {
-                    "bng_ref_formatted": "NZ 690 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 069"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "NZ 690 060",
+                    "NZ 691 060",
+                    "NZ 692 060",
+                    "NZ 693 060",
+                    "NZ 694 060",
+                    "NZ 695 060",
+                    "NZ 696 060",
+                    "NZ 697 060",
+                    "NZ 698 060",
+                    "NZ 699 060",
+                    "NZ 690 061",
+                    "NZ 691 061",
+                    "NZ 692 061",
+                    "NZ 693 061",
+                    "NZ 694 061",
+                    "NZ 695 061",
+                    "NZ 696 061",
+                    "NZ 697 061",
+                    "NZ 698 061",
+                    "NZ 699 061",
+                    "NZ 690 062",
+                    "NZ 691 062",
+                    "NZ 692 062",
+                    "NZ 693 062",
+                    "NZ 694 062",
+                    "NZ 695 062",
+                    "NZ 696 062",
+                    "NZ 697 062",
+                    "NZ 698 062",
+                    "NZ 699 062",
+                    "NZ 690 063",
+                    "NZ 691 063",
+                    "NZ 692 063",
+                    "NZ 693 063",
+                    "NZ 694 063",
+                    "NZ 695 063",
+                    "NZ 696 063",
+                    "NZ 697 063",
+                    "NZ 698 063",
+                    "NZ 699 063",
+                    "NZ 690 064",
+                    "NZ 691 064",
+                    "NZ 692 064",
+                    "NZ 693 064",
+                    "NZ 694 064",
+                    "NZ 695 064",
+                    "NZ 696 064",
+                    "NZ 697 064",
+                    "NZ 698 064",
+                    "NZ 699 064",
+                    "NZ 690 065",
+                    "NZ 691 065",
+                    "NZ 692 065",
+                    "NZ 693 065",
+                    "NZ 694 065",
+                    "NZ 695 065",
+                    "NZ 696 065",
+                    "NZ 697 065",
+                    "NZ 698 065",
+                    "NZ 699 065",
+                    "NZ 690 066",
+                    "NZ 691 066",
+                    "NZ 692 066",
+                    "NZ 693 066",
+                    "NZ 694 066",
+                    "NZ 695 066",
+                    "NZ 696 066",
+                    "NZ 697 066",
+                    "NZ 698 066",
+                    "NZ 699 066",
+                    "NZ 690 067",
+                    "NZ 691 067",
+                    "NZ 692 067",
+                    "NZ 693 067",
+                    "NZ 694 067",
+                    "NZ 695 067",
+                    "NZ 696 067",
+                    "NZ 697 067",
+                    "NZ 698 067",
+                    "NZ 699 067",
+                    "NZ 690 068",
+                    "NZ 691 068",
+                    "NZ 692 068",
+                    "NZ 693 068",
+                    "NZ 694 068",
+                    "NZ 695 068",
+                    "NZ 696 068",
+                    "NZ 697 068",
+                    "NZ 698 068",
+                    "NZ 699 068",
+                    "NZ 690 069",
+                    "NZ 691 069",
+                    "NZ 692 069",
+                    "NZ 693 069",
+                    "NZ 694 069",
+                    "NZ 695 069",
+                    "NZ 696 069",
+                    "NZ 697 069",
+                    "NZ 698 069",
+                    "NZ 699 069"
+                ]
+            }
         },
         {
             "bng_ref_string": "NZ6906",
             "resolution": "100m",
-            "expected": [
-                {
-                    "bng_ref_formatted": "NZ 690 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 060"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 061"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 062"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 063"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 064"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 065"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 066"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 067"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 068"
-                },
-                {
-                    "bng_ref_formatted": "NZ 690 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 691 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 692 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 693 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 694 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 695 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 696 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 697 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 698 069"
-                },
-                {
-                    "bng_ref_formatted": "NZ 699 069"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "NZ 690 060",
+                    "NZ 691 060",
+                    "NZ 692 060",
+                    "NZ 693 060",
+                    "NZ 694 060",
+                    "NZ 695 060",
+                    "NZ 696 060",
+                    "NZ 697 060",
+                    "NZ 698 060",
+                    "NZ 699 060",
+                    "NZ 690 061",
+                    "NZ 691 061",
+                    "NZ 692 061",
+                    "NZ 693 061",
+                    "NZ 694 061",
+                    "NZ 695 061",
+                    "NZ 696 061",
+                    "NZ 697 061",
+                    "NZ 698 061",
+                    "NZ 699 061",
+                    "NZ 690 062",
+                    "NZ 691 062",
+                    "NZ 692 062",
+                    "NZ 693 062",
+                    "NZ 694 062",
+                    "NZ 695 062",
+                    "NZ 696 062",
+                    "NZ 697 062",
+                    "NZ 698 062",
+                    "NZ 699 062",
+                    "NZ 690 063",
+                    "NZ 691 063",
+                    "NZ 692 063",
+                    "NZ 693 063",
+                    "NZ 694 063",
+                    "NZ 695 063",
+                    "NZ 696 063",
+                    "NZ 697 063",
+                    "NZ 698 063",
+                    "NZ 699 063",
+                    "NZ 690 064",
+                    "NZ 691 064",
+                    "NZ 692 064",
+                    "NZ 693 064",
+                    "NZ 694 064",
+                    "NZ 695 064",
+                    "NZ 696 064",
+                    "NZ 697 064",
+                    "NZ 698 064",
+                    "NZ 699 064",
+                    "NZ 690 065",
+                    "NZ 691 065",
+                    "NZ 692 065",
+                    "NZ 693 065",
+                    "NZ 694 065",
+                    "NZ 695 065",
+                    "NZ 696 065",
+                    "NZ 697 065",
+                    "NZ 698 065",
+                    "NZ 699 065",
+                    "NZ 690 066",
+                    "NZ 691 066",
+                    "NZ 692 066",
+                    "NZ 693 066",
+                    "NZ 694 066",
+                    "NZ 695 066",
+                    "NZ 696 066",
+                    "NZ 697 066",
+                    "NZ 698 066",
+                    "NZ 699 066",
+                    "NZ 690 067",
+                    "NZ 691 067",
+                    "NZ 692 067",
+                    "NZ 693 067",
+                    "NZ 694 067",
+                    "NZ 695 067",
+                    "NZ 696 067",
+                    "NZ 697 067",
+                    "NZ 698 067",
+                    "NZ 699 067",
+                    "NZ 690 068",
+                    "NZ 691 068",
+                    "NZ 692 068",
+                    "NZ 693 068",
+                    "NZ 694 068",
+                    "NZ 695 068",
+                    "NZ 696 068",
+                    "NZ 697 068",
+                    "NZ 698 068",
+                    "NZ 699 068",
+                    "NZ 690 069",
+                    "NZ 691 069",
+                    "NZ 692 069",
+                    "NZ 693 069",
+                    "NZ 694 069",
+                    "NZ 695 069",
+                    "NZ 696 069",
+                    "NZ 697 069",
+                    "NZ 698 069",
+                    "NZ 699 069"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU0000100001",
