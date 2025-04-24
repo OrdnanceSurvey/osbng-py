@@ -396,7 +396,7 @@ def bng_to_xy(
 
     if position not in valid_positions:
         raise ValueError(
-            f"Invalid position provided. Supported positions are: {", ".join(p for p in valid_positions)}"
+            f"Invalid position provided. Supported positions are: {', '.join(p for p in valid_positions)}"
         )
 
     # Extract resolution in metres from BNG reference
