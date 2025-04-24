@@ -162,7 +162,7 @@ def _validate_and_normalise_bng_resolution(resolution: int | str) -> int:
         raise BNGResolutionError()
 
 
-def _validate_easting_northing(easting: float, northing: float):
+def _validate_easting_northing(easting: int | float, northing: int | float):
     """Validates that easting and northing coordinates are within the bounds of the BNG index system extent.
 
     The easting and northing coordinates must be below the upper bounds of the BNG system.
@@ -170,8 +170,8 @@ def _validate_easting_northing(easting: float, northing: float):
     representing the southwest (lower-left) corner of a grid square beyond the system's limits.
 
     Args:
-        easting (float): The easting coordinate. Must be in the range 0 <= easting < 700000.
-        northing (float): The northing coordinate. Must be in the range 0 <= northing < 1300000.
+        easting (int | float): The easting coordinate. Must be in the range 0 <= easting < 700000.
+        northing (int | float): The northing coordinate. Must be in the range 0 <= northing < 1300000.
 
     Raises:
         BNGExtentError: If the easting or northing coordinates are outside the BNG extent.
@@ -183,15 +183,15 @@ def _validate_easting_northing(easting: float, northing: float):
 
 
 def _validate_and_normalise_bbox(
-    xmin: float, ymin: float, xmax: float, ymax: float
-) -> tuple[float, float, float, float]:
+    xmin: int | float, ymin: int | float, xmax: int | float, ymax: int | float
+) -> tuple[int | float, int | float, int | float, int | float]:
     """Validates and normalises bounding box coordinates to the BNG index system extent.
 
     Args:
-        xmin (float): The minimum easting coordinate of the bounding box.
-        ymin (float): The minimum northing coordinate of the bounding box.
-        xmax (float): The maximum easting coordinate of the bounding box.
-        ymax (float): The maximum northing coordinate of the bounding box.
+        xmin (int | float): The minimum easting coordinate of the bounding box.
+        ymin (int | float): The minimum northing coordinate of the bounding box.
+        xmax (int | float): The maximum easting coordinate of the bounding box.
+        ymax (int | float): The maximum northing coordinate of the bounding box.
 
     Returns:
         tuple[float, float, float, float]: The normalised bounding box coordinates.
@@ -226,12 +226,12 @@ def _validate_and_normalise_bbox(
     return xmin, ymin, xmax, ymax
 
 
-def _get_bng_suffix(easting: float, northing: float, resolution: int) -> str:
+def _get_bng_suffix(easting: int | float, northing: int | float, resolution: int) -> str:
     """Get the BNG ordinal direction suffix for a given easting, northing and quadtree resolution.
 
     Args:
-        easting (float): Easting coordinate.
-        northing (float): Northing coordinate.
+        easting (int | float): Easting coordinate.
+        northing (int | float): Northing coordinate.
         resolution (int): Resolution expressed as a metre-based integer. Must be an intermediate quadtree
                           resolution e.g. 5, 50, 500, 5000, 50000.
 
@@ -287,12 +287,12 @@ def _decompose_geom(geom: Geometry) -> list[Geometry]:
         raise ValueError(f"Unsupported geometry type: {geom.geom_type}")
 
 
-def xy_to_bng(easting: float, northing: float, resolution: int | str) -> BNGReference:
+def xy_to_bng(easting: int | float, northing: int | float, resolution: int | str) -> BNGReference:
     """Returns a BNGReference object given easting and northing coordinates, at a specified resolution.
 
     Args:
-        easting (float): The easting coordinate.
-        northing (float): The northing coordinate.
+        easting (int | float): The easting coordinate.
+        northing (int | float): The northing coordinate.
         resolution (int | str): The resolution of the BNG reference expressed either as a metre-based integer or as a string label.
 
     Returns:
@@ -534,7 +534,7 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
 
 
 def bbox_to_bng(
-    xmin: float, ymin: float, xmax: float, ymax: float, resolution: int | str
+    xmin: int | float, ymin: int | float, xmax: int | float, ymax: int | float, resolution: int | str
 ) -> list[BNGReference]:
     """Returns a list of BNGReference objects given bounding box coordinates and a resolution.
 
@@ -556,10 +556,10 @@ def bbox_to_bng(
     to the bounds of the BNG system.
 
     Args:
-        xmin (float): The minimum easting coordinate of the bounding box.
-        ymin (float): The minimum northing coordinate of the bounding box.
-        xmax (float): The maximum easting coordinate of the bounding box.
-        ymax (float): The maximum northing coordinate of the bounding box.
+        xmin (int | float): The minimum easting coordinate of the bounding box.
+        ymin (int | float): The minimum northing coordinate of the bounding box.
+        xmax (int | float): The maximum easting coordinate of the bounding box.
+        ymax (int | float): The maximum northing coordinate of the bounding box.
         resolution (int | str): The resolution of the BNG reference expressed either as a metre-based integer or as a string label.
 
     Returns:

@@ -319,7 +319,7 @@ class BNGToXYTestCase(TypedDict):
     Attributes:
         bng_ref_string (str): The BNG reference string.
         position (str): The grid cell position expressed as a string.
-        expected (list[float | int]): The expected result is a list of easting and northing coordinates.
+        expected (list[int | float]): The expected result is a list of easting and northing coordinates.
     """
 
     bng_ref_string: str
