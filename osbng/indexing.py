@@ -27,11 +27,12 @@ Supported resolutions:
 
 import numpy as np
 import warnings
-from shapely import box, Geometry, prepare, intersects, contains, intersection
+
+from shapely import box, contains, Geometry, intersection, intersects, prepare
 from shapely.geometry import Polygon
 
-from osbng.bng_reference import _PATTERN, BNGReference, _validate_bngreference
-from osbng.errors import BNGResolutionError, BNGExtentError
+from osbng.bng_reference import _PATTERN, _validate_bngreference, BNGReference
+from osbng.errors import BNGExtentError, BNGResolutionError
 from osbng.resolution import BNG_RESOLUTIONS
 
 __all__ = [
