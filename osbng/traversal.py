@@ -8,12 +8,21 @@ It supports spatial analyses such as distance-constrained nearest neighbour sear
  
 """
 
-from osbng.indexing import bng_to_xy, xy_to_bng
-from osbng.bng_reference import BNGReference, _validate_bngreference, _validate_bngreference_pair
-from osbng.errors import BNGExtentError, BNGNeighbourError
 import numpy as np
 import warnings
 
+from osbng.indexing import bng_to_xy, xy_to_bng
+from osbng.bng_reference import BNGReference, _validate_bngreference, _validate_bngreference_pair
+from osbng.errors import BNGExtentError, BNGNeighbourError
+
+__all__ = [
+    "bng_kring",
+    "bng_kdisc",
+    "bng_distance",
+    "bng_neighbours",
+    "bng_is_neighbour",
+    "bng_dwithin",
+]
 
 def _ring_or_disc_(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGReference]:
     """Helper function to extract grid squares in a disc or ring.
