@@ -28,7 +28,7 @@ BNG_BOUNDS = (0, 0, 700000, 1300000)
 
 
 def bbox_to_bng_iterfeatures(
-    xmin: float, ymin: float, xmax: float, ymax: float, resolution: int | str
+    xmin: int | float, ymin: int | float, xmax: int | float, ymax: int | float, resolution: int | str
 ) -> Iterator[dict[str, Union[str, dict]]]:
     """Returns an iterator of BNGReference objects represented using a GeoJSON-like
        mapping within specified bounds at a specified resolution.
@@ -37,10 +37,10 @@ def bbox_to_bng_iterfeatures(
     the BNGReference object as a GeoJSON-like Feature.
 
     Args:
-        xmin (float): The minimum x-coordinate of the bounding box.
-        ymin (float): The minimum y-coordinate of the bounding box.
-        xmax (float): The maximum x-coordinate of the bounding box.
-        ymax (float): The maximum y-coordinate of the bounding box.
+        xmin (int | float): The minimum x-coordinate of the bounding box.
+        ymin (int | float): The minimum y-coordinate of the bounding box.
+        xmax (int | float): The maximum x-coordinate of the bounding box.
+        ymax (int | float): The maximum y-coordinate of the bounding box.
         resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
 
     Yields:
