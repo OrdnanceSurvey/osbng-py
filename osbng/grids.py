@@ -9,7 +9,7 @@ GeoPandas can be used to read the iterator data directly into a GeoDataFrame for
 Iterators can be converted to lists to generate all grid square GeoJSON-like Features at a given resolution.
 """
 
-from typing import Iterator, Union
+from typing import Any, Iterator
 
 from osbng.indexing import bbox_to_bng
 
@@ -29,7 +29,7 @@ BNG_BOUNDS = (0, 0, 700000, 1300000)
 
 def bbox_to_bng_iterfeatures(
     xmin: int | float, ymin: int | float, xmax: int | float, ymax: int | float, resolution: int | str
-) -> Iterator[dict[str, Union[str, dict]]]:
+) -> Iterator[dict[str, Any]]:
     """Returns an iterator of BNGReference objects represented using a GeoJSON-like
        mapping within specified bounds at a specified resolution.
 
@@ -44,7 +44,7 @@ def bbox_to_bng_iterfeatures(
         resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
 
     Yields:
-        dict: A GeoJSON-like representation of a BNGReference object.
+        dict[str, Any]: A GeoJSON-like representation of a BNGReference object.
 
     Raises:
         BNGResolutionError: If the resolution is not a valid resolution.
