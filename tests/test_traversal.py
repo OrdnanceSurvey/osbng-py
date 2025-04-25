@@ -72,7 +72,7 @@ def test_bng_kring(test_case):
         assert len(bng_kring(BNGReference(test_case["bng_ref_string"]), test_case["k"])) == test_case["expected_length"]
     else:
         kring = bng_kring(BNGReference(test_case["bng_ref_string"]), test_case["k"])
-        assert set([r.bng_ref_formatted for r in kring]) == set([r["bng_ref_formatted"] for r in test_case["expected"]])
+        assert sorted([r.bng_ref_formatted for r in kring]) == sorted([r["bng_ref_formatted"] for r in test_case["expected"]])
 
 
 # Parameterised test for bng_kdisc function
