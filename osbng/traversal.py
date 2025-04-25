@@ -29,11 +29,11 @@ def _ring_or_disc_(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGRefe
 
     Args:
         bng_ref (BNGReference): A BNGReference object.
-        k (int): Grid distance in units of grid cells.
-        is_disc (bool): If True, returns all cells within distance k.  If False, only returns the outer ring.
+        k (int): Grid distance in units of grid squares.
+        is_disc (bool): If True, returns all grid squares within distance k.  If False, only returns the outer ring.
 
     Returns:
-        list of BNGReference: All BNGReference objects representing cells in a square ring or disc of radius k.
+        list of BNGReference: All BNGReference objects representing grid squares in a square ring or disc of radius k.
     """
     
     # Check that k is a positive integer
@@ -46,7 +46,7 @@ def _ring_or_disc_(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGRefe
     # Derive point location of root square
     xc, yc = bng_to_xy(bng_ref, "centre")
 
-    # Initialise list of ring references
+    # Initialise list of ring BNG reference objects
     kring_refs = []
 
     # Track whether we need to raise an extent warning
@@ -74,7 +74,7 @@ def _ring_or_disc_(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGRefe
     # Note: do this after the above, otherwise repeated warnings will be raised!
     if raise_extent_warning:
         warnings.warn(
-            "One or more of the requested cells falls outside of the BNG index "
+            "One or more of the requested grid squares falls outside of the BNG index "
             +"system extent and will not be returned."
         )
 
@@ -82,15 +82,15 @@ def _ring_or_disc_(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGRefe
 
 @_validate_bngreference
 def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
-    """Returns a list of BNG references representing a hollow ring around a given grid square
+    """Returns a list of BNG reference objects representing a hollow ring around a given grid square
     at a grid distance k.
 
     Args:
         bng_ref (BNGReference): A BNGReference object.
-        k (int): Grid distance in units of grid cells.
+        k (int): Grid distance in units of grid squares.
 
     Returns:
-        list of BNGReference: All BNGReference objects representing cells in a square ring of radius k.
+        list of BNGReference: All BNGReference objects representing squares in a square ring of radius k.
 
     Examples:
         >>> bng_kring(BNGReference('SU1234'), 1)
@@ -104,15 +104,15 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
 
 @_validate_bngreference
 def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
-    """Returns a list of BNG references representing a filled disc around a given grid square
+    """Returns a list of BNG reference objects representing a filled disc around a given grid square
     up to a grid distance k, including the given central grid square.
 
     Args:
         bng_ref (BNGReference): A BNGReference object.
-        k (int): Grid distance in units of grid cells.
+        k (int): Grid distance in units of grid squares.
 
     Returns:
-        list of BNGReference: All BNGReference objects representing cells in a square of radius k.
+        list of BNGReference: All BNGReference objects representing grid squares in a square of radius k.
 
     Examples:
         >>> bng_kdisc(BNGReference('SU1234'), 1)
@@ -179,14 +179,14 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
 
 @_validate_bngreference
 def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
-    """Returns a list of BNGReferences representing the four neighbouring grid squares
+    """Returns a list of BNGReference objects representing the four neighbouring grid squares
     sharing an edge with the input BNGReference.
 
     Args:
         bng_ref (BNGReference): A BNGReference object.
 
     Returns:
-        list of BNGReference: The grid cells immediately North, South, East and West of bng_ref.
+        list of BNGReference: The grid grid squares immediately North, South, East and West of bng_ref.
 
     Examples:
         >>> bng_neighbours(BNGReference('SU1234'))
@@ -220,7 +220,7 @@ def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
     # Note: do this after the above, otherwise repeated warnings will be raised!
     if raise_extent_warning:
         warnings.warn(
-            "One or more of the requested cells falls outside of the BNG index "
+            "One or more of the requested grid squares falls outside of the BNG index "
             +"system extent and will not be returned."
         )
 
@@ -264,7 +264,7 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
 
 @_validate_bngreference
 def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
-    """Returns a list of BNG references around a given grid square within an absolute distance d.
+    """Returns a list of BNG reference objects around a given grid square within an absolute distance d.
     All squares will be returned for which any part of its boundary is within distance d of any part of
     bng_ref's boundary.
 
