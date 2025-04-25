@@ -8,7 +8,7 @@ The `osbng` Python package provides a programmatic interface to the British Nati
 
 The package supports the 'standard' BNG metre-based resolutions, which represent powers of ten from 1m to 100km (`1m, 10m, 100m, 1km, 10km, 100km`). It also supports the 'intermediate' quadtree resolutions (`5m, 50m, 500m, 5km, 50km`), identified by an ordinal (`NE, SE, SW, NW`) BNG reference direction suffix.
 
-![BNG index system overview at 100km, 10km and 1km resolutions](docs/_static/images/osbng_100km_10km_1km_grid.png)
+![BNG index system overview at 100km, 10km and 1km resolutions](docs/_static/images/osbng_grids_100km_10km_1km.png)
 
 ## Installation
 
