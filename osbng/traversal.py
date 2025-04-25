@@ -24,7 +24,7 @@ __all__ = [
     "bng_dwithin",
 ]
 
-def _ring_or_disc_(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGReference]:
+def _ring_or_disc(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGReference]:
     """Helper function to extract grid squares in a disc or ring.
 
     Args:
@@ -102,7 +102,7 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
         [list of 24 BNGReference objects]
     """
 
-    return _ring_or_disc_(bng_ref, k, False)
+    return _ring_or_disc(bng_ref, k, False)
 
 @_validate_bngreference
 def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
@@ -127,7 +127,7 @@ def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
         [list of 49 BNGReference objects]
     """
 
-    return _ring_or_disc_(bng_ref, k, True)
+    return _ring_or_disc(bng_ref, k, True)
 
 
 @_validate_bngreference_pair
