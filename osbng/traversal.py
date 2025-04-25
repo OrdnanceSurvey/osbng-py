@@ -129,6 +129,7 @@ def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
 @_validate_bngreference_pair
 def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: bool = False) -> float:
     """Returns the euclidean distance between the centroids of two BNGReference objects.
+    Note that the two BNGReference objects do not necessarily need to share a common resolution.
 
     Args:
         bng_ref1 (BNGReference): A BNGReference object.
@@ -255,7 +256,7 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
     # Check if the two BNGReference objects are at the same resolution
     if bng_ref1.resolution_metres != bng_ref2.resolution_metres:
         raise BNGNeighbourError(
-            "The input BNG Resolution objects are not the same grid resolution. The input BNG Resolution objects must be the same grid resolution."
+            "The input BNGReference objects are not the same grid resolution. The input BNGReference objects must be the same grid resolution."
         )
     # Otherwise check if the two BNGReference objects are neighbours
     else:
