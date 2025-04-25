@@ -126,6 +126,6 @@ The following example constructs a `GeoPandas` GeoDataFrame from one of the iter
 
 Please raise an issue to discuss features, bugs or general questions.
 
-## Licence
+## License
 
-The `osbng` package is licensed under the terms of the MIT Licence.
+The `osbng` package is licensed under the terms of the [MIT License](LICENSE).
