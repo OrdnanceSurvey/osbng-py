@@ -26,7 +26,7 @@ conda install -c conda-forge osbng
 
 * [`osbng-r`](https://github.com/OrdnanceSurvey/osbng-r), an R package with broad parity to the `osbng` Python package.
 * [`osbng-grids`](https://github.com/OrdnanceSurvey/osbng-grids), for BNG grid data in GeoParquet and GeoPackage (GPKG) formats.
-* [`mosaic`](https://github.com/databrickslabs/mosaic), a Databricks package providing geospatial grid indexing using the BNG (and H3) for Apache Spark.
+* [`mosaic`](https://github.com/databrickslabs/mosaic), a Databricks package providing geospatial grid indexing using the BNG for Apache Spark.
 
 ## Usage
 
