@@ -33,7 +33,7 @@ def _ring_or_disc_(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGRefe
         is_disc (bool): If True, returns all grid squares within distance k.  If False, only returns the outer ring.
 
     Returns:
-        list of BNGReference: All BNGReference objects representing grid squares in a square ring or disc of radius k.
+        list[BNGReference]: All BNGReference objects representing grid squares in a square ring or disc of radius k.
     """
     
     # Check that k is a positive integer
@@ -90,7 +90,7 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
         k (int): Grid distance in units of grid squares.
 
     Returns:
-        list of BNGReference: All BNGReference objects representing squares in a square ring of radius k.
+        list[BNGReference]: All BNGReference objects representing squares in a square ring of radius k.
 
     Examples:
         >>> bng_kring(BNGReference('SU1234'), 1)
@@ -112,7 +112,7 @@ def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
         k (int): Grid distance in units of grid squares.
 
     Returns:
-        list of BNGReference: All BNGReference objects representing grid squares in a square of radius k.
+        list[BNGReference]: All BNGReference objects representing grid squares in a square of radius k.
 
     Examples:
         >>> bng_kdisc(BNGReference('SU1234'), 1)
@@ -186,7 +186,7 @@ def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
         bng_ref (BNGReference): A BNGReference object.
 
     Returns:
-        list of BNGReference: The grid grid squares immediately North, South, East and West of bng_ref.
+        list[BNGReference]: The grid grid squares immediately North, South, East and West of bng_ref.
 
     Examples:
         >>> bng_neighbours(BNGReference('SU1234'))
@@ -273,7 +273,7 @@ def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
         d (int or float): The absolute distance d in metres.
 
     Returns:
-        list of BNGReference: All grid squares which have any part of their geometry within distance
+        list[BNGReference]: All grid squares which have any part of their geometry within distance
             d of bng_ref's geometry
 
     Examples:
