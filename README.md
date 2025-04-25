@@ -64,6 +64,9 @@ Provides the ability to index and work with coordinates and geometries against t
 * Decoding `BNGReference` objects back into coordinates, bounding boxes and grid squares as [`Shapely`](https://github.com/shapely/shapely) geometries.
 * Indexing bounding boxes and `Shapely` geometries into grid squares at a specified resolution for spatial analysis.
 
+![BNG Grid Squares at 5km Resolution Intersected by London Region](docs/_static/images/osbng_indexing_geom_to_bng_5km_london.png)
+![Decomposition of the London Region into BNG Grid Squares at 5km Resolution](docs/_static/images/osbng_indexing_geom_to_bng_intersection_5km_london.png)
+
 The following example demonstrates a round trip of constructing of a `BNGReference` object from easting northing coordinates, and the decoding back into coordinates, bounding box and Shapely geometry:
 
 ``` python

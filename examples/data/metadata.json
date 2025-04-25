@@ -1,0 +1,20 @@
+{
+    "dataset": "Regions (December 2024) Boundaries EN BFC",
+    "description": "This file contains the digital vector boundaries for Regions in England as at December 2024",
+    "version": "Decemeber 2024",
+    "author": "Office for National Statistics",
+    "source": {
+        "name": "ONS Open Geography Portal",
+        "url": "https://geoportal.statistics.gov.uk/"
+    },
+    "license": {
+        "name": "Open Government Licence",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+    },
+    "crs": {
+        "name": "EPSG:27700",
+        "description": "British National Grid (OSGB36)",
+        "url": "https://epsg.io/27700"
+    },
+    "format": "GeoPackage"
+}
