@@ -37,10 +37,10 @@ def bbox_to_bng_iterfeatures(
     the BNGReference object as a GeoJSON-like Feature.
 
     Args:
-        xmin (int | float): The minimum x-coordinate of the bounding box.
-        ymin (int | float): The minimum y-coordinate of the bounding box.
-        xmax (int | float): The maximum x-coordinate of the bounding box.
-        ymax (int | float): The maximum y-coordinate of the bounding box.
+        xmin (int | float): The minimum easting coordinate of the bounding box.
+        ymin (int | float): The minimum northing coordinate of the bounding box.
+        xmax (int | float): The maximum easting coordinate of the bounding box.
+        ymax (int | float): The maximum northing coordinate of the bounding box.
         resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
 
     Yields:
