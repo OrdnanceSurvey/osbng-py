@@ -36,6 +36,8 @@ from osbng.errors import BNGExtentError, BNGResolutionError
 from osbng.resolution import BNG_RESOLUTIONS
 
 __all__ = [
+    "PREFIXES",
+    "SUFFIXES",
     "xy_to_bng",
     "bng_to_xy",
     "bng_to_bbox",
@@ -50,7 +52,7 @@ __all__ = [
 warnings.simplefilter("always")
 
 # 100km BNG grid square letter prefixes and corresponding positional indices
-_PREFIXES = np.array(
+PREFIXES = np.array(
     [
         ["SV", "SW", "SX", "SY", "SZ", "TV", "TW"],
         ["SQ", "SR", "SS", "ST", "SU", "TQ", "TR"],
@@ -70,7 +72,7 @@ _PREFIXES = np.array(
 
 # BNG ordinal direction suffixes and corresponding positional indices
 # Used to identify intermediate quadtree resolutions
-_SUFFIXES = np.array([["SW", "NW"], ["SE", "NE"]])
+SUFFIXES = np.array([["SW", "NW"], ["SE", "NE"]])
 
 
 class BNGIndexedGeometry:
@@ -249,7 +251,7 @@ def _get_bng_suffix(easting: int | float, northing: int | float, resolution: int
     suffix_y = 1 if ((northing % 100000) / (resolution * 2) % 1) >= 0.5 else 0
 
     # Return the suffix from the lookup using quadtree positional index
-    return _SUFFIXES[suffix_x, suffix_y]
+    return SUFFIXES[suffix_x, suffix_y]
 
 
 def _decompose_geom(geom: Geometry) -> list[Geometry]:
@@ -322,7 +324,7 @@ def xy_to_bng(easting: int | float, northing: int | float, resolution: int | str
     prefix_y = int(northing // 100000)
 
     # Return the prefix from the lookup using positional indices
-    prefix = _PREFIXES[prefix_y][prefix_x]
+    prefix = PREFIXES[prefix_y][prefix_x]
 
     # Calculate scaled resolution for quadtree resolutions
     if BNG_RESOLUTIONS[validated_resolution]["quadtree"]:
@@ -410,8 +412,8 @@ def bng_to_xy(
     en_components = match.group(2)
     suffix = match.group(3)
 
-    # Get the prefix indices from prefix position in _PREFIXES array
-    prefix_indices = np.argwhere(_PREFIXES == prefix)[0]
+    # Get the prefix indices from prefix position in PREFIXES array
+    prefix_indices = np.argwhere(PREFIXES == prefix)[0]
 
     # Convert the prefix indices to easting and northing coordinates of 100km grid square
     prefix_easting = int(prefix_indices[1] * 100000)
@@ -436,9 +438,9 @@ def bng_to_xy(
         easting_offset = 0
         northing_offset = 0
 
-    # Generate the suffix values from the position in the _SUFFIXES array
+    # Generate the suffix values from the position in the SUFFIXES array
     if suffix:
-        suffix_indices = np.argwhere(_SUFFIXES == suffix)[0]
+        suffix_indices = np.argwhere(SUFFIXES == suffix)[0]
         # Convert the suffix indices to coordinate values by multiplying by the resolution
         suffix_easting = int(suffix_indices[0] * resolution)
         suffix_northing = int(suffix_indices[1] * resolution)
