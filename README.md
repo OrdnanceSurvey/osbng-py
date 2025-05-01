@@ -4,7 +4,7 @@ A Python library for Ordnance Survey's British National Grid (BNG) index system.
 
 ## Overview
 
-The `osbng` Python package provides a programmatic interface to the British National Grid (BNG), supporting efficient grid-based indexing and spatial analysis. This enables applications such as statistical aggregation, data visualisation, and data interoperability using BNG grid references. Designed for developers working with geospatial data in the context of Great Britain, the library offers tools to simplify working with the BNG, facilitating both technical integration into geospatial workflows and practical exploration of the index system's structure.
+The `osbng` Python package provides a programmatic interface to the BNG, supporting efficient grid-based indexing and spatial analysis. This enables applications such as statistical aggregation, data visualisation, and data interoperability using BNG grid references. Designed for developers working with geospatial data in the context of Great Britain, the library offers tools to simplify working with the BNG, facilitating both technical integration into geospatial workflows and practical exploration of the index system's structure.
 
 The package supports the 'standard' BNG metre-based resolutions, which represent powers of ten from 1m to 100km (`1m, 10m, 100m, 1km, 10km, 100km`). It also supports the 'intermediate' quadtree resolutions (`5m, 50m, 500m, 5km, 50km`), identified by an ordinal (`NE, SE, SW, NW`) BNG reference direction suffix.
 
@@ -67,7 +67,7 @@ Provides the ability to index and work with coordinates and geometries against t
 ![BNG Grid Squares at 5km Resolution Intersected by London Region](docs/_static/images/osbng_indexing_geom_to_bng_5km_london.png)
 ![Decomposition of the London Region into BNG Grid Squares at 5km Resolution](docs/_static/images/osbng_indexing_geom_to_bng_intersection_5km_london.png)
 
-The following example demonstrates a round trip of constructing of a `BNGReference` object from easting northing coordinates, and the decoding back into coordinates, bounding box and Shapely geometry:
+The following example demonstrates a round trip of constructing a `BNGReference` object from easting northing coordinates, and then decoding back into coordinates, bounding box and Shapely geometry:
 
 ``` python
 >>> from osbng.indexing import xy_to_bng
@@ -90,6 +90,8 @@ The following example returns the parent of a `BNGReference`:
 
 ``` python
 >>> bng_ref = BNGReference(bng_ref_string="ST5671SE")
+>>> bng_ref.resolution_label
+'500m'
 >>> bng_ref.bng_to_parent(resolution="10km")
 BNGReference(bng_ref_formatted=ST 5 7, resolution_label=10km)
 ```
@@ -127,7 +129,7 @@ The following example constructs a `GeoPandas` GeoDataFrame from one of the iter
 
 ## Contributing
 
-Please raise an issue to discuss features, bugs or general questions.
+Please raise an issue to discuss features, bugs or ask general questions.
 
 ## License
 
