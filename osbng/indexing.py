@@ -38,14 +38,14 @@ from osbng.resolution import BNG_RESOLUTIONS
 __all__ = [
     "PREFIXES",
     "SUFFIXES",
+    "BNGIndexedGeometry",
     "xy_to_bng",
     "bng_to_xy",
     "bng_to_bbox",
     "bng_to_grid_geom",
     "bbox_to_bng",
     "geom_to_bng",
-    "geom_to_bng_intersection",
-    "BNGIndexedGeometry",
+    "geom_to_bng_intersection"
 ]
 
 # Set warnings to always display
