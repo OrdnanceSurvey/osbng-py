@@ -104,32 +104,18 @@
         {
             "bng_ref_string": "SU1234",
             "k": 1,
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU 11 33"
-                },
-                {
-                    "bng_ref_formatted": "SU 12 33"
-                },
-                {
-                    "bng_ref_formatted": "SU 13 33"
-                },
-                {
-                    "bng_ref_formatted": "SU 11 34"
-                },
-                {
-                    "bng_ref_formatted": "SU 13 34"
-                },
-                {
-                    "bng_ref_formatted": "SU 11 35"
-                },
-                {
-                    "bng_ref_formatted": "SU 12 35"
-                },
-                {
-                    "bng_ref_formatted": "SU 13 35"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "SU 11 33",
+                    "SU 12 33",
+                    "SU 13 33",
+                    "SU 11 34",
+                    "SU 13 34",
+                    "SU 11 35",
+                    "SU 12 35",
+                    "SU 13 35"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU1234",
@@ -141,35 +127,19 @@
         {
             "bng_ref_string": "SU1234",
             "k": 1,
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU 11 33"
-                },
-                {
-                    "bng_ref_formatted": "SU 12 33"
-                },
-                {
-                    "bng_ref_formatted": "SU 13 33"
-                },
-                {
-                    "bng_ref_formatted": "SU 11 34"
-                },
-                {
-                    "bng_ref_formatted": "SU 13 34"
-                },
-                {
-                    "bng_ref_formatted": "SU 11 35"
-                },
-                {
-                    "bng_ref_formatted": "SU 12 35"
-                },
-                {
-                    "bng_ref_formatted": "SU 13 35"
-                },
-                {
-                    "bng_ref_formatted": "SU 12 34"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [
+                    "SU 11 33",
+                    "SU 12 33",
+                    "SU 13 33",
+                    "SU 11 34",
+                    "SU 13 34",
+                    "SU 11 35",
+                    "SU 12 35",
+                    "SU 13 35",
+                    "SU 12 34"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU1234",
@@ -181,35 +151,19 @@
         {
             "bng_ref_string": "SU1234",
             "d": 999,
-            "expected": [
-                {
-                    "bng_ref_formatted": "SU 11 33"
-                },
-                {
-                    "bng_ref_formatted": "SU 12 33"
-                },
-                {
-                    "bng_ref_formatted": "SU 13 33"
-                },
-                {
-                    "bng_ref_formatted": "SU 11 34"
-                },
-                {
-                    "bng_ref_formatted": "SU 13 34"
-                },
-                {
-                    "bng_ref_formatted": "SU 11 35"
-                },
-                {
-                    "bng_ref_formatted": "SU 12 35"
-                },
-                {
-                    "bng_ref_formatted": "SU 13 35"
-                },
-                {
-                    "bng_ref_formatted": "SU 12 34"
-                }
-            ]
+            "expected": {
+                "bng_ref_formatted": [                    
+                    "SU 11 33",
+                    "SU 12 33",
+                    "SU 13 33",
+                    "SU 11 34",
+                    "SU 13 34",
+                    "SU 11 35",
+                    "SU 12 35",
+                    "SU 13 35",
+                    "SU 12 34"
+                ]
+            }
         },
         {
             "bng_ref_string": "SU1234",
