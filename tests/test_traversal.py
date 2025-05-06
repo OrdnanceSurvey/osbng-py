@@ -72,7 +72,7 @@ def test_bng_kring(test_case):
         assert len(bng_kring(BNGReference(test_case["bng_ref_string"]), test_case["k"])) == test_case["expected_length"]
     else:
         kring = bng_kring(BNGReference(test_case["bng_ref_string"]), test_case["k"])
-        assert sorted([r.bng_ref_formatted for r in kring]) == sorted([r["bng_ref_formatted"] for r in test_case["expected"]])
+        assert sorted([r.bng_ref_formatted for r in kring]) == sorted(test_case["expected"]["bng_ref_formatted"])
 
 
 # Parameterised test for bng_kdisc function
@@ -87,7 +87,7 @@ def test_bng_kdisc(test_case):
         assert len(bng_kdisc(BNGReference(test_case["bng_ref_string"]), test_case["k"])) == test_case["expected_length"]
     else:
         kring = bng_kdisc(BNGReference(test_case["bng_ref_string"]), test_case["k"])
-        assert set([r.bng_ref_formatted for r in kring]) == set([r["bng_ref_formatted"] for r in test_case["expected"]])
+        assert sorted([r.bng_ref_formatted for r in kring]) == sorted(test_case["expected"]["bng_ref_formatted"])
 
 
 # Parameterised test for bng_dwithin function
@@ -102,5 +102,5 @@ def test_bng_dwithin(test_case):
         assert len(bng_dwithin(BNGReference(test_case["bng_ref_string"]), test_case["d"])) == test_case["expected_length"]
     else:
         kring = bng_dwithin(BNGReference(test_case["bng_ref_string"]), test_case["d"])
-        assert set([r.bng_ref_formatted for r in kring]) == set([r["bng_ref_formatted"] for r in test_case["expected"]])
+        assert sorted([r.bng_ref_formatted for r in kring]) == sorted([r["bng_ref_formatted"] for r in test_case["expected"]])
 
