@@ -85,6 +85,8 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
     """Returns a list of BNG reference objects representing a hollow ring around a given grid square
     at a grid distance k.
 
+    Returned BNG reference objects are ordered North to South then West to East, therefore not in ring order.
+
     Args:
         bng_ref (BNGReference): A BNGReference object.
         k (int): Grid distance in units of grid squares.
@@ -108,6 +110,8 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
 def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
     """Returns a list of BNG reference objects representing a filled disc around a given grid square
     up to a grid distance k, including the given central grid square.
+
+    Returned BNG reference objects are ordered North to South then West to East.
 
     Args:
         bng_ref (BNGReference): A BNGReference object.
