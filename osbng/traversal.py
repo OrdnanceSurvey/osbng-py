@@ -24,16 +24,22 @@ __all__ = [
     "bng_dwithin",
 ]
 
-def _ring_or_disc(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGReference]:
+def _ring_or_disc(bng_ref: BNGReference, k: int, is_disc: bool, return_relations: bool) -> list[BNGReference] | list[(BNGReference, int, int)]:
     """Helper function to extract grid squares in a disc or ring.
 
     Args:
         bng_ref (BNGReference): A BNGReference object.
         k (int): Grid distance in units of grid squares.
         is_disc (bool): If True, returns all grid squares within distance k.  If False, only returns the outer ring.
+        return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+            grid units.  If False, returns a list of BNGReference objects.
 
     Returns:
-        list[BNGReference]: All BNGReference objects representing grid squares in a square ring or disc of radius k.
+        if return_relations==True:
+            list[(BNGReference, dx, dy)]: All BNGReference objects representing grid squares in a square ring or disc of radius k,
+                with the x- and y-offsets (in grid square units) between bng_ref and each returned BNGReference.
+        else:
+            list[BNGReference]: All BNGReference objects representing grid squares in a square ring or disc of radius k.
     """
     
     # Check that k is a positive integer
@@ -68,7 +74,7 @@ def _ring_or_disc(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGRefer
                 except BNGExtentError:
                     raise_extent_warning = True
                 else:
-                    kring_refs.append(ring_ref)
+                    kring_refs.append((ring_ref, dx, dy)) if return_relations else kring_refs.append(ring_ref)
 
     # Raise an extent warning if an error has been caught
     # Note: do this after the above, otherwise repeated warnings will be raised!
@@ -82,7 +88,7 @@ def _ring_or_disc(bng_ref: BNGReference, k: int, is_disc: bool) -> list[BNGRefer
 
 @_validate_bngreference
 def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
-    """Returns a list of BNG reference objects representing a hollow ring around a given grid square
+    """Returns a list of BNG reference objects representing a hollow ring around a given BNG reference object
     at a grid distance k.
 
     Returned BNG reference objects are ordered North to South then West to East, therefore not in ring order.
@@ -108,8 +114,8 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
 
 @_validate_bngreference
 def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
-    """Returns a list of BNG reference objects representing a filled disc around a given grid square
-    up to a grid distance k, including the given central grid square.
+    """Returns a list of BNG reference objects representing a filled disc around a given BNG reference object
+    up to a grid distance k, including the given central BNG reference object.
 
     Returned BNG reference objects are ordered North to South then West to East.
 
@@ -195,7 +201,7 @@ def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
         bng_ref (BNGReference): A BNGReference object.
 
     Returns:
-        list[BNGReference]: The grid grid squares immediately North, South, East and West of bng_ref.
+        list[BNGReference]: The grid squares immediately North, South, East and West of bng_ref.
 
     Examples:
         >>> bng_neighbours(BNGReference('SU1234'))
@@ -273,7 +279,7 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
 
 @_validate_bngreference
 def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
-    """Returns a list of BNG reference objects around a given grid square within an absolute distance d.
+    """Returns a list of BNG reference objects around a given BNG reference object within an absolute distance d.
     All squares will be returned for which any part of its boundary is within distance d of any part of
     bng_ref's boundary.
 
