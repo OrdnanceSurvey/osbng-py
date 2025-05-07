@@ -496,7 +496,7 @@ class BNGReference:
 
         return _bng_to_parent(self, resolution)
     
-    def bng_kring(self, k: int) -> list["BNGReference"]:
+    def bng_kring(self, k: int, return_relations: bool = False) -> list["BNGReference"]:
         """Returns a list of BNG reference objects representing a hollow ring around the current BNG reference object
         at a grid distance k.
 
@@ -505,12 +505,16 @@ class BNGReference:
         Args:
             k (int): Grid distance in units of grid squares.
 
+        Kwargs:
+            return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+                grid units.  If False (default), returns a list of BNGReference objects.
+
         Returns:
             list[BNGReference]: All BNGReference objects representing squares in a square ring of radius k.
 
         Examples:
             >>> BNGReference("SU1234").bng_kring(1)
-            BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km),
+            [BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km),
             BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km),
             BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km),
             BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km)]
@@ -520,9 +524,9 @@ class BNGReference:
 
         from osbng.traversal import bng_kring as _bng_kring
 
-        return _bng_kring(self, k)
+        return _bng_kring(self, k, return_relations=return_relations)
     
-    def bng_kdisc(self, k: int) -> list["BNGReference"]:
+    def bng_kdisc(self, k: int, return_relations: bool = False) -> list["BNGReference"]:
         """Returns a list of BNG reference objects representing a filled disc around the current BNG reference object
         up to a grid distance k, including the given central BNG reference object.
 
@@ -530,6 +534,10 @@ class BNGReference:
 
         Args:
             k (int): Grid distance in units of grid squares.
+
+        Kwargs:
+            return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+                grid units.  If False (default), returns a list of BNGReference objects.
 
         Returns:
             list[BNGReference]: All BNGReference objects representing grid squares in a square of radius k.
@@ -547,7 +555,7 @@ class BNGReference:
 
         from osbng.traversal import bng_kdisc as _bng_kdisc
 
-        return _bng_kdisc(self, k)
+        return _bng_kdisc(self, k, return_relations=return_relations)
     
     def bng_distance(self, bng_ref2: "BNGReference", edge_to_edge: bool = False) -> float:
         """Returns the euclidean distance between the centroids of the current BNGReference object and another.

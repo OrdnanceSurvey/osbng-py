@@ -87,7 +87,7 @@ def _ring_or_disc(bng_ref: BNGReference, k: int, is_disc: bool, return_relations
     return kring_refs
 
 @_validate_bngreference
-def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
+def bng_kring(bng_ref: BNGReference, k: int, return_relations: bool = False) -> list[BNGReference]:
     """Returns a list of BNG reference objects representing a hollow ring around a given BNG reference object
     at a grid distance k.
 
@@ -97,12 +97,19 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
         bng_ref (BNGReference): A BNGReference object.
         k (int): Grid distance in units of grid squares.
 
+    Kwargs:
+        return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+            grid units.  If False (default), returns a list of BNGReference objects.
+
     Returns:
         list[BNGReference]: All BNGReference objects representing squares in a square ring of radius k.
 
+        If return_relations is True, returns list[(BNGReference, dx, dy)], where dx and dy are the x and y offsets between bng_ref
+            and each returned BNGReference object in units of grid squares.
+
     Examples:
         >>> bng_kring(BNGReference('SU1234'), 1)
-        BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km),
+        [BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km),
         BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km),
         BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km),
         BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km)]
@@ -110,10 +117,10 @@ def bng_kring(bng_ref: BNGReference, k: int) -> list[BNGReference]:
         [list of 24 BNGReference objects]
     """
 
-    return _ring_or_disc(bng_ref, k, False)
+    return _ring_or_disc(bng_ref, k, False, return_relations)
 
 @_validate_bngreference
-def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
+def bng_kdisc(bng_ref: BNGReference, k: int, return_relations: bool = False) -> list[BNGReference]:
     """Returns a list of BNG reference objects representing a filled disc around a given BNG reference object
     up to a grid distance k, including the given central BNG reference object.
 
@@ -123,8 +130,15 @@ def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
         bng_ref (BNGReference): A BNGReference object.
         k (int): Grid distance in units of grid squares.
 
+    Kwargs:
+        return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+            grid units.  If False (default), returns a list of BNGReference objects.
+
     Returns:
         list[BNGReference]: All BNGReference objects representing grid squares in a square of radius k.
+
+        If return_relations is True, returns list[(BNGReference, dx, dy)], where dx and dy are the x and y offsets between bng_ref
+            and each returned BNGReference object in units of grid squares.
 
     Examples:
         >>> bng_kdisc(BNGReference('SU1234'), 1)
@@ -137,7 +151,7 @@ def bng_kdisc(bng_ref: BNGReference, k: int) -> list[BNGReference]:
         [list of 49 BNGReference objects]
     """
 
-    return _ring_or_disc(bng_ref, k, True)
+    return _ring_or_disc(bng_ref, k, True, return_relations)
 
 
 @_validate_bngreference_pair
