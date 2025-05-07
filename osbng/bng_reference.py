@@ -514,12 +514,19 @@ class BNGReference:
 
         Examples:
             >>> BNGReference("SU1234").bng_kring(1)
-            [BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km),
-            BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km),
-            BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km),
-            BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km)]
+            [BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km)]
             >>> BNGReference("SU1234").bng_kring(1, return_relations=True)
-            [BNGReference]
+            [(BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km), -1, 1),
+            (BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km), 0, 1),
+            (BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km), 1, 1),
+            (BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km), -1, 0),
+            (BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km), 1, 0),
+            (BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), -1, -1),
+            (BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km), 0, -1),
+            (BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km), 1, -1)]
             >>> BNGReference("SU1234").bng_kring(3)
             [list of 24 BNGReference objects]
         """
@@ -546,11 +553,21 @@ class BNGReference:
 
         Examples:
             >>> BNGReference("SU1234").bng_kdisc(1)
-            [BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km),
-            BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km),
+            [BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km),
             BNGReference(bng_ref_formatted=SU 12 34, resolution_label=1km), BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km),
-            BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km),
-            BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km)]
+            BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km)]
+            >>> BNGReference("SU1234").bng_kdisc(1, return_relations=True)
+            [(BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km), -1, 1),
+            (BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km), 0, 1),
+            (BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km), 1, 1),
+            (BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km), -1, 0),
+            (BNGReference(bng_ref_formatted=SU 12 34, resolution_label=1km), 0, 0),
+            (BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km), 1, 0),
+            (BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), -1, -1),
+            (BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km), 0, -1),
+            (BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km), 1, -1)]
             >>> BNGReference("SU1234").bng_kdisc(3)
             [list of 49 BNGReference objects]
         """
