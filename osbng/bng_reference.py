@@ -518,6 +518,8 @@ class BNGReference:
             BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km),
             BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km),
             BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km)]
+            >>> BNGReference("SU1234").bng_kring(1, return_relations=True)
+            [BNGReference]
             >>> BNGReference("SU1234").bng_kring(3)
             [list of 24 BNGReference objects]
         """
@@ -671,6 +673,20 @@ def _validate_bngreference(func):
         if not isinstance(args[0], BNGReference):
             raise TypeError(
                 f"First argument must be a BNGReference object, got: {type(args[0])}"
+            )
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+def _validate_bngreference_pair(func):
+    """Decorator to validate that the first two positional arguments of a function are BNGReference objects."""
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if not (isinstance(args[0], BNGReference) & isinstance(args[1], BNGReference)):
+            raise TypeError(
+                f"First two arguments must be a BNGReference object, got: {type(args[0])} and {type(args[1])}"
             )
         return func(*args, **kwargs)
 
