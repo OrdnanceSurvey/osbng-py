@@ -59,7 +59,7 @@ def _ring_or_disc(bng_ref: BNGReference, k: int, is_disc: bool, return_relations
     raise_extent_warning = False
 
     # Iterate over all dx/dy within range
-    for dy in range(-k,k+1):
+    for dy in range(-k,k+1)[::-1]:
         for dx in range(-k,k+1):
             # Include all dx/dy combinations for disks
             # Only include edges for rings
