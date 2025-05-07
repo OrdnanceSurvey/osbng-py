@@ -347,6 +347,11 @@ class BNGReference:
         if isinstance(other, BNGReference):
             return self.bng_ref_compact == other.bng_ref_compact
         return False
+    
+    def __lt__(self, other):
+        if isinstance(other, BNGReference):
+            return (-self.resolution_metres, self.bng_ref_compact) < (-other.resolution_metres, other.bng_ref_compact)
+        return NotImplemented
 
     def __hash__(self):
         return hash(self.bng_ref_compact)
