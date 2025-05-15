@@ -3029,7 +3029,9 @@
             "ymax": 0,
             "resolution": "1km",
             "expected": {
-                "bng_ref_formatted": []
+                "bng_ref_formatted": [
+                    "SV 00 00"
+                ]
             }
         },
         {
