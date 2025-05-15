@@ -3241,6 +3241,18 @@
                     "SV 01 00"
                 ]
             }
+        },
+        {
+            "xmin": 453900,
+            "xmax": 453900,
+            "ymin": 340637,
+            "ymax": 340674,
+            "resolution": "100m",
+            "expected": {
+                "bng_ref_formatted": [
+                    "SK 539 406"
+                ]
+            }
         }
     ],
     "geom_to_bng": [
