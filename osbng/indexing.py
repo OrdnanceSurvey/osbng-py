@@ -601,6 +601,12 @@ def bbox_to_bng(
     # Generate a grid of easting and northing coordinates
     eastings = np.arange(xmin, xmax_snapped, validated_resolution)
     northings = np.arange(ymin, ymax_snapped, validated_resolution)
+
+    # For vertical or horizontal lines which exactly align with the grid boundaries,
+    # the above returns an empty list, so ensure that at least one element is in the eastings and northings
+    eastings = eastings if len(eastings) > 0 else np.array([xmax_snapped])
+    northings = northings if len(northings) > 0 else np.array([ymax_snapped])
+
     easting_grid, northing_grid = np.meshgrid(eastings, northings)
 
     # Flatten grids for iteration
