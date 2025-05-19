@@ -101,11 +101,20 @@ Provides functionality for traversing and calculating distances within the BNG i
 * Calculating the distance between grid square centroids.
 * Retrieving all grid squares within a specified absolute distance.
 
-The following example :
+The following example returns a k-disc of a `BNGReference` object:
 
 ``` python
->>> from osbng.traversal import bng_kring
->>> ...
+>>> bng_ref = BNGReference(bng_ref_string="ST5671SE")
+>>> bng_ref.bng_kdisc(k=1)
+[BNGReference(bng_ref_formatted=ST 56 71 NW, resolution_label=500m),
+ BNGReference(bng_ref_formatted=ST 56 71 NE, resolution_label=500m),
+ BNGReference(bng_ref_formatted=ST 57 71 NW, resolution_label=500m),
+ BNGReference(bng_ref_formatted=ST 56 71 SW, resolution_label=500m),
+ BNGReference(bng_ref_formatted=ST 56 71 SE, resolution_label=500m),
+ BNGReference(bng_ref_formatted=ST 57 71 SW, resolution_label=500m),
+ BNGReference(bng_ref_formatted=ST 56 70 NW, resolution_label=500m),
+ BNGReference(bng_ref_formatted=ST 56 70 NE, resolution_label=500m),
+ BNGReference(bng_ref_formatted=ST 57 70 NW, resolution_label=500m)]
 ```
 
 ### Grids
