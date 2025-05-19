@@ -1,0 +1,57 @@
+[project]
+name = "osbng"
+version = "0.1.0"
+description = "A Python library supporting geospatial grid indexing and interaction with Ordnance Survey's British National Grid index system"
+readme = {file = "README.md"}
+license = {file = "LICENSE"}
+authors = [
+    {name = "Steve Kingston", email = "steve.kingston@os.uk"}, 
+    {name = "Kate New", email = "kate.new@os.uk"},
+    {name = "Tom Peterken", email = "tom.peterken@os.uk"},
+    {name = "Chris Jochem", email = "chris.jochem@os.uk"}
+]
+keywords = [
+    "geospatial", 
+    "gis",
+    "grid",
+    "indexing",
+    "spatial"
+]
+requires-python = ">=3.10, <3.14"
+dependencies = ["shapely >=2.0.0"]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "tox"
+]
+all = [
+    "geopandas",
+    "matplotlib",
+    "pytest",
+    "tox"
+]
+
+[build-system]
+requires = [
+    "setuptools >=61.0", 
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["osbng"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.tox]
+requires = ["tox>=4.26.0"]
+envlist = [
+    "3.10",
+    "3.11",
+    "3.12",
+    "3.13"
+]
+skip_missing_interpreters = false
