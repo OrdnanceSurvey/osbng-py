@@ -3029,7 +3029,9 @@
             "ymax": 0,
             "resolution": "1km",
             "expected": {
-                "bng_ref_formatted": []
+                "bng_ref_formatted": [
+                    "SV 00 00"
+                ]
             }
         },
         {
@@ -3239,6 +3241,18 @@
                     "SV 01 01",
                     "SV 00 00",
                     "SV 01 00"
+                ]
+            }
+        },
+        {
+            "xmin": 453900,
+            "xmax": 453900,
+            "ymin": 340637,
+            "ymax": 340674,
+            "resolution": "100m",
+            "expected": {
+                "bng_ref_formatted": [
+                    "SK 539 406"
                 ]
             }
         }
