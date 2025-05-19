@@ -347,6 +347,11 @@ class BNGReference:
         if isinstance(other, BNGReference):
             return self.bng_ref_compact == other.bng_ref_compact
         return False
+    
+    def __lt__(self, other):
+        if isinstance(other, BNGReference):
+            return (-self.resolution_metres, self.bng_ref_compact) < (-other.resolution_metres, other.bng_ref_compact)
+        return NotImplemented
 
     def __hash__(self):
         return hash(self.bng_ref_compact)
@@ -495,6 +500,191 @@ class BNGReference:
         from osbng.hierarchy import bng_to_parent as _bng_to_parent
 
         return _bng_to_parent(self, resolution)
+    
+    def bng_kring(self, k: int, return_relations: bool = False) -> list["BNGReference"]:
+        """Returns a list of BNG reference objects representing a hollow ring around the current BNG reference object
+        at a grid distance k.
+
+        Returned BNG reference objects are ordered North to South then West to East, therefore not in ring order.
+
+        Args:
+            k (int): Grid distance in units of grid squares.
+
+        Kwargs:
+            return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+                grid units.  If False (default), returns a list of BNGReference objects.
+
+        Returns:
+            list[BNGReference]: All BNGReference objects representing squares in a square ring of radius k.
+
+        Examples:
+            >>> BNGReference("SU1234").bng_kring(1)
+            [BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km)]
+            >>> BNGReference("SU1234").bng_kring(1, return_relations=True)
+            [(BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km), -1, 1),
+            (BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km), 0, 1),
+            (BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km), 1, 1),
+            (BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km), -1, 0),
+            (BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km), 1, 0),
+            (BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), -1, -1),
+            (BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km), 0, -1),
+            (BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km), 1, -1)]
+            >>> BNGReference("SU1234").bng_kring(3)
+            [list of 24 BNGReference objects]
+        """
+
+        from osbng.traversal import bng_kring as _bng_kring
+
+        return _bng_kring(self, k, return_relations=return_relations)
+    
+    def bng_kdisc(self, k: int, return_relations: bool = False) -> list["BNGReference"]:
+        """Returns a list of BNG reference objects representing a filled disc around the current BNG reference object
+        up to a grid distance k, including the given central BNG reference object.
+
+        Returned BNG reference objects are ordered North to South then West to East.
+
+        Args:
+            k (int): Grid distance in units of grid squares.
+
+        Kwargs:
+            return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+                grid units.  If False (default), returns a list of BNGReference objects.
+
+        Returns:
+            list[BNGReference]: All BNGReference objects representing grid squares in a square of radius k.
+
+        Examples:
+            >>> BNGReference("SU1234").bng_kdisc(1)
+            [BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 12 34, resolution_label=1km), BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km)]
+            >>> BNGReference("SU1234").bng_kdisc(1, return_relations=True)
+            [(BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km), -1, 1),
+            (BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km), 0, 1),
+            (BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km), 1, 1),
+            (BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km), -1, 0),
+            (BNGReference(bng_ref_formatted=SU 12 34, resolution_label=1km), 0, 0),
+            (BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km), 1, 0),
+            (BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), -1, -1),
+            (BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km), 0, -1),
+            (BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km), 1, -1)]
+            >>> BNGReference("SU1234").bng_kdisc(3)
+            [list of 49 BNGReference objects]
+        """
+
+        from osbng.traversal import bng_kdisc as _bng_kdisc
+
+        return _bng_kdisc(self, k, return_relations=return_relations)
+    
+    def bng_distance(self, bng_ref2: "BNGReference", edge_to_edge: bool = False) -> float:
+        """Returns the euclidean distance between the centroids of the current BNGReference object and another.
+        Note that the other BNGReference object does not necessarily need to share a common resolution.
+
+        Args:
+            bng_ref2 (BNGReference): A BNGReference object.
+
+        Kwargs:
+            edge_to_edge (bool): If False (default), distance will be centroid-to-centroid distance.
+                If True, distance will be the shortest distance between any point in the grid squares.
+
+        Returns:
+            float: The euclidean distance between the centroids of the two BNGReference objects.
+
+        Raises:
+            TypeError: If the bng_ref2 argument is not a BNGReference object.
+
+        Examples:
+            >>> BNGReference("SE1433").bng_distance(BNGRerence("SE1533"))
+            1000.0
+            >>> BNGReference("SE1433").bng_distance(BNGRerence("SE1631"))
+            2828.42712474619
+            >>> BNGReference("SE1433").bng_distance(BNGRerence("SE"))
+            39147.158262126766
+            >>> BNGReference("SE1433").bng_distance(BNGRerence("SENW"))
+            42807.709586007986
+            >>> BNGReference("SE").bng_distance(BNGRerence("OV"))
+            141421.35623730952
+        """
+
+        from osbng.traversal import bng_distance as _bng_distance
+
+        return _bng_distance(self, bng_ref2, edge_to_edge=edge_to_edge)
+    
+    def bng_neighbours(self):
+        """Returns a list of BNGReference objects representing the four neighbouring grid squares
+        sharing an edge with the current BNGReference.
+
+        Returns:
+            list[BNGReference]: The grid squares immediately North, South, East and West of bng_ref.
+
+        Examples:
+            >>> BNGRefence("SU1234").bng_neighbours()
+            [BNGReference('SU1235'), BNGReference('SU1334'), BNGReference('SU1233'), BNGReference('SU1134')]
+        """
+
+        from osbng.traversal import bng_neighbours as _bng_neighbours
+
+        return _bng_neighbours(self)
+    
+    def bng_is_neighbour(self, bng_ref2: "BNGReference") -> bool:
+        """Returns True if the BNGReference object is a neighbour, otherwise False.
+        Neighbours are defined as grid squares that share an edge with the current BNGReference object.
+
+        Args:
+            bng_ref2 (BNGReference): A BNGReference object.
+
+        Returns:
+            bool: True if the two BNGReference objects are neighbours, otherwise False.
+
+        Raises:
+            TypeError: If the bng_ref2 argument is not a BNGReference object.
+            BNGNeighbourError: If the BNGReference object is not at the same resolution.
+
+        Examples:
+            >>> BNGReference("SE1921").bng_is_neighbour(BNGReference("SE1821"))
+            True
+            >>> BNGReference("SE1922").bng_is_neighbour(BNGReference("SE1821"))
+            False
+            >>> BNGReference("SU1234").bng_is_neighbour(BNGReference("SU1234"))
+            False
+
+        """
+
+        from osbng.traversal import bng_is_neighbour as _bng_is_neighbour
+
+        return _bng_is_neighbour(self, bng_ref2)
+    
+    def bng_dwithin(self, d: int | float) -> list["BNGReference"]:
+        """Returns a list of BNG reference objects around the current BNG reference object within an absolute distance d.
+        All squares will be returned for which any part of its boundary is within distance d of any part of
+        the BNGReference object's boundary.
+
+        Args:
+            d (int or float): The absolute distance d in metres.
+
+        Returns:
+            list[BNGReference]: All grid squares which have any part of their geometry within distance
+                d of the current grid square
+
+        Examples:
+            >>> BNGReference("SU1234").bng_dwithin(1000)
+            [BNGReference(bng_ref_formatted=SU 11 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 33, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 13 33, resolution_label=1km), BNGReference(bng_ref_formatted=SU 11 34, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 12 34, resolution_label=1km), BNGReference(bng_ref_formatted=SU 13 34, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 11 35, resolution_label=1km), BNGReference(bng_ref_formatted=SU 12 35, resolution_label=1km),
+            BNGReference(bng_ref_formatted=SU 13 35, resolution_label=1km)]
+            >>> BNGReference("SU1234").bng_dwithin(1001)
+            [list of 21 BNGReference objects]
+        """
+
+        from osbng.traversal import bng_dwithin as _bng_dwithin
+
+        return _bng_dwithin(self, d)
 
 
 def _validate_bngreference(func):
@@ -505,6 +695,20 @@ def _validate_bngreference(func):
         if not isinstance(args[0], BNGReference):
             raise TypeError(
                 f"First argument must be a BNGReference object, got: {type(args[0])}"
+            )
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+def _validate_bngreference_pair(func):
+    """Decorator to validate that the first two positional arguments of a function are BNGReference objects."""
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if not (isinstance(args[0], BNGReference) & isinstance(args[1], BNGReference)):
+            raise TypeError(
+                f"First two arguments must be a BNGReference object, got: {type(args[0])} and {type(args[1])}"
             )
         return func(*args, **kwargs)
 
