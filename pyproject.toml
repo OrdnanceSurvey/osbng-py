@@ -2,7 +2,7 @@
 name = "osbng"
 version = "0.1.0"
 description = "A Python library supporting geospatial grid indexing and interaction with Ordnance Survey's British National Grid index system"
-readme = {file = "README.md"}
+readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
     {name = "Steve Kingston", email = "steve.kingston@os.uk"}, 
