@@ -27,8 +27,8 @@ from shapely.geometry import shape
 from osbng.errors import _EXCEPTION_MAP
 from osbng.indexing import _validate_and_normalise_bng_resolution
 from osbng.indexing_gpd import gdf_to_bng_intersection_explode
-from tests.test_indexing import GeomToBNGIntersectionTestCase
 from osbng.utils import _load_test_cases
+from tests.test_indexing import GeomToBNGIntersectionTestCase
 
 
 def validate_and_assert_gdf_bng_intersection(
