@@ -34,7 +34,7 @@ all = [
 
 [build-system]
 requires = [
-    "setuptools >=68.0", 
+    "setuptools >=77.0.3", # Ensure support for PEP 639 license metadata
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
