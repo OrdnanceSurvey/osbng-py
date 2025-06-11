@@ -29,7 +29,6 @@ def gdf_to_bng_intersection_explode(
     gdf: gpd.GeoDataFrame,
     resolution: int | str,
     *,
-    geometry_column: str = "geometry",
     reset_index: bool = True,
 ) -> gpd.GeoDataFrame:
     """Applies the `osbng.indexing.geom_to_bng_intersection` function to each geometry in a GeoPandas `GeoDataFrame`, returning a flattened GeoDataFrame
@@ -47,7 +46,6 @@ def gdf_to_bng_intersection_explode(
     Args:
         gdf (gpd.GeoDataFrame): Input GeoDataFrame.
         resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
-        geometry_column (str): The name of the geometry column in the input GeoDataFrame. Defaults to "geometry". Keyword-only.
         reset_index (bool): Whether to reset the index of the resulting GeoDataFrame. Defaults to True. Keyword-only.
 
     Returns:
@@ -60,9 +58,8 @@ def gdf_to_bng_intersection_explode(
         BNGResolutionError: If an invalid resolution is provided.
         BNGExtentError: If the coordinates of a Point geometry are outside of the BNG index system extent.
         ValueError: If the GeoDataFrame CRS is not equal to "EPSG:27700"
-        ValueError: If the geometry column does not exist in the GeoDataFrame.
+        ValueError: If an active geometry column is not set in the GeoDataFrame.
         ValueError: If the geometry type is not supported.
-        TypeError: If the geometry column is not of geometry dtype.
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
@@ -73,15 +70,14 @@ def gdf_to_bng_intersection_explode(
             "GeoDataFrame CRS must be set to 'EPSG:27700' (British National Grid)."
         )
 
-    # Validate the geometry column exists in the GeoDataFrame
-    if geometry_column not in gdf.columns:
-        raise ValueError(
-            f"Geometry column '{geometry_column}' not found in GeoDataFrame."
-        )
+    # Validate if an active geometry column has been set on the GeoDataFrame
+    geometry_column = gdf.active_geometry_name
 
-    # Validate the geometry column is of geometry dtype
-    if not gdf[geometry_column].dtype.name == "geometry":
-        raise TypeError(f"Column '{geometry_column}' is not of geometry dtype.")
+    if geometry_column is None:
+        raise ValueError(
+            "GeoDataFrame must have an active geometry column set. "
+            "Use `gdf.set_geometry(geometry_column_name)` to set the active geometry column."
+        )
 
     # Initialise an empty list to store the rows for the new GeoDataFrame
     rows = []
