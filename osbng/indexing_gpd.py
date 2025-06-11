@@ -57,12 +57,22 @@ def gdf_to_bng_intersection_explode(
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
         BNGExtentError: If the coordinates of a Point geometry are outside of the BNG index system extent.
+        TypeError: If the input is not a GeoPandas GeoDataFrame.
+        ValueError: If the input GeoDataFrame is empty.
         ValueError: If the GeoDataFrame CRS is not equal to "EPSG:27700"
         ValueError: If an active geometry column is not set in the GeoDataFrame.
         ValueError: If the geometry type is not supported.
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
+
+    # Validate the input is a GeoDataFrame
+    if not isinstance(gdf, gpd.GeoDataFrame):
+        raise TypeError("Input must be a GeoPandas GeoDataFrame.")
+    
+    # Validate the GeoDataFrame is not empty
+    if gdf.empty:
+        raise ValueError("Input GeoDataFrame must not be empty.")
 
     # Validate the GeoDataFrame coordinate reference system (CRS) is equal to EPSG:27700
     if gdf.crs is None or not gdf.crs.to_epsg() == 27700:
