@@ -9,6 +9,8 @@ To install the required package, use::
 
 """
 
+from shapely import Geometry
+
 try:
     import geopandas as gpd
 except ImportError as e:
@@ -25,6 +27,27 @@ from osbng.indexing import (
 __all__ = ["gdf_to_bng_intersection_explode"]
 
 
+def _is_geometry_column(gdf: gpd.GeoDataFrame, col: str) -> bool:
+    """
+    Check if a column in a GeoDataFrame is a geometry column.
+
+    Args:
+        gdf (gpd.GeoDataFrame): The GeoDataFrame to check.
+        col (str): The column name to check.
+
+    Returns:
+        bool: True if the column is a geometry column, False otherwise.
+    """
+    # Drop NULL rows
+    non_null = gdf[col].dropna()
+
+    # If the column is empty, return False
+    if non_null.empty:
+        return False
+    # Check if the first non-null value is an instance of Geometry
+    return isinstance(non_null.iloc[0], Geometry)
+
+
 def gdf_to_bng_intersection_explode(
     gdf: gpd.GeoDataFrame,
     resolution: int | str,
@@ -34,12 +57,17 @@ def gdf_to_bng_intersection_explode(
     """Applies the `osbng.indexing.geom_to_bng_intersection` function to each geometry in a GeoPandas `GeoDataFrame`, returning a flattened GeoDataFrame
     by exploding the resulting lists of `BNGIndexedGeometry` objects.
 
+    The `geom_to_bng_intersection` function is applied to the active geometry column of the input GeoDataFrame, 
+    which is expected to be set and in the OSGB36 / British National Grid coordinate reference system (CRS) (EPSG:27700).
+
     This function decomposes each geometry in the input GeoDataFrame bounded by their presence in BNG grid squares at the specified resolution. The resulting `BNGIndexedGeometry` objects are
     exploded into individual rows, with each row containing a new column for each `BNGIndexedGeometry` object property: bng_ref, is_core, and geom.
 
-    The original GeoDataFrame geometry column is replaced with the `geom` property of the `BNGIndexedGeometry` objects. The original geometry column can be retrieved if required
-    by joining the resulting GeoDataFrame with the original GeoDataFrame on the index (if not reset), or using a feature identifier. Dropping the original geometry column reduces memory usage 
+    The input GeoDataFrame geometry column is replaced with the `geom` property of the `BNGIndexedGeometry` objects. The input geometry column can be retrieved if required
+    by joining the resulting GeoDataFrame with the original GeoDataFrame on the index (if not reset), or using a feature identifier. Dropping the original geometry column reduces memory usage
     and simplifies the resulting GeoDataFrame.
+
+    All non-geometry columns from the original GeoDataFrame are retained in the resulting GeoDataFrame.
 
     Exploding the resulting GeoDataFrame allows for easier analysis and manipulation of the `BNGIndexedGeometry` object properties. This is otherwise a more complex operation.
 
@@ -58,7 +86,6 @@ def gdf_to_bng_intersection_explode(
         BNGResolutionError: If an invalid resolution is provided.
         BNGExtentError: If the coordinates of a Point geometry are outside of the BNG index system extent.
         TypeError: If the input is not a GeoPandas GeoDataFrame.
-        ValueError: If the input GeoDataFrame is empty.
         ValueError: If the GeoDataFrame CRS is not equal to "EPSG:27700"
         ValueError: If an active geometry column is not set in the GeoDataFrame.
         ValueError: If the geometry type is not supported.
@@ -69,7 +96,7 @@ def gdf_to_bng_intersection_explode(
     # Validate the input is a GeoDataFrame
     if not isinstance(gdf, gpd.GeoDataFrame):
         raise TypeError("Input must be a GeoPandas GeoDataFrame.")
-    
+
     # Validate the GeoDataFrame is not empty
     if gdf.empty:
         raise ValueError("Input GeoDataFrame must not be empty.")
@@ -88,6 +115,12 @@ def gdf_to_bng_intersection_explode(
             "GeoDataFrame must have an active geometry column set. "
             "Use `gdf.set_geometry(geometry_column_name)` to set the active geometry column."
         )
+
+    # Retain only the active geometry column and non-geometry columns
+    gdf = gdf[
+        [geometry_column]
+        + [col for col in gdf.columns if not _is_geometry_column(gdf, col)]
+    ]
 
     # Initialise an empty list to store the rows for the new GeoDataFrame
     rows = []
