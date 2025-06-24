@@ -1,7 +1,7 @@
 [project]
 name = "osbng"
 version = "0.1.0"
-description = "A Python library supporting geospatial grid indexing and interaction with Ordnance Survey's British National Grid index system"
+description = "A Python package supporting geospatial grid indexing and interaction with Ordnance Survey's British National Grid index system"
 readme = "README.md"
 license = "MIT"
 authors = [
