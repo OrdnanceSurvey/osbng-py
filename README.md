@@ -76,6 +76,12 @@ The following example demonstrates a round trip of constructing a `BNGReference`
 'POLYGON ((360000 170000, 360000 175000, 355000 175000, 355000 170000, 360000 170000))'
 ```
 
+### Indexing GeoPandas (GPD)
+
+Optional functionality is available when the [`GeoPandas`](https://github.com/geopandas/geopandas) package is installed. This enables indexing of geometries in a `GeoDataFrame` against the BNG index system. Includes:
+
+* Indexing geometries in a `GeoDataFrame` into grid squares at a specified resolution, and explode the resulting lists of indexed objects into a flattened `GeoDataFrame` for further analysis.
+
 ### Hierarchy
 
 Provides functionality to navigate the hierarchical structure of the BNG index system. This includes:
