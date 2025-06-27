@@ -1,0 +1,52 @@
+cff-version: 1.2.0
+title: >-
+  Geospatial grid indexing and interaction with the British
+  National Grid.
+message: 'To cite package osbng in publications use:'
+type: software
+authors:
+  - given-names: Steve
+    family-names: Kingston
+    email: steve.kingston@os.uk
+  - given-names: Kate
+    family-names: New
+    email: kate.new@os.uk
+  - given-names: Tom
+    family-names: Peterken
+    email: tom.peterken@os.uk
+  - given-names: Chris
+    family-names: Jochem
+    email: chris.jochem@os.uk
+repository-code: 'https://github.com/OrdnanceSurvey/osbng-py'
+abstract: >-
+  Offers a streamlined programmatic interface to Ordnance
+  Survey's British National Grid (BNG) index system,
+  enabling efficient spatial indexing and analysis based on
+  grid references. It supports a range of geospatial
+  applications, including statistical aggregation, data
+  visualisation, and interoperability across datasets.
+  Designed for developers and analysts working with
+  geospatial data in Great Britain, osbng simplifies
+  integration with geospatial workflows and provides
+  intuitive tools for exploring the structure and logic of
+  the BNG system.
+keywords:
+  - python
+  - geospatial
+  - gis
+  - spatial
+  - ordnancesurvey
+  - spatial-indexing
+  - ordnance-survey-grid
+license: MIT
+version: 0.2.0
+preferred-citation:
+  type: software
+  title: Geospatial grid indexing and interaction with the British National Grid.
+  authors:
+  - name: Ordnance Survey
+  institution:
+    name: Ordnance Survey Ltd
+  year: '2025'
+  version: 0.2.0
+  repository-code: https://github.com/OrdnanceSurvey/osbng-py
