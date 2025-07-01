@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 title: >-
-  Geospatial grid indexing and interaction with the British
-  National Grid.
+  osbng: Geospatial Grid Indexing and Interaction With the British
+  National Grid
 message: 'To cite package osbng in publications use:'
 type: software
 authors:
@@ -42,7 +42,7 @@ license: MIT
 version: 0.2.0
 preferred-citation:
   type: software
-  title: Geospatial grid indexing and interaction with the British National Grid.
+  title: osbng: Geospatial Grid Indexing and Interaction With the British National Grid
   authors:
   - name: Ordnance Survey
   institution:
