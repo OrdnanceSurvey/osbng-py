@@ -35,9 +35,10 @@ keywords:
   - geospatial
   - gis
   - spatial
-  - ordnancesurvey
-  - spatial-indexing
-  - ordnance-survey-grid
+  - ordnance survey
+  - spatial indexing
+  - british national grid
+  - ordnance survey grid
 license: MIT
 version: 0.2.0
 preferred-citation:
