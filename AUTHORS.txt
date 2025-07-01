@@ -1,4 +1,0 @@
-* Steve Kingston <steve.kingston@os.uk>
-* Kate New <kate.new@os.uk>
-* Tom Peterken <tom.peterken@os.uk>
-* Chris Jochem <chris.jochem@os.uk>
