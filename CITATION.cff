@@ -41,6 +41,7 @@ keywords:
   - ordnance survey grid
 license: MIT
 version: 0.2.0
+date-released: 2025-06-25
 preferred-citation:
   type: software
   title: osbng: Geospatial Grid Indexing and Interaction With the British National Grid
