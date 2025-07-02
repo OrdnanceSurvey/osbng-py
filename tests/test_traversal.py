@@ -7,10 +7,10 @@ The test cases are defined as TypedDicts, which provide a way to define the stru
 
 import pytest
 
-from osbng.traversal import *
-from osbng.errors import _EXCEPTION_MAP
-from osbng.utils import _load_test_cases
 from osbng.bng_reference import BNGReference
+from osbng.errors import _EXCEPTION_MAP
+from osbng.traversal import *
+from osbng.utils import _load_test_cases
 
 
 # Parameterised test for bng_distance function
