@@ -1,6 +1,6 @@
 [project]
 name = "osbng"
-version = "0.1.0"
+version = "0.2.0"
 description = "A Python package supporting geospatial grid indexing and interaction with Ordnance Survey's British National Grid index system"
 readme = "README.md"
 license = "MIT"
@@ -41,7 +41,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-where = ["osbng"]
+where = ["."]
 
 [tool.pytest.ini_options]
 addopts = "-ra"
