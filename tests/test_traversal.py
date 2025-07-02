@@ -45,6 +45,7 @@ def test_bng_distance(test_case: BNGDistanceTestCase):
     """
     bng_ref1 = test_case["bng_ref_string_1"]
     bng_ref2 = test_case["bng_ref_string_2"]
+
     if "expected_exception" in test_case:
         # Get exception name from test case
         exception_name = test_case["expected_exception"]["name"]
@@ -53,12 +54,14 @@ def test_bng_distance(test_case: BNGDistanceTestCase):
         # Assert that the test case raises the expected exception
         with pytest.raises(exception_class):
             bng_distance(BNGReference(bng_ref1), BNGReference(bng_ref2))
+
     elif "edge_to_edge" in test_case:
         # If edge_to_edge is specified, use it in the distance calculation
         edge_to_edge = test_case["edge_to_edge"]
         # Assert that the function returns the expected result
         distance = bng_distance(BNGReference(bng_ref1), BNGReference(bng_ref2), edge_to_edge=edge_to_edge)
         assert distance == test_case["expected"]
+
     else:
         # Assert that the function returns the expected result
         distance = bng_distance(BNGReference(bng_ref1), BNGReference(bng_ref2))
@@ -96,6 +99,7 @@ def test_bng_is_neighbour(test_case: BNGIsNeighbourTestCase):
     # Load test case data
     bng_ref1 = test_case["bng_ref_string_1"]
     bng_ref2 = test_case["bng_ref_string_2"]
+
     if "expected_exception" in test_case:
         # Get exception name from test case
         exception_name = test_case["expected_exception"]["name"]
@@ -110,6 +114,7 @@ def test_bng_is_neighbour(test_case: BNGIsNeighbourTestCase):
         # Assert that the test case raises the expected exception
         with pytest.raises(exception_class, match=message):
             bng_is_neighbour(BNGReference(bng_ref1), BNGReference(bng_ref2))
+
     else:
         # Assert that the function returns the expected result
         distance = bng_is_neighbour(BNGReference(bng_ref1), BNGReference(bng_ref2))
@@ -147,6 +152,7 @@ def test_bng_kring(test_case: BNGKRingTestCase):
     if "expected_length" in test_case:
         # Assert that the function returns the expected length
         assert len(bng_kring(BNGReference(test_case["bng_ref_string"]), test_case["k"])) == test_case["expected_length"]
+    
     else:
         # Assert that the function returns the expected result
         kring = bng_kring(BNGReference(test_case["bng_ref_string"]), test_case["k"])
@@ -184,6 +190,7 @@ def test_bng_kdisc(test_case: BNGKDiscTestCase):
     if "expected_length" in test_case:
         # Assert that the function returns the expected length
         assert len(bng_kdisc(BNGReference(test_case["bng_ref_string"]), test_case["k"])) == test_case["expected_length"]
+    
     else:
         # Assert that the function returns the expected result
         kring = bng_kdisc(BNGReference(test_case["bng_ref_string"]), test_case["k"])
@@ -221,6 +228,7 @@ def test_bng_dwithin(test_case: BNGKDWithinTestCase):
     if "expected_length" in test_case:
         # Assert that the function returns the expected length
         assert len(bng_dwithin(BNGReference(test_case["bng_ref_string"]), test_case["d"])) == test_case["expected_length"]
+    
     else:
         # Assert that the function returns the expected result
         kring = bng_dwithin(BNGReference(test_case["bng_ref_string"]), test_case["d"])
