@@ -5,6 +5,8 @@ Test cases are loaded from the JSON file using the _load_test_cases function, wh
 The test cases are defined as TypedDicts, which provide a way to define the structure of the test case data.
 """
 
+from typing import TypedDict
+
 import pytest
 
 from osbng.bng_reference import BNGReference
@@ -13,12 +15,28 @@ from osbng.traversal import *
 from osbng.utils import _load_test_cases
 
 
+class BNGDistanceTestCase(TypedDict):
+    """TypedDict for bng_distance function test cases.
+
+    Attributes:
+        bng_ref_string_1 (str): The first BNG reference string.
+        bng_ref_string_2 (str): The second BNG reference string.
+        edge_to_edge (bool | None): Whether to calculate edge-to-edge distance.
+        expected (float): The distance expected between the two BNG references.
+    """
+
+    bng_ref_string_1: str
+    bng_ref_string_2: str
+    edge_to_edge: bool | None
+    expected: float
+
+
 # Parameterised test for bng_distance function
 @pytest.mark.parametrize(
     "test_case",
     _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_distance"],
 )
-def test_bng_distance(test_case):
+def test_bng_distance(test_case: BNGDistanceTestCase):
     """Test bng_distance with test cases from JSON file."""
     bng_ref1 = test_case["bng_ref_string_1"]
     bng_ref2 = test_case["bng_ref_string_2"]
@@ -37,12 +55,28 @@ def test_bng_distance(test_case):
         assert distance == test_case["expected"]
 
 
+class BNGIsNeighbourTestCase(TypedDict):
+    """TypedDict for bng_is_neighbour function test cases.
+
+    Attributes:
+        bng_ref_string_1 (str): The first BNG reference string.
+        bng_ref_string_2 (str): The second BNG reference string.
+        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name and message.
+        expected (bool | None): The expected result of the neighbour check.
+    """
+
+    bng_ref_string_1: str
+    bng_ref_string_2: str
+    expected_exception: dict[str, str] | None
+    expected: bool | None
+
+
 # Parameterised test for bng_is_neighbour function
 @pytest.mark.parametrize(
     "test_case",
     _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_is_neighbour"],
 )
-def test_bng_is_neighbour(test_case):
+def test_bng_is_neighbour(test_case: BNGIsNeighbourTestCase):
     """Test bng_is_neighbour with test cases from JSON file."""
     bng_ref1 = test_case["bng_ref_string_1"]
     bng_ref2 = test_case["bng_ref_string_2"]
@@ -62,12 +96,28 @@ def test_bng_is_neighbour(test_case):
         assert distance == test_case["expected"]
 
 
+class BNGKRingTestCase(TypedDict):
+    """TypedDict for bng_kring function test cases.
+
+    Attributes:
+        bng_ref_string (str): The BNG reference string.
+        k (int): The k value for the k-ring.
+        expected (dict[str, list[str]] | None): The expected result is a dictionary with the key "bng_ref_formatted" and a list of formatted BNG reference strings.
+        expected_length (int | None): The expected length of the k-ring. Represents the number of BNGReference objects within k-ring.
+    """
+
+    bng_ref_string: str
+    k: int
+    expected: dict[str, list[str]] | None
+    expected_length: int | None
+
+
 # Parameterised test for bng_kring function
 @pytest.mark.parametrize(
     "test_case",
     _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_kring"],
 )
-def test_bng_kring(test_case):
+def test_bng_kring(test_case: BNGKRingTestCase):
     """Test bng_kring with test cases from JSON file."""
 
     if "expected_length" in test_case:
@@ -77,12 +127,28 @@ def test_bng_kring(test_case):
         assert sorted([r.bng_ref_formatted for r in kring]) == sorted(test_case["expected"]["bng_ref_formatted"])
 
 
+class BNGKDiscTestCase(TypedDict):
+    """TypedDict for bng_kdisc function test cases.
+
+    Attributes:
+        bng_ref_string (str): The BNG reference string.
+        k (int): The k value for the k-disc.
+        expected (dict[str, list[str]] | None): The expected result is a dictionary with the key "bng_ref_formatted" and a list of formatted BNG reference strings.
+        expected_length (int | None): The expected length of the k-disc. Represents the number of BNGReference objects within k-disc.
+    """
+
+    bng_ref_string: str
+    k: int
+    expected: dict[str, list[str]] | None
+    expected_length: int | None
+
+
 # Parameterised test for bng_kdisc function
 @pytest.mark.parametrize(
     "test_case",
     _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_kdisc"],
 )
-def test_bng_kdisc(test_case):
+def test_bng_kdisc(test_case: BNGKDiscTestCase):
     """Test bng_kdisc with test cases from JSON file."""
 
     if "expected_length" in test_case:
@@ -92,12 +158,28 @@ def test_bng_kdisc(test_case):
         assert sorted([r.bng_ref_formatted for r in kring]) == sorted(test_case["expected"]["bng_ref_formatted"])
 
 
+class BNGKDWithinTestCase(TypedDict):
+    """TypedDict for bng_dwithin function test cases.
+
+    Attributes:
+        bng_ref_string (str): The BNG reference string.
+        d (int): The d value for the d-within search.
+        expected (dict[str, list[str]] | None): The expected result is a dictionary with the key "bng_ref_formatted" and a list of formatted BNG reference strings.
+        expected_length (int | None): The expected length of the d-within search. Represents the number of BNGReference objects within d-within search.
+    """
+
+    bng_ref_string: str
+    d: int
+    expected: dict[str, list[str]] | None
+    expected_length: int | None
+
+
 # Parameterised test for bng_dwithin function
 @pytest.mark.parametrize(
     "test_case",
     _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_dwithin"],
 )
-def test_bng_dwithin(test_case):
+def test_bng_dwithin(test_case: BNGKDWithinTestCase):
     """Test bng_dwithin with test cases from JSON file."""
 
     if "expected_length" in test_case:
