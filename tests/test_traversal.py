@@ -22,7 +22,7 @@ class BNGDistanceTestCase(TypedDict):
         bng_ref_string_1 (str): The first BNG reference string.
         bng_ref_string_2 (str): The second BNG reference string.
         edge_to_edge (bool | None): Whether to calculate edge-to-edge distance.
-        expected (float): The distance expected between the two BNG references.
+        expected (float): The expected distance between the pair of BNGReference objects.
     """
 
     bng_ref_string_1: str
@@ -43,6 +43,7 @@ def test_bng_distance(test_case: BNGDistanceTestCase):
     Args:
         test_case (BNGDistanceTestCase): The test case from JSON file.
     """
+    # Load test case data
     bng_ref1 = test_case["bng_ref_string_1"]
     bng_ref2 = test_case["bng_ref_string_2"]
 
