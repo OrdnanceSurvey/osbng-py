@@ -50,6 +50,17 @@
             "bng_ref_string_1": "TL 19 28",
             "bng_ref_string_2": "ST SW",
             "expected": 220323.62560560773
+        },
+        {
+            "bng_ref_string_1": "SJ",
+            "bng_ref_string_2": "SJ",
+            "expected": 0.0
+        },
+        {
+            "bng_ref_string_1": "SJ",
+            "bng_ref_string_2": "SJ",
+            "edge_to_edge": true,
+            "expected": 0.0
         }
     ],
     "bng_is_neighbour": [
@@ -152,7 +163,7 @@
             "bng_ref_string": "SU 12 34",
             "d": 999,
             "expected": {
-                "bng_ref_formatted": [                    
+                "bng_ref_formatted": [
                     "SU 11 33",
                     "SU 12 33",
                     "SU 13 33",
