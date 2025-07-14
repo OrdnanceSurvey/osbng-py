@@ -1,66 +1,77 @@
 {
     "bng_distance": [
         {
-            "bng_ref_string_1": "SE1822",
-            "bng_ref_string_2": "SE1922",
+            "bng_ref_string_1": "SE 18 22",
+            "bng_ref_string_2": "SE 19 22",
             "expected": 1000.0
         },
         {
-            "bng_ref_string_1": "SE1822",
-            "bng_ref_string_2": "SE1922",
+            "bng_ref_string_1": "SE 18 22",
+            "bng_ref_string_2": "SE 19 22",
             "edge_to_edge": true,
             "expected": 0.0
         },
         {
-            "bng_ref_string_1": "SE12",
-            "bng_ref_string_2": "SE13",
+            "bng_ref_string_1": "SE 12",
+            "bng_ref_string_2": "SE 13",
             "expected": 10000.0
         },
         {
-            "bng_ref_string_1": "SE12",
-            "bng_ref_string_2": "SE14",
+            "bng_ref_string_1": "SE 12",
+            "bng_ref_string_2": "SE 14",
             "expected": 20000.0
         },
         {
-            "bng_ref_string_1": "TL2029",
-            "bng_ref_string_2": "TL2130",
+            "bng_ref_string_1": "TL 20 29",
+            "bng_ref_string_2": "TL 21 30",
             "expected": 1414.213562373095
         },
         {
-            "bng_ref_string_1": "TL1928",
-            "bng_ref_string_2": "TL2231",
+            "bng_ref_string_1": "TL 19 28",
+            "bng_ref_string_2": "TL 22 31",
             "expected": 4242.640687119285
         },
         {
-            "bng_ref_string_1": "SE0718",
-            "bng_ref_string_2": "SE0922",
+            "bng_ref_string_1": "SE 07 18",
+            "bng_ref_string_2": "SE 09 22",
             "expected": 4472.13595499958
         },
         {
-            "bng_ref_string_1": "SE1118",
-            "bng_ref_string_2": "SE22NW",
+            "bng_ref_string_1": "SE 11 18",
+            "bng_ref_string_2": "SE 22 NW",
             "expected": 14212.670403551896
         },
         {
-            "bng_ref_string_1": "STSW",
-            "bng_ref_string_2": "TASW",
+            "bng_ref_string_1": "ST SW",
+            "bng_ref_string_2": "TA SW",
             "expected": 360555.1275463989
         },
         {
-            "bng_ref_string_1": "TL1928",
-            "bng_ref_string_2": "STSW",
+            "bng_ref_string_1": "TL 19 28",
+            "bng_ref_string_2": "ST SW",
             "expected": 220323.62560560773
+        },
+        {
+            "bng_ref_string_1": "SJ",
+            "bng_ref_string_2": "SJ",
+            "expected": 0.0
+        },
+        {
+            "bng_ref_string_1": "SJ",
+            "bng_ref_string_2": "SJ",
+            "edge_to_edge": true,
+            "expected": 0.0
         }
     ],
     "bng_is_neighbour": [
         {
-            "bng_ref_string_1": "SE1822",
-            "bng_ref_string_2": "SE1922",
+            "bng_ref_string_1": "SE 18 22",
+            "bng_ref_string_2": "SE 19 22",
             "expected": true
         },
         {
-            "bng_ref_string_1": "SE1822",
-            "bng_ref_string_2": "SE1721",
+            "bng_ref_string_1": "SE 18 22",
+            "bng_ref_string_2": "SE 17 21",
             "expected": false
         },
         {
@@ -80,29 +91,29 @@
         },
         {
             "bng_ref_string_1": "SE",
-            "bng_ref_string_2": "TA0030",
+            "bng_ref_string_2": "TA 00 30",
             "expected_exception": {
                 "name": "BNGNeighbourError",
                 "message": "The input BNG Resolution objects are not the same grid resolution. The input BNG Resolution objects must be the same grid resolution."
             }
         },
         {
-            "bng_ref_string_1": "SPSE",
-            "bng_ref_string_2": "TL02",
+            "bng_ref_string_1": "SP SE",
+            "bng_ref_string_2": "TL 02",
             "expected_exception": {
                 "name": "BNGNeighbourError",
                 "message": "The input BNG Resolution objects are not the same grid resolution. The input BNG Resolution objects must be the same grid resolution."
             }
         },
         {
-            "bng_ref_string_1": "SPSE",
-            "bng_ref_string_2": "SPSE",
+            "bng_ref_string_1": "SP SE",
+            "bng_ref_string_2": "SP SE",
             "expected": false
         }
     ],
     "bng_kring": [
         {
-            "bng_ref_string": "SU1234",
+            "bng_ref_string": "SU 12 34",
             "k": 1,
             "expected": {
                 "bng_ref_formatted": [
@@ -118,14 +129,44 @@
             }
         },
         {
-            "bng_ref_string": "SU1234",
+            "bng_ref_string": "SU 12 34",
             "k": 3,
             "expected_length": 24
+        },
+        {
+            "bng_ref_string": "SV",
+            "k": 1,
+            "expected_warning": true,
+            "expected": {
+                "bng_ref_formatted": [
+                    "SQ",
+                    "SR",
+                    "SW"
+                ]
+            }
+        },
+        {
+            "bng_ref_string": "OM 9 4",
+            "k": 2,
+            "expected_warning": true,
+            "expected": {
+                "bng_ref_formatted": [
+                    "OM 7 2",
+                    "OM 7 3",
+                    "OM 7 4",
+                    "OM 7 5",
+                    "OM 7 6",
+                    "OM 8 2",
+                    "OM 8 6",
+                    "OM 9 2",
+                    "OM 9 6"
+                ]
+            }
         }
     ],
     "bng_kdisc": [
         {
-            "bng_ref_string": "SU1234",
+            "bng_ref_string": "SU 12 34",
             "k": 1,
             "expected": {
                 "bng_ref_formatted": [
@@ -142,17 +183,59 @@
             }
         },
         {
-            "bng_ref_string": "SU1234",
+            "bng_ref_string": "SU 12 34",
             "k": 3,
             "expected_length": 49
+        },
+        {
+            "bng_ref_string": "HL NW",
+            "k": 1,
+            "expected_warning": true,
+            "expected": {
+                "bng_ref_formatted": [
+                    "HL NW",
+                    "HL NE",
+                    "HL SE",
+                    "HL SW"
+                ]
+            }
+        },
+        {
+            "bng_ref_string": "TW 71",
+            "k": 2,
+            "expected_warning": true,
+            "expected": {
+                "bng_ref_formatted": [
+                    "TW 5 0",
+                    "TW 5 1",
+                    "TW 5 2",
+                    "TW 5 3",
+                    "TW 6 0",
+                    "TW 6 1",
+                    "TW 6 2",
+                    "TW 6 3",
+                    "TW 7 0",
+                    "TW 7 1",
+                    "TW 7 2",
+                    "TW 7 3",
+                    "TW 8 0",
+                    "TW 8 1",
+                    "TW 8 2",
+                    "TW 8 3",
+                    "TW 9 0",
+                    "TW 9 1",
+                    "TW 9 2",
+                    "TW 9 3"
+                ]
+            }
         }
     ],
     "bng_dwithin": [
         {
-            "bng_ref_string": "SU1234",
+            "bng_ref_string": "SU 12 34",
             "d": 999,
             "expected": {
-                "bng_ref_formatted": [                    
+                "bng_ref_formatted": [
                     "SU 11 33",
                     "SU 12 33",
                     "SU 13 33",
@@ -166,7 +249,7 @@
             }
         },
         {
-            "bng_ref_string": "SU1234",
+            "bng_ref_string": "SU 12 34",
             "d": 1001,
             "expected_length": 21
         }
