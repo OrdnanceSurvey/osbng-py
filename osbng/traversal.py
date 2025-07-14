@@ -213,11 +213,6 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
         0.0
     """
 
-    # Derive the centroid of the first BNGReference object
-    centroid1 = bng_to_xy(bng_ref1, "centre")
-
-    # Derive the centroid of the second BNGReference object
-    centroid2 = bng_to_xy(bng_ref2, "centre")
 
     # Catch the special case of parent-child relationship when using edge-to-edge
     if (bng_ref1.resolution_metres != bng_ref2.resolution_metres) & edge_to_edge:
@@ -230,7 +225,14 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
         if bng_to_parent(child_candidate, resolution=parent_candidate.resolution_metres) == parent_candidate:
             return 0.0
 
-    # Note this must be a new if, not elif, to catch cases where bng_ref1 and bng_ref2 do not share a resolution but are not parents
+    # Derive the centroid of the first BNGReference object
+    centroid1 = bng_to_xy(bng_ref1, "centre")
+
+    # Derive the centroid of the second BNGReference object
+    centroid2 = bng_to_xy(bng_ref2, "centre")
+
+    # Note this must be a new if-else logic to the above special case, to catch cases where bng_ref1 and bng_ref2
+    # do not share a resolution but are not parents
     if edge_to_edge:      
         # For edge-to-edge distances, the x-distance and y-distance are the centroid-to-centroid
         # distance minus half the box width/height at either end
