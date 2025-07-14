@@ -132,6 +132,37 @@
             "bng_ref_string": "SU 12 34",
             "k": 3,
             "expected_length": 24
+        },
+        {
+            "bng_ref_string": "SV",
+            "k": 1,
+            "expected_warning": true,
+            "expected": {
+                "bng_ref_formatted": [
+                    "SQ",
+                    "SR",
+                    "SV",
+                    "SW"
+                ]
+            }
+        },
+        {
+            "bng_ref_string": "OM 94",
+            "k": 2,
+            "expected_warning": true,
+            "expected": {
+                "bng_ref_formatted": [
+                    "OM 72",
+                    "OM 73",
+                    "OM 74",
+                    "OM 75",
+                    "OM 76",
+                    "OM 82",
+                    "OM 86",
+                    "OM 92",
+                    "OM 96"
+                ]
+            }
         }
     ],
     "bng_kdisc": [
@@ -156,6 +187,47 @@
             "bng_ref_string": "SU 12 34",
             "k": 3,
             "expected_length": 49
+        },
+        {
+            "bng_ref_string": "HL NW",
+            "k": 1,
+            "expected_warning": true,
+            "expected": {
+                "bng_ref_formatted": [
+                    "HL NE",
+                    "HL SE",
+                    "HL SW"
+                ]
+            }
+        },
+        {
+            "bng_ref_string": "TW 71",
+            "k": 2,
+            "expected_warning": true,
+            "expected": {
+                "bng_ref_formatted": [
+                    "TW 50",
+                    "TW 51",
+                    "TW 52",
+                    "TW 53",
+                    "TW 60",
+                    "TW 61",
+                    "TW 62",
+                    "TW 63",
+                    "TW 70",
+                    "TW 71",
+                    "TW 72",
+                    "TW 73",
+                    "TW 80",
+                    "TW 81",
+                    "TW 82",
+                    "TW 83",
+                    "TW 90",
+                    "TW 91",
+                    "TW 92",
+                    "TW 93"
+                ]
+            }
         }
     ],
     "bng_dwithin": [
