@@ -61,6 +61,12 @@
             "bng_ref_string_2": "SJ",
             "edge_to_edge": true,
             "expected": 0.0
+        },
+        {
+            "bng_ref_string_1": "SU",
+            "bng_ref_string_2": "SU 23 45",
+            "edge_to_edge": true,
+            "expected": 0.0
         }
     ],
     "bng_is_neighbour": [

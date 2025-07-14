@@ -11,6 +11,7 @@ It supports spatial analyses such as distance-constrained nearest neighbour sear
 import numpy as np
 import warnings
 
+from osbng.hierarchy import bng_to_parent
 from osbng.indexing import bng_to_xy, xy_to_bng
 from osbng.bng_reference import BNGReference, _validate_bngreference, _validate_bngreference_pair
 from osbng.errors import BNGExtentError, BNGNeighbourError
@@ -176,7 +177,10 @@ def bng_kdisc(bng_ref: BNGReference, k: int, return_relations: bool = False) -> 
 @_validate_bngreference_pair
 def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: bool = False) -> float:
     """Returns the euclidean distance between the centroids of two BNGReference objects.
+    
     Note that the two BNGReference objects do not necessarily need to share a common resolution.
+    When edge_to_edge = True and bng_ref1 and bng_ref2 have a parent-child relationship, the
+    returned distance is 0.
 
     Args:
         bng_ref1 (BNGReference): A BNGReference object.
@@ -195,6 +199,8 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
     Examples:
         >>> bng_distance(BNGReference('SE1433'), BNGReference('SE1533'))
         1000.0
+        >>> bng_distance(BNGReference('SE1433'), BNGReference('SE1533'), edge_to_edge = True)
+        0.0
         >>> bng_distance(BNGReference('SE1433'), BNGReference('SE1631'))
         2828.42712474619
         >>> bng_distance(BNGReference('SE1433'), BNGReference('SE'))
@@ -203,7 +209,21 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
         42807.709586007986
         >>> bng_distance(BNGReference('SE'), BNGReference('OV'))
         141421.35623730952
+        >>> bng_distance(BNGReference('SU'), BNGReference('SU2345'), edge_to_edge = True)
+        0.0
     """
+
+
+    # Catch the special case of parent-child relationship when using edge-to-edge
+    if (bng_ref1.resolution_metres != bng_ref2.resolution_metres) & edge_to_edge:
+
+        # Identify the possible parent and child
+        # Note this is required, to avoid errors by testing bng_to_parent on a BNGReference with resolution of 100km!
+        parent_candidate, child_candidate = (bng_ref1, bng_ref2) if bng_ref1.resolution_metres > bng_ref2.resolution_metres else (bng_ref2, bng_ref1)
+
+        # Return distance of 0 if one is a parent of the other
+        if bng_to_parent(child_candidate, resolution=parent_candidate.resolution_metres) == parent_candidate:
+            return 0.0
 
     # Derive the centroid of the first BNGReference object
     centroid1 = bng_to_xy(bng_ref1, "centre")
@@ -211,8 +231,9 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
     # Derive the centroid of the second BNGReference object
     centroid2 = bng_to_xy(bng_ref2, "centre")
 
-    if edge_to_edge:       
-        
+    # Note this must be a new if-else logic to the above special case, to catch cases where bng_ref1 and bng_ref2
+    # do not share a resolution but are not parents
+    if edge_to_edge:      
         # For edge-to-edge distances, the x-distance and y-distance are the centroid-to-centroid
         # distance minus half the box width/height at either end
         dx = 0 if centroid1[0]==centroid2[0] else abs(centroid1[0]-centroid2[0])-0.5*(bng_ref1.resolution_metres+bng_ref2.resolution_metres)

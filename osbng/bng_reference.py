@@ -583,7 +583,10 @@ class BNGReference:
     
     def bng_distance(self, bng_ref2: "BNGReference", edge_to_edge: bool = False) -> float:
         """Returns the euclidean distance between the centroids of the current BNGReference object and another.
+
         Note that the other BNGReference object does not necessarily need to share a common resolution.
+        When edge_to_edge = True and the two BNGReference objects have a parent-child relationship, the
+        returned distance is 0.
 
         Args:
             bng_ref2 (BNGReference): A BNGReference object.
@@ -601,6 +604,8 @@ class BNGReference:
         Examples:
             >>> BNGReference("SE1433").bng_distance(BNGRerence("SE1533"))
             1000.0
+            >>> BNGReference("SE1433").bng_distance(BNGReference("SE1533"), edge_to_edge = True)
+            0.0
             >>> BNGReference("SE1433").bng_distance(BNGRerence("SE1631"))
             2828.42712474619
             >>> BNGReference("SE1433").bng_distance(BNGRerence("SE"))
@@ -609,6 +614,8 @@ class BNGReference:
             42807.709586007986
             >>> BNGReference("SE").bng_distance(BNGRerence("OV"))
             141421.35623730952
+            >>> BNGReference("SU").bng_distance(BNGReference("SU2345"), edge_to_edge = True)
+            0.0
         """
 
         from osbng.traversal import bng_distance as _bng_distance
