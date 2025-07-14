@@ -219,25 +219,29 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
     # Derive the centroid of the second BNGReference object
     centroid2 = bng_to_xy(bng_ref2, "centre")
 
-    if edge_to_edge:
+    # Catch the special case of parent-child relationship when using edge-to-edge
+    if (bng_ref1.resolution_metres != bng_ref2.resolution_metres) & edge_to_edge:
 
-        # If one is the parent of the other, then distance is 0
-        if (bng_to_parent(bng_ref1) == bng_ref2) | (bng_to_parent(bng_ref2) == bng_ref1):
-            dist = 0.0
+        # Identify the possible parent and child
+        # Note this is required, to avoid errors by testing bng_to_parent on a BNGReference with resolution of 100km!
+        parent_candidate, child_candidate = (bng_ref1, bng_ref2) if bng_ref1.resolution_metres > bng_ref2.resolution_metres else (bng_ref2, bng_ref1)
 
-        else:        
-            # For edge-to-edge distances, the x-distance and y-distance are the centroid-to-centroid
-            # distance minus half the box width/height at either end
-            dx = 0 if centroid1[0]==centroid2[0] else abs(centroid1[0]-centroid2[0])-0.5*(bng_ref1.resolution_metres+bng_ref2.resolution_metres)
-            dy = 0 if centroid1[1]==centroid2[1] else abs(centroid1[1]-centroid2[1])-0.5*(bng_ref1.resolution_metres+bng_ref2.resolution_metres)
-            dist = float(np.sqrt(dx**2 + dy**2))
+        # Return distance of 0 if one is a parent of the other
+        if bng_to_parent(child_candidate, resolution=parent_candidate.resolution_metres) == parent_candidate:
+            return 0.0
+
+    # Note this must be a new if, not elif, to catch cases where bng_ref1 and bng_ref2 do not share a resolution but are not parents
+    if edge_to_edge:      
+        # For edge-to-edge distances, the x-distance and y-distance are the centroid-to-centroid
+        # distance minus half the box width/height at either end
+        dx = 0 if centroid1[0]==centroid2[0] else abs(centroid1[0]-centroid2[0])-0.5*(bng_ref1.resolution_metres+bng_ref2.resolution_metres)
+        dy = 0 if centroid1[1]==centroid2[1] else abs(centroid1[1]-centroid2[1])-0.5*(bng_ref1.resolution_metres+bng_ref2.resolution_metres)
 
     else:
         dx = centroid1[0]-centroid2[0]
         dy = centroid1[1]-centroid2[1]
-        dist = float(np.sqrt(dx**2 + dy**2))
 
-    return dist
+    return float(np.sqrt(dx**2 + dy**2))
 
 
 @_validate_bngreference
