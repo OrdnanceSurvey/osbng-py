@@ -177,7 +177,10 @@ def bng_kdisc(bng_ref: BNGReference, k: int, return_relations: bool = False) -> 
 @_validate_bngreference_pair
 def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: bool = False) -> float:
     """Returns the euclidean distance between the centroids of two BNGReference objects.
+    
     Note that the two BNGReference objects do not necessarily need to share a common resolution.
+    When edge_to_edge = True and bng_ref1 and bng_ref2 have a parent-child relationship, the
+    returned distance is 0.
 
     Args:
         bng_ref1 (BNGReference): A BNGReference object.
@@ -196,6 +199,8 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
     Examples:
         >>> bng_distance(BNGReference('SE1433'), BNGReference('SE1533'))
         1000.0
+        >>> bng_distance(BNGReference('SE1433'), BNGReference('SE1533'), edge_to_edge = True)
+        0.0
         >>> bng_distance(BNGReference('SE1433'), BNGReference('SE1631'))
         2828.42712474619
         >>> bng_distance(BNGReference('SE1433'), BNGReference('SE'))
@@ -204,6 +209,8 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
         42807.709586007986
         >>> bng_distance(BNGReference('SE'), BNGReference('OV'))
         141421.35623730952
+        >>> bng_distance(BNGReference('SU'), BNGReference('SU2345'), edge_to_edge = True)
+        0.0
     """
 
     # Derive the centroid of the first BNGReference object
