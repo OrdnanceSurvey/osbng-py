@@ -152,14 +152,28 @@ def test_bng_kring(test_case: BNGKRingTestCase):
     Args:
         test_case (BNGKRingTestCase): The test case from JSON file.
     """
+    # Load test case data
+    bng_ref_string = test_case["bng_ref_string"]
+    k = test_case["k"]
+    # Get expected result
+    expected = None if "expected_length" in test_case else test_case["expected"]["bng_ref_formatted"]
+    expected_length = None if "expected" in test_case else test_case["expected_length"]
+
     if "expected_length" in test_case:
         # Assert that the function returns the expected length
-        assert len(bng_kring(BNGReference(test_case["bng_ref_string"]), test_case["k"])) == test_case["expected_length"]
+        assert len(bng_kring(BNGReference(bng_ref_string), k)) == expected_length
+
+    elif "expected_warning" in test_case:
+        # Assert that the test case raises a warning
+        with pytest.warns(UserWarning):
+            # Assert that the function returns the expected result
+            kring = bng_kring(BNGReference(bng_ref_string), k)
+            assert sorted([r.bng_ref_formatted for r in kring]) == sorted(expected)
     
     else:
         # Assert that the function returns the expected result
-        kring = bng_kring(BNGReference(test_case["bng_ref_string"]), test_case["k"])
-        assert sorted([r.bng_ref_formatted for r in kring]) == sorted(test_case["expected"]["bng_ref_formatted"])
+        kring = bng_kring(BNGReference(bng_ref_string), k)
+        assert sorted([r.bng_ref_formatted for r in kring]) == sorted(expected)
 
 
 class BNGKDiscTestCase(TypedDict):
@@ -192,14 +206,28 @@ def test_bng_kdisc(test_case: BNGKDiscTestCase):
     Args:
         test_case (BNGKDiscTestCase): The test case from JSON file.
     """
+    # Load test case data
+    bng_ref_string = test_case["bng_ref_string"]
+    k = test_case["k"]
+    # Get expected result
+    expected = None if "expected_length" in test_case else test_case["expected"]["bng_ref_formatted"]
+    expected_length = None if "expected" in test_case else test_case["expected_length"]
+
     if "expected_length" in test_case:
         # Assert that the function returns the expected length
-        assert len(bng_kdisc(BNGReference(test_case["bng_ref_string"]), test_case["k"])) == test_case["expected_length"]
+        assert len(bng_kdisc(BNGReference(bng_ref_string), k)) == expected_length
+
+    elif "expected_warning" in test_case:
+        # Assert that the test case raises a warning
+        with pytest.warns(UserWarning):
+            # Assert that the function returns the expected result
+            kdisc = bng_kdisc(BNGReference(bng_ref_string), k)
+            assert sorted([r.bng_ref_formatted for r in kdisc]) == sorted(expected)
     
     else:
         # Assert that the function returns the expected result
-        kring = bng_kdisc(BNGReference(test_case["bng_ref_string"]), test_case["k"])
-        assert sorted([r.bng_ref_formatted for r in kring]) == sorted(test_case["expected"]["bng_ref_formatted"])
+        kdisc = bng_kdisc(BNGReference(bng_ref_string), k)
+        assert sorted([r.bng_ref_formatted for r in kdisc]) == sorted(expected)
 
 
 class BNGKDWithinTestCase(TypedDict):
