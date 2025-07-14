@@ -11,6 +11,7 @@ It supports spatial analyses such as distance-constrained nearest neighbour sear
 import numpy as np
 import warnings
 
+from osbng.hierarchy import bng_to_parent
 from osbng.indexing import bng_to_xy, xy_to_bng
 from osbng.bng_reference import BNGReference, _validate_bngreference, _validate_bngreference_pair
 from osbng.errors import BNGExtentError, BNGNeighbourError
@@ -211,18 +212,25 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
     # Derive the centroid of the second BNGReference object
     centroid2 = bng_to_xy(bng_ref2, "centre")
 
-    if edge_to_edge:       
-        
-        # For edge-to-edge distances, the x-distance and y-distance are the centroid-to-centroid
-        # distance minus half the box width/height at either end
-        dx = 0 if centroid1[0]==centroid2[0] else abs(centroid1[0]-centroid2[0])-0.5*(bng_ref1.resolution_metres+bng_ref2.resolution_metres)
-        dy = 0 if centroid1[1]==centroid2[1] else abs(centroid1[1]-centroid2[1])-0.5*(bng_ref1.resolution_metres+bng_ref2.resolution_metres)
+    if edge_to_edge:
+
+        # If one is the parent of the other, then distance is 0
+        if (bng_to_parent(bng_ref1) == bng_ref2) | (bng_to_parent(bng_ref2) == bng_ref1):
+            dist = 0.0
+
+        else:        
+            # For edge-to-edge distances, the x-distance and y-distance are the centroid-to-centroid
+            # distance minus half the box width/height at either end
+            dx = 0 if centroid1[0]==centroid2[0] else abs(centroid1[0]-centroid2[0])-0.5*(bng_ref1.resolution_metres+bng_ref2.resolution_metres)
+            dy = 0 if centroid1[1]==centroid2[1] else abs(centroid1[1]-centroid2[1])-0.5*(bng_ref1.resolution_metres+bng_ref2.resolution_metres)
+            dist = float(np.sqrt(dx**2 + dy**2))
 
     else:
         dx = centroid1[0]-centroid2[0]
         dy = centroid1[1]-centroid2[1]
+        dist = float(np.sqrt(dx**2 + dy**2))
 
-    return float(np.sqrt(dx**2 + dy**2))
+    return dist
 
 
 @_validate_bngreference
