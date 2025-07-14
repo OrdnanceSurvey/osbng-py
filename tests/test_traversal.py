@@ -128,12 +128,14 @@ class BNGKRingTestCase(TypedDict):
     Attributes:
         bng_ref_string (str): The BNG reference string.
         k (int): The k value for the k-ring.
+        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
         expected (dict[str, list[str]] | None): The expected result is a dictionary with the key "bng_ref_formatted" and a list of formatted BNG reference strings.
         expected_length (int | None): The expected length of the k-ring. Represents the number of BNGReference objects within k-ring.
     """
 
     bng_ref_string: str
     k: int
+    expected_warning: bool | None
     expected: dict[str, list[str]] | None
     expected_length: int | None
 
@@ -166,12 +168,14 @@ class BNGKDiscTestCase(TypedDict):
     Attributes:
         bng_ref_string (str): The BNG reference string.
         k (int): The k value for the k-disc.
+        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
         expected (dict[str, list[str]] | None): The expected result is a dictionary with the key "bng_ref_formatted" and a list of formatted BNG reference strings.
         expected_length (int | None): The expected length of the k-disc. Represents the number of BNGReference objects within k-disc.
     """
 
     bng_ref_string: str
     k: int
+    expected_warning: bool | None
     expected: dict[str, list[str]] | None
     expected_length: int | None
 
