@@ -141,26 +141,25 @@
                 "bng_ref_formatted": [
                     "SQ",
                     "SR",
-                    "SV",
                     "SW"
                 ]
             }
         },
         {
-            "bng_ref_string": "OM 94",
+            "bng_ref_string": "OM 9 4",
             "k": 2,
             "expected_warning": true,
             "expected": {
                 "bng_ref_formatted": [
-                    "OM 72",
-                    "OM 73",
-                    "OM 74",
-                    "OM 75",
-                    "OM 76",
-                    "OM 82",
-                    "OM 86",
-                    "OM 92",
-                    "OM 96"
+                    "OM 7 2",
+                    "OM 7 3",
+                    "OM 7 4",
+                    "OM 7 5",
+                    "OM 7 6",
+                    "OM 8 2",
+                    "OM 8 6",
+                    "OM 9 2",
+                    "OM 9 6"
                 ]
             }
         }
@@ -194,6 +193,7 @@
             "expected_warning": true,
             "expected": {
                 "bng_ref_formatted": [
+                    "HL NW",
                     "HL NE",
                     "HL SE",
                     "HL SW"
@@ -206,26 +206,26 @@
             "expected_warning": true,
             "expected": {
                 "bng_ref_formatted": [
-                    "TW 50",
-                    "TW 51",
-                    "TW 52",
-                    "TW 53",
-                    "TW 60",
-                    "TW 61",
-                    "TW 62",
-                    "TW 63",
-                    "TW 70",
-                    "TW 71",
-                    "TW 72",
-                    "TW 73",
-                    "TW 80",
-                    "TW 81",
-                    "TW 82",
-                    "TW 83",
-                    "TW 90",
-                    "TW 91",
-                    "TW 92",
-                    "TW 93"
+                    "TW 5 0",
+                    "TW 5 1",
+                    "TW 5 2",
+                    "TW 5 3",
+                    "TW 6 0",
+                    "TW 6 1",
+                    "TW 6 2",
+                    "TW 6 3",
+                    "TW 7 0",
+                    "TW 7 1",
+                    "TW 7 2",
+                    "TW 7 3",
+                    "TW 8 0",
+                    "TW 8 1",
+                    "TW 8 2",
+                    "TW 8 3",
+                    "TW 9 0",
+                    "TW 9 1",
+                    "TW 9 2",
+                    "TW 9 3"
                 ]
             }
         }
