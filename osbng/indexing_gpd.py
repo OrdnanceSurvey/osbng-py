@@ -130,7 +130,7 @@ def gdf_to_bng_intersection_explode(
         # Extract the geometry from the specified geometry column
         geom = row[geometry_column]
         # Convert the geometry to BNGIndexedGeometry objects
-        bng_idx_geoms = geom_to_bng_intersection(geom, validated_resolution)
+        bng_idx_geoms = geom_to_bng_intersection(geom, resolution=validated_resolution)
         # Drop the geometry column from the original row
         orig_row = row.drop(geometry_column)
 
