@@ -361,7 +361,7 @@ def xy_to_bng(easting: int | float, northing: int | float, resolution: int | str
 
 @_validate_bngreference
 def bng_to_xy(
-    bng_ref: BNGReference, position: str = "lower-left"
+    bng_ref: BNGReference, *, position: str = "lower-left"
 ) -> tuple[int | float, int | float]:
     """Returns the easting and northing coordinates given a BNG reference object, at a specified grid cell position.
 
