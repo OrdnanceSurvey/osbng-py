@@ -66,11 +66,11 @@ def test_bng_to_children(test_case: BNGToChildrenTestCase):
         exception_class = _EXCEPTION_MAP[exception_name]
         # Assert that the test case raises the expected exception and message
         with pytest.raises(exception_class, match=message):
-            bng_to_children(BNGReference(bng_ref_string), resolution)
+            bng_to_children(BNGReference(bng_ref_string), resolution=resolution)
 
     else:
         # Return a list of child BNGReference objects
-        bng_refs = bng_to_children(BNGReference(bng_ref_string), resolution)
+        bng_refs = bng_to_children(BNGReference(bng_ref_string), resolution=resolution)
         # Sort lists to account for order differences
         bng_ref_strings = [bng_ref.bng_ref_formatted for bng_ref in bng_refs]
         # Assert that the function returns the expected result
@@ -122,10 +122,10 @@ def test_bng_to_parent(test_case: BNGToParentTestCase):
         exception_class = _EXCEPTION_MAP[exception_name]
         # Assert that the test case raises the expected exception and message
         with pytest.raises(exception_class, match=message):
-            bng_to_parent(BNGReference(bng_ref_string), resolution)
+            bng_to_parent(BNGReference(bng_ref_string), resolution=resolution)
 
     else:
         # Return the parent BNGReference object
-        bng_ref = bng_to_parent(BNGReference(bng_ref_string), resolution)
+        bng_ref = bng_to_parent(BNGReference(bng_ref_string), resolution=resolution)
         # Assert that the function returns the expected result
         assert bng_ref.bng_ref_formatted == test_case["expected"]["bng_ref_formatted"]

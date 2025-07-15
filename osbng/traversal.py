@@ -51,7 +51,7 @@ def _ring_or_disc(bng_ref: BNGReference, k: int, is_disc: bool, return_relations
     
     
     # Derive point location of root square
-    xc, yc = bng_to_xy(bng_ref, "centre")
+    xc, yc = bng_to_xy(bng_ref, position="centre")
 
     # Initialise list of ring BNG reference objects
     kring_refs = []
@@ -227,10 +227,10 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, *, edge_to_edge
             return 0.0
 
     # Derive the centroid of the first BNGReference object
-    centroid1 = bng_to_xy(bng_ref1, "centre")
+    centroid1 = bng_to_xy(bng_ref1, position="centre")
 
     # Derive the centroid of the second BNGReference object
-    centroid2 = bng_to_xy(bng_ref2, "centre")
+    centroid2 = bng_to_xy(bng_ref2, position="centre")
 
     # Note this must be a new if-else logic to the above special case, to catch cases where bng_ref1 and bng_ref2
     # do not share a resolution but are not parents
@@ -264,7 +264,7 @@ def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
     """
 
     # Get the centroid of the bng square
-    x, y = bng_to_xy(bng_ref, "centre")
+    x, y = bng_to_xy(bng_ref, position="centre")
     
     # Initialise a neighbours list
     neighbours_list = []

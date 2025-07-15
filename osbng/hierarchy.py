@@ -84,8 +84,8 @@ def bng_to_children(bng_ref: BNGReference, *, resolution: int | str | None = Non
         )
 
     # Get min and max coordinates of the grid square bounding box
-    min_coords = bng_to_xy(bng_ref, "lower-left")
-    max_coords = bng_to_xy(bng_ref, "upper-right")
+    min_coords = bng_to_xy(bng_ref, position="lower-left")
+    max_coords = bng_to_xy(bng_ref, position="upper-right")
 
     # Derive children BNGReference objects from the bounding box
     bng_refs = bbox_to_bng(
@@ -153,7 +153,7 @@ def bng_to_parent(bng_ref: BNGReference, *, resolution: int | str | None = None)
         )
 
     # Dervive coordinates of the grid square bounding box
-    x, y = bng_to_xy(bng_ref, "lower-left")
+    x, y = bng_to_xy(bng_ref, position="lower-left")
 
     # Derive parent BNGReference object from coordinates
     bng_ref = xy_to_bng(x, y, validated_resolution)
