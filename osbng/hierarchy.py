@@ -37,9 +37,7 @@ def bng_to_children(bng_ref: BNGReference, *, resolution: int | str | None = Non
 
     Args:
         bng_ref (BNGReference): The BNGReference object to derive children from.
-
-    Kwargs:
-        resolution (int | str | None): The resolution of the children BNGReference objects expressed either as a
+        resolution (int | str | None, optional): The resolution of the children BNGReference objects expressed either as a
             metre-based integer or as a string label. Defaults to None. Keyword only.
 
     Returns:
@@ -110,9 +108,7 @@ def bng_to_parent(bng_ref: BNGReference, *, resolution: int | str | None = None)
 
     Args:
         bng_ref (BNGReference): The BNGReference object to derive parent from.
-
-    Kwargs:
-        resolution (int | str | None): The resolution of the parent BNGReference objects expressed either as a
+        resolution (int | str | None, optional): The resolution of the parent BNGReference objects expressed either as a
             metre-based integer or as a string label. Defaults to None. Keyword only.
 
     Returns:

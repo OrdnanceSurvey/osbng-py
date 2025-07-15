@@ -97,9 +97,7 @@ def bng_kring(bng_ref: BNGReference, k: int, *, return_relations: bool = False) 
     Args:
         bng_ref (BNGReference): A BNGReference object.
         k (int): Grid distance in units of grid squares.
-
-    Kwargs:
-        return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+        return_relations (bool, optional): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
             grid units.  If False (default), returns a list of BNGReference objects.  Keyword only.
 
     Returns:
@@ -185,9 +183,7 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, *, edge_to_edge
     Args:
         bng_ref1 (BNGReference): A BNGReference object.
         bng_ref2 (BNGReference): A BNGReference object.
-
-    Kwargs:
-        edge_to_edge (bool): If False (default), distance will be centroid-to-centroid distance.
+        edge_to_edge (bool, optional): If False (default), distance will be centroid-to-centroid distance.
             If True, distance will be the shortest distance between any point in the grid squares.
             Keyword only.
 
