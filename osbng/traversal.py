@@ -137,9 +137,7 @@ def bng_kdisc(bng_ref: BNGReference, k: int, *, return_relations: bool = False) 
     Args:
         bng_ref (BNGReference): A BNGReference object.
         k (int): Grid distance in units of grid squares.
-
-    Kwargs:
-        return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+        return_relations (bool, optional): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
             grid units.  If False (default), returns a list of BNGReference objects.  Keyword only.
 
     Returns:
