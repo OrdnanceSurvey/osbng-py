@@ -367,8 +367,11 @@ def bng_to_xy(
 
     Args:
         bng_ref (BNGReference): The BNG eference object.
+
+    Kwargs:
         position (str): The grid cell position expressed as a string.
                         One of: 'lower-left', 'upper-left', 'upper-right', 'lower-right', 'centre'.
+                        Keyword only.
 
     Returns:
         tuple[int | float, int | float]: The easting and northing coordinates as a tuple.
