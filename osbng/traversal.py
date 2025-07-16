@@ -51,7 +51,7 @@ def _ring_or_disc(bng_ref: BNGReference, k: int, is_disc: bool, return_relations
     
     
     # Derive point location of root square
-    xc, yc = bng_to_xy(bng_ref, "centre")
+    xc, yc = bng_to_xy(bng_ref, position="centre")
 
     # Initialise list of ring BNG reference objects
     kring_refs = []
@@ -88,7 +88,7 @@ def _ring_or_disc(bng_ref: BNGReference, k: int, is_disc: bool, return_relations
     return kring_refs
 
 @_validate_bngreference
-def bng_kring(bng_ref: BNGReference, k: int, return_relations: bool = False) -> list[BNGReference]:
+def bng_kring(bng_ref: BNGReference, k: int, *, return_relations: bool = False) -> list[BNGReference]:
     """Returns a list of BNG reference objects representing a hollow ring around a given BNG reference object
     at a grid distance k.
 
@@ -97,10 +97,8 @@ def bng_kring(bng_ref: BNGReference, k: int, return_relations: bool = False) -> 
     Args:
         bng_ref (BNGReference): A BNGReference object.
         k (int): Grid distance in units of grid squares.
-
-    Kwargs:
-        return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
-            grid units.  If False (default), returns a list of BNGReference objects.
+        return_relations (bool, optional): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+            grid units.  If False (default), returns a list of BNGReference objects.  Keyword only.
 
     Returns:
         list[BNGReference]: All BNGReference objects representing squares in a square ring of radius k.
@@ -130,7 +128,7 @@ def bng_kring(bng_ref: BNGReference, k: int, return_relations: bool = False) -> 
     return _ring_or_disc(bng_ref, k, False, return_relations)
 
 @_validate_bngreference
-def bng_kdisc(bng_ref: BNGReference, k: int, return_relations: bool = False) -> list[BNGReference]:
+def bng_kdisc(bng_ref: BNGReference, k: int, *, return_relations: bool = False) -> list[BNGReference]:
     """Returns a list of BNG reference objects representing a filled disc around a given BNG reference object
     up to a grid distance k, including the given central BNG reference object.
 
@@ -139,10 +137,8 @@ def bng_kdisc(bng_ref: BNGReference, k: int, return_relations: bool = False) -> 
     Args:
         bng_ref (BNGReference): A BNGReference object.
         k (int): Grid distance in units of grid squares.
-
-    Kwargs:
-        return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
-            grid units.  If False (default), returns a list of BNGReference objects.
+        return_relations (bool, optional): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+            grid units.  If False (default), returns a list of BNGReference objects.  Keyword only.
 
     Returns:
         list[BNGReference]: All BNGReference objects representing grid squares in a square of radius k.
@@ -175,7 +171,7 @@ def bng_kdisc(bng_ref: BNGReference, k: int, return_relations: bool = False) -> 
 
 
 @_validate_bngreference_pair
-def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: bool = False) -> float:
+def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, *, edge_to_edge: bool = False) -> float:
     """Returns the euclidean distance between the centroids of two BNGReference objects.
     
     Note that the two BNGReference objects do not necessarily need to share a common resolution.
@@ -185,10 +181,9 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
     Args:
         bng_ref1 (BNGReference): A BNGReference object.
         bng_ref2 (BNGReference): A BNGReference object.
-
-    Kwargs:
-        edge_to_edge (bool): If False (default), distance will be centroid-to-centroid distance.
+        edge_to_edge (bool, optional): If False (default), distance will be centroid-to-centroid distance.
             If True, distance will be the shortest distance between any point in the grid squares.
+            Keyword only.
 
     Returns:
         float: The euclidean distance between the centroids of the two BNGReference objects.
@@ -226,10 +221,10 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, edge_to_edge: b
             return 0.0
 
     # Derive the centroid of the first BNGReference object
-    centroid1 = bng_to_xy(bng_ref1, "centre")
+    centroid1 = bng_to_xy(bng_ref1, position="centre")
 
     # Derive the centroid of the second BNGReference object
-    centroid2 = bng_to_xy(bng_ref2, "centre")
+    centroid2 = bng_to_xy(bng_ref2, position="centre")
 
     # Note this must be a new if-else logic to the above special case, to catch cases where bng_ref1 and bng_ref2
     # do not share a resolution but are not parents
@@ -263,7 +258,7 @@ def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
     """
 
     # Get the centroid of the bng square
-    x, y = bng_to_xy(bng_ref, "centre")
+    x, y = bng_to_xy(bng_ref, position="centre")
     
     # Initialise a neighbours list
     neighbours_list = []

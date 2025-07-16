@@ -509,9 +509,7 @@ class BNGReference:
 
         Args:
             k (int): Grid distance in units of grid squares.
-
-        Kwargs:
-            return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+            return_relations (bool, optional): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
                 grid units.  If False (default), returns a list of BNGReference objects.
 
         Returns:
@@ -548,9 +546,7 @@ class BNGReference:
 
         Args:
             k (int): Grid distance in units of grid squares.
-
-        Kwargs:
-            return_relations (bool): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+            return_relations (bool, optional): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
                 grid units.  If False (default), returns a list of BNGReference objects.
 
         Returns:
@@ -590,9 +586,7 @@ class BNGReference:
 
         Args:
             bng_ref2 (BNGReference): A BNGReference object.
-
-        Kwargs:
-            edge_to_edge (bool): If False (default), distance will be centroid-to-centroid distance.
+            edge_to_edge (bool, optional): If False (default), distance will be centroid-to-centroid distance.
                 If True, distance will be the shortest distance between any point in the grid squares.
 
         Returns:

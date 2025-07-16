@@ -361,14 +361,15 @@ def xy_to_bng(easting: int | float, northing: int | float, resolution: int | str
 
 @_validate_bngreference
 def bng_to_xy(
-    bng_ref: BNGReference, position: str = "lower-left"
+    bng_ref: BNGReference, *, position: str = "lower-left"
 ) -> tuple[int | float, int | float]:
     """Returns the easting and northing coordinates given a BNG reference object, at a specified grid cell position.
 
     Args:
         bng_ref (BNGReference): The BNG eference object.
-        position (str): The grid cell position expressed as a string.
+        position (str, optional): The grid cell position expressed as a string.
                         One of: 'lower-left', 'upper-left', 'upper-right', 'lower-right', 'centre'.
+                        Keyword only.
 
     Returns:
         tuple[int | float, int | float]: The easting and northing coordinates as a tuple.
@@ -379,13 +380,13 @@ def bng_to_xy(
         ValueError: If an invalid position provided.
 
     Example:
-        >>> bng_to_xy(BNGReference("SU"), "lower-left")
+        >>> bng_to_xy(BNGReference("SU"), position="lower-left")
         (400000, 100000)
-        >>> bng_to_xy(BNGReference("SU 3 1"), "lower-left")
+        >>> bng_to_xy(BNGReference("SU 3 1"), position="lower-left")
         (430000, 110000)
-        >>> bng_to_xy(BNGReference("SU 3 1 NE"), "centre")
+        >>> bng_to_xy(BNGReference("SU 3 1 NE"), position="centre")
         (437500, 117500)
-        >>> bng_to_xy(BNGReference("SU 37289 15541"), "centre)
+        >>> bng_to_xy(BNGReference("SU 37289 15541"), position="centre)
         (437289.5, 115541.5)
     """
     # validate position string
@@ -502,8 +503,8 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
         (437289, 115541, 437290, 115542)
     """
     # Extract lower left and upper right coordinates of grid square
-    min_xy = bng_to_xy(bng_ref, "lower-left")
-    max_xy = bng_to_xy(bng_ref, "upper-right")
+    min_xy = bng_to_xy(bng_ref, position="lower-left")
+    max_xy = bng_to_xy(bng_ref, position="upper-right")
 
     return min_xy + max_xy
 

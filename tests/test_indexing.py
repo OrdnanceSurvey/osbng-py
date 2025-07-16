@@ -349,7 +349,7 @@ def test_bng_to_xy(test_case: BNGToXYTestCase):
     bng_ref = BNGReference(bng_ref_string)
 
     # Assert that the function returns the expected result
-    assert bng_to_xy(bng_ref, position) == expected
+    assert bng_to_xy(bng_ref, position=position) == expected
 
 
 class BNGToBBOXTestCase(TypedDict):

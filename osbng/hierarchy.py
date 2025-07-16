@@ -26,7 +26,7 @@ __all__ = ["bng_to_children", "bng_to_parent"]
 
 
 @_validate_bngreference
-def bng_to_children(bng_ref: BNGReference, resolution: int | str | None = None) -> list[BNGReference]:
+def bng_to_children(bng_ref: BNGReference, *, resolution: int | str | None = None) -> list[BNGReference]:
     """Returns a list of BNGReference objects that are children of the input BNGReference object.
 
     By default, the children of the BNGReference object is defined as the BNGReference objects in the
@@ -37,7 +37,8 @@ def bng_to_children(bng_ref: BNGReference, resolution: int | str | None = None) 
 
     Args:
         bng_ref (BNGReference): The BNGReference object to derive children from.
-        resolution (int | str | None): The resolution of the children BNGReference objects expressed either as a metre-based integer or as a string label. Defaults to None.
+        resolution (int | str | None, optional): The resolution of the children BNGReference objects expressed either as a
+            metre-based integer or as a string label. Defaults to None. Keyword only.
 
     Returns:
         list[BNGReference]: A list of BNGReference objects that are children of the input BNGReference object.
@@ -84,8 +85,8 @@ def bng_to_children(bng_ref: BNGReference, resolution: int | str | None = None) 
         )
 
     # Get min and max coordinates of the grid square bounding box
-    min_coords = bng_to_xy(bng_ref, "lower-left")
-    max_coords = bng_to_xy(bng_ref, "upper-right")
+    min_coords = bng_to_xy(bng_ref, position="lower-left")
+    max_coords = bng_to_xy(bng_ref, position="upper-right")
 
     # Derive children BNGReference objects from the bounding box
     bng_refs = bbox_to_bng(
@@ -96,7 +97,7 @@ def bng_to_children(bng_ref: BNGReference, resolution: int | str | None = None) 
 
 
 @_validate_bngreference
-def bng_to_parent(bng_ref: BNGReference, resolution: int | str | None = None) -> BNGReference:
+def bng_to_parent(bng_ref: BNGReference, *, resolution: int | str | None = None) -> BNGReference:
     """Returns a BNGReference object that is the parent of the input BNGReference object.
 
     By default, the parent of the BNGReference object is defined as the BNGReference in the next BNG
@@ -107,7 +108,8 @@ def bng_to_parent(bng_ref: BNGReference, resolution: int | str | None = None) ->
 
     Args:
         bng_ref (BNGReference): The BNGReference object to derive parent from.
-        resolution (int | str | None): The resolution of the parent BNGReference objects expressed either as a metre-based integer or as a string label. Defaults to None.
+        resolution (int | str | None, optional): The resolution of the parent BNGReference objects expressed either as a
+            metre-based integer or as a string label. Defaults to None. Keyword only.
 
     Returns:
         BNGReference: A BNGReference object that is the parent of the input BNGReference object.
@@ -153,7 +155,7 @@ def bng_to_parent(bng_ref: BNGReference, resolution: int | str | None = None) ->
         )
 
     # Dervive coordinates of the grid square bounding box
-    x, y = bng_to_xy(bng_ref, "lower-left")
+    x, y = bng_to_xy(bng_ref, position="lower-left")
 
     # Derive parent BNGReference object from coordinates
     bng_ref = xy_to_bng(x, y, validated_resolution)
