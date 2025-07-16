@@ -31,7 +31,7 @@ import numpy as np
 from shapely import box, contains, Geometry, intersection, intersects, prepare
 from shapely.geometry import Polygon
 
-from osbng.bng_reference import _PATTERN, _validate_bngreference, BNGReference
+from osbng.bng_reference import _PATTERN, _validate_bngreferences, BNGReference
 from osbng.errors import BNGExtentError, BNGResolutionError
 from osbng.resolution import BNG_RESOLUTIONS
 
@@ -359,7 +359,7 @@ def xy_to_bng(easting: int | float, northing: int | float, resolution: int | str
         return BNGReference(prefix)
 
 
-@_validate_bngreference
+@_validate_bngreferences
 def bng_to_xy(
     bng_ref: BNGReference, *, position: str = "lower-left"
 ) -> tuple[int | float, int | float]:
@@ -479,7 +479,7 @@ def bng_to_xy(
         return easting, northing
 
 
-@_validate_bngreference
+@_validate_bngreferences
 def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
     """Returns grid square bounding box coordinates given a BNGReference object.
 
@@ -509,7 +509,7 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
     return min_xy + max_xy
 
 
-@_validate_bngreference
+@_validate_bngreferences
 def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
     """Returns a grid square as a Shapely Polygon given a BNG Reference object.
 
