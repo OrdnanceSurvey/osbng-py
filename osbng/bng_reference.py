@@ -724,6 +724,7 @@ def _validate_bngreferences(func):
 
         # Iterate through all args/kwargs to and check BNGReference
         for arg_name, (arg_val, expected_type) in arg_expected_types_dict.items():
+            # If there's not a BNGReference when expected, raise an error
             if (expected_type == BNGReference) and not isinstance(arg_val, BNGReference):
                 raise TypeError(
                     f"A BNGReference object must be provided as {arg_name}."
