@@ -689,8 +689,8 @@ class BNGReference:
         return _bng_dwithin(self, d)
 
 
-def _validate_bngreference_single(func):
-    """One decorator to rule them all"""
+def _validate_bngreferences(func):
+    """Decorator to validate that a BNGReference object is passed as an arg or kwarg when expected."""
 
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -724,54 +724,11 @@ def _validate_bngreference_single(func):
 
         # Iterate through all args/kwargs to and check BNGReference
         for arg_name, (arg_val, expected_type) in arg_expected_types_dict.items():
-            if ("BNGReference" in expected_type) and not isinstance(arg_val, BNGReference):
+            if (expected_type == BNGReference) and not isinstance(arg_val, BNGReference):
                 raise TypeError(
                     f"A BNGReference object must be provided as {arg_name}."
                 )
             
             return func(*args, **kwargs)
-
-    return wrapper
-
-def _validate_bngreference(func):
-    """Decorator to validate that a BNGReference object is passed as either the first positional argument or as the bng_ref keyword argument."""
-
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        # Validate first positional argument
-        if args and isinstance(args[0], BNGReference):
-            return func(*args, **kwargs)
-
-        # Validate bng_ref keyword argument
-        if "bng_ref" in kwargs and isinstance(kwargs["bng_ref"], BNGReference):
-            return func(*args, **kwargs)
-
-        # Raise TypeError if neither condition is met
-        raise TypeError(
-            "A BNGReference object must be provided as the first positional argument or as the bng_ref keyword argument."
-        )
-
-    return wrapper
-
-
-def _validate_bngreference_pair(func):
-    """Decorator to validate that two BNGReference objects are passed as either the first two positional arguments or as the bng_ref1 and bng_ref2 keyword arguments."""
-
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        # Validate first two positional arguments
-        if len(args) >= 2 and isinstance(args[0], BNGReference) and isinstance(args[1], BNGReference):
-            return func(*args, **kwargs)
-
-        # Validate bng_ref1 and bng_ref2 keyword arguments
-        if (
-            "bng_ref1" in kwargs and isinstance(kwargs["bng_ref1"], BNGReference) and
-            "bng_ref2" in kwargs and isinstance(kwargs["bng_ref2"], BNGReference)
-        ):
-            return func(*args, **kwargs)
-
-        raise TypeError(
-            "Two BNGReference objects must be provided as the first two positional arguments or as the bng_ref1 and bng_ref2 keyword arguments."
-        )
 
     return wrapper
