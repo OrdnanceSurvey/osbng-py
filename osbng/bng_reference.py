@@ -82,6 +82,7 @@ increasing detail, allowing for variable accuracy depending on the geospatial ap
 survey measurements.
 """
 
+import inspect
 import re
 from functools import wraps
 from shapely.geometry import Polygon, mapping
@@ -687,6 +688,50 @@ class BNGReference:
 
         return _bng_dwithin(self, d)
 
+
+def _validate_bngreference_single(func):
+    """One decorator to rule them all"""
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+    
+        # Create a dictionary of name:parameter pairs from the function signature
+        signature_params_dict = dict(inspect.signature(func).parameters)
+
+        # Initialise a dictionary of name:(value, expected type) pairs
+        arg_expected_types_dict = {}
+
+        # Function args are provided as a list
+        for arg_num, arg_val in enumerate(args):
+
+            # Extract arg name from function signature
+            arg_name = list(signature_params_dict.values())[arg_num].name
+
+            # Extract expected type from function signature
+            expected_type = list(signature_params_dict.values())[arg_num].annotation
+
+            # Append arg to name:(value, expected type) dict
+            arg_expected_types_dict[arg_name] = (arg_val, expected_type)
+
+        # Function kwargs are provided as a name:value dict
+        for kwarg_name, kwarg_val in kwargs.items():
+            
+            # Extract expected type from function signature
+            expected_type = signature_params_dict[kwarg_name].annotation
+
+            # Append kwarg to name:(value, expected type) dict
+            arg_expected_types_dict[kwarg_name] = (kwarg_val, expected_type)
+
+        # Iterate through all args/kwargs to and check BNGReference
+        for arg_name, (arg_val, expected_type) in arg_expected_types_dict.items():
+            if ("BNGReference" in expected_type) and not isinstance(arg_val, BNGReference):
+                raise TypeError(
+                    f"A BNGReference object must be provided as {arg_name}."
+                )
+            
+            return func(*args, **kwargs)
+
+    return wrapper
 
 def _validate_bngreference(func):
     """Decorator to validate that a BNGReference object is passed as either the first positional argument or as the bng_ref keyword argument."""
