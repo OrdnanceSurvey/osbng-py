@@ -13,7 +13,7 @@ import warnings
 
 from osbng.hierarchy import bng_to_parent
 from osbng.indexing import bng_to_xy, xy_to_bng
-from osbng.bng_reference import BNGReference, _validate_bngreference, _validate_bngreference_pair
+from osbng.bng_reference import BNGReference, _validate_bngreferences
 from osbng.errors import BNGExtentError, BNGNeighbourError
 
 __all__ = [
@@ -87,7 +87,7 @@ def _ring_or_disc(bng_ref: BNGReference, k: int, is_disc: bool, return_relations
 
     return kring_refs
 
-@_validate_bngreference
+@_validate_bngreferences
 def bng_kring(bng_ref: BNGReference, k: int, *, return_relations: bool = False) -> list[BNGReference]:
     """Returns a list of BNG reference objects representing a hollow ring around a given BNG reference object
     at a grid distance k.
@@ -127,7 +127,7 @@ def bng_kring(bng_ref: BNGReference, k: int, *, return_relations: bool = False) 
 
     return _ring_or_disc(bng_ref, k, False, return_relations)
 
-@_validate_bngreference
+@_validate_bngreferences
 def bng_kdisc(bng_ref: BNGReference, k: int, *, return_relations: bool = False) -> list[BNGReference]:
     """Returns a list of BNG reference objects representing a filled disc around a given BNG reference object
     up to a grid distance k, including the given central BNG reference object.
@@ -170,7 +170,7 @@ def bng_kdisc(bng_ref: BNGReference, k: int, *, return_relations: bool = False) 
     return _ring_or_disc(bng_ref, k, True, return_relations)
 
 
-@_validate_bngreference_pair
+@_validate_bngreferences
 def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, *, edge_to_edge: bool = False) -> float:
     """Returns the euclidean distance between the centroids of two BNGReference objects.
     
@@ -241,7 +241,7 @@ def bng_distance(bng_ref1: BNGReference, bng_ref2: BNGReference, *, edge_to_edge
     return float(np.sqrt(dx**2 + dy**2))
 
 
-@_validate_bngreference
+@_validate_bngreferences
 def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
     """Returns a list of BNGReference objects representing the four neighbouring grid squares
     sharing an edge with the input BNGReference.
@@ -290,7 +290,7 @@ def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
 
     return neighbours_list
 
-@_validate_bngreference_pair
+@_validate_bngreferences
 def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
     """Returns True if the two BNGReference objects are neighbours, otherwise False.
     Neighbours are defined as grid squares that share an edge with the first BNGReference object.
@@ -326,7 +326,7 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
         return bng_ref2 in bng_neighbours(bng_ref1)
     
 
-@_validate_bngreference
+@_validate_bngreferences
 def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
     """Returns a list of BNG reference objects around a given BNG reference object within an absolute distance d.
     All squares will be returned for which any part of its boundary is within distance d of any part of
