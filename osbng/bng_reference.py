@@ -694,35 +694,26 @@ def _validate_bngreferences(func):
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-    
-        # Create a dictionary of name:parameter pairs from the function signature
-        signature_params_dict = dict(inspect.signature(func).parameters)
 
-        # Function args are provided as a list
-        for arg_num, arg_val in enumerate(args):
+        # Get the function's signature
+        signature = inspect.signature(func)
 
-            # Extract arg name from function signature
-            arg_name = list(signature_params_dict.values())[arg_num].name
+        # Construct a bound form of the signature
+        bound_signature = signature.bind(*args, **kwargs)
 
-            # Extract expected type from function signature
-            expected_type = list(signature_params_dict.values())[arg_num].annotation
+        # Iterate through each parameter in the signature
+        for arg_name in signature.parameters.keys():
+
+            # Identify the expected data type
+            expected_type = signature.get(arg_name).annotation
+
+            # Find the actual object provided to the argument
+            arg_val = bound_signature.arguments.get(arg_name)
 
             # If a BNGReference is expected and the arg value is not a BNGReference, raise an error
             if (expected_type == BNGReference) and not isinstance(arg_val, BNGReference):
                 raise TypeError(
                     f"A BNGReference object must be provided as the {arg_name} argument."
-                )
-
-        # Function kwargs are provided as a name:value dict
-        for kwarg_name, kwarg_val in kwargs.items():
-            
-            # Extract expected type from function signature
-            expected_type = signature_params_dict[kwarg_name].annotation
-
-            # If a BNGReference is expected and the kwarg value is not a BNGReference, raise an error
-            if (expected_type == BNGReference) and not isinstance(kwarg_val, BNGReference):
-                raise TypeError(
-                    f"A BNGReference object must be provided as the {arg_name} keyword argument."
                 )
             
         return func(*args, **kwargs)
