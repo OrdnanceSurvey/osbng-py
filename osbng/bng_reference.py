@@ -705,7 +705,7 @@ def _validate_bngreferences(func):
         for arg_name in signature.parameters.keys():
 
             # Identify the expected data type
-            expected_type = signature.get(arg_name).annotation
+            expected_type = signature.parameters.get(arg_name).annotation
 
             # Find the actual object provided to the argument
             arg_val = bound_signature.arguments.get(arg_name)
