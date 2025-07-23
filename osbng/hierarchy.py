@@ -17,7 +17,7 @@ Supported Resolutions:
       'resolution' module.
 """
 
-from osbng.bng_reference import BNGReference, _validate_bngreference
+from osbng.bng_reference import BNGReference, _validate_bngreferences
 from osbng.errors import BNGHierarchyError
 from osbng.indexing import _validate_and_normalise_bng_resolution, xy_to_bng, bng_to_xy, bbox_to_bng
 from osbng.resolution import BNG_RESOLUTIONS
@@ -25,7 +25,7 @@ from osbng.resolution import BNG_RESOLUTIONS
 __all__ = ["bng_to_children", "bng_to_parent"]
 
 
-@_validate_bngreference
+@_validate_bngreferences
 def bng_to_children(bng_ref: BNGReference, *, resolution: int | str | None = None) -> list[BNGReference]:
     """Returns a list of BNGReference objects that are children of the input BNGReference object.
 
@@ -96,7 +96,7 @@ def bng_to_children(bng_ref: BNGReference, *, resolution: int | str | None = Non
     return bng_refs
 
 
-@_validate_bngreference
+@_validate_bngreferences
 def bng_to_parent(bng_ref: BNGReference, *, resolution: int | str | None = None) -> BNGReference:
     """Returns a BNGReference object that is the parent of the input BNGReference object.
 

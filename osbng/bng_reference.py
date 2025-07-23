@@ -82,6 +82,7 @@ increasing detail, allowing for variable accuracy depending on the geospatial ap
 survey measurements.
 """
 
+import inspect
 import re
 from functools import wraps
 from shapely.geometry import Polygon, mapping
@@ -688,45 +689,33 @@ class BNGReference:
         return _bng_dwithin(self, d)
 
 
-def _validate_bngreference(func):
-    """Decorator to validate that a BNGReference object is passed as either the first positional argument or as the bng_ref keyword argument."""
+def _validate_bngreferences(func):
+    """Decorator to validate that a BNGReference object is passed as an arg or kwarg when expected."""
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-        # Validate first positional argument
-        if args and isinstance(args[0], BNGReference):
-            return func(*args, **kwargs)
 
-        # Validate bng_ref keyword argument
-        if "bng_ref" in kwargs and isinstance(kwargs["bng_ref"], BNGReference):
-            return func(*args, **kwargs)
+        # Get the function's signature
+        signature = inspect.signature(func)
 
-        # Raise TypeError if neither condition is met
-        raise TypeError(
-            "A BNGReference object must be provided as the first positional argument or as the bng_ref keyword argument."
-        )
+        # Construct a bound form of the signature
+        bound_signature = signature.bind(*args, **kwargs)
 
-    return wrapper
+        # Iterate through each parameter in the signature
+        for arg_name in signature.parameters.keys():
 
+            # Identify the expected data type
+            expected_type = signature.parameters.get(arg_name).annotation
 
-def _validate_bngreference_pair(func):
-    """Decorator to validate that two BNGReference objects are passed as either the first two positional arguments or as the bng_ref1 and bng_ref2 keyword arguments."""
+            # Find the actual object provided to the argument
+            arg_val = bound_signature.arguments.get(arg_name)
 
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        # Validate first two positional arguments
-        if len(args) >= 2 and isinstance(args[0], BNGReference) and isinstance(args[1], BNGReference):
-            return func(*args, **kwargs)
-
-        # Validate bng_ref1 and bng_ref2 keyword arguments
-        if (
-            "bng_ref1" in kwargs and isinstance(kwargs["bng_ref1"], BNGReference) and
-            "bng_ref2" in kwargs and isinstance(kwargs["bng_ref2"], BNGReference)
-        ):
-            return func(*args, **kwargs)
-
-        raise TypeError(
-            "Two BNGReference objects must be provided as the first two positional arguments or as the bng_ref1 and bng_ref2 keyword arguments."
-        )
+            # If a BNGReference is expected and the arg value is not a BNGReference, raise an error
+            if (expected_type == BNGReference) and not isinstance(arg_val, BNGReference):
+                raise TypeError(
+                    f"A BNGReference object must be provided as the {arg_name} argument."
+                )
+            
+        return func(*args, **kwargs)
 
     return wrapper
