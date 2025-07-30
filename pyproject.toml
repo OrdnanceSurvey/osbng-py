@@ -56,3 +56,41 @@ envlist = [
     "3.13"
 ]
 skip_missing_interpreters = false
+
+[tool.ruff.lint]
+select = [
+    # flake8-annotations
+    # Checks for missing or incorrect type annotations
+    "ANN",
+    # pydocstyle
+    # Checks for docstring conventions and formatting
+    "D",
+    # pycodestyle
+    # Checks for general Python style issues
+    "E",
+    # pyflakes
+    # Checks for logical errors like unused imports, undefined names etc
+    "F",
+    # isort
+    # Checks for import sorting and grouping
+    "I",
+    ]
+# Ignore specific rules
+ignore = [
+    # missing-return-type-special-method
+    "ANN204"
+]
+# Exclude directories and files
+exclude = [
+    "__pycache__/",
+    ".ruff_cache/",
+    ".pytest_cache/",
+    ".tox/",
+    "*.env",
+    "build/",
+    "dist/",
+    "*.egg-info/"
+]
+
+[tool.ruff.format]
+docstring-code-format = true
