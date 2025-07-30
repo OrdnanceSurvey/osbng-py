@@ -11,6 +11,7 @@ def _load_test_cases(file_path: str) -> dict:
 
     Returns:
         dict: The test cases as a dictionary.
+
     """
     with open(file_path) as f:
         return json.load(f)
