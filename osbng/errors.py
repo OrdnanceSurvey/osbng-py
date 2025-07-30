@@ -50,13 +50,13 @@ class BNGHierarchyError(Exception):
 
 
 class BNGNeighbourError(Exception):
-    """Exception raised for invalid BNG Resolution objects, either they are not the same grid resolution or are identical objects."""
+    """Exception raised for invalid neighbour relationships."""
 
     pass
 
 
 class BNGExtentError(Exception):
-    """Exception raised for easting and northing coordinates outside the BNG index system extent.
+    """Exception raised for coordinates outside the BNG index system extent.
 
     BNG extent defined as 0 <= easting < 700000 and 0 <= northing < 1300000
     """
@@ -64,7 +64,8 @@ class BNGExtentError(Exception):
     def __init__(self):
         # Create message listing the easting and northing coordinate ranges
         message = (
-            "Coordinates outside of the BNG extent. Easting and northing values must be within: \n"
+            "Coordinates outside of the BNG extent. "
+            "Easting and northing values must be within: \n"
             "0 <= easting < 700000\n"
             "0 <= northing < 1300000"
         )
