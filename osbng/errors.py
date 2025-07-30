@@ -22,7 +22,7 @@ from osbng.resolution import BNG_RESOLUTIONS
 
 
 class BNGReferenceError(Exception):
-    """Exception rasied for invalid BNG reference strings during BNGReference object creation."""
+    """Exception raised for invalid BNG reference strings."""
 
     pass
 
