@@ -36,7 +36,8 @@ class BNGResolutionError(Exception):
         message = (
             "Invalid BNG resolution provided. Supported resolutions are: \n"
             + f"Metres: {', '.join(map(str, BNG_RESOLUTIONS.keys()))}\n"
-            + f"Labels: {', '.join(value['label'] for value in BNG_RESOLUTIONS.values())}"
+            + "Labels: "
+            + f"{', '.join(value['label'] for value in BNG_RESOLUTIONS.values())}"
         )
         # Pass message to base class
         super().__init__(message)
