@@ -44,7 +44,7 @@ class BNGResolutionError(Exception):
 
 
 class BNGHierarchyError(Exception):
-    """Exception raised for invalid parent/child derivation"""
+    """Exception raised for invalid parent/child derivation."""
 
     pass
 
