@@ -1,19 +1,21 @@
-"""Provides custom exceptions supporting interactions with the British National Grid (BNG) index system.
+"""Custom exceptions for the British National Grid (BNG) index system.
 
-These exceptions are intended to provide clear and specific error handling for scenarios where invalid inputs
-or operations are encountered.
+These exceptions are intended to provide clear and specific error handling for 
+scenarios where invalid inputs or operations are encountered.
 
 Custom exceptions:
 
     - BNGReferenceError: Raised when an invalid BNG reference string is provided.
     - BNGResolutionError: Raised when an invalid BNG resolution is provided.
     - BNGHierarchyError: Raised when an invalid parent/child derivation is attempted.
-    - BNGExtentError: Raised when easting and northing coordinates fall outside of the defined extent of the BNG index system.
+    - BNGExtentError: Raised when easting and northing coordinates fall outside of the 
+      defined extent of the BNG index system.
 
 Additional features:
 
-    - EXCEPTION_MAP (dict): A dictionary that maps string representations of exception class names to their respective classes. This allows for
-                            dynamic exception handling in a structured manner.
+    - EXCEPTION_MAP (dict): A dictionary that maps string representations of exception 
+      class names to their respective classes. This allows for dynamic exception 
+      handling in a structured manner.
 """
 
 from osbng.resolution import BNG_RESOLUTIONS
