@@ -1,6 +1,6 @@
 """Provides custom exceptions supporting interactions with the British National Grid (BNG) index system.
 
-These exceptions are intended to provide clear and specific error handling for scenarios where invalid inputs 
+These exceptions are intended to provide clear and specific error handling for scenarios where invalid inputs
 or operations are encountered.
 
 Custom exceptions:
@@ -12,7 +12,7 @@ Custom exceptions:
 
 Additional features:
 
-    - EXCEPTION_MAP (dict): A dictionary that maps string representations of exception class names to their respective classes. This allows for 
+    - EXCEPTION_MAP (dict): A dictionary that maps string representations of exception class names to their respective classes. This allows for
                             dynamic exception handling in a structured manner.
 """
 
@@ -32,9 +32,9 @@ class BNGResolutionError(Exception):
         # Extract the numeric and string resolutions from BNG_RESOLUTIONS
         # Create message listing supported resolutions
         message = (
-            "Invalid BNG resolution provided. Supported resolutions are: \n" +
-            f"Metres: {', '.join(map(str, BNG_RESOLUTIONS.keys()))}\n" +
-            f"Labels: {', '.join(value['label'] for value in BNG_RESOLUTIONS.values())}"
+            "Invalid BNG resolution provided. Supported resolutions are: \n"
+            + f"Metres: {', '.join(map(str, BNG_RESOLUTIONS.keys()))}\n"
+            + f"Labels: {', '.join(value['label'] for value in BNG_RESOLUTIONS.values())}"
         )
         # Pass message to base class
         super().__init__(message)
