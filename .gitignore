@@ -1,5 +1,13 @@
+# Cache files
 __pycache__/
+.ruff_cache/
+
+# Test and environment artifacts
 .pytest_cache/
 .tox/
 *.env
 
+# Distribution and packaging
+build/
+dist/
+*.egg-info/
