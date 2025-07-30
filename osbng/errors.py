@@ -55,7 +55,8 @@ class BNGNeighbourError(Exception):
 class BNGExtentError(Exception):
     """Exception raised for easting and northing coordinates outside the BNG index system extent.
 
-    BNG extent defined as 0 <= easting < 700000 and 0 <= northing < 1300000"""
+    BNG extent defined as 0 <= easting < 700000 and 0 <= northing < 1300000
+    """
 
     def __init__(self):
         # Create message listing the easting and northing coordinate ranges
