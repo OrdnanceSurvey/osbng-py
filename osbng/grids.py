@@ -1,13 +1,13 @@
 """Generate British National Grid (BNG) grid square data within specified bounds.
 
-Uses a GeoJSON-like mapping for grid squares implementing the __geo_interface__ 
-protocol (https://gist.github.com/sgillies/2217756). Use of this protocol enables 
+Uses a GeoJSON-like mapping for grid squares implementing the __geo_interface__
+protocol (https://gist.github.com/sgillies/2217756). Use of this protocol enables
 integration with geospatial data processing libraries and tools.
 
-Grid square data covering the BNG index system bounds is provided as an iterator at 
-100km, 50km, 10km, 5km and 1km resolutions. GeoPandas can be used to read the iterator 
-data directly into a GeoDataFrame for further processing using 
-geopandas.GeoDataFrame.from_features() or similar methods. Iterators can be converted 
+Grid square data covering the BNG index system bounds is provided as an iterator at
+100km, 50km, 10km, 5km and 1km resolutions. GeoPandas can be used to read the iterator
+data directly into a GeoDataFrame for further processing using
+geopandas.GeoDataFrame.from_features() or similar methods. Iterators can be converted
 to lists to generate all grid square GeoJSON-like Features at a given resolution.
 """
 
@@ -30,7 +30,11 @@ BNG_BOUNDS = (0, 0, 700000, 1300000)
 
 
 def bbox_to_bng_iterfeatures(
-    xmin: int | float, ymin: int | float, xmax: int | float, ymax: int | float, resolution: int | str
+    xmin: int | float,
+    ymin: int | float,
+    xmax: int | float,
+    ymax: int | float,
+    resolution: int | str,
 ) -> Iterator[dict[str, Any]]:
     """Returns an iterator of BNGReference Features given a bounding box and resolution.
 
@@ -42,7 +46,7 @@ def bbox_to_bng_iterfeatures(
         ymin (int | float): The minimum northing coordinate of the BBOX.
         xmax (int | float): The maximum easting coordinate of the BBOX.
         ymax (int | float): The maximum northing coordinate of the BBOX.
-        resolution (int | str): The BNG resolution expressed either as a metre-based 
+        resolution (int | str): The BNG resolution expressed either as a metre-based
             integer or as a string label.
 
     Yields:
@@ -59,11 +63,11 @@ def bbox_to_bng_iterfeatures(
         yield bng_ref.__geo_interface__
 
 
-# Grid square data covering the BNG index system bounds provided at 
+# Grid square data covering the BNG index system bounds provided at
 # 100km, 50km, 10km, 5km and 1km resolutions as iterators
-# Iterators can be converted to a list to trigger generation of 
+# Iterators can be converted to a list to trigger generation of
 # BNGReference object Features
-# Resolution capped at 1km to prevent excessive data generation 
+# Resolution capped at 1km to prevent excessive data generation
 # for lower (finer) resolutions
 bng_grid_100km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "100km")
 bng_grid_50km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "50km")
