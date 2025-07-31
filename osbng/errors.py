@@ -31,7 +31,7 @@ class BNGResolutionError(Exception):
     """Exception raised for unsupported BNG resolutions."""
 
     def __init__(self):
-        """Initialise with a message listing supported resolutions."""
+        """Initialise exception with a message listing supported resolutions."""
         # Extract the numeric and string resolutions from BNG_RESOLUTIONS
         # Create message listing supported resolutions
         message = (
@@ -63,7 +63,7 @@ class BNGExtentError(Exception):
     """
 
     def __init__(self):
-        """Initialise with a message listing the valid coordinate ranges."""
+        """Initialise exception with a message listing the valid coordinate ranges."""
         # Create message listing the easting and northing coordinate ranges
         message = (
             "Coordinates outside of the BNG extent. "
