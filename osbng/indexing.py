@@ -80,45 +80,53 @@ SUFFIXES = np.array([["SW", "NW"], ["SE", "NE"]])
 
 
 class BNGIndexedGeometry:
-    """Represents the decomposition of a Shapely Geometry object into BNG grid squares at a specified resolution.
+    """Decomposition of a Shapely Geometry object into BNG grid squares at a resolution.
 
-    The BNGIndexedGeometry class stores information about the relationship between an input geometry and the grid squares
-    it intersects. This is particularly useful for spatial indexing and analysis of geometries against the BNG system.
+    The BNGIndexedGeometry class stores information about the relationship between an 
+    input geometry and the grid squares it intersects. This is particularly useful for 
+    spatial indexing and analysis of geometries against the BNG index system.
 
     Attributes:
-        bng_ref (BNGReference): The BNGReference object representing the grid square corresponding to the decomposition.
-        is_core (bool): A Boolean flag indicating whether the grid square geometry is entirely contained by the input
-                        geometry. This is relevant for Polygon geometries and helps distinguish between "core" (fully inside)
-                        and "edge" (partially overlapping) grid squares.
-        geom (Geometry): The Shapely Geometry representing the intersection between the input geometry and the grid square.
-                         This can one of a number of geometry types depending on the overlap. When is_core is True,
-                         geom is the same as the grid square geometry.
+        bng_ref (BNGReference): The BNGReference object representing the grid square 
+            corresponding to the decomposition.
+        is_core (bool): A Boolean flag indicating whether the grid square geometry is 
+            entirely contained by the input geometry. This is relevant for Polygon 
+            geometries and helps distinguish between "core" (fully inside) and "edge" 
+            (partially overlapping) grid squares.
+        geom (Geometry): The Shapely Geometry representing the intersection between the 
+            input geometry and the grid square. This can one of a number of geometry
+            types depending on the overlap. When is_core is True, geom is the same as
+            the grid square geometry.
 
     Usage:
-        The BNGIndexedGeometry class is instantiated as part of the geom_to_bng_intersection indexing function that decomposes a
-        Shapely Geometry into grid squares at a specified resolution. The decomposition can be used for indexing, spatial analysis,
-        or visualisation.
+        The BNGIndexedGeometry class is instantiated as part of the 
+        geom_to_bng_intersection indexing function that decomposes a Shapely Geometry 
+        into grid squares at a specified resolution. The decomposition can be used for 
+        indexing, spatial analysis, or visualisation.
     """
 
     def __init__(self, bng_ref: BNGReference, is_core: bool, geom: Geometry):
-        """Initialises a BNGIndexedGeometry object instance."""
+        """Initialise BNGIndexedGeometry."""
         self._bng_ref = bng_ref
         self._is_core = is_core
         self._geom = geom
 
     @property
     def bng_ref(self) -> BNGReference:
-        """Returns the BNGReference object associated with this geometry."""
+        """BNGReference object representing the grid square."""
         return self._bng_ref
 
     @property
     def is_core(self) -> bool:
-        """Indicates whether the grid square geometry is contained by the input geometry."""
+        """True if grid square geometry is contained by the input geometry."""
         return self._is_core
 
     @property
     def geom(self) -> Geometry:
-        """Returns the Shapely Geometry representing the intersection between the input geometry and the grid square."""
+        """Intersection between the input geometry and the grid square.
+        
+        Intersection represented as a Shapely Geometry object.
+        """
         return self._geom
 
     def __repr__(self):
