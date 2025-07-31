@@ -90,14 +90,8 @@ def gdf_to_bng_intersection_explode(
 
     Returns:
         gpd.GeoDataFrame: A new GeoDataFrame with one row per BNGIndexedGeometry
-            object, containing the following columns:
-            - bng_ref: The BNGReference object. The BNGIndexedGeometry object
-                bng_ref property.
-            - is_core: A boolean indicating whether the geometry is a core grid square.
-                The BNGIndexedGeometry object is_core property.
-            - geometry: The Shapely Geometry representing the intersection between the
-                input geometry and the grid square. The BNGIndexedGeometry object geom
-                property.
+            object, containing three columns bng_ref, is_core, and geometry
+            corresponding to the BNGIndexedGeometry object properties.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
