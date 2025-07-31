@@ -92,5 +92,9 @@ exclude = [
     "*.egg-info/"
 ]
 
+[tool.ruff.lint.pydocstyle]
+# Use Google-style convention for docstrings
+convention = "google"
+
 [tool.ruff.format]
 docstring-code-format = true
