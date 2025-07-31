@@ -38,9 +38,12 @@ class ValidateAndNormaliseBNGResolutionTestCase(TypedDict):
     """TypedDict for _validate_and_normalise_bng_resolution function test cases.
 
     Attributes:
-        resolution (int | float | str): The BNG resolution expressed either as a metre-based integer or float, or as a string label.
-        expected (int | None): The expected result is an integer or None if exception is expected.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
+        resolution (int | float | str): The BNG resolution expressed either as a 
+            metre-based integer or float, or as a string label.
+        expected (int | None): The expected result is an integer or None if exception 
+            is expected.
+        expected_exception (dict[str, str] | None): The expected exception is a 
+            dictionary with the exception name.
     """
 
     resolution: int | float | str
@@ -89,7 +92,8 @@ class ValidateEastingNorthingTestCase(TypedDict):
     Attributes:
         easting (int | float): The easting coordinate.
         northing (int | float): The northing coordinate.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
+        expected_exception (dict[str, str] | None): The expected exception is a 
+            dictionary with the exception name.
     """
 
     easting: int | float
@@ -133,12 +137,13 @@ class ValidateAndNormaliseBBOXTestCase(TypedDict):
     """TypedDict for _validate_and_normalise_bbox function test cases.
 
     Attributes:
-        xmin (int | float): The minimum easting coordinate of the bounding box.
-        ymin (int | float): The minimum northing coordinate of the bounding box.
-        xmax (int | float): The maximum easting coordinate of the bounding box.
-        ymax (int | float): The maximum northing coordinate of the bounding box.
-        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
-        expected (list[int | float]): The expected result is a list of bounding box coordinates.
+        xmin (int | float): The minimum easting coordinate of the bounding box (BBOX).
+        ymin (int | float): The minimum northing coordinate of the BBOX.
+        xmax (int | float): The maximum easting coordinate of the BBOX.
+        ymax (int | float): The maximum northing coordinate of the BBOX.
+        expected_warning (bool | None): The expected warning is a boolean indicating if 
+            a warning is expected.
+        expected (list[int | float]): The expected result is a list of BBOX coordinates.
     """
 
     xmin: int | float
@@ -225,7 +230,8 @@ class DecomposeGeomTestCase(TypedDict):
 
     Attributes:
         geom (dict[str, Any]): Geometry reresented in GeoJSON format.
-        expected (dict[str, int | list[str]]): Expected result is a dictionary with the expected part count and list of part geometry types.
+        expected (dict[str, int | list[str]]): Expected result is a dictionary with the 
+            expected part count and list of part geometry types.
     """
 
     geom: dict[str, Any]
@@ -266,9 +272,12 @@ class XYToBNGTestCase(TypedDict):
     Attributes:
         easting (int | float): The easting coordinate.
         northing (int | float): The northing coordinate.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected (dict[str, str] | None): The expected result is a dictionary with the BNG reference formatted string.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
+        resolution (int | str): The resolution expressed either as a metre-based 
+            integer or as a string label.
+        expected (dict[str, str] | None): The expected result is a dictionary with the 
+            BNG reference formatted string.
+        expected_exception (dict[str, str] | None): The expected exception is a 
+            dictionary with the exception name.
     """
 
     easting: int | float
@@ -319,7 +328,8 @@ class BNGToXYTestCase(TypedDict):
     Attributes:
         bng_ref_string (str): The BNG reference string.
         position (str): The grid cell position expressed as a string.
-        expected (list[int | float]): The expected result is a list of easting and northing coordinates.
+        expected (list[int | float]): The expected result is a list of easting and 
+            northing coordinates.
     """
 
     bng_ref_string: str
@@ -393,7 +403,8 @@ class BNGToGridGeomTestCase(TypedDict):
 
     Attributes:
         bng_ref_string (str): The BNG reference string.
-        expected (dict[str, Any]): The expected result is a dictionary with the expected geometry in GeoJSON format.
+        expected (dict[str, Any]): The expected result is a dictionary with the 
+            expected geometry in GeoJSON format.
     """
 
     bng_ref_string: str
@@ -429,13 +440,16 @@ class BBOXToBNGTestCase(TypedDict):
     """TypedDict for bbox_to_bng function test cases.
 
     Attributes:
-        xmin (int | float): The minimum easting coordinate of the bounding box.
-        ymin (int | float): The minimum northing coordinate of the bounding box.
-        xmax (int | float): The maximum easting coordinate of the bounding box.
-        ymax (int | float): The maximum northing coordinate of the bounding box.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
-        expected (dict[str, list[str]]): The expected result is a dictionary with a list of BNG reference formatted strings.
+        xmin (int | float): The minimum easting coordinate of the bounding box (BBOX).
+        ymin (int | float): The minimum northing coordinate of the BBOX.
+        xmax (int | float): The maximum easting coordinate of the BBOX.
+        ymax (int | float): The maximum northing coordinate of the BBOX.
+        resolution (int | str): The resolution expressed either as a metre-based 
+            integer or as a string label.
+        expected_warning (bool | None): The expected warning is a boolean indicating if 
+            a warning is expected.
+        expected (dict[str, list[str]]): The expected result is a dictionary with a 
+            list of BNG reference formatted strings.
     """
 
     xmin: int | float
@@ -493,10 +507,14 @@ class GeomToBNGTestCase(TypedDict):
 
     Attributes:
         geom (dict[str, Any]): Geometry represented in GeoJSON format.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
-        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
-        expected (dict[str, list[str]] | None): The expected result is a dictionary with a list of BNG reference formatted strings.
+        resolution (int | str): The resolution expressed either as a metre-based 
+            integer or as a string label.
+        expected_exception (dict[str, str] | None): The expected exception is a 
+            dictionary with the exception name.
+        expected_warning (bool | None): The expected warning is a boolean indicating if 
+            a warning is expected.
+        expected (dict[str, list[str]] | None): The expected result is a dictionary 
+            with a list of BNG reference formatted strings.
     """
 
     geom: dict[str, Any]
@@ -513,8 +531,10 @@ def validate_and_assert_bng_intersects(
 
     Args:
         geom (Geometry): Shapely Geometry object.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected (list[str]): Expected result. A list containing the expected BNG reference formatted strings.
+        resolution (int | str): The resolution expressed either as a metre-based 
+            integer or as a string label.
+        expected (list[str]): Expected result. A list containing the expected BNG 
+            reference formatted strings.
     """
     # Return a list of BNGReference objects
     bng_refs = geom_to_bng(geom, resolution)
@@ -572,10 +592,15 @@ class GeomToBNGIntersectionTestCase(TypedDict):
 
     Attributes:
         geom (dict[str, Any]): Geometry represented in GeoJSON format.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
-        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
-        expected (list[dict[str, str | bool]] | None): The expected result is a list of dictionaries with the expected BNG reference formatted strings and booleans indicating if a grid square is a core geometry.
+        resolution (int | str): The resolution expressed either as a metre-based 
+            integer or as a string label.
+        expected_exception (dict[str, str] | None): The expected exception is a 
+            dictionary with the exception name.
+        expected_warning (bool | None): The expected warning is a boolean indicating if 
+            a warning is expected.
+        expected (list[dict[str, str | bool]] | None): The expected result is a list of 
+            dictionaries with the expected BNG reference formatted strings and booleans 
+            indicating if a grid square is a core geometry.
     """
 
     geom: dict[str, Any]
@@ -592,8 +617,11 @@ def validate_and_assert_bng_intersection(
 
     Args:
         geom (Geometry): Shapely Geometry object.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected (dict[str, str | bool]): Expected result. A dictionary containing the expected BNG reference formatted string and a boolean indicating if it is a core geometry.
+        resolution (int | str): The resolution expressed either as a metre-based 
+            integer or as a string label.
+        expected (dict[str, str | bool]): Expected result. A dictionary containing the 
+            expected BNG reference formatted string and a boolean indicating if it is a 
+            core geometry.
     """
     # Convert test case geometry from GeoJSON to Shapely Geometry object
     # Return a list of BNGIndexedGeometry objects
