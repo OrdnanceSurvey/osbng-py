@@ -36,7 +36,7 @@ from tests.test_indexing import GeomToBNGIntersectionTestCase
 
 def validate_and_assert_gdf_bng_intersection(
     gdf: gpd.GeoDataFrame, resolution: int | str, expected: list[tuple[str, bool]]
-):
+) -> None:
     """Validates and asserts gdf_to_bng_intersection_explode return.
 
     Args:
@@ -84,7 +84,9 @@ def validate_and_assert_gdf_bng_intersection(
         "geom_to_bng_intersection"
     ],
 )
-def test_gdf_to_bng_intersection_explode(test_case: GeomToBNGIntersectionTestCase):
+def test_gdf_to_bng_intersection_explode(
+    test_case: GeomToBNGIntersectionTestCase,
+) -> None:
     """Test gdf_to_bng_intersection_explode with test cases from JSON file.
 
     Args:
