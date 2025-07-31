@@ -1,12 +1,12 @@
 """Testing for the indexing_gpd module.
 
-Testing is skipped if the GeoPandas (https://github.com/geopandas/geopandas) package is 
+Testing is skipped if the GeoPandas (https://github.com/geopandas/geopandas) package is
 not installed.
 
-The test cases are defined in the JSON file located at ./data/indexing_test_cases.json 
+The test cases are defined in the JSON file located at ./data/indexing_test_cases.json
 and are used to parameterise the tests for various functions in the indexing module.
-Test cases are loaded from the JSON file using the _load_test_cases function, which is 
-defined in the utils module. The test cases are defined as TypedDicts, which provide a 
+Test cases are loaded from the JSON file using the _load_test_cases function, which is
+defined in the utils module. The test cases are defined as TypedDicts, which provide a
 way to define the structure of the test case data.
 
 Testing reuses the test cases for the osbng.indexing.geom_to_bng_intersection function.
@@ -40,12 +40,12 @@ def validate_and_assert_gdf_bng_intersection(
     """Validates and asserts gdf_to_bng_intersection_explode return.
 
     Args:
-        gdf (gpd.GeoDataFrame): GeoPandas GeoDataFrame containing the geometry to be 
+        gdf (gpd.GeoDataFrame): GeoPandas GeoDataFrame containing the geometry to be
             tested.
-        resolution (int | str): The resolution expressed either as a metre-based 
+        resolution (int | str): The resolution expressed either as a metre-based
             integer or as a string label.
-        expected (list[tuple[str, bool]]): Expected result. A list of tuples, where 
-            each tuple contains, the expected BNG reference formatted string and a 
+        expected (list[tuple[str, bool]]): Expected result. A list of tuples, where
+            each tuple contains, the expected BNG reference formatted string and a
             boolean indicating if it is a core geometry.
     """
     # Apply the gdf_to_bng_intersection_explode function to the input GeoDataFrame
@@ -53,7 +53,7 @@ def validate_and_assert_gdf_bng_intersection(
     # Assert that the result is a GeoDataFrame
     assert isinstance(gdf_test, gpd.GeoDataFrame)
 
-    # Extract the 'bng_ref_formatted' property from the 'bng_ref' column 
+    # Extract the 'bng_ref_formatted' property from the 'bng_ref' column
     # and 'is_core' column
     result = [
         (bng_ref.bng_ref_formatted, is_core)
@@ -63,14 +63,14 @@ def validate_and_assert_gdf_bng_intersection(
     assert sorted(result) == sorted(expected)
 
     # Extract the areas of the core indexed geometries
-    # Core indexed geometries represent grid squares that are fully contained within 
+    # Core indexed geometries represent grid squares that are fully contained within
     # the input geometry
     result_core_areas = gdf_test[gdf_test["is_core"]]["geometry"].area.tolist()
 
     if result_core_areas:
         # Normalise the resolution to its metre equivalent
         normalised_resolution = _validate_and_normalise_bng_resolution(resolution)
-        # Assert that the resolution of the core indexed geometries 
+        # Assert that the resolution of the core indexed geometries
         # is equal to the normalised resolution
         assert all(sqrt(area) == normalised_resolution for area in result_core_areas)
 
@@ -94,7 +94,7 @@ def test_gdf_to_bng_intersection_explode(test_case: GeomToBNGIntersectionTestCas
     # Convert test case geometry from GeoJSON to Shapely Geometry object
     geom = shape(test_case["geom"])
     # Create GeoDataFrame from the geometry
-    # Set GeoDataFrame coordinate reference system (CRS) to 
+    # Set GeoDataFrame coordinate reference system (CRS) to
     # 'EPSG:27700' (British National Grid)
     gdf = gpd.GeoDataFrame({"geometry": [geom]}, crs=27700)
     resolution = test_case["resolution"]
