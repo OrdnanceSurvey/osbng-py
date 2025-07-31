@@ -588,7 +588,7 @@ def bbox_to_bng(
     ymax: int | float,
     resolution: int | str,
 ) -> list[BNGReference]:
-    """Returns a list of BNGReference objects for a bounding box and resolution.
+    """Returns a BNGReference list given a bounding box and resolution.
 
     The relationship between the bounding box (BBOX) and the returned grid squares 
     depends on the alignment of the BBOX with the BNG index system:
@@ -617,7 +617,7 @@ def bbox_to_bng(
             a metre-based integer or as a string label.
 
     Returns:
-        list[BNGReference]: List of BNGReference objects.
+        list[BNGReference]: BNGReference list.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
