@@ -15,7 +15,7 @@ try:
     import geopandas as gpd
 except ImportError as e:
     raise ImportError(
-        "The 'geopandas' package is required to use the 'osbng.indexing_gdf' module. "
+        "The geopandas package is required to use the osbng.indexing_gdf module. "
         "Install it with: pip install osbng[geopandas]"
     ) from e
 
