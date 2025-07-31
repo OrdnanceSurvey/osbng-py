@@ -544,27 +544,39 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
 
 @_validate_bngreferences
 def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
-    """Returns a grid square as a Shapely Polygon given a BNG Reference object.
+    """Returns a grid square as a Shapely Polygon given a BNG Reference.
 
     Args:
-        bng_ref (BNGReference): The BNGReference object.
+        bng_ref (BNGReference): The BNGReference.
 
     Returns:
-        Polygon: Grid square as Shapely Polygon object.
+        Polygon: Grid square as a Shapely Polygon object.
 
     Raises:
-        BNGReferenceError: If the first positional argument is not a BNGReference object.
-        TypeError: If first argument is not BNG Reference object.
+        BNGReferenceError: If the first positional argument is not a BNGReference.
+        TypeError: If first argument is not a BNGReference.
 
     Example:
         >>> bng_to_grid_geom(BNGReference("SU")).wkt
-        'POLYGON ((500000 100000, 500000 200000, 400000 200000, 400000 100000, 500000 100000))'
+        (
+        'POLYGON ((500000 100000, 500000 200000, 400000 200000, 400000 100000, '
+        '500000 100000))'
+        )
         >>> bng_to_grid_geom(BNGReference("SU 3 1")).wkt
-        'POLYGON ((440000 110000, 440000 120000, 430000 120000, 430000 110000, 440000 110000))'
+        (
+        'POLYGON ((440000 110000, 440000 120000, 430000 120000, 430000 110000, '
+        '440000 110000))'
+        )
         >>> bng_to_grid_geom(BNGReference("SU 3 1 NE")).wkt
-        'POLYGON ((440000 115000, 440000 120000, 435000 120000, 435000 115000, 440000 115000))'
+        (
+        'POLYGON ((440000 115000, 440000 120000, 435000 120000, 435000 115000, '
+        '440000 115000))'
+        )
         >>> bng_to_grid_geom(BNGReference("SU 37289 15541")).wkt
-        'POLYGON ((437290 115541, 437290 115542, 437289 115542, 437289 115541, 437290 115541))'
+        (
+        'POLYGON ((437290 115541, 437290 115542, 437289 115542, 437289 115541, '
+        '437290 115541))'
+        )
     """
     return box(*bng_to_bbox(bng_ref))
 
