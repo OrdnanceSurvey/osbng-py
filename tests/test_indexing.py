@@ -626,8 +626,9 @@ def validate_and_assert_bng_intersection(
     # Convert test case geometry from GeoJSON to Shapely Geometry object
     # Return a list of BNGIndexedGeometry objects
     bng_idx_geoms = geom_to_bng_intersection(geom, resolution)
-    # Extract bng_ref_formatted and is_core properties to create a simplified representation
-    # of the BNGIndexedGeometry objects for comparison with the expected output.
+    # Extract bng_ref_formatted and is_core properties to create a simplified 
+    # representation of the BNGIndexedGeometry objects for comparison with the 
+    # expected output.
     result = [
         (bng_idx_geom.bng_ref.bng_ref_formatted, bng_idx_geom.is_core)
         for bng_idx_geom in bng_idx_geoms
@@ -635,14 +636,16 @@ def validate_and_assert_bng_intersection(
     # Assert that the result matches the expected output
     assert sorted(result) == sorted(expected)
     # Extract the areas of the core indexed geometries
-    # Core indexed geometries represent grid squares that are fully contained within the input geometry
+    # Core indexed geometries represent grid squares that are 
+    # fully contained within the input geometry
     result_core_areas = [
         bng_idx_geom.geom.area for bng_idx_geom in bng_idx_geoms if bng_idx_geom.is_core
     ]
     if result_core_areas:
         # Normalise the resolution to its metre equivalent
         normalised_resolution = _validate_and_normalise_bng_resolution(resolution)
-        # Assert that the resolution of the core indexed geometries is equal to the normalised resolution
+        # Assert that the resolution of the core indexed geometries 
+        # is equal to the normalised resolution
         assert all(sqrt(area) == normalised_resolution for area in result_core_areas)
 
 
