@@ -101,7 +101,8 @@ def gdf_to_bng_intersection_explode(
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
-        BNGExtentError: If the coordinates of a Point geometry are outside of the BNG index system extent.
+        BNGExtentError: If the coordinates of a Point geometry are outside of the BNG
+            index system extent.
         TypeError: If the input is not a GeoPandas GeoDataFrame.
         ValueError: If the GeoDataFrame CRS is not equal to "EPSG:27700"
         ValueError: If an active geometry column is not set in the GeoDataFrame.
