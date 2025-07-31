@@ -544,7 +544,7 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
 
 @_validate_bngreferences
 def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
-    """Returns a grid square as a Shapely Polygon given a BNG Reference.
+    """Returns a grid square as a Shapely Polygon given a BNGReference.
 
     Args:
         bng_ref (BNGReference): The BNGReference.
