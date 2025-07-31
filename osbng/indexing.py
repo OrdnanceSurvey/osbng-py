@@ -1,11 +1,11 @@
 """Index coordinates and Shapely geometries against the BNG index system.
 
 Supports bi-directional conversion between easting/northing coordinate pairs
-and BNGReference objects at supported resolutions as defined in the 'resolution' module.
-Additionally, it enables the indexing of geometries, represented using Shapely Geometry
-objects, into grid squares at a specified resolution. Shapely geometries can also be
-decomposed into simplified representations bounded by their presence in each grid square 
-at a specified resolution.
+and BNGReference objects at supported resolutions as defined in the 'resolution' 
+module. Additionally, it enables the indexing of geometries, represented using Shapely 
+Geometry objects, into grid squares at a specified resolution. Shapely geometries can 
+also be decomposed into simplified representations bounded by their presence in each 
+grid square at a specified resolution.
 
 Indexing functionality facilitates grid-based spatial analysis, enabling applications 
 such as statistical aggregation, data visualisation, and data interoperability.
