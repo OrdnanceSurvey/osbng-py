@@ -177,7 +177,8 @@ def gdf_to_bng_intersection_explode(
         # Drop the orig_index column if reset_index is True
         out_gdf = out_gdf.drop(columns=["orig_index"])
     else:
-        # If reset_index is False, set the orig_index column as the index of the result GeoDataFrame
+        # If reset_index is False, set the orig_index column 
+        # as the index of the result GeoDataFrame
         out_gdf = out_gdf.set_index("orig_index")
         # Set GeoDataFrame to have an unamed index
         out_gdf.index.name = None
