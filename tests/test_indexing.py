@@ -58,7 +58,7 @@ class ValidateAndNormaliseBNGResolutionTestCase(TypedDict):
 )
 def test__validate_and_normalise_bng_resolution(
     test_case: ValidateAndNormaliseBNGResolutionTestCase,
-):
+) -> None:
     """Test _validate_and_normalise_bng_resolution with test cases from JSON file.
 
     Args:
@@ -105,7 +105,7 @@ class ValidateEastingNorthingTestCase(TypedDict):
         "_validate_easting_northing"
     ],
 )
-def test__validate_easting_northing(test_case: ValidateEastingNorthingTestCase):
+def test__validate_easting_northing(test_case: ValidateEastingNorthingTestCase) -> None:
     """Test _validate_and_normalise_bng_resolution with test cases from JSON file.
 
     Args:
@@ -157,7 +157,7 @@ class ValidateAndNormaliseBBOXTestCase(TypedDict):
         "_validate_and_normalise_bbox"
     ],
 )
-def test__validate_and_normalise_bbox(test_case: ValidateAndNormaliseBBOXTestCase):
+def test__validate_and_normalise_bbox(test_case: ValidateAndNormaliseBBOXTestCase) -> None:
     """Test _validate_and_normalise_bbox with test cases from JSON file.
 
     Args:
@@ -204,7 +204,7 @@ class GetBNGSuffixTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["_get_bng_suffix"],
 )
-def test__get_bng_suffix(test_case: GetBNGSuffixTestCase):
+def test__get_bng_suffix(test_case: GetBNGSuffixTestCase) -> None:
     """Test _get_bng_suffix function with test cases from JSON file.
 
     Args:
@@ -238,7 +238,7 @@ class DecomposeGeomTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["_decompose_geom"],
 )
-def test__decompose_geom(test_case: DecomposeGeomTestCase):
+def test__decompose_geom(test_case: DecomposeGeomTestCase) -> None:
     """Test _decompose_geom with test cases from JSON file.
 
     Args:
@@ -284,7 +284,7 @@ class XYToBNGTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["xy_to_bng"],
 )
-def test_xy_to_bng(test_case: XYToBNGTestCase):
+def test_xy_to_bng(test_case: XYToBNGTestCase) -> None:
     """Test xy_to_bng with test cases from JSON file.
 
     Args:
@@ -333,7 +333,7 @@ class BNGToXYTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_xy"],
 )
-def test_bng_to_xy(test_case: BNGToXYTestCase):
+def test_bng_to_xy(test_case: BNGToXYTestCase) -> None:
     """Test bng_to_xy with test cases from JSON file.
 
     Args:
@@ -370,7 +370,7 @@ class BNGToBBOXTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_bbox"],
 )
-def test_bng_to_bbox(test_case: BNGToBBOXTestCase):
+def test_bng_to_bbox(test_case: BNGToBBOXTestCase) -> None:
     """Test bng_to_bbox with test cases from JSON file.
 
     Args:
@@ -406,7 +406,7 @@ class BNGToGridGeomTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_grid_geom"],
 )
-def test_bng_to_grid_geom(test_case: BNGToGridGeomTestCase):
+def test_bng_to_grid_geom(test_case: BNGToGridGeomTestCase) -> None:
     """Test bng_to_grid_geom with test cases from JSON file.
 
     Args:
@@ -453,7 +453,7 @@ class BBOXToBNGTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bbox_to_bng"],
 )
-def test_bbox_to_bng(test_case: BBOXToBNGTestCase):
+def test_bbox_to_bng(test_case: BBOXToBNGTestCase) -> None:
     """Test bbox_to_bng with test cases from JSON file.
 
     Args:
@@ -508,7 +508,7 @@ class GeomToBNGTestCase(TypedDict):
 
 def validate_and_assert_bng_intersects(
     geom: Geometry, resolution: int | str, expected: list[str]
-):
+) -> None:
     """Helper function to validate and assert geom_to_bng function return.
 
     Args:
@@ -530,7 +530,7 @@ def validate_and_assert_bng_intersects(
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["geom_to_bng"],
 )
-def test_geom_to_bng(test_case: GeomToBNGTestCase):
+def test_geom_to_bng(test_case: GeomToBNGTestCase) -> None:
     """Test geom_to_bng with test cases from JSON file.
 
     Args:
@@ -587,7 +587,7 @@ class GeomToBNGIntersectionTestCase(TypedDict):
 
 def validate_and_assert_bng_intersection(
     geom: Geometry, resolution: int | str, expected: dict[str, str | bool]
-):
+) -> None:
     """Helper function to validate and assert geom_to_bng_intersection return.
 
     Args:
@@ -626,7 +626,7 @@ def validate_and_assert_bng_intersection(
         "geom_to_bng_intersection"
     ],
 )
-def test_geom_to_bng_intersection(test_case: GeomToBNGIntersectionTestCase):
+def test_geom_to_bng_intersection(test_case: GeomToBNGIntersectionTestCase) -> None:
     """Test geom_to_bng_intersection with test cases from JSON file.
 
     Args:
