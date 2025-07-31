@@ -387,7 +387,7 @@ def xy_to_bng(
 def bng_to_xy(
     bng_ref: BNGReference, *, position: str = "lower-left"
 ) -> tuple[int | float, int | float]:
-    """Returns the easting and northing coordinates given a BNGReference.
+    """Returns easting and northing coordinates given a BNGReference.
      
       An optional grid square position can be specified to return the coordinates of a
       specific corner or the centre of the grid square.
