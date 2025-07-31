@@ -336,7 +336,8 @@ def xy_to_bng(
         # Get BNG ordinal suffix
         suffix = _get_bng_suffix(easting, northing, validated_resolution)
     else:
-        # For non-quadtree (standard) resolutions, the scaled resolution is the same as the resolution
+        # For non-quadtree (standard) resolutions,
+        # the scaled resolution is the same as the resolution
         scaled_resolution = validated_resolution
         # No suffix for non-quadtree resolutions
         suffix = ""
@@ -420,7 +421,8 @@ def bng_to_xy(
     # Get the prefix indices from prefix position in PREFIXES array
     prefix_indices = np.argwhere(PREFIXES == prefix)[0]
 
-    # Convert the prefix indices to easting and northing coordinates of 100km grid square
+    # Convert the prefix indices to easting and northing 
+    # coordinates of 100km grid square
     prefix_easting = int(prefix_indices[1] * 100000)
     prefix_northing = int(prefix_indices[0] * 100000)
 
@@ -428,7 +430,8 @@ def bng_to_xy(
     if BNG_RESOLUTIONS[resolution]["quadtree"]:
         scaled_resolution = resolution * 2
 
-    # For non-quadtree (standard) resolutions, the scaled resolution is the same as the resolution
+    # For non-quadtree (standard) resolutions, the scaled resolution 
+    # is the same as the resolution
     else:
         scaled_resolution = resolution
 
@@ -446,7 +449,8 @@ def bng_to_xy(
     # Generate the suffix values from the position in the SUFFIXES array
     if suffix:
         suffix_indices = np.argwhere(SUFFIXES == suffix)[0]
-        # Convert the suffix indices to coordinate values by multiplying by the resolution
+        # Convert the suffix indices to coordinate values 
+        # by multiplying by the resolution
         suffix_easting = int(suffix_indices[0] * resolution)
         suffix_northing = int(suffix_indices[1] * resolution)
 
@@ -602,7 +606,8 @@ def bbox_to_bng(
     # Validate and normalise bounding box coordinates to the BNG index system extent
     xmin, ymin, xmax, ymax = _validate_and_normalise_bbox(xmin, ymin, xmax, ymax)
 
-    # Snap the maximum easting and maximum northing coordinates to an integer multiple of resolution
+    # Snap the maximum easting and maximum northing coordinates 
+    # to an integer multiple of resolution
     xmax_snapped = int(np.ceil(xmax / validated_resolution) * validated_resolution)
     ymax_snapped = int(np.ceil(ymax / validated_resolution) * validated_resolution)
 
@@ -611,7 +616,8 @@ def bbox_to_bng(
     northings = np.arange(ymin, ymax_snapped, validated_resolution)
 
     # For vertical or horizontal lines which exactly align with the grid boundaries,
-    # the above returns an empty list, so ensure that at least one element is in the eastings and northings
+    # the above returns an empty list, so ensure that at least one element 
+    # is in the eastings and northings
     eastings = eastings if len(eastings) > 0 else np.array([xmax_snapped])
     northings = northings if len(northings) > 0 else np.array([ymax_snapped])
 
@@ -770,7 +776,8 @@ def geom_to_bng_intersection(
         bng_refs = np.array(geom_to_bng(part, resolution))
 
         if part.geom_type == "Point":
-            # Convert the Point to a BNGIndexedGeometry object and append to bng_idx_geoms list
+            # Convert the Point to a BNGIndexedGeometry object 
+            # and append to bng_idx_geoms list
             bng_idx_geoms.append(BNGIndexedGeometry(bng_refs[0], False, part))
 
         elif part.geom_type == "LineString":
@@ -778,9 +785,11 @@ def geom_to_bng_intersection(
             bng_geoms = np.array([bng_to_grid_geom(bng_ref) for bng_ref in bng_refs])
             # Prepare the geometry part to speed up intersects spatial predicate tests
             prepare(part)
-            # Derive the intersections between the geometry part and the grid square geometries
+            # Derive the intersections between the geometry part 
+            # and the grid square geometries
             intersections = intersection(part, bng_geoms)
-            # Derive BNGIndexedGeometry objects for geometry part and add to the bng_idx_geoms list
+            # Derive BNGIndexedGeometry objects for geometry part 
+            # and add to the bng_idx_geoms list
             bng_idx_geoms.extend(
                 [
                     BNGIndexedGeometry(bng_ref, False, geometry)
@@ -799,14 +808,17 @@ def geom_to_bng_intersection(
             core = bng_refs[bng_bool]
             # Subset bng_refs array based on negative containment
             edge = bng_refs[~bng_bool]
-            # Derive BNGIndexedGeometry objects for core cases and add to the bng_idx_geoms list
+            # Derive BNGIndexedGeometry objects for core cases 
+            # and add to the bng_idx_geoms list
             bng_idx_geom_core = [
                 BNGIndexedGeometry(bng_ref, True, bng_ref.bng_to_grid_geom())
                 for bng_ref in core
             ]
-            # Derive the intersection between the part geometry and the 'edge' grid square geometries
+            # Derive the intersection between the part geometry 
+            # and the 'edge' grid square geometries
             intersections = intersection(part, bng_geoms[~bng_bool])
-            # Derive BNGIndexedGeometry objects for 'edge' grid squares and add to the bng_idx_geoms list
+            # Derive BNGIndexedGeometry objects for 'edge' grid squares 
+            # and add to the bng_idx_geoms list
             bng_idx_geom_edge = [
                 BNGIndexedGeometry(bng_ref, False, geometry)
                 for bng_ref, geometry in zip(edge, intersections)
