@@ -248,13 +248,13 @@ def _validate_and_normalise_bbox(
 def _get_bng_suffix(
     easting: int | float, northing: int | float, resolution: int
 ) -> str:
-    """Get the BNG ordinal direction suffix for a given easting, northing and quadtree resolution.
+    """Get the BNG ordinal suffix for a given easting, northing and quadtree resolution.
 
     Args:
         easting (int | float): Easting coordinate.
         northing (int | float): Northing coordinate.
-        resolution (int): Resolution expressed as a metre-based integer. Must be an intermediate quadtree
-                          resolution e.g. 5, 50, 500, 5000, 50000.
+        resolution (int): Resolution expressed as a metre-based integer. Must be an 
+            intermediate quadtree resolution e.g. 5, 50, 500, 5000, 50000.
 
     Returns:
         str: The BNG ordinal direction suffix.
