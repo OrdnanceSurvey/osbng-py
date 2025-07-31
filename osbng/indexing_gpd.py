@@ -54,33 +54,51 @@ def gdf_to_bng_intersection_explode(
     *,
     reset_index: bool = True,
 ) -> gpd.GeoDataFrame:
-    """Applies the `osbng.indexing.geom_to_bng_intersection` function to each geometry in a GeoPandas `GeoDataFrame`, returning a flattened GeoDataFrame
-    by exploding the resulting lists of `BNGIndexedGeometry` objects.
+    """Applies geom_to_bng_intersection to a GeoDataFrame at a given resolution.
 
-    The `geom_to_bng_intersection` function is applied to the active geometry column of the input GeoDataFrame, 
-    which is expected to be set and in the OSGB36 / British National Grid coordinate reference system (CRS) (EPSG:27700).
+    Decomposes each geometry in the input GeoDataFrame bounded by their presence in 
+    grid squares at the specified resolution. The resulting BNGIndexedGeometry objects 
+    are exploded into individual rows, with each row containing a new column for each 
+    BNGIndexedGeometry object property: bng_ref, is_core, and geom.
 
-    This function decomposes each geometry in the input GeoDataFrame bounded by their presence in BNG grid squares at the specified resolution. The resulting `BNGIndexedGeometry` objects are
-    exploded into individual rows, with each row containing a new column for each `BNGIndexedGeometry` object property: bng_ref, is_core, and geom.
+    Decomposition is achieved by applying the osbng.indexing.geom_to_bng_intersection
+    function to each geometry in the input GeoPandas GeoDataFrame, returning a 
+    flattened GeoDataFrame by exploding the resulting BNGIndexedGeometry lists.
 
-    The input GeoDataFrame geometry column is replaced with the `geom` property of the `BNGIndexedGeometry` objects. The input geometry column can be retrieved if required
-    by joining the resulting GeoDataFrame with the original GeoDataFrame on the index (if not reset), or using a feature identifier. Dropping the original geometry column reduces memory usage
-    and simplifies the resulting GeoDataFrame.
+    The active geometry column of the input GeoDataFrame is passed to 
+    geom_to_bng_intersection, which is expected to be set and in the 
+    OSGB36 / British National Grid coordinate reference system (CRS) (EPSG:27700).
 
-    All non-geometry columns from the original GeoDataFrame are retained in the resulting GeoDataFrame.
+    The input GeoDataFrame geometry column is replaced with the geom property of the 
+    BNGIndexedGeometry objects. The input geometry column can be retrieved if required
+    by joining the resulting GeoDataFrame with the original GeoDataFrame on the index 
+    (if not reset), or using a feature identifier. Dropping the original geometry 
+    column reduces memory usage and simplifies the resulting GeoDataFrame.
 
-    Exploding the resulting GeoDataFrame allows for easier analysis and manipulation of the `BNGIndexedGeometry` object properties. This is otherwise a more complex operation.
+    All non-geometry columns from the original GeoDataFrame are retained in the 
+    resulting GeoDataFrame.
+
+    Exploding the resulting GeoDataFrame allows for easier analysis and manipulation of 
+    the BNGIndexedGeometry object properties. This is otherwise a more complex 
+    operation.
 
     Args:
-        gdf (gpd.GeoDataFrame): Input GeoDataFrame.
-        resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
-        reset_index (bool): Whether to reset the index of the resulting GeoDataFrame. Defaults to True. Keyword-only.
+        gdf (gpd.GeoDataFrame): Input GeoPandas GeoDataFrame.
+        resolution (int | str): The BNG resolution expressed either as a metre-based 
+            integer or as a string label.
+        reset_index (bool): Whether to reset the index of the resulting GeoDataFrame. 
+            Defaults to True. Keyword-only.
 
     Returns:
-        gpd.GeoDataFrame: A new GeoDataFrame with one row per `BNGIndexedGeometry` object, containing the following columns:
-            - `bng_ref`: The `BNGReference` object. The `BNGIndexedGeometry` object `bng_ref` property.
-            - `is_core`: A boolean indicating whether the geometry is a core grid square. The `BNGIndexedGeometry` object `is_core` property.
-            - `geometry`: The Shapely Geometry representing the intersection between the input geometry and the grid square. The `BNGIndexedGeometry` object `geom` property.
+        gpd.GeoDataFrame: A new GeoDataFrame with one row per BNGIndexedGeometry 
+            object, containing the following columns:
+            - bng_ref: The BNGReference object. The BNGIndexedGeometry object 
+                bng_ref property.
+            - is_core: A boolean indicating whether the geometry is a core grid square. 
+                The BNGIndexedGeometry object is_core property.
+            - geometry: The Shapely Geometry representing the intersection between the 
+                input geometry and the grid square. The BNGIndexedGeometry object geom 
+                property.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
