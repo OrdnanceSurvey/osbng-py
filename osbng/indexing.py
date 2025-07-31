@@ -1,12 +1,12 @@
 """Provides functionality to index coordinates and Shapely geometries within the British National Grid (BNG) index system.
 
 The module supports bi-directional conversion between easting/northing coordinate pairs and BNGReference objects
-at supported resolutions as defined in the 'resolution' module. Additionally, it enables the indexing of geometries, 
+at supported resolutions as defined in the 'resolution' module. Additionally, it enables the indexing of geometries,
 represented using Shapely Geometry objects, into grid squares at a specified resolution. Shapely geometries can also be decomposed
 into simplified representations bounded by their presence in each grid square at a specified resolution.
 
-Indexing functionality faciliates grid-based spatial analysis, enabling applications such as statistical aggregation, 
-data visualisation, and data interopability. 
+Indexing functionality faciliates grid-based spatial analysis, enabling applications such as statistical aggregation,
+data visualisation, and data interopability.
 
 Summary of functionality:
 
@@ -14,14 +14,14 @@ Summary of functionality:
     - Decoding BNGReference objects back into easting/nothing coordinates, bounding boxes and grid squares as Shapely geometries.
     - Indexing bounding boxes into grid squares at a specified resolution.
     - Indexing Shapely geometries into grid squares at a specified resolution.
-    - Decomposing Shapely geometries into simplified representations bounded by their presence in each grid square at 
+    - Decomposing Shapely geometries into simplified representations bounded by their presence in each grid square at
       a specified resolution.
 
 Supported resolutions:
 
-    - The module supports the 'standard' and 'intermediate' quadtree resolutions: 100km, 50km, 10km, 5km, 1km, 500m, 100m, 
+    - The module supports the 'standard' and 'intermediate' quadtree resolutions: 100km, 50km, 10km, 5km, 1km, 500m, 100m,
       50m, 10m, 5m and 1m.
-    - These resolutions passed to indexing functions are validated and normalised using the resolution mapping defined in the 
+    - These resolutions passed to indexing functions are validated and normalised using the resolution mapping defined in the
       'resolution' module.
 """
 
@@ -45,7 +45,7 @@ __all__ = [
     "bng_to_grid_geom",
     "bbox_to_bng",
     "geom_to_bng",
-    "geom_to_bng_intersection"
+    "geom_to_bng_intersection",
 ]
 
 # Set warnings to always display
@@ -228,7 +228,9 @@ def _validate_and_normalise_bbox(
     return xmin, ymin, xmax, ymax
 
 
-def _get_bng_suffix(easting: int | float, northing: int | float, resolution: int) -> str:
+def _get_bng_suffix(
+    easting: int | float, northing: int | float, resolution: int
+) -> str:
     """Get the BNG ordinal direction suffix for a given easting, northing and quadtree resolution.
 
     Args:
@@ -289,7 +291,9 @@ def _decompose_geom(geom: Geometry) -> list[Geometry]:
         raise ValueError(f"Unsupported geometry type: {geom.geom_type}")
 
 
-def xy_to_bng(easting: int | float, northing: int | float, resolution: int | str) -> BNGReference:
+def xy_to_bng(
+    easting: int | float, northing: int | float, resolution: int | str
+) -> BNGReference:
     """Returns a BNGReference object given easting and northing coordinates, at a specified resolution.
 
     Args:
@@ -537,7 +541,11 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
 
 
 def bbox_to_bng(
-    xmin: int | float, ymin: int | float, xmax: int | float, ymax: int | float, resolution: int | str
+    xmin: int | float,
+    ymin: int | float,
+    xmax: int | float,
+    ymax: int | float,
+    resolution: int | str,
 ) -> list[BNGReference]:
     """Returns a list of BNGReference objects given bounding box coordinates and a resolution.
 
@@ -573,7 +581,7 @@ def bbox_to_bng(
 
     Example:
         >>> bbox_to_bng(400000, 100000, 500000, 200000, "50km")
-        [BNGReference(bng_ref_formatted=SU SW, resolution_label=50km), 
+        [BNGReference(bng_ref_formatted=SU SW, resolution_label=50km),
          BNGReference(bng_ref_formatted=SU SE, resolution_label=50km),
          BNGReference(bng_ref_formatted=SU NW, resolution_label=50km),
          BNGReference(bng_ref_formatted=SU NE, resolution_label=50km)]
@@ -586,7 +594,7 @@ def bbox_to_bng(
          BNGReference(bng_ref_formatted=SX 9 8 SE, resolution_label=5km),
          BNGReference(bng_ref_formatted=SX 8 8 NE, resolution_label=5km),
          BNGReference(bng_ref_formatted=SX 9 8 NW, resolution_label=5km),
-         BNGReference(bng_ref_formatted=SX 9 8 NE, resolution_label=5km)] 
+         BNGReference(bng_ref_formatted=SX 9 8 NE, resolution_label=5km)]
     """
 
     # Validate and normalise the resolution to its metre-based integer value
@@ -629,8 +637,8 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
        The BNGReference objects returned represent the grid squares intersected by the input geometry.
        BNGReference objects are deduplicated in cases where two or more parts of a multi-part geometry
        intersect the same grid square.
-       
-       This function is useful for spatial indexing and aggregation of geometries against the BNG. 
+
+       This function is useful for spatial indexing and aggregation of geometries against the BNG.
        For geometry decomposition by the BNG index system, use geom_to_bng_intersection instead.
 
        A note on the type of the input geometry. This also applies to the parts within a multi-part geometry:
@@ -657,7 +665,9 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
     Example:
         >>> geom_to_bng(Point(430000, 110000), "100km")
         [BNGReference(bng_ref_formatted=SU, resolution_label=100km)]
-        >>> geom_to_bng(LineString([[430000, 110000],[430010, 110000],[430010, 110010]]), "5m")
+        >>> geom_to_bng(
+        ...     LineString([[430000, 110000], [430010, 110000], [430010, 110010]]), "5m"
+        ... )
         [BNGReference(bng_ref_formatted=SU 3000 1000 SE, resolution_label=5m),
          BNGReference(bng_ref_formatted=SU 3000 1000 SW, resolution_label=5m),
          BNGReference(bng_ref_formatted=SU 3000 1000 NE, resolution_label=5m)]
@@ -670,7 +680,6 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
 
     # Recursively decompose geometry into its constituent parts
     for part in _decompose_geom(geom):
-
         if part.geom_type == "Point":
             # Convert the Point to BNGReference object and append to bng_refs list
             bng_refs.append(xy_to_bng(part.x, part.y, validated_resolution))
@@ -730,12 +739,19 @@ def geom_to_bng_intersection(
     Example:
         >>> geom_to_bng_intersection(Point(430000, 110000), "100km")
         [BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU, resolution_label=100km), is_core=False, geom=POINT (430000 110000))]
-        >>> geom_to_bng_intersection(LineString([[430000, 110000],[430010, 110000],[430010, 110010]]), "5m")
+        >>> geom_to_bng_intersection(
+        ...     LineString([[430000, 110000], [430010, 110000], [430010, 110010]]), "5m"
+        ... )
         [BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU 3000 1000 SE, resolution_label=5m), is_core=False, geom=MULTILINESTRING ((430005 110000, 430010 110000), (430010 110000, 430010 110005))),
          BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU 3000 1000 SW, resolution_label=5m), is_core=False, geom=LINESTRING (430000 110000, 430005 110000)),
          BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU 3000 1000 NE, resolution_label=5m), is_core=False, geom=LINESTRING (430010 110005, 430010 110010))]
         >>> from shapely import wkt
-        >>> geom_to_bng_intersection(wkt.loads("Polygon ((375480.64511692 144999.23691181, 426949.67604058 160255.02751493, 465166.20199588 153320.57724078, 453762.88376729 94454.79935802, 393510.2158297 91989.21703833, 375480.64511692 144999.23691181))"), "50km")
+        >>> geom_to_bng_intersection(
+        ...     wkt.loads(
+        ...         "Polygon ((375480.64511692 144999.23691181, 426949.67604058 160255.02751493, 465166.20199588 153320.57724078, 453762.88376729 94454.79935802, 393510.2158297 91989.21703833, 375480.64511692 144999.23691181))"
+        ...     ),
+        ...     "50km",
+        ... )
         [BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU SW, resolution_label=50km), is_core=True, geom=POLYGON ((450000 100000, 450000 150000, 400000 150000, 400000 100000, 450000 100000))),
          BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=ST NE, resolution_label=50km), is_core=False, geom=POLYGON ((400000 152266.94988613573, 400000 150000, 392351.90644475375 150000, 400000 152266.94988613573))),
          BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=ST SE, resolution_label=50km), is_core=False, geom=POLYGON ((392351.90644475375 150000, 400000 150000, 400000 100000, 390785.6181363417 100000, 375480.64511692 144999.23691181, 392351.90644475375 150000))),
@@ -751,7 +767,6 @@ def geom_to_bng_intersection(
 
     # Recursively decompose geometry into its constituent parts
     for part in _decompose_geom(geom):
-        
         # Convert the geometry part to BNGReference objects
         bng_refs = np.array(geom_to_bng(part, resolution))
 
