@@ -59,9 +59,12 @@ def bbox_to_bng_iterfeatures(
         yield bng_ref.__geo_interface__
 
 
-# Grid square data covering the BNG index system bounds provided at 100km, 50km, 10km, 5km and 1km resolutions as iterators
-# Iterators can be converted to a list to trigger generation of BNGReference object Features
-# Resolution capped at 1km to prevent excessive data generation for lower (finer) resolutions
+# Grid square data covering the BNG index system bounds provided at 
+# 100km, 50km, 10km, 5km and 1km resolutions as iterators
+# Iterators can be converted to a list to trigger generation of 
+# BNGReference object Features
+# Resolution capped at 1km to prevent excessive data generation 
+# for lower (finer) resolutions
 bng_grid_100km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "100km")
 bng_grid_50km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "50km")
 bng_grid_10km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "10km")
