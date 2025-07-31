@@ -588,31 +588,33 @@ def bbox_to_bng(
     ymax: int | float,
     resolution: int | str,
 ) -> list[BNGReference]:
-    """Returns a list of BNGReference objects given bounding box coordinates and a resolution.
+    """Returns a list of BNGReference objects for a bounding box and resolution.
 
-    The relationship between the bounding box and the returned BNG grid squares depends on the
-    alignment of the bounding box with the BNG index system:
+    The relationship between the bounding box (BBOX) and the returned grid squares 
+    depends on the alignment of the BBOX with the BNG index system:
 
-    - **Aligned Bounding Box**: If the bounding box edges align with the BNG system
-        (e.g. xmin, ymin, xmax, ymax are multiples of the specified resolution), only the grid
-        squares entirely contained within the bounding box are returned. Grid squares that intersect
-        but are not fully contained within the bounding box are excluded.
+    If the BBOX edges align with the BNG index system (xmin, ymin, xmax, ymax 
+    are multiples of the specified resolution), only the grid squares entirely contained 
+    within the BBOX are returned. Grid squares that intersect but are not fully 
+    contained within the BBOX are excluded.
 
-    - **Non-Aligned Bounding Box**: If the bounding box edges are not aligned with the BNG system,
-        grid squares that are partially overlapped by the bounding box are also included. In this case,
-        the function ensures all relevant grid squares that the bounding box touches are returned,
-        including those at the edges.
+    If the BBOX edges are not aligned with the BNG index system, grid squares 
+    that are partially overlapped by the BBOX are also included. In this case,
+    the function ensures all relevant grid squares that the BBOX touches are 
+    returned, including those at the edges.
 
-    Validates and normalises the bounding box coordinates to the BNG index system extent. If bounding box
-    coordinates fall outside of the BNG system extent, then a warning is raised and the coordinates are snapped
-    to the bounds of the BNG system.
+    Validates and normalises the BBOX coordinates to the BNG index system 
+    extent. If BBOX coordinates fall outside of the BNG index system extent, 
+    then a warning is raised and the coordinates are snapped to the bounds of the BNG 
+    index system.
 
     Args:
-        xmin (int | float): The minimum easting coordinate of the bounding box.
-        ymin (int | float): The minimum northing coordinate of the bounding box.
-        xmax (int | float): The maximum easting coordinate of the bounding box.
-        ymax (int | float): The maximum northing coordinate of the bounding box.
-        resolution (int | str): The resolution of the BNG reference expressed either as a metre-based integer or as a string label.
+        xmin (int | float): The minimum easting coordinate of the BBOX.
+        ymin (int | float): The minimum northing coordinate of the BBOX.
+        xmax (int | float): The maximum easting coordinate of the BBOX.
+        ymax (int | float): The maximum northing coordinate of the BBOX.
+        resolution (int | str): The resolution of the BNG reference expressed either as 
+            a metre-based integer or as a string label.
 
     Returns:
         list[BNGReference]: List of BNGReference objects.
