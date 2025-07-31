@@ -1,12 +1,15 @@
 """Testing for the indexing_gpd module.
 
-Testing is skipped if the 'GeoPandas' (https://github.com/geopandas/geopandas) package is not installed.
+Testing is skipped if the GeoPandas (https://github.com/geopandas/geopandas) package is 
+not installed.
 
-The test cases are defined in the JSON file located at ./data/indexing_test_cases.json and are used to parameterise the tests for various functions in the indexing module.
-Test cases are loaded from the JSON file using the _load_test_cases function, which is defined in the utils module.
-The test cases are defined as TypedDicts, which provide a way to define the structure of the test case data.
+The test cases are defined in the JSON file located at ./data/indexing_test_cases.json 
+and are used to parameterise the tests for various functions in the indexing module.
+Test cases are loaded from the JSON file using the _load_test_cases function, which is 
+defined in the utils module. The test cases are defined as TypedDicts, which provide a 
+way to define the structure of the test case data.
 
-Testing reuses the test cases for the `osbng.indexing.geom_to_bng_intersection` function.
+Testing reuses the test cases for the osbng.indexing.geom_to_bng_intersection function.
 """
 
 from math import sqrt
