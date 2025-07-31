@@ -758,27 +758,35 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
 def geom_to_bng_intersection(
     geom: Geometry, resolution: int | str
 ) -> list[BNGIndexedGeometry]:
-    """Returns a list of BNGIndexedGeometry objects given a Shapely Geometry and a specified resolution.
+    """Returns a BNGIndexedGeometry list given a Shapely Geometry and resolution.
 
-       Decomposes a Shapely Geometry into BNG grid squares at a specified resolution. Unlike geom_to_bng which only returns
-       BNGReference objects representing the grid squares intersected by the input geometry, geom_to_bng_intersection returns
-       BNGIndexedGeometry objects that store the intersection between the input geometry and the grid square geometries.
+    Decomposes a Shapely Geometry into grid squares at a specified resolution. Unlike 
+    geom_to_bng which only returns BNGReference objects representing the grid squares
+    intersected by the input geometry, geom_to_bng_intersection returns 
+    BNGIndexedGeometry objects that store the intersection between the input geometry
+    and the grid square geometries.
 
-       This is particularly useful for spatial indexing, aggregation and visualisation use cases that requires the decomposition
-       of geometries into their constituent parts bounded by the BNG system.
+    This is particularly useful for spatial indexing, aggregation and visualisation 
+    use cases that requires the decomposition of geometries into their constituent 
+    parts bounded by the BNG index system.
 
-       A note on the type of the input geometry. This also applies to the parts within a multi-part geometry:
+    A note on the type of the input geometry. This also applies to the parts within a 
+    multi-part geometry:
 
-        - For Point geometries, the function returns a list comprising a single BNGIndexedGeometry object. A BNGExtentError
-          exception is raised if the coordinates are outside of the BNG index system extent.
-        - For LineString and Polygon geometry types, the function returns a list of BNGIndexedGeometry objects representing the
-          intersections between the grid squares and the geometry. When the geometry extends beyond the BNG system extent, the function
-          will show a feature bounding box warning but will still return the BNGIndexedGeometry objects for the intersected grid
-          squares.
+    For Point geometries, the function returns a list comprising a single 
+    BNGIndexedGeometry object. A BNGExtentError exception is raised if the coordinates 
+    are outside of the BNG index system extent.
+
+    For LineString and Polygon geometry types, the function returns a list of 
+    BNGIndexedGeometry objects representing the intersections between the grid squares 
+    and the geometry. When the geometry extends beyond the BNG index system extent, the 
+    function will show a feature bounding box warning but will still return the 
+    BNGIndexedGeometry objects for the intersected grid squares.
 
     Args:
         geom (Geometry): Shapely Geometry object.
-        resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
+        resolution (int | str): The BNG resolution expressed either as a metre-based 
+            integer or as a string label.
 
     Returns:
         list[BNGIndexedGeometry]: List of BNGIndexedGeometry objects.
@@ -786,33 +794,160 @@ def geom_to_bng_intersection(
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
         ValueError: If the geometry type is not supported.
-        BNGExtentError: If the coordinates of a point geometry are outside of the BNG index system extent.
+        BNGExtentError: If the coordinates of a Point geometry are outside of the BNG 
+            index system extent.
 
     Example:
+        >>> from shapely.geometry import Point
         >>> geom_to_bng_intersection(Point(430000, 110000), "100km")
-        [BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU, resolution_label=100km), is_core=False, geom=POINT (430000 110000))]
+        [
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(bng_ref_formatted=SU, resolution_label=100km), 
+                is_core=False, 
+                geom=POINT (430000 110000)
+            )
+        ]
+        >>> from shapely.geometry import LineString
         >>> geom_to_bng_intersection(
-        ...     LineString([[430000, 110000], [430010, 110000], [430010, 110010]]), "5m"
+        ...     LineString([[430000, 110000], [430010, 110000], [430010, 110010]]), 
+        ...     "5m"
         ... )
-        [BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU 3000 1000 SE, resolution_label=5m), is_core=False, geom=MULTILINESTRING ((430005 110000, 430010 110000), (430010 110000, 430010 110005))),
-         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU 3000 1000 SW, resolution_label=5m), is_core=False, geom=LINESTRING (430000 110000, 430005 110000)),
-         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU 3000 1000 NE, resolution_label=5m), is_core=False, geom=LINESTRING (430010 110005, 430010 110010))]
+        [
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(
+                            bng_ref_formatted=SU 3000 1000 SE, 
+                            resolution_label=5m
+                        ), 
+                is_core=False, 
+                geom=MULTILINESTRING (
+                     (430005 110000, 430010 110000), 
+                     (430010 110000, 430010 110005)
+                )
+            ),
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(
+                            bng_ref_formatted=SU 3000 1000 SW, 
+                            resolution_label=5m
+                ),  
+                is_core=False, 
+                geom=LINESTRING (430000 110000, 430005 110000)
+            ),
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(
+                            bng_ref_formatted=SU 3000 1000 NE, 
+                            resolution_label=5m
+                ), 
+                is_core=False, 
+                geom=LINESTRING (430010 110005, 430010 110010))
+        ]
         >>> from shapely import wkt
         >>> geom_to_bng_intersection(
         ...     wkt.loads(
-        ...         "Polygon ((375480.64511692 144999.23691181, 426949.67604058 160255.02751493, 465166.20199588 153320.57724078, 453762.88376729 94454.79935802, 393510.2158297 91989.21703833, 375480.64511692 144999.23691181))"
+        ...         "POLYGON ("
+        ...         "(375480.64511692 144999.23691181, 426949.67604058 160255.02751493,"
+        ...         " 465166.20199588 153320.57724078, 453762.88376729 94454.79935802,"
+        ...         " 393510.2158297 91989.21703833, 375480.64511692 144999.23691181)"
+        ...         ")"
         ...     ),
         ...     "50km",
         ... )
-        [BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU SW, resolution_label=50km), is_core=True, geom=POLYGON ((450000 100000, 450000 150000, 400000 150000, 400000 100000, 450000 100000))),
-         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=ST NE, resolution_label=50km), is_core=False, geom=POLYGON ((400000 152266.94988613573, 400000 150000, 392351.90644475375 150000, 400000 152266.94988613573))),
-         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=ST SE, resolution_label=50km), is_core=False, geom=POLYGON ((392351.90644475375 150000, 400000 150000, 400000 100000, 390785.6181363417 100000, 375480.64511692 144999.23691181, 392351.90644475375 150000))),
-         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SZ NW, resolution_label=50km), is_core=False, geom=POLYGON ((400000 92254.78365399371, 400000 100000, 450000 100000, 450000 94300.8194596147, 400000 92254.78365399371))),
-         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SZ NE, resolution_label=50km), is_core=False, geom=POLYGON ((453762.88376729 94454.79935802, 450000 94300.8194596147, 450000 100000, 454837.0849387723 100000, 453762.88376729 94454.79935802))),
-         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU SE, resolution_label=50km), is_core=False, geom=POLYGON ((454837.0849387723 100000, 450000 100000, 450000 150000, 464522.9488131115 150000, 454837.0849387723 100000))),
-         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU NE, resolution_label=50km), is_core=False, geom=POLYGON ((465166.20199588 153320.57724078, 464522.9488131115 150000, 450000 150000, 450000 156072.50905454965, 465166.20199588 153320.57724078))),
-         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SU NW, resolution_label=50km), is_core=False, geom=POLYGON ((426949.67604058 160255.02751493, 450000 156072.50905454965, 450000 150000, 400000 150000, 400000 152266.94988613573, 426949.67604058 160255.02751493))),
-         BNGIndexedGeometry(bng_ref=BNGReference(bng_ref_formatted=SY NE, resolution_label=50km), is_core=False, geom=POLYGON ((393510.2158297 91989.21703833, 390785.6181363417 100000, 400000 100000, 400000 92254.78365399371, 393510.2158297 91989.21703833)))]
+        [
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(bng_ref_formatted=SU SW, 
+                                     resolution_label=50km
+                ), 
+                is_core=True, 
+                geom=POLYGON (
+                     (450000 100000, 450000 150000, 400000 150000, 
+                      400000 100000, 450000 100000)
+                )
+            ),
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(bng_ref_formatted=ST NE, 
+                                     resolution_label=50km
+                ), 
+                is_core=False,
+                geom=POLYGON (
+                     (400000 152266.94988613573, 400000 150000, 
+                      392351.90644475375 150000, 400000 152266.94988613573)
+                )
+            ),
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(bng_ref_formatted=ST SE, 
+                                     resolution_label=50km
+                ), 
+                is_core=False,
+                geom=POLYGON (
+                     (392351.90644475375 150000, 400000 150000, 400000 100000, 
+                      390785.6181363417 100000, 375480.64511692 144999.23691181, 
+                      392351.90644475375 150000)
+                )
+            ),
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(bng_ref_formatted=SZ NW, 
+                                     resolution_label=50km
+                ), 
+                is_core=False,
+                geom=POLYGON (
+                     (400000 92254.78365399371, 400000 100000, 450000 100000, 
+                      450000 94300.8194596147, 400000 92254.78365399371)
+                )
+            ),
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(bng_ref_formatted=SZ NE, 
+                                     resolution_label=50km
+                ), 
+                is_core=False,
+                geom=POLYGON (
+                     (453762.88376729 94454.79935802, 450000 94300.8194596147, 
+                      450000 100000, 454837.0849387723 100000, 
+                      453762.88376729 94454.79935802)
+                )
+            ),
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(bng_ref_formatted=SU SE, 
+                                     resolution_label=50km
+                ), 
+                is_core=False,
+                geom=POLYGON (
+                     (454837.0849387723 100000, 450000 100000, 450000 150000, 
+                      464522.9488131115 150000, 454837.0849387723 100000)
+                )
+            ),
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(bng_ref_formatted=SU NE, 
+                                     resolution_label=50km
+                ), 
+                is_core=False,
+                geom=POLYGON (
+                     (465166.20199588 153320.57724078, 464522.9488131115 150000, 
+                      450000 150000, 450000 156072.50905454965, 
+                      465166.20199588 153320.57724078)
+                )
+            ),
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(bng_ref_formatted=SU NW, 
+                                     resolution_label=50km
+                ), 
+                is_core=False,
+                geom=POLYGON (
+                     (426949.67604058 160255.02751493, 450000 156072.50905454965, 
+                      450000 150000, 400000 150000, 400000 152266.94988613573, 
+                      426949.67604058 160255.02751493)
+                )
+            ),
+            BNGIndexedGeometry(
+                bng_ref=BNGReference(bng_ref_formatted=SY NE, 
+                                     resolution_label=50km
+                ), 
+                is_core=False,
+                geom=POLYGON (
+                     (393510.2158297 91989.21703833, 390785.6181363417 100000, 
+                      400000 100000, 400000 92254.78365399371, 
+                      393510.2158297 91989.21703833)
+                )
+            )
+        ]
     """
     # Initialise an empty list to store the BNGIndexedGeometry objects
     bng_idx_geoms = []
