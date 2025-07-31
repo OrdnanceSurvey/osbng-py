@@ -1,6 +1,5 @@
 """Testing for the indexing module.
 
-
 The test cases are defined in the JSON file located at ./data/indexing_test_cases.json
 and are used to parameterise the tests for various functions in the indexing module.
 Test cases are loaded from the JSON file using the _load_test_cases function, which is
@@ -12,7 +11,6 @@ from math import sqrt
 from typing import Any, TypedDict
 
 import pytest
-
 from shapely import Geometry
 from shapely.geometry import shape
 from shapely.testing import assert_geometries_equal
@@ -20,18 +18,18 @@ from shapely.testing import assert_geometries_equal
 from osbng.bng_reference import BNGReference
 from osbng.errors import _EXCEPTION_MAP
 from osbng.indexing import (
+    _decompose_geom,
+    _get_bng_suffix,
+    _validate_and_normalise_bbox,
     _validate_and_normalise_bng_resolution,
     _validate_easting_northing,
-    _validate_and_normalise_bbox,
-    _get_bng_suffix,
-    _decompose_geom,
-    xy_to_bng,
-    bng_to_xy,
+    bbox_to_bng,
     bng_to_bbox,
     bng_to_grid_geom,
-    bbox_to_bng,
+    bng_to_xy,
     geom_to_bng,
     geom_to_bng_intersection,
+    xy_to_bng,
 )
 from osbng.utils import _load_test_cases
 
