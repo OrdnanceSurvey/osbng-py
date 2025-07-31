@@ -676,27 +676,35 @@ def bbox_to_bng(
 
 
 def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
-    """Returns a list of BNGReference objects given a Shapely Geometry and a specified resolution.
+    """Returns a list of BNGReference objects given a Shapely Geometry and resolution.
 
-       The BNGReference objects returned represent the grid squares intersected by the input geometry.
-       BNGReference objects are deduplicated in cases where two or more parts of a multi-part geometry
-       intersect the same grid square.
+       The BNGReference objects returned represent the grid squares intersected by the 
+       input geometry. BNGReference objects are deduplicated in cases where two or more 
+       parts of a multi-part geometry intersect the same grid square.
 
-       This function is useful for spatial indexing and aggregation of geometries against the BNG.
-       For geometry decomposition by the BNG index system, use geom_to_bng_intersection instead.
+       This function is useful for spatial indexing and aggregation of geometries 
+       against the BNG index system.
 
-       A note on the type of the input geometry. This also applies to the parts within a multi-part geometry:
+       For geometry decomposition by the BNG index system, use geom_to_bng_intersection 
+       instead.
 
-         - For Point geometries, the function returns a list comprising a single BNGReference object. A BNGExtentError
-           exception is raised if the coordinates are outside of the BNG index system extent.
-         - For LineString and Polygon geometry types, the function returns a list of BNGReference objects representing the
-           grid squares intersected by the geometry. When the geometry extends beyond the BNG system extent, the function
-           will show a feature bounding box warning but will still return the BNGReference objects for the intersected grid
-           squares.
+       A note on the type of the input geometry. This also applies to the parts within a 
+       multi-part geometry:
+
+       For Point geometries, the function returns a list comprising a single 
+       BNGReference object. A BNGExtentError exception is raised if the coordinates are 
+       outside of the BNG index system extent.
+
+       For LineString and Polygon geometry types, the function returns a list of 
+       BNGReference objects representing the grid squares intersected by the geometry. 
+       When the geometry extends beyond the BNG index system extent, the function will 
+       show a feature bounding box warning but will still return the BNGReference 
+       objects for the intersected grid squares.
 
     Args:
         geom (Geometry): Shapely Geometry object.
-        resolution (int | str): The BNG resolution expressed either as a metre-based integer or as a string label.
+        resolution (int | str): The BNG resolution expressed either as a metre-based 
+            integer or as a string label.
 
     Returns:
         list[BNGReference]: List of BNGReference objects.
