@@ -53,7 +53,8 @@ def validate_and_assert_gdf_bng_intersection(
     # Assert that the result is a GeoDataFrame
     assert isinstance(gdf_test, gpd.GeoDataFrame)
 
-    # Extract the 'bng_ref_formatted' property from the 'bng_ref' column and 'is_core' column
+    # Extract the 'bng_ref_formatted' property from the 'bng_ref' column 
+    # and 'is_core' column
     result = [
         (bng_ref.bng_ref_formatted, is_core)
         for bng_ref, is_core in zip(gdf_test["bng_ref"], gdf_test["is_core"])
@@ -62,13 +63,15 @@ def validate_and_assert_gdf_bng_intersection(
     assert sorted(result) == sorted(expected)
 
     # Extract the areas of the core indexed geometries
-    # Core indexed geometries represent grid squares that are fully contained within the input geometry
+    # Core indexed geometries represent grid squares that are fully contained within 
+    # the input geometry
     result_core_areas = gdf_test[gdf_test["is_core"]]["geometry"].area.tolist()
 
     if result_core_areas:
         # Normalise the resolution to its metre equivalent
         normalised_resolution = _validate_and_normalise_bng_resolution(resolution)
-        # Assert that the resolution of the core indexed geometries is equal to the normalised resolution
+        # Assert that the resolution of the core indexed geometries 
+        # is equal to the normalised resolution
         assert all(sqrt(area) == normalised_resolution for area in result_core_areas)
 
 
@@ -91,7 +94,8 @@ def test_gdf_to_bng_intersection_explode(test_case: GeomToBNGIntersectionTestCas
     # Convert test case geometry from GeoJSON to Shapely Geometry object
     geom = shape(test_case["geom"])
     # Create GeoDataFrame from the geometry
-    # Set GeoDataFrame coordinate reference system (CRS) to 'EPSG:27700' (British National Grid)
+    # Set GeoDataFrame coordinate reference system (CRS) to 
+    # 'EPSG:27700' (British National Grid)
     gdf = gpd.GeoDataFrame({"geometry": [geom]}, crs=27700)
     resolution = test_case["resolution"]
     # Convert expected result dictionary values into tuples
