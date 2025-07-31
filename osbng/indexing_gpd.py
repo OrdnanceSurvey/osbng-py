@@ -1,9 +1,9 @@
-"""Provides functionality to convert geometries in a GeoPandas `GeoDataFrame` to `BNGIndexedGeometry` objects,
-and explode the resulting lists into a flattened GeoDataFrame.
+"""Index geometries in a GeoPandas GeoDataFrame against the BNG index system.
 
-This module requires the 'GeoPandas' (https://github.com/geopandas/geopandas) package to be installed.
+This module requires the 'GeoPandas' (https://github.com/geopandas/geopandas) package 
+to be installed.
 
-To install the required package, use::
+To install the required package, use:
 
     pip install osbng[geopandas]
 
