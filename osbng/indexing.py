@@ -177,7 +177,7 @@ def _validate_and_normalise_bng_resolution(resolution: int | str) -> int:
         raise BNGResolutionError()
 
 
-def _validate_easting_northing(easting: int | float, northing: int | float):
+def _validate_easting_northing(easting: int | float, northing: int | float) -> None:
     """Validates that coordinates are within the bounds of the BNG index system extent.
 
     The easting and northing coordinates must be below the upper bounds of the BNG 
