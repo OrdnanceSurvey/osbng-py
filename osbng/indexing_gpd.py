@@ -131,7 +131,8 @@ def gdf_to_bng_intersection_explode(
     if geometry_column is None:
         raise ValueError(
             "GeoDataFrame must have an active geometry column set. "
-            "Use `gdf.set_geometry(geometry_column_name)` to set the active geometry column."
+            "Use gdf.set_geometry(geometry_column_name) to set the active geometry "
+            "column."
         )
 
     # Retain only the active geometry column and non-geometry columns
