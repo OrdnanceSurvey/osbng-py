@@ -320,7 +320,7 @@ def xy_to_bng(
             a metre-based integer or as a string label.
 
     Returns:
-        BNGReference: The BNGReference object.
+        BNGReference: The BNGReference.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
