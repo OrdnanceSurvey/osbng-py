@@ -178,18 +178,22 @@ def _validate_and_normalise_bng_resolution(resolution: int | str) -> int:
 
 
 def _validate_easting_northing(easting: int | float, northing: int | float):
-    """Validates that easting and northing coordinates are within the bounds of the BNG index system extent.
+    """Validates that coordinates are within the bounds of the BNG index system extent.
 
-    The easting and northing coordinates must be below the upper bounds of the BNG system.
-    Coordinates of 700000 (easting) and 1300000 (northing) would correspond to a BNG reference
-    representing the southwest (lower-left) corner of a grid square beyond the system's limits.
+    The easting and northing coordinates must be below the upper bounds of the BNG 
+    system. Coordinates of 700000 (easting) and 1300000 (northing) would correspond to a 
+    BNG reference representing the southwest (lower-left) corner of a grid square beyond 
+    the system's limits.
 
     Args:
-        easting (int | float): The easting coordinate. Must be in the range 0 <= easting < 700000.
-        northing (int | float): The northing coordinate. Must be in the range 0 <= northing < 1300000.
+        easting (int | float): The easting coordinate. 
+            Must be in the range 0 <= easting < 700000.
+        northing (int | float): The northing coordinate. 
+            Must be in the range 0 <= northing < 1300000.
 
     Raises:
-        BNGExtentError: If the easting or northing coordinates are outside the BNG extent.
+        BNGExtentError: If the easting or northing coordinates are outside the BNG 
+            index system extent.
     """
     if not (0 <= easting < 700000):
         raise BNGExtentError()
