@@ -28,8 +28,7 @@ __all__ = ["gdf_to_bng_intersection_explode"]
 
 
 def _is_geometry_column(gdf: gpd.GeoDataFrame, col: str) -> bool:
-    """
-    Check if a column in a GeoDataFrame is a geometry column.
+    """Check if a column in a GeoDataFrame is a geometry column.
 
     Args:
         gdf (gpd.GeoDataFrame): The GeoDataFrame to check.
