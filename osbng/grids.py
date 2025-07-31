@@ -1,12 +1,14 @@
-"""Provides functionality to generate British National Grid (BNG) grid square data within specified bounds.
+"""Generate British National Grid (BNG) grid square data within specified bounds.
 
-Uses a GeoJSON-like mapping for grid squares implementing the __geo_interface__ protocol (https://gist.github.com/sgillies/2217756).
-Use of this protocol enables integration with geospatial data processing libraries and tools.
+Uses a GeoJSON-like mapping for grid squares implementing the __geo_interface__ 
+protocol (https://gist.github.com/sgillies/2217756). Use of this protocol enables 
+integration with geospatial data processing libraries and tools.
 
-Grid square data covering the BNG index system bounds is provided as an iterator at 100km, 50km, 10km, 5km and 1km resolutions.
-GeoPandas can be used to read the iterator data directly into a GeoDataFrame for further processing using geopandas.GeoDataFrame.from_features() 
-(https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.from_features.html).
-Iterators can be converted to lists to generate all grid square GeoJSON-like Features at a given resolution.
+Grid square data covering the BNG index system bounds is provided as an iterator at 
+100km, 50km, 10km, 5km and 1km resolutions. GeoPandas can be used to read the iterator 
+data directly into a GeoDataFrame for further processing using 
+geopandas.GeoDataFrame.from_features() or similar methods. Iterators can be converted 
+to lists to generate all grid square GeoJSON-like Features at a given resolution.
 """
 
 from typing import Any, Iterator
