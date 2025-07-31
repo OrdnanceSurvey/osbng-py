@@ -37,14 +37,16 @@ from tests.test_indexing import GeomToBNGIntersectionTestCase
 def validate_and_assert_gdf_bng_intersection(
     gdf: gpd.GeoDataFrame, resolution: int | str, expected: list[tuple[str, bool]]
 ):
-    """Helper function to validate and assert gdf_to_bng_intersection_explode return.
+    """Validates and asserts gdf_to_bng_intersection_explode return.
 
     Args:
-        gdf (gpd.GeoDataFrame): GeoPandas GeoDataFrame containing the geometry to be tested.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected (list[tuple[str, bool]]): Expected result. A list of tuples, where each tuple contains:
-                                           - The expected BNG reference formatted string.
-                                           - A boolean indicating if it is a core geometry.
+        gdf (gpd.GeoDataFrame): GeoPandas GeoDataFrame containing the geometry to be 
+            tested.
+        resolution (int | str): The resolution expressed either as a metre-based 
+            integer or as a string label.
+        expected (list[tuple[str, bool]]): Expected result. A list of tuples, where 
+            each tuple contains, the expected BNG reference formatted string and a 
+            boolean indicating if it is a core geometry.
     """
     # Apply the gdf_to_bng_intersection_explode function to the input GeoDataFrame
     gdf_test = gdf_to_bng_intersection_explode(gdf, resolution)
