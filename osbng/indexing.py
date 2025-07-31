@@ -12,8 +12,8 @@ such as statistical aggregation, data visualisation, and data interoperability.
 
 Summary of functionality:
 
-    - Encoding easting and northing coordinates into BNGReference objects at a specified 
-    resolution.
+    - Encoding easting and northing coordinates into BNGReference objects at a 
+    specified resolution.
     - Decoding BNGReference objects back into easting/nothing coordinates, 
     bounding boxes and grid squares as Shapely geometries.
     - Indexing bounding boxes into grid squares at a specified resolution.
@@ -181,9 +181,9 @@ def _validate_easting_northing(easting: int | float, northing: int | float):
     """Validates that coordinates are within the bounds of the BNG index system extent.
 
     The easting and northing coordinates must be below the upper bounds of the BNG 
-    system. Coordinates of 700000 (easting) and 1300000 (northing) would correspond to a 
-    BNG reference representing the southwest (lower-left) corner of a grid square beyond 
-    the system's limits.
+    system. Coordinates of 700000 (easting) and 1300000 (northing) would correspond to 
+    a BNG reference representing the southwest (lower-left) corner of a grid square 
+    beyond the BNG index system's limits.
 
     Args:
         easting (int | float): The easting coordinate. 
@@ -594,9 +594,9 @@ def bbox_to_bng(
     depends on the alignment of the BBOX with the BNG index system:
 
     If the BBOX edges align with the BNG index system (xmin, ymin, xmax, ymax 
-    are multiples of the specified resolution), only the grid squares entirely contained 
-    within the BBOX are returned. Grid squares that intersect but are not fully 
-    contained within the BBOX are excluded.
+    are multiples of the specified resolution), only the grid squares entirely 
+    contained within the BBOX are returned. Grid squares that intersect but are not 
+    fully contained within the BBOX are excluded.
 
     If the BBOX edges are not aligned with the BNG index system, grid squares 
     that are partially overlapped by the BBOX are also included. In this case,
