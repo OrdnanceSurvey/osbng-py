@@ -311,19 +311,21 @@ def _decompose_geom(geom: Geometry) -> list[Geometry]:
 def xy_to_bng(
     easting: int | float, northing: int | float, resolution: int | str
 ) -> BNGReference:
-    """Returns a BNGReference object given easting and northing coordinates, at a specified resolution.
+    """Returns a BNGReference given easting and northing coordinates and resolution.
 
     Args:
         easting (int | float): The easting coordinate.
         northing (int | float): The northing coordinate.
-        resolution (int | str): The resolution of the BNG reference expressed either as a metre-based integer or as a string label.
+        resolution (int | str): The resolution of the BNG reference expressed either as 
+            a metre-based integer or as a string label.
 
     Returns:
         BNGReference: The BNGReference object.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
-        BNGExtentError: If the easting and northing coordinates are outside the BNG extent.
+        BNGExtentError: If the easting and northing coordinates are outside the BNG 
+            index system extent.
 
     Example:
         >>> xy_to_bng(437289, 115541, "100km")
