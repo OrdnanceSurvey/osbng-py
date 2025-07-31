@@ -28,10 +28,10 @@ Supported resolutions:
 import warnings
 
 import numpy as np
-from shapely import box, contains, Geometry, intersection, intersects, prepare
+from shapely import Geometry, box, contains, intersection, intersects, prepare
 from shapely.geometry import Polygon
 
-from osbng.bng_reference import _PATTERN, _validate_bngreferences, BNGReference
+from osbng.bng_reference import _PATTERN, BNGReference, _validate_bngreferences
 from osbng.errors import BNGExtentError, BNGResolutionError
 from osbng.resolution import BNG_RESOLUTIONS
 
@@ -93,7 +93,8 @@ class BNGIndexedGeometry:
     Usage:
         The BNGIndexedGeometry class is instantiated as part of the geom_to_bng_intersection indexing function that decomposes a
         Shapely Geometry into grid squares at a specified resolution. The decomposition can be used for indexing, spatial analysis,
-        or visualisation."""
+        or visualisation.
+    """
 
     def __init__(self, bng_ref: BNGReference, is_core: bool, geom: Geometry):
         """Initialises a BNGIndexedGeometry object instance."""
@@ -141,7 +142,6 @@ def _validate_and_normalise_bng_resolution(resolution: int | str) -> int:
         >>> _validate_and_normalise_bng_resolution("1km")
         1000
     """
-
     # If resolution is an integer, check if it's a valid metre-based resolution
     if isinstance(resolution, int):
         if resolution not in BNG_RESOLUTIONS.keys():
@@ -596,7 +596,6 @@ def bbox_to_bng(
          BNGReference(bng_ref_formatted=SX 9 8 NW, resolution_label=5km),
          BNGReference(bng_ref_formatted=SX 9 8 NE, resolution_label=5km)]
     """
-
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
 
