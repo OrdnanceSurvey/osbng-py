@@ -107,17 +107,17 @@ class BNGIndexedGeometry:
         self._geom = geom
 
     @property
-    def bng_ref(self):
+    def bng_ref(self) -> BNGReference:
         """Returns the BNGReference object associated with this geometry."""
         return self._bng_ref
 
     @property
-    def is_core(self):
+    def is_core(self) -> bool:
         """Indicates whether the grid square geometry is contained by the input geometry."""
         return self._is_core
 
     @property
-    def geom(self):
+    def geom(self) -> Geometry:
         """Returns the Shapely Geometry representing the intersection between the input geometry and the grid square."""
         return self._geom
 
