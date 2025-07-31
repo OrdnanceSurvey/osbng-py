@@ -130,6 +130,7 @@ class BNGIndexedGeometry:
         return self._geom
 
     def __repr__(self):
+        """String representation of the BNGIndexedGeometry object."""
         return (
             f"BNGIndexedGeometry(bng_ref={self._bng_ref}, "
             f"is_core={self._is_core}, geom={self._geom.wkt})"
