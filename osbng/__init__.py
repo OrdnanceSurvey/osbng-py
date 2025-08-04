@@ -1,4 +1,8 @@
-"""A Python package supporting geospatial grid indexing and interaction with Ordnance Survey's British National Grid index system."""
+"""A Python package supporting Ordnance Survey's British National Grid index system.
+
+This package enables the use of the BNG index system for geospatial grid indexing and
+other interactions.
+"""
 
 from osbng.bng_reference import BNGReference
 from osbng.grids import *
