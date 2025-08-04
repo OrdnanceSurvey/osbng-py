@@ -3,34 +3,34 @@
 BNGReference Object
 ------------------------
 
-The BNG index system uses BNG references, also known more simply as grid or tile references, to identify and index locations across 
-Great Britain (GB) into grid squares at various resolutions. 
+The BNG index system uses BNG references, also known more simply as grid or tile references, to identify and index locations across
+Great Britain (GB) into grid squares at various resolutions.
 
-The BNGReference object is a custom class that encapsulates a BNG reference string, providing properties and methods to access 
+The BNGReference object is a custom class that encapsulates a BNG reference string, providing properties and methods to access
 and manipulate the reference.
 
 British National Grid Index System
 ------------------------
 
-The Ordnance Survey (OS) BNG index system, also known as the OS National Grid, is a rectangular 
-Cartesian 700 x 1300km grid system based upon the transverse Mercator projection. In the BNG, locations 
-are specified using coordinates, eastings (x) and northings (y), measured in meters from a defined 
-origin point (0, 0) southwest of the Isles of Scilly off the coast of Cornwall, England. Values increase 
+The Ordnance Survey (OS) BNG index system, also known as the OS National Grid, is a rectangular
+Cartesian 700 x 1300km grid system based upon the transverse Mercator projection. In the BNG, locations
+are specified using coordinates, eastings (x) and northings (y), measured in meters from a defined
+origin point (0, 0) southwest of the Isles of Scilly off the coast of Cornwall, England. Values increase
 to the northeast, covering all of mainland GB and surrounding islands.
 
-The BNG is structured using a hierarchical system of grid squares at various resolutions. At its highest level, 
-the grid divides GB into 100 km by 100 km squares, each identified by a two-letter code. Successive levels 
+The BNG is structured using a hierarchical system of grid squares at various resolutions. At its highest level,
+the grid divides GB into 100 km by 100 km squares, each identified by a two-letter code. Successive levels
 of resolution further subdivide the grid squares into finer detail, down to individual 1-meter squares.
 
 BNG Reference Structure
 ------------------------
 
-Each BNG reference string consists of a series of alphanumeric characters that encode the easting and northing at 
+Each BNG reference string consists of a series of alphanumeric characters that encode the easting and northing at
 a given resolution.
 
-A BNG reference includes a 2-letter prefix that identifies the 100 km grid square. This is followed by an 
-easting and northing value, and optionally, a suffix indicating an ordinal (intercardinal) direction (NE, SE, SW, NW). 
-These suffixes represent a quadtree subdivision of the grid at the 'standard' resolutions (100km, 10km, 1km, 100m, and 10m), 
+A BNG reference includes a 2-letter prefix that identifies the 100 km grid square. This is followed by an
+easting and northing value, and optionally, a suffix indicating an ordinal (intercardinal) direction (NE, SE, SW, NW).
+These suffixes represent a quadtree subdivision of the grid at the 'standard' resolutions (100km, 10km, 1km, 100m, and 10m),
 with each direction indicating a specific quadrant.
 
 <prefix><easting value><northing value><suffix>
@@ -38,13 +38,13 @@ with each direction indicating a specific quadrant.
 There are two exceptions to this structure:
 
 1.  At the 100km resolution, a BNG reference consists only of the prefix.
-2.  At the 50km resolution, a BNG reference includes the prefix and the ordinal direction suffix but does not include easting 
+2.  At the 50km resolution, a BNG reference includes the prefix and the ordinal direction suffix but does not include easting
 or northing components.
 
 A BNG reference can be expressed at different scales, as follows:
 
 1.  100km: Identified by a two-letter code (e.g. 'TQ').
-2.  50km: Subdivides the 100 km grid into four quadrants. The grid reference adds an ordinal direction suffix (NE, NW, SE, SW) 
+2.  50km: Subdivides the 100 km grid into four quadrants. The grid reference adds an ordinal direction suffix (NE, NW, SE, SW)
     to indicate the quadrant within the 100 km square (e.g. 'TQ SW').
 3.  10km: Adds one-digit easting and northing values (e.g. 'TQ 2 3').
 4.  5km: Subdivides the 10 km square adding an ordinal suffix (e.g. 'TQ 53 SW').
@@ -61,7 +61,7 @@ BNG Reference Formatting
 
 BNG reference strings passed to a BNGReference object must adhere to the following format:
 
-- Whitespace may or may not separate the components of the reference (i.e. between the two-letter 100km grid square prefix, easting, 
+- Whitespace may or may not separate the components of the reference (i.e. between the two-letter 100km grid square prefix, easting,
   northing, and ordinal suffix).
 - If whitespace is present, it should be a single space character.
 - Whitespace can be inconsistently used between components of the reference.
@@ -70,15 +70,15 @@ BNG reference strings passed to a BNGReference object must adhere to the followi
 EPSG:27700 (OSGB36 / British National Grid)
 ------------------------
 
-The BNG system is a practical application of the EPSG:27700 (OSGB36 / British National Grid) coordinate reference system 
-(https://epsg.io/27700) which provides the geodetic framework that defines how locations defined by easting and northing coordinates 
+The BNG system is a practical application of the EPSG:27700 (OSGB36 / British National Grid) coordinate reference system
+(https://epsg.io/27700) which provides the geodetic framework that defines how locations defined by easting and northing coordinates
 and encoded as BNG references (e.g. 'ST 569 714') are projected to the grid.
 
 BNG Reference Application
 ------------------------
 
-The BNG index system is widely used by the geospatial community across GB. At each resolution, a given location can be identified with 
-increasing detail, allowing for variable accuracy depending on the geospatial application, from small-scale mapping to precise 
+The BNG index system is widely used by the geospatial community across GB. At each resolution, a given location can be identified with
+increasing detail, allowing for variable accuracy depending on the geospatial application, from small-scale mapping to precise
 survey measurements.
 """
 
@@ -348,10 +348,13 @@ class BNGReference:
         if isinstance(other, BNGReference):
             return self.bng_ref_compact == other.bng_ref_compact
         return False
-    
+
     def __lt__(self, other):
         if isinstance(other, BNGReference):
-            return (-self.resolution_metres, self.bng_ref_compact) < (-other.resolution_metres, other.bng_ref_compact)
+            return (-self.resolution_metres, self.bng_ref_compact) < (
+                -other.resolution_metres,
+                other.bng_ref_compact,
+            )
         return NotImplemented
 
     def __hash__(self):
@@ -501,7 +504,7 @@ class BNGReference:
         from osbng.hierarchy import bng_to_parent as _bng_to_parent
 
         return _bng_to_parent(self, resolution)
-    
+
     def bng_kring(self, k: int, return_relations: bool = False) -> list["BNGReference"]:
         """Returns a list of BNG reference objects representing a hollow ring around the current BNG reference object
         at a grid distance k.
@@ -510,7 +513,7 @@ class BNGReference:
 
         Args:
             k (int): Grid distance in units of grid squares.
-            return_relations (bool, optional): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+            return_relations (bool, optional): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in
                 grid units.  If False (default), returns a list of BNGReference objects.
 
         Returns:
@@ -538,7 +541,7 @@ class BNGReference:
         from osbng.traversal import bng_kring as _bng_kring
 
         return _bng_kring(self, k, return_relations=return_relations)
-    
+
     def bng_kdisc(self, k: int, return_relations: bool = False) -> list["BNGReference"]:
         """Returns a list of BNG reference objects representing a filled disc around the current BNG reference object
         up to a grid distance k, including the given central BNG reference object.
@@ -547,7 +550,7 @@ class BNGReference:
 
         Args:
             k (int): Grid distance in units of grid squares.
-            return_relations (bool, optional): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in 
+            return_relations (bool, optional): If True, returns a list of (BNGReference, dx, dy) tuples where dx, dy are integer offsets in
                 grid units.  If False (default), returns a list of BNGReference objects.
 
         Returns:
@@ -577,8 +580,10 @@ class BNGReference:
         from osbng.traversal import bng_kdisc as _bng_kdisc
 
         return _bng_kdisc(self, k, return_relations=return_relations)
-    
-    def bng_distance(self, bng_ref2: "BNGReference", edge_to_edge: bool = False) -> float:
+
+    def bng_distance(
+        self, bng_ref2: "BNGReference", edge_to_edge: bool = False
+    ) -> float:
         """Returns the euclidean distance between the centroids of the current BNGReference object and another.
 
         Note that the other BNGReference object does not necessarily need to share a common resolution.
@@ -599,7 +604,9 @@ class BNGReference:
         Examples:
             >>> BNGReference("SE1433").bng_distance(BNGRerence("SE1533"))
             1000.0
-            >>> BNGReference("SE1433").bng_distance(BNGReference("SE1533"), edge_to_edge = True)
+            >>> BNGReference("SE1433").bng_distance(
+            ...     BNGReference("SE1533"), edge_to_edge=True
+            ... )
             0.0
             >>> BNGReference("SE1433").bng_distance(BNGRerence("SE1631"))
             2828.42712474619
@@ -609,14 +616,16 @@ class BNGReference:
             42807.709586007986
             >>> BNGReference("SE").bng_distance(BNGRerence("OV"))
             141421.35623730952
-            >>> BNGReference("SU").bng_distance(BNGReference("SU2345"), edge_to_edge = True)
+            >>> BNGReference("SU").bng_distance(
+            ...     BNGReference("SU2345"), edge_to_edge=True
+            ... )
             0.0
         """
 
         from osbng.traversal import bng_distance as _bng_distance
 
         return _bng_distance(self, bng_ref2, edge_to_edge=edge_to_edge)
-    
+
     def bng_neighbours(self):
         """Returns a list of BNGReference objects representing the four neighbouring grid squares
         sharing an edge with the current BNGReference.
@@ -632,7 +641,7 @@ class BNGReference:
         from osbng.traversal import bng_neighbours as _bng_neighbours
 
         return _bng_neighbours(self)
-    
+
     def bng_is_neighbour(self, bng_ref2: "BNGReference") -> bool:
         """Returns True if the BNGReference object is a neighbour, otherwise False.
         Neighbours are defined as grid squares that share an edge with the current BNGReference object.
@@ -660,7 +669,7 @@ class BNGReference:
         from osbng.traversal import bng_is_neighbour as _bng_is_neighbour
 
         return _bng_is_neighbour(self, bng_ref2)
-    
+
     def bng_dwithin(self, d: int | float) -> list["BNGReference"]:
         """Returns a list of BNG reference objects around the current BNG reference object within an absolute distance d.
         All squares will be returned for which any part of its boundary is within distance d of any part of
@@ -694,7 +703,6 @@ def _validate_bngreferences(func):
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-
         # Get the function's signature
         signature = inspect.signature(func)
 
@@ -703,7 +711,6 @@ def _validate_bngreferences(func):
 
         # Iterate through each parameter in the signature
         for arg_name in signature.parameters.keys():
-
             # Identify the expected data type
             expected_type = signature.parameters.get(arg_name).annotation
 
@@ -711,11 +718,13 @@ def _validate_bngreferences(func):
             arg_val = bound_signature.arguments.get(arg_name)
 
             # If a BNGReference is expected and the arg value is not a BNGReference, raise an error
-            if (expected_type == BNGReference) and not isinstance(arg_val, BNGReference):
+            if (expected_type == BNGReference) and not isinstance(
+                arg_val, BNGReference
+            ):
                 raise TypeError(
                     f"A BNGReference object must be provided as the {arg_name} argument."
                 )
-            
+
         return func(*args, **kwargs)
 
     return wrapper
