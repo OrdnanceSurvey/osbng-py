@@ -14,18 +14,22 @@ Supported BNG resolutions are:
 - 5m
 - 1m
 
-Relates metre-based BNG resolutions, expressed as integer values, to their respective string label representations.
-These mappings are used to indicate different resolution precision levels in BNG references and serve as the basis for validating
-and normalising resolutions within the system.
+Relates metre-based BNG resolutions, expressed as integer values, to their respective
+string label representations.  These mappings are used to indicate different resolution
+precision levels in BNG references and serve as the basis for validating and normalising
+resolutions within the system.
 
-The integer values represent spatial resolutions in metres, while the string labels provide a human-readable descriptor
-for each resolution level. For example, the numeric resolution 1000 is mapped to the label '1km'.
+The integer values represent spatial resolutions in metres, while the string labels
+provide a human-readable descriptor for each resolution level. For example, the numeric
+resolution 1000 is mapped to the label '1km'.
 
-The resolution mappings also include a flag indicating whether a given resolution represents an (intermediate) quadtree resolution.
-Quadtree resolutions are used to subdivide BNG grid squares at (standard) powers of ten resolutions into four equal quadrants,
-providing additional levels of precision for spatial indexing.
+The resolution mappings also include a flag indicating whether a given resolution
+represents an (intermediate) quadtree resolution.  Quadtree resolutions are used to
+subdivide BNG grid squares at (standard) powers of ten resolutions into four equal
+quadrants, providing additional levels of precision for spatial indexing.
 
-These resolution mappings establish the allowable values that functions and objects referencing the system can accept and process.
+These resolution mappings establish the allowable values that functions and objects
+referencing the system can accept and process.
 """
 
 __all__ = ["BNG_RESOLUTIONS"]
