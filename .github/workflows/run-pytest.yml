@@ -22,4 +22,4 @@ jobs:
           pip install -r testing-requirements.txt
       - name: Test with pytest  
         run: |  
-          coverage run -m pytest -s
+          coverage run -m pytest . -s
