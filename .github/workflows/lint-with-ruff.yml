@@ -1,4 +1,4 @@
-name: Run Unit Test via Pytest  
+name: Run ruff check for formatting
 
 on: [pull_request]  
 
