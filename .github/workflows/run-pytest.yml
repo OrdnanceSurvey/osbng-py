@@ -1,6 +1,6 @@
 name: Run Unit Test via Pytest  
   
-on: [pull_request]  
+on: [commit]  
   
 jobs:  
   build:  
@@ -19,7 +19,7 @@ jobs:
         run: |  
           cd tests
           python -m pip install --upgrade pip  
-          pip install -r testing-requirements.txt
+          pip install osbng[test]
       - name: Test with pytest  
         run: |  
           cd tests
