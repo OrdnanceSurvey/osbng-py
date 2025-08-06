@@ -24,7 +24,9 @@ dependencies = ["shapely >=2.0.0"]
 geopandas = ["geopandas >= 1.0.0"]
 test = [
     "pytest",
-    "tox"
+    "tox",
+    "geopandas >= 1.0.0",
+    "coverage"
 ]
 all = [
     "geopandas >= 1.0.0",
