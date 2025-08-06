@@ -17,10 +17,9 @@ jobs:
           python-version: ${{ matrix.python-version }}  
       - name: Install dependencies  
         run: |  
-          cd tests
           python -m pip install --upgrade pip  
-          pip install -r testing-requirements.txt
-      - name: Test with pytest  
+          pip install -e .[test]
+      - name: Test with pytest
         run: |  
           cd tests
           coverage run -m pytest . -s

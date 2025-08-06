@@ -1,6 +1,0 @@
-shapely>=2.0.0
-geopandas>=1.0.0
-matplotlib
-pytest
-tox
-coverage
