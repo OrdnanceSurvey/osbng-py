@@ -367,7 +367,7 @@ class BNGReference:
         }
 
     def __eq__(self, other: object):
-        """Defined equality based on self.bng_ref_compact."""
+        """Defined equality based on bng_ref_compact."""
         if isinstance(other, BNGReference):
             return self.bng_ref_compact == other.bng_ref_compact
         return False
@@ -376,8 +376,8 @@ class BNGReference:
         """Defines ordering using resolution_metres and bng_ref_compact.
         
         For two BNGReference objects, ordering is done in the following order:
-        1. Rank by self.resolution_metres, where higher resolutions are ordered first.
-        2. Rank by self.bng_ref_compact alphabetically.
+        1. Rank by resolution_metres, where higher resolutions are ordered first.
+        2. Rank by bng_ref_compact alphabetically.
 
         Example:
             >>> BNGReference("SU") < BNGReference("SU1234")
@@ -393,11 +393,11 @@ class BNGReference:
         return NotImplemented
 
     def __hash__(self):
-        """Uses self.bng_ref_compact for hashing."""
+        """Uses bng_ref_compact for hashing."""
         return hash(self.bng_ref_compact)
 
     def __repr__(self):
-        """Prints in format showing self.bng_ref_formatted and self.resolution_label."""
+        """Prints in format showing bng_ref_formatted and resolution_label."""
         return f"BNGReference(bng_ref_formatted={self.bng_ref_formatted}, "\
             f"resolution_label={self.resolution_label})"
 
