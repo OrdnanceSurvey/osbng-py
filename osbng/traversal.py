@@ -210,7 +210,7 @@ def bng_kdisc(
 def bng_distance(
     bng_ref1: BNGReference, bng_ref2: BNGReference, *, edge_to_edge: bool = False
 ) -> float:
-    """Returns the euclidean distance between the centroids of two BNGReference objects.
+    """Returns the euclidean distance between two BNGReference objects.
 
     Note that the two BNGReference objects do not necessarily need to share a common
     resolution.  When edge_to_edge = True and bng_ref1 and bng_ref2 have a parent-child
@@ -224,8 +224,7 @@ def bng_distance(
             distance between any point in the grid squares.  Keyword only.
 
     Returns:
-        float: The euclidean distance between the centroids of the two
-            BNGReference objects.
+        float: The euclidean distance between the two BNGReference objects.
 
     Raises:
         TypeError: If the first or second argument is not a BNGReference object.
