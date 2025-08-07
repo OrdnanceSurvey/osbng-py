@@ -1,8 +1,12 @@
 """Testing for the bng_reference module.
 
-The test cases are defined in the JSON file located at ./data/bng_reference_test_cases.json and are used to parameterise the tests for various functions in the indexing module.
-Test cases are loaded from the JSON file using the _load_test_cases function, which is defined in the utils module.
-The test cases are defined as TypedDicts, which provide a way to define the structure of the test case data.
+The test cases are defined in the JSON file located at
+./data/bng_reference_test_cases.json and are used to parameterise the tests for various
+functions in the indexing module.
+
+Test cases are loaded from the JSON file using the _load_test_cases function, which is
+defined in the utils module. The test cases are defined as TypedDicts, which provide a
+way to define the structure of the test case data.
 """
 
 from typing import TypedDict
@@ -10,11 +14,11 @@ from typing import TypedDict
 import pytest
 
 from osbng.bng_reference import (
-    _validate_bng_ref_string,
-    _get_bng_resolution_metres,
-    _get_bng_resolution_label,
-    _format_bng_ref_string,
     BNGReference,
+    _format_bng_ref_string,
+    _get_bng_resolution_label,
+    _get_bng_resolution_metres,
+    _validate_bng_ref_string,
 )
 from osbng.errors import _EXCEPTION_MAP
 from osbng.utils import _load_test_cases
@@ -25,7 +29,7 @@ class ValidateBNGRefStringTestCase(TypedDict):
 
     Attributes:
         bng_ref_string (str): The BNG reference string to validate.
-        expected (bool): True if the BNG reference is valid, False otherwise..
+        expected (bool): True if the BNG reference is valid, False otherwise.
     """
 
     bng_ref_string: str
@@ -40,7 +44,7 @@ class ValidateBNGRefStringTestCase(TypedDict):
         "_validate_bng_ref_string"
     ],
 )
-def test__validate_bng_ref_string(test_case: ValidateBNGRefStringTestCase):
+def test__validate_bng_ref_string(test_case: ValidateBNGRefStringTestCase) -> None:
     """Test _validate_bng_ref_string function with test cases from JSON file.
 
     Args:
@@ -73,7 +77,7 @@ class GetBNGResolutionMetresTestCase(TypedDict):
         "_get_bng_resolution_metres"
     ],
 )
-def test__get_bng_resolution_metres(test_case: GetBNGResolutionMetresTestCase):
+def test__get_bng_resolution_metres(test_case: GetBNGResolutionMetresTestCase) -> None:
     """Test _get_bng_resolution_metres function with test cases from JSON file.
 
     Args:
@@ -106,7 +110,7 @@ class GetBNGResolutionLabelTestCase(TypedDict):
         "_get_bng_resolution_label"
     ],
 )
-def test__get_bng_resolution_label(test_case: GetBNGResolutionLabelTestCase):
+def test__get_bng_resolution_label(test_case: GetBNGResolutionLabelTestCase) -> None:
     """Test _get_bng_resolution_label function with test cases from JSON file.
 
     Args:
@@ -139,7 +143,7 @@ class FormatBNGRefStringTestCase(TypedDict):
         "_format_bng_ref_string"
     ],
 )
-def test__format_bng_ref_string(test_case: FormatBNGRefStringTestCase):
+def test__format_bng_ref_string(test_case: FormatBNGRefStringTestCase) -> None:
     """Test _format_bng_ref_string function with test cases from JSON file.
 
     Args:
@@ -157,11 +161,14 @@ class BNGReferenceTestCase(TypedDict):
 
     Attributes:
         bng_ref_string (str): The BNG reference string.
-        expected_exception (dict[str, str]): The expected exception is a dictionary with the exception name.
+        expected_exception (dict[str, str]): The expected exception is a dictionary with
+            the exception name.
         expected_bng_ref_compact (str): The BNG reference with whitespace removed.
-        expected_bng_ref_formatted (str): The pretty-formatted version of the BNG reference with single spaces between components.
+        expected_bng_ref_formatted (str): The pretty-formatted version of the BNG
+            reference with single spaces between components.
         expected_resolution_metres (int): The resolution of the BNG reference in meters.
-        expected_resolution_label (str): The resolution of the BNG reference expressed as a descriptive string.
+        expected_resolution_label (str): The resolution of the BNG reference expressed
+            as a descriptive string.
     """
 
     bng_ref_string: str
@@ -178,11 +185,12 @@ class BNGReferenceTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/bng_reference_test_cases.json")["BNGReference"],
 )
-def test_bngreference(test_case: BNGReferenceTestCase):
+def test_bngreference(test_case: BNGReferenceTestCase) -> None:
     """Test BNGReference object with test cases from JSON file.
 
     Args:
-        test_case (BNGReferenceTestCase): Test case from JSON file with the following keys:
+        test_case (BNGReferenceTestCase): Test case from JSON file with the following
+        keys:
             - bng_ref_string
             - expected_bng_ref_compact
             - expected_bng_ref_formatted
