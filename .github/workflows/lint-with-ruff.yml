@@ -1,4 +1,4 @@
-name: Run ruff check for formatting
+name: Run ruff checks
 
 on: [pull_request]  
 
