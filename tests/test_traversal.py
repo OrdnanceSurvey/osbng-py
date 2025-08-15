@@ -48,7 +48,7 @@ class BNGDistanceTestCase(TypedDict):
 )
 def test_bng_distance(test_case: BNGDistanceTestCase) -> None:
     """Test bng_distance with test cases from JSON file.
-    
+
     Args:
         test_case (BNGDistanceTestCase): The test case from JSON file.
     """
@@ -70,9 +70,7 @@ def test_bng_distance(test_case: BNGDistanceTestCase) -> None:
         edge_to_edge = test_case["edge_to_edge"]
         # Assert that the function returns the expected result
         distance = bng_distance(
-            BNGReference(bng_ref1),
-            BNGReference(bng_ref2),
-            edge_to_edge=edge_to_edge
+            BNGReference(bng_ref1), BNGReference(bng_ref2), edge_to_edge=edge_to_edge
         )
         assert distance == test_case["expected"]
 
@@ -107,7 +105,7 @@ class BNGIsNeighbourTestCase(TypedDict):
 )
 def test_bng_is_neighbour(test_case: BNGIsNeighbourTestCase) -> None:
     """Test bng_is_neighbour with test cases from JSON file.
-    
+
     Args:
         test_case (BNGIsNeighbourTestCase): The test case from JSON file.
     """
@@ -165,7 +163,7 @@ class BNGKRingTestCase(TypedDict):
 )
 def test_bng_kring(test_case: BNGKRingTestCase) -> None:
     """Test bng_kring with test cases from JSON file.
-    
+
     Args:
         test_case (BNGKRingTestCase): The test case from JSON file.
     """
@@ -190,7 +188,7 @@ def test_bng_kring(test_case: BNGKRingTestCase) -> None:
             # Assert that the function returns the expected result
             kring = bng_kring(BNGReference(bng_ref_string), k)
             assert sorted([r.bng_ref_formatted for r in kring]) == sorted(expected)
-    
+
     else:
         # Assert that the function returns the expected result
         kring = bng_kring(BNGReference(bng_ref_string), k)
@@ -226,7 +224,7 @@ class BNGKDiscTestCase(TypedDict):
 )
 def test_bng_kdisc(test_case: BNGKDiscTestCase) -> None:
     """Test bng_kdisc with test cases from JSON file.
-    
+
     Args:
         test_case (BNGKDiscTestCase): The test case from JSON file.
     """
@@ -251,7 +249,7 @@ def test_bng_kdisc(test_case: BNGKDiscTestCase) -> None:
             # Assert that the function returns the expected result
             kdisc = bng_kdisc(BNGReference(bng_ref_string), k)
             assert sorted([r.bng_ref_formatted for r in kdisc]) == sorted(expected)
-    
+
     else:
         # Assert that the function returns the expected result
         kdisc = bng_kdisc(BNGReference(bng_ref_string), k)
@@ -300,4 +298,3 @@ def test_bng_dwithin(test_case: BNGKDWithinTestCase) -> None:
         assert sorted([r.bng_ref_formatted for r in kring]) == sorted(
             test_case["expected"]["bng_ref_formatted"]
         )
-

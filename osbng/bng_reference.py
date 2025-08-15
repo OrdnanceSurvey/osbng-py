@@ -374,7 +374,7 @@ class BNGReference:
 
     def __lt__(self, other: object):
         """Defines ordering using resolution_metres and bng_ref_compact.
-        
+
         For two BNGReference objects, ordering is done in the following order:
         1. Rank by resolution_metres, where higher resolutions are ordered first.
         2. Rank by bng_ref_compact alphabetically.
@@ -398,8 +398,10 @@ class BNGReference:
 
     def __repr__(self):
         """Prints in format showing bng_ref_formatted and resolution_label."""
-        return f"BNGReference(bng_ref_formatted={self.bng_ref_formatted}, "\
+        return (
+            f"BNGReference(bng_ref_formatted={self.bng_ref_formatted}, "
             f"resolution_label={self.resolution_label})"
+        )
 
     def bng_to_xy(
         self, position: str = "lower-left"
@@ -750,7 +752,7 @@ class BNGReference:
 
     def bng_dwithin(self, d: int | float) -> list["BNGReference"]:
         """Returns a list of BNGReferencess within an absolute distance d.
-        
+
         All squares will be returned for which any part of its boundary is within
         distance d of any part of the BNGReference object's boundary.
 
@@ -807,8 +809,7 @@ def _validate_bngreferences(func: Callable) -> Callable:
                 arg_val, BNGReference
             ):
                 raise TypeError(
-                    "A BNGReference object must be provided as the"\
-                        f"{arg_name} argument."
+                    f"A BNGReference object must be provided as the{arg_name} argument."
                 )
 
         return func(*args, **kwargs)

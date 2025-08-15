@@ -155,7 +155,7 @@ def bng_kdisc(
     bng_ref: BNGReference, k: int, *, return_relations: bool = False
 ) -> list[BNGReference]:
     """Returns a filled disc around a given BNGReference object.
-     
+
     Nearby BNGReference objects within a grid distance k are returned, including the
     given central BNGReference object.
 
@@ -379,7 +379,7 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
     # Check if the two BNGReference objects are at the same resolution
     if bng_ref1.resolution_metres != bng_ref2.resolution_metres:
         raise BNGNeighbourError(
-            "The input BNGReference objects are not the same grid resolution." \
+            "The input BNGReference objects are not the same grid resolution."
             "The inputBNGReference objects must be the same grid resolution."
         )
     # Otherwise check if the two BNGReference objects are neighbours
@@ -390,7 +390,7 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
 @_validate_bngreferences
 def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
     """Returns a list of BNG reference objects within an absolute distance d.
-    
+
     All squares will be returned for which any part of its boundary is within distance d
     of any part of bng_ref's boundary.
 

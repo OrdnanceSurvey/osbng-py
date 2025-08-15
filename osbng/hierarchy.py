@@ -1,5 +1,5 @@
 """Provides functionality to navigate the hierarchical structure BNG index system.
- 
+
 The BNG is structured using a hierarchical system of grid squares at various
 resolutions. At its highest level, the grid divides GB into 100 km by 100 km squares,
 each identified by a two-letter code. Successive levels of resolution further subdivide
@@ -180,7 +180,7 @@ def bng_to_parent(
     # BNGReference object
     if validated_resolution <= bng_ref.resolution_metres:
         raise BNGHierarchyError(
-            "Resolution must be greater than the resolution "\
+            "Resolution must be greater than the resolution "
             "of input BNGReference object"
         )
 
