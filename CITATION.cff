@@ -40,8 +40,8 @@ keywords:
   - british national grid
   - ordnance survey grid
 license: MIT
-version: 0.3.1
-date-released: 2025-06-25
+version: 0.3.2
+date-released: 2025-08-15
 preferred-citation:
   type: software
   title: 'osbng: Geospatial Grid Indexing and Interaction With the British National Grid'
@@ -50,5 +50,5 @@ preferred-citation:
   institution:
     name: Ordnance Survey Ltd
   year: '2025'
-  version: 0.3.1
+  version: 0.3.2
   repository-code: https://github.com/OrdnanceSurvey/osbng-py

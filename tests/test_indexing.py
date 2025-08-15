@@ -1,16 +1,16 @@
 """Testing for the indexing module.
 
-
-The test cases are defined in the JSON file located at ./data/indexing_test_cases.json and are used to parameterise the tests for various functions in the indexing module.
-Test cases are loaded from the JSON file using the _load_test_cases function, which is defined in the utils module.
-The test cases are defined as TypedDicts, which provide a way to define the structure of the test case data.
+The test cases are defined in the JSON file located at ./data/indexing_test_cases.json
+and are used to parameterise the tests for various functions in the indexing module.
+Test cases are loaded from the JSON file using the _load_test_cases function, which is
+defined in the utils module. The test cases are defined as TypedDicts, which provide a
+way to define the structure of the test case data.
 """
 
 from math import sqrt
 from typing import Any, TypedDict
 
 import pytest
-
 from shapely import Geometry
 from shapely.geometry import shape
 from shapely.testing import assert_geometries_equal
@@ -18,18 +18,18 @@ from shapely.testing import assert_geometries_equal
 from osbng.bng_reference import BNGReference
 from osbng.errors import _EXCEPTION_MAP
 from osbng.indexing import (
+    _decompose_geom,
+    _get_bng_suffix,
+    _validate_and_normalise_bbox,
     _validate_and_normalise_bng_resolution,
     _validate_easting_northing,
-    _validate_and_normalise_bbox,
-    _get_bng_suffix,
-    _decompose_geom,
-    xy_to_bng,
-    bng_to_xy,
+    bbox_to_bng,
     bng_to_bbox,
     bng_to_grid_geom,
-    bbox_to_bng,
+    bng_to_xy,
     geom_to_bng,
     geom_to_bng_intersection,
+    xy_to_bng,
 )
 from osbng.utils import _load_test_cases
 
@@ -38,9 +38,12 @@ class ValidateAndNormaliseBNGResolutionTestCase(TypedDict):
     """TypedDict for _validate_and_normalise_bng_resolution function test cases.
 
     Attributes:
-        resolution (int | float | str): The BNG resolution expressed either as a metre-based integer or float, or as a string label.
-        expected (int | None): The expected result is an integer or None if exception is expected.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
+        resolution (int | float | str): The BNG resolution expressed either as a
+            metre-based integer or float, or as a string label.
+        expected (int | None): The expected result is an integer or None if exception
+            is expected.
+        expected_exception (dict[str, str] | None): The expected exception is a
+            dictionary with the exception name.
     """
 
     resolution: int | float | str
@@ -58,7 +61,7 @@ class ValidateAndNormaliseBNGResolutionTestCase(TypedDict):
 )
 def test__validate_and_normalise_bng_resolution(
     test_case: ValidateAndNormaliseBNGResolutionTestCase,
-):
+) -> None:
     """Test _validate_and_normalise_bng_resolution with test cases from JSON file.
 
     Args:
@@ -89,7 +92,8 @@ class ValidateEastingNorthingTestCase(TypedDict):
     Attributes:
         easting (int | float): The easting coordinate.
         northing (int | float): The northing coordinate.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
+        expected_exception (dict[str, str] | None): The expected exception is a
+            dictionary with the exception name.
     """
 
     easting: int | float
@@ -105,7 +109,7 @@ class ValidateEastingNorthingTestCase(TypedDict):
         "_validate_easting_northing"
     ],
 )
-def test__validate_easting_northing(test_case: ValidateEastingNorthingTestCase):
+def test__validate_easting_northing(test_case: ValidateEastingNorthingTestCase) -> None:
     """Test _validate_and_normalise_bng_resolution with test cases from JSON file.
 
     Args:
@@ -133,12 +137,13 @@ class ValidateAndNormaliseBBOXTestCase(TypedDict):
     """TypedDict for _validate_and_normalise_bbox function test cases.
 
     Attributes:
-        xmin (int | float): The minimum easting coordinate of the bounding box.
-        ymin (int | float): The minimum northing coordinate of the bounding box.
-        xmax (int | float): The maximum easting coordinate of the bounding box.
-        ymax (int | float): The maximum northing coordinate of the bounding box.
-        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
-        expected (list[int | float]): The expected result is a list of bounding box coordinates.
+        xmin (int | float): The minimum easting coordinate of the bounding box (BBOX).
+        ymin (int | float): The minimum northing coordinate of the BBOX.
+        xmax (int | float): The maximum easting coordinate of the BBOX.
+        ymax (int | float): The maximum northing coordinate of the BBOX.
+        expected_warning (bool | None): The expected warning is a boolean indicating if
+            a warning is expected.
+        expected (list[int | float]): The expected result is a list of BBOX coordinates.
     """
 
     xmin: int | float
@@ -157,7 +162,9 @@ class ValidateAndNormaliseBBOXTestCase(TypedDict):
         "_validate_and_normalise_bbox"
     ],
 )
-def test__validate_and_normalise_bbox(test_case: ValidateAndNormaliseBBOXTestCase):
+def test__validate_and_normalise_bbox(
+    test_case: ValidateAndNormaliseBBOXTestCase,
+) -> None:
     """Test _validate_and_normalise_bbox with test cases from JSON file.
 
     Args:
@@ -204,7 +211,7 @@ class GetBNGSuffixTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["_get_bng_suffix"],
 )
-def test__get_bng_suffix(test_case: GetBNGSuffixTestCase):
+def test__get_bng_suffix(test_case: GetBNGSuffixTestCase) -> None:
     """Test _get_bng_suffix function with test cases from JSON file.
 
     Args:
@@ -225,7 +232,8 @@ class DecomposeGeomTestCase(TypedDict):
 
     Attributes:
         geom (dict[str, Any]): Geometry reresented in GeoJSON format.
-        expected (dict[str, int | list[str]]): Expected result is a dictionary with the expected part count and list of part geometry types.
+        expected (dict[str, int | list[str]]): Expected result is a dictionary with the
+            expected part count and list of part geometry types.
     """
 
     geom: dict[str, Any]
@@ -238,7 +246,7 @@ class DecomposeGeomTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["_decompose_geom"],
 )
-def test__decompose_geom(test_case: DecomposeGeomTestCase):
+def test__decompose_geom(test_case: DecomposeGeomTestCase) -> None:
     """Test _decompose_geom with test cases from JSON file.
 
     Args:
@@ -266,9 +274,12 @@ class XYToBNGTestCase(TypedDict):
     Attributes:
         easting (int | float): The easting coordinate.
         northing (int | float): The northing coordinate.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected (dict[str, str] | None): The expected result is a dictionary with the BNG reference formatted string.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
+        resolution (int | str): The resolution expressed either as a metre-based
+            integer or as a string label.
+        expected (dict[str, str] | None): The expected result is a dictionary with the
+            BNG reference formatted string.
+        expected_exception (dict[str, str] | None): The expected exception is a
+            dictionary with the exception name.
     """
 
     easting: int | float
@@ -284,7 +295,7 @@ class XYToBNGTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["xy_to_bng"],
 )
-def test_xy_to_bng(test_case: XYToBNGTestCase):
+def test_xy_to_bng(test_case: XYToBNGTestCase) -> None:
     """Test xy_to_bng with test cases from JSON file.
 
     Args:
@@ -319,7 +330,8 @@ class BNGToXYTestCase(TypedDict):
     Attributes:
         bng_ref_string (str): The BNG reference string.
         position (str): The grid cell position expressed as a string.
-        expected (list[int | float]): The expected result is a list of easting and northing coordinates.
+        expected (list[int | float]): The expected result is a list of easting and
+            northing coordinates.
     """
 
     bng_ref_string: str
@@ -333,7 +345,7 @@ class BNGToXYTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_xy"],
 )
-def test_bng_to_xy(test_case: BNGToXYTestCase):
+def test_bng_to_xy(test_case: BNGToXYTestCase) -> None:
     """Test bng_to_xy with test cases from JSON file.
 
     Args:
@@ -370,7 +382,7 @@ class BNGToBBOXTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_bbox"],
 )
-def test_bng_to_bbox(test_case: BNGToBBOXTestCase):
+def test_bng_to_bbox(test_case: BNGToBBOXTestCase) -> None:
     """Test bng_to_bbox with test cases from JSON file.
 
     Args:
@@ -393,7 +405,8 @@ class BNGToGridGeomTestCase(TypedDict):
 
     Attributes:
         bng_ref_string (str): The BNG reference string.
-        expected (dict[str, Any]): The expected result is a dictionary with the expected geometry in GeoJSON format.
+        expected (dict[str, Any]): The expected result is a dictionary with the
+            expected geometry in GeoJSON format.
     """
 
     bng_ref_string: str
@@ -406,7 +419,7 @@ class BNGToGridGeomTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_grid_geom"],
 )
-def test_bng_to_grid_geom(test_case: BNGToGridGeomTestCase):
+def test_bng_to_grid_geom(test_case: BNGToGridGeomTestCase) -> None:
     """Test bng_to_grid_geom with test cases from JSON file.
 
     Args:
@@ -429,13 +442,16 @@ class BBOXToBNGTestCase(TypedDict):
     """TypedDict for bbox_to_bng function test cases.
 
     Attributes:
-        xmin (int | float): The minimum easting coordinate of the bounding box.
-        ymin (int | float): The minimum northing coordinate of the bounding box.
-        xmax (int | float): The maximum easting coordinate of the bounding box.
-        ymax (int | float): The maximum northing coordinate of the bounding box.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
-        expected (dict[str, list[str]]): The expected result is a dictionary with a list of BNG reference formatted strings.
+        xmin (int | float): The minimum easting coordinate of the bounding box (BBOX).
+        ymin (int | float): The minimum northing coordinate of the BBOX.
+        xmax (int | float): The maximum easting coordinate of the BBOX.
+        ymax (int | float): The maximum northing coordinate of the BBOX.
+        resolution (int | str): The resolution expressed either as a metre-based
+            integer or as a string label.
+        expected_warning (bool | None): The expected warning is a boolean indicating if
+            a warning is expected.
+        expected (dict[str, list[str]]): The expected result is a dictionary with a
+            list of BNG reference formatted strings.
     """
 
     xmin: int | float
@@ -453,7 +469,7 @@ class BBOXToBNGTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["bbox_to_bng"],
 )
-def test_bbox_to_bng(test_case: BBOXToBNGTestCase):
+def test_bbox_to_bng(test_case: BBOXToBNGTestCase) -> None:
     """Test bbox_to_bng with test cases from JSON file.
 
     Args:
@@ -493,10 +509,14 @@ class GeomToBNGTestCase(TypedDict):
 
     Attributes:
         geom (dict[str, Any]): Geometry represented in GeoJSON format.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
-        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
-        expected (dict[str, list[str]] | None): The expected result is a dictionary with a list of BNG reference formatted strings.
+        resolution (int | str): The resolution expressed either as a metre-based
+            integer or as a string label.
+        expected_exception (dict[str, str] | None): The expected exception is a
+            dictionary with the exception name.
+        expected_warning (bool | None): The expected warning is a boolean indicating if
+            a warning is expected.
+        expected (dict[str, list[str]] | None): The expected result is a dictionary
+            with a list of BNG reference formatted strings.
     """
 
     geom: dict[str, Any]
@@ -508,13 +528,15 @@ class GeomToBNGTestCase(TypedDict):
 
 def validate_and_assert_bng_intersects(
     geom: Geometry, resolution: int | str, expected: list[str]
-):
+) -> None:
     """Helper function to validate and assert geom_to_bng function return.
 
     Args:
         geom (Geometry): Shapely Geometry object.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected (list[str]): Expected result. A list containing the expected BNG reference formatted strings.
+        resolution (int | str): The resolution expressed either as a metre-based
+            integer or as a string label.
+        expected (list[str]): Expected result. A list containing the expected BNG
+            reference formatted strings.
     """
     # Return a list of BNGReference objects
     bng_refs = geom_to_bng(geom, resolution)
@@ -530,7 +552,7 @@ def validate_and_assert_bng_intersects(
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/indexing_test_cases.json")["geom_to_bng"],
 )
-def test_geom_to_bng(test_case: GeomToBNGTestCase):
+def test_geom_to_bng(test_case: GeomToBNGTestCase) -> None:
     """Test geom_to_bng with test cases from JSON file.
 
     Args:
@@ -572,10 +594,15 @@ class GeomToBNGIntersectionTestCase(TypedDict):
 
     Attributes:
         geom (dict[str, Any]): Geometry represented in GeoJSON format.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
-        expected_warning (bool | None): The expected warning is a boolean indicating if a warning is expected.
-        expected (list[dict[str, str | bool]] | None): The expected result is a list of dictionaries with the expected BNG reference formatted strings and booleans indicating if a grid square is a core geometry.
+        resolution (int | str): The resolution expressed either as a metre-based
+            integer or as a string label.
+        expected_exception (dict[str, str] | None): The expected exception is a
+            dictionary with the exception name.
+        expected_warning (bool | None): The expected warning is a boolean indicating if
+            a warning is expected.
+        expected (list[dict[str, str | bool]] | None): The expected result is a list of
+            dictionaries with the expected BNG reference formatted strings and booleans
+            indicating if a grid square is a core geometry.
     """
 
     geom: dict[str, Any]
@@ -587,19 +614,23 @@ class GeomToBNGIntersectionTestCase(TypedDict):
 
 def validate_and_assert_bng_intersection(
     geom: Geometry, resolution: int | str, expected: dict[str, str | bool]
-):
+) -> None:
     """Helper function to validate and assert geom_to_bng_intersection return.
 
     Args:
         geom (Geometry): Shapely Geometry object.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected (dict[str, str | bool]): Expected result. A dictionary containing the expected BNG reference formatted string and a boolean indicating if it is a core geometry.
+        resolution (int | str): The resolution expressed either as a metre-based
+            integer or as a string label.
+        expected (dict[str, str | bool]): Expected result. A dictionary containing the
+            expected BNG reference formatted string and a boolean indicating if it is a
+            core geometry.
     """
     # Convert test case geometry from GeoJSON to Shapely Geometry object
     # Return a list of BNGIndexedGeometry objects
     bng_idx_geoms = geom_to_bng_intersection(geom, resolution)
-    # Extract bng_ref_formatted and is_core properties to create a simplified representation
-    # of the BNGIndexedGeometry objects for comparison with the expected output.
+    # Extract bng_ref_formatted and is_core properties to create a simplified
+    # representation of the BNGIndexedGeometry objects for comparison with the
+    # expected output.
     result = [
         (bng_idx_geom.bng_ref.bng_ref_formatted, bng_idx_geom.is_core)
         for bng_idx_geom in bng_idx_geoms
@@ -607,14 +638,16 @@ def validate_and_assert_bng_intersection(
     # Assert that the result matches the expected output
     assert sorted(result) == sorted(expected)
     # Extract the areas of the core indexed geometries
-    # Core indexed geometries represent grid squares that are fully contained within the input geometry
+    # Core indexed geometries represent grid squares that are
+    # fully contained within the input geometry
     result_core_areas = [
         bng_idx_geom.geom.area for bng_idx_geom in bng_idx_geoms if bng_idx_geom.is_core
     ]
     if result_core_areas:
         # Normalise the resolution to its metre equivalent
         normalised_resolution = _validate_and_normalise_bng_resolution(resolution)
-        # Assert that the resolution of the core indexed geometries is equal to the normalised resolution
+        # Assert that the resolution of the core indexed geometries
+        # is equal to the normalised resolution
         assert all(sqrt(area) == normalised_resolution for area in result_core_areas)
 
 
@@ -626,7 +659,7 @@ def validate_and_assert_bng_intersection(
         "geom_to_bng_intersection"
     ],
 )
-def test_geom_to_bng_intersection(test_case: GeomToBNGIntersectionTestCase):
+def test_geom_to_bng_intersection(test_case: GeomToBNGIntersectionTestCase) -> None:
     """Test geom_to_bng_intersection with test cases from JSON file.
 
     Args:

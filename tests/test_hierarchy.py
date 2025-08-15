@@ -1,8 +1,10 @@
 """Testing for the hierarchy module.
 
-The test cases are defined in the JSON file located at ./data/hierarchy_test_cases.json and are used to parameterise the tests for various functions in the indexing module.
-Test cases are loaded from the JSON file using the _load_test_cases function, which is defined in the utils module.
-The test cases are defined as TypedDicts, which provide a way to define the structure of the test case data.
+The test cases are defined in the JSON file located at ./data/hierarchy_test_cases.json
+and are used to parameterise the tests for various functions in the indexing module.
+Test cases are loaded from the JSON file using the _load_test_cases function, which is
+defined in the utils module. The test cases are defined as TypedDicts, which provide a
+way to define the structure of the test case data.
 """
 
 from typing import TypedDict
@@ -20,9 +22,12 @@ class BNGToChildrenTestCase(TypedDict):
 
     Attributes:
         bng_ref_string (str): The BNG reference string.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name and optional message.
-        expected (dict[str, list[str]] | None): The expected result is a dictionary with a list of BNG reference formatted strings.
+        resolution (int | str): The resolution expressed either as a metre-based integer
+            or as a string label.
+        expected_exception (dict[str, str] | None): The expected exception is a
+            dictionary with the exception name and optional message.
+        expected (dict[str, list[str]] | None): The expected result is a dictionary with
+            a list of BNG reference formatted strings.
     """
 
     bng_ref_string: str
@@ -37,7 +42,7 @@ class BNGToChildrenTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_children"],
 )
-def test_bng_to_children(test_case: BNGToChildrenTestCase):
+def test_bng_to_children(test_case: BNGToChildrenTestCase) -> None:
     """Test bng_to_children with test cases from JSON file.
 
     Args:
@@ -82,9 +87,12 @@ class BNGToParentTestCase(TypedDict):
 
     Attributes:
         bng_ref_string (str): The BNG reference string.
-        resolution (int | str): The resolution expressed either as a metre-based integer or as a string label.
-        expected_exception (dict[str, str] | None): The expected exception is a dictionary with the exception name.
-        expected (dict[str, str] | None): The expected result is a dictionary with the BNG reference formatted string.
+        resolution (int | str): The resolution expressed either as a metre-based integer
+            or as a string label.
+        expected_exception (dict[str, str] | None): The expected exception is a
+            dictionary with the exception name.
+        expected (dict[str, str] | None): The expected result is a dictionary with the
+            BNG reference formatted string.
     """
 
     bng_ref_string: str
@@ -99,7 +107,7 @@ class BNGToParentTestCase(TypedDict):
     # Load test cases from JSON file
     _load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_parent"],
 )
-def test_bng_to_parent(test_case: BNGToParentTestCase):
+def test_bng_to_parent(test_case: BNGToParentTestCase) -> None:
     """Test bng_to_parent with test cases from JSON file.
 
     Args:

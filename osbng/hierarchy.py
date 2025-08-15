@@ -1,52 +1,74 @@
-"""Provides functionality to navigate the hierarchical structure of the British National Grid (BNG) index system.
- 
-The BNG is structured using a hierarchical system of grid squares at various resolutions. At its highest level, the grid divides GB into 100 km by 100 km squares, each identified by a two-letter code. Successive levels of resolution further subdivide the grid squares into finer detail, down to individual 1-meter squares.
-This module allows for the traversal of this hierarchy by providing methods to return the parent and children of BNGReference objects at specified resolutions.
+"""Provides functionality to navigate the hierarchical structure BNG index system.
+
+The BNG is structured using a hierarchical system of grid squares at various
+resolutions. At its highest level, the grid divides GB into 100 km by 100 km squares,
+each identified by a two-letter code. Successive levels of resolution further subdivide
+the grid squares into finer detail, down to individual 1-meter squares. This module
+allows for the traversal of this hierarchy by providing methods to return the parent and
+children of BNGReference objects at specified resolutions.
 
 Parent and child definitions:
-- **Parent**: The parent of a BNGReference object is the grid square at the next higher (coarser) resolution level that contains the current reference. For example, the parent of a 1km grid square reference would be the 5km grid square that contains it.
-- **Children**: The children of a BNGReference object are the grid squares at the next lower (finer) resolution level that are contained within the current reference. For example, the children of a 10km grid square reference would be the 5km grid squares that it contains.
+- **Parent**: The parent of a BNGReference object is the grid square at the next higher
+    (coarser) resolution level that contains the current reference. For example, the
+    parent of a 1km grid square reference would be the 5km grid square that contains it.
+- **Children**: The children of a BNGReference object are the grid squares at the next
+    lower (finer) resolution level that are contained within the current reference. For
+    example, the children of a 10km grid square reference would be the 5km grid squares
+    that it contains.
 
 Note:
-- While parent and child derivation defaults to the next higher and lower resolution, any supported resolution in the hierarchy can be specified.
+- While parent and child derivation defaults to the next higher and lower resolution,
+    any supported resolution in the hierarchy can be specified.
 
 Supported Resolutions:
-    - The module supports the 'standard' and 'intermediate' quadtree resolutions, including 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 
-    5m and 1m.
-    - These resolutions passed to hierarchy functions are validated and normalised using the resolution mapping defined in the 
-      'resolution' module.
+    - The module supports the 'standard' and 'intermediate' quadtree resolutions,
+        including 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 5m and 1m.
+    - These resolutions passed to hierarchy functions are validated and normalised using
+        the resolution mapping defined in the 'resolution' module.
 """
 
 from osbng.bng_reference import BNGReference, _validate_bngreferences
 from osbng.errors import BNGHierarchyError
-from osbng.indexing import _validate_and_normalise_bng_resolution, xy_to_bng, bng_to_xy, bbox_to_bng
+from osbng.indexing import (
+    _validate_and_normalise_bng_resolution,
+    bbox_to_bng,
+    bng_to_xy,
+    xy_to_bng,
+)
 from osbng.resolution import BNG_RESOLUTIONS
 
 __all__ = ["bng_to_children", "bng_to_parent"]
 
 
 @_validate_bngreferences
-def bng_to_children(bng_ref: BNGReference, *, resolution: int | str | None = None) -> list[BNGReference]:
-    """Returns a list of BNGReference objects that are children of the input BNGReference object.
+def bng_to_children(
+    bng_ref: BNGReference, *, resolution: int | str | None = None
+) -> list[BNGReference]:
+    """Returns all children of the input BNGReference object.
 
-    By default, the children of the BNGReference object is defined as the BNGReference objects in the
-    next resolution down from the input BNGReference resolution. For example, 100km -> 50km.
+    By default, the children of the BNGReference object is defined as the BNGReference
+    objects in the next resolution down from the input BNGReference resolution. For
+    example, 100km -> 50km.
 
-    Any valid resolution can be provided as the child resolution, provided it is less than the
-    resolution of the input BNGReference.
+    Any valid resolution can be provided as the child resolution, provided it is less
+    than the resolution of the input BNGReference.
 
     Args:
         bng_ref (BNGReference): The BNGReference object to derive children from.
-        resolution (int | str | None, optional): The resolution of the children BNGReference objects expressed either as a
-            metre-based integer or as a string label. Defaults to None. Keyword only.
+        resolution (int | str | None, optional): The resolution of the children
+            BNGReference objects expressed either as a metre-based integer or as a
+            string label. Defaults to None. Keyword only.
 
     Returns:
-        list[BNGReference]: A list of BNGReference objects that are children of the input BNGReference object.
+        list[BNGReference]: A list of BNGReference objects that are children of the
+            input BNGReference object.
 
     Raises:
-        BNGReferenceError: If the first positional argument is not a BNGReference object.
+        BNGReferenceError: If the first positional argument is not a BNGReference
+            object.
         BNGHierarchyError: If the resolotuion of the input BNGReference object is 1m.
-        BNGHIerarchyError: If the resolution is greater than or equal to the resolution of the input BNGReference object.
+        BNGHIerarchyError: If the resolution is greater than or equal to the resolution
+            of the input BNGReference object.
         BNGResolutionError: If an invalid resolution is provided.
 
     Examples:
@@ -61,7 +83,6 @@ def bng_to_children(bng_ref: BNGReference, *, resolution: int | str | None = Non
         BNGReference(bng_ref_formatted=SU 3 6 NW, resolution_label=5km),
         BNGReference(bng_ref_formatted=SU 3 6 NE, resolution_label=5km)]
     """
-
     # Raise error if the resolution is 1m
     if bng_ref.resolution_metres == 1:
         raise BNGHierarchyError("Cannot derive children from the finest 1m resolution")
@@ -78,7 +99,8 @@ def bng_to_children(bng_ref: BNGReference, *, resolution: int | str | None = Non
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
 
-    # Raise error if the validated resolution is greater than the resolution of the input BNGReference object
+    # Raise error if the validated resolution is greater than the resolution of the
+    # input BNGReference object
     if validated_resolution >= bng_ref.resolution_metres:
         raise BNGHierarchyError(
             "Resolution must be less than the resolution of input BNGReference object"
@@ -97,27 +119,34 @@ def bng_to_children(bng_ref: BNGReference, *, resolution: int | str | None = Non
 
 
 @_validate_bngreferences
-def bng_to_parent(bng_ref: BNGReference, *, resolution: int | str | None = None) -> BNGReference:
-    """Returns a BNGReference object that is the parent of the input BNGReference object.
+def bng_to_parent(
+    bng_ref: BNGReference, *, resolution: int | str | None = None
+) -> BNGReference:
+    """Returns the parent of the input BNGReference object.
 
-    By default, the parent of the BNGReference object is defined as the BNGReference in the next BNG
-    resolution up from the input BNGReference resolution. For example, 50km -> 100km.
+    By default, the parent of the BNGReference object is defined as the BNGReference in
+    the next BNG resolution up from the input BNGReference resolution. For example,
+    50km -> 100km.
 
-    Any valid resolution can be provided as the parent resolution, provided it is greater than the
-    resolution of the input BNGReference.
+    Any valid resolution can be provided as the parent resolution, provided it is
+    greater than the resolution of the input BNGReference.
 
     Args:
         bng_ref (BNGReference): The BNGReference object to derive parent from.
-        resolution (int | str | None, optional): The resolution of the parent BNGReference objects expressed either as a
-            metre-based integer or as a string label. Defaults to None. Keyword only.
+        resolution (int | str | None, optional): The resolution of the parent
+            BNGReference objects expressed either as a metre-based integer or as a
+            string label. Defaults to None. Keyword only.
 
     Returns:
-        BNGReference: A BNGReference object that is the parent of the input BNGReference object.
+        BNGReference: A BNGReference object that is the parent of the input BNGReference
+            object.
 
     Raises:
-        BNGReferenceError: If the first positional argument is not a BNGReference object.
+        BNGReferenceError: If the first positional argument is not a BNGReference
+            object.
         BNGHierarchyError: If the resolution of the input BNGReference object is 100km.
-        BNGHierarchyError: If the resolution is less than or equal to the resolution of the input BNGReference object.
+        BNGHierarchyError: If the resolution is less than or equal to the resolution of
+            the input BNGReference object.
         BNGResolutionError: If an invalid resolution is provided.
 
     Examples:
@@ -129,7 +158,6 @@ def bng_to_parent(bng_ref: BNGReference, *, resolution: int | str | None = None)
         BNGReference(bng_ref_formatted=SU 3 5, resolution_label=10km)
 
     """
-
     # Raise error if the resolution is 100km
     if bng_ref.resolution_metres == 100000:
         raise BNGHierarchyError(
@@ -148,10 +176,12 @@ def bng_to_parent(bng_ref: BNGReference, *, resolution: int | str | None = None)
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
 
-    # Raise error if the validated resolution is less than the resolution of the input BNGReference object
+    # Raise error if the validated resolution is less than the resolution of the input
+    # BNGReference object
     if validated_resolution <= bng_ref.resolution_metres:
         raise BNGHierarchyError(
-            "Resolution must be greater than the resolution of input BNGReference object"
+            "Resolution must be greater than the resolution "
+            "of input BNGReference object"
         )
 
     # Dervive coordinates of the grid square bounding box
