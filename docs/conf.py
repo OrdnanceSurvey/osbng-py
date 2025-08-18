@@ -1,16 +1,16 @@
 """Configuration file for Sphinx documentation."""
 
-import os
 import sys
 from datetime import datetime
+from pathlib import Path
 
-# Project root directory from docs/conf.py
+# Project root directory from docs/
 # Represents parent directory of the osbng package
-PROJECT_ROOT = os.path.abspath(os.path.join(__file__, "..", "..", ".."))
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 # Add root directory to sys.path
 # Ensures Python can import osbng during autodoc
-sys.path.insert(0, PROJECT_ROOT)
+sys.path.insert(0, str(PROJECT_ROOT))
 
 # Project information
 project = "osbng"
