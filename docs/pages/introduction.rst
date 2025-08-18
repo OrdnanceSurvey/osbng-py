@@ -1,0 +1,216 @@
+Introduction
+============
+
+A Python library for Ordnance Survey’s British National Grid (BNG) index
+system. This library provides tools for working with the BNG, a
+rectangular Cartesian grid system used to identify and index locations
+across Great Britain into grid squares at various resolutions.
+
+Overview
+--------
+
+The ``osbng`` package offers a streamlined programmatic interface to
+Ordnance Survey's British National Grid (BNG) index system, enabling
+efficient spatial indexing and analysis based on grid references. It
+supports a range of geospatial applications, including statistical
+aggregation, data visualisation, and interoperability across datasets.
+Designed for developers and analysts working with geospatial data in
+Great Britain, ``osbng`` simplifies integration with geospatial
+workflows and provides intuitive tools for exploring the structure and
+logic of the BNG system.
+
+The package supports the ‘standard’ BNG metre-based resolutions, which
+represent powers of ten from 1m to 100km
+(``1m, 10m, 100m, 1km, 10km, 100km``). It also supports the
+‘intermediate’ quadtree resolutions (``5m, 50m, 500m, 5km, 50km``),
+identified by an ordinal (``NE, SE, SW, NW``) BNG reference direction
+suffix.
+
+.. figure:: ../_static/images/osbng_grids_100km_10km_1km.png
+   :alt: BNG index system overview at 100km, 10km and 1km resolutions
+
+Installation
+------------
+
+Install ``osbng`` from GitHub using ``pip``:
+
+.. code:: shell
+
+   pip install git+https://github.com/OrdnanceSurvey/osbng-py.git
+
+Complimentary Tools
+-------------------
+
+- ```osbng-r`` <https://github.com/OrdnanceSurvey/osbng-r>`__, an R
+  package with broad parity to the ``osbng`` Python package.
+- ```osbng-grids`` <https://github.com/OrdnanceSurvey/osbng-grids>`__,
+  for BNG grid data in GeoParquet and GeoPackage (GPKG) formats.
+- ```mosaic`` <https://github.com/databrickslabs/mosaic>`__, a
+  Databricks package providing geospatial grid indexing using the BNG
+  for Apache Spark.
+
+Usage
+-----
+
+The ``osbng`` package is structured into modules supporting different
+interactions with the BNG index system (e.g. indexing, hierarchy,
+traversal). A high-level summary of each module is provided below:
+
+BNG Reference
+~~~~~~~~~~~~~
+
+``osbng`` implements a custom ``BNGReference`` object. This object
+validates and encapsulates a BNG reference, providing properties and
+methods to access and manipulate the reference.
+
+.. code:: python
+
+   >>> from osbng.bng_reference import BNGReference
+   >>> bng_ref = BNGReference(bng_ref_string="ST57SE")
+   >>> bng_ref.bng_ref_formatted
+   'ST 5 7 SE'
+   >>> bng_ref.resolution_metres
+   5000
+   >>> bng_ref.resolution_label
+   '5km'
+   >>> bng_ref.__geo_interface__
+   {'type': 'Feature',
+    'properties': {'bng_ref': 'ST57SE'},
+    'geometry': {'type': 'Polygon',
+     'coordinates': (((360000.0, 170000.0),
+       (360000.0, 175000.0),
+       (355000.0, 175000.0),
+       (355000.0, 170000.0),
+       (360000.0, 170000.0)),)}}
+
+Indexing
+~~~~~~~~
+
+Provides the ability to index and work with coordinates and geometries
+against the BNG index system. This includes:
+
+- Encoding easting and northing coordinates into ``BNGReference``
+  objects at a specified resolution.
+- Decoding ``BNGReference`` objects back into coordinates, bounding
+  boxes and grid squares as
+  ```Shapely`` <https://github.com/shapely/shapely>`__ geometries.
+- Indexing bounding boxes and ``Shapely`` geometries into grid squares
+  at a specified resolution for spatial analysis.
+
+.. image:: ../_static/images/osbng_indexing_geom_to_bng_5km_london.png
+   :alt: BNG Grid Squares at 5km Resolution Intersected by London Region
+
+.. image:: ../_static/images/osbng_indexing_geom_to_bng_intersection_5km_london.png
+   :alt: Decomposition of the London Region into BNG Grid Squares at 5km Resolution
+
+The following example demonstrates a round trip of constructing a
+``BNGReference`` object from easting northing coordinates, and then
+decoding back into coordinates, bounding box and Shapely geometry:
+
+.. code:: python
+
+   >>> from osbng.indexing import xy_to_bng
+   >>> bng_ref = xy_to_bng(easting=356976, northing=171421, resolution="5km")
+   >>> bng_ref.bng_to_xy(position="lower-left")
+   (355000, 170000)
+   >>> bng_ref.bng_to_bbox()
+   (355000, 170000, 360000, 175000)
+   >>> bng_ref.bng_to_grid_geom().wkt
+   'POLYGON ((360000 170000, 360000 175000, 355000 175000, 355000 170000, 360000 170000))'
+
+Indexing GeoPandas (GPD)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Optional functionality is available when the
+```GeoPandas`` <https://github.com/geopandas/geopandas>`__ package is
+installed. This enables indexing of geometries in a ``GeoDataFrame``
+against the BNG index system. Includes:
+
+- Indexing geometries in a ``GeoDataFrame`` into grid squares at a
+  specified resolution, and explode the resulting lists of indexed
+  objects into a flattened ``GeoDataFrame`` for further analysis.
+
+Hierarchy
+~~~~~~~~~
+
+Provides functionality to navigate the hierarchical structure of the BNG
+index system. This includes:
+
+- Returning parents and children of ``BNGReference`` objects at
+  specified resolutions.
+
+The following example returns the parent of a ``BNGReference``:
+
+.. code:: python
+
+   >>> bng_ref = BNGReference(bng_ref_string="ST5671SE")
+   >>> bng_ref.resolution_label
+   '500m'
+   >>> bng_ref.bng_to_parent(resolution="10km")
+   BNGReference(bng_ref_formatted=ST 5 7, resolution_label=10km)
+
+Traversal
+~~~~~~~~~
+
+Provides functionality for traversing and calculating distances within
+the BNG index system. It supports spatial analyses such as
+distance-constrained nearest neighbour searches and ‘distance within’
+queries by offering:
+
+- Generation of k-discs and k-rings around a given grid square.
+- Identification of neighbouring grid squares and checking adjacency.
+- Calculating the distance between grid square centroids.
+- Retrieving all grid squares within a specified absolute distance.
+
+The following example returns a k-disc of a ``BNGReference`` object:
+
+.. code:: python
+
+   >>> bng_ref = BNGReference(bng_ref_string="ST5671SE")
+   >>> bng_ref.bng_kdisc(k=1)
+   [BNGReference(bng_ref_formatted=ST 56 71 NW, resolution_label=500m),
+    BNGReference(bng_ref_formatted=ST 56 71 NE, resolution_label=500m),
+    BNGReference(bng_ref_formatted=ST 57 71 NW, resolution_label=500m),
+    BNGReference(bng_ref_formatted=ST 56 71 SW, resolution_label=500m),
+    BNGReference(bng_ref_formatted=ST 56 71 SE, resolution_label=500m),
+    BNGReference(bng_ref_formatted=ST 57 71 SW, resolution_label=500m),
+    BNGReference(bng_ref_formatted=ST 56 70 NW, resolution_label=500m),
+    BNGReference(bng_ref_formatted=ST 56 70 NE, resolution_label=500m),
+    BNGReference(bng_ref_formatted=ST 57 70 NW, resolution_label=500m)]
+
+Grids
+~~~~~
+
+Provides functionality to generate BNG grid square data within specified
+bounds. This includes:
+
+- Returning a GeoJSON-like mapping for grid squares implementing the
+  ```__geo_interface__`` <https://gist.github.com/sgillies/2217756>`__
+  protocol supporting integration with other tools in the Python
+  geospatial ecosystem.
+- Grid square data covering the BNG index system bounds is provided as
+  an iterator at 100km, 50km, 10km, 5km and 1km resolutions.
+
+The following example constructs a ``GeoPandas`` GeoDataFrame from one
+of the iterators:
+
+.. code:: python
+
+   >>> import geopandas as gpd
+   >>> from osbng.grids import bng_grid_10km
+   >>> gdf = gpd.GeoDataFrame.from_features(bng_grid_10km, crs=27700)
+
+Contributing
+------------
+
+Please raise an issue to discuss features, bugs or ask general
+questions.
+
+License
+-------
+
+The ``osbng`` package is licensed under the terms of the `MIT
+License <LICENSE>`__.
+
+.. |BNG Grid Squares at 5km Resolution Intersected by London Region| image:: docs/_static/images/osbng_indexing_geom_to_bng_5km_london.png
+.. |Decomposition of the London Region into BNG Grid Squares at 5km Resolution| image:: docs/_static/images/osbng_indexing_geom_to_bng_intersection_5km_london.png
