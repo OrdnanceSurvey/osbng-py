@@ -1,7 +1,7 @@
 """Index coordinates and ``Shapely`` geometries against the BNG index system.
 
 Supports bi-directional conversion between easting/northing coordinate pairs
-and :class:`osbng.BNGReference` objects at supported resolutions as defined in the
+and :class:`~osbng.BNGReference` objects at supported resolutions as defined in the
 :doc:`resolution` module. Additionally, it enables the indexing of geometries,
 represented using Shapely_ ``Geometry`` objects, into grid squares at a specified
 resolution. ``Shapely`` geometries can also be decomposed into simplified
@@ -12,9 +12,9 @@ such as statistical aggregation, data visualisation, and data interoperability.
 
 Summary of functionality:
 
-- Encoding easting and northing coordinates into :class:`osbng.BNGReference` objects at
+- Encoding easting and northing coordinates into :class:`~osbng.BNGReference` objects at
   a specified resolution.
-- Decoding :class:`osbng.BNGReference` objects back into easting/nothing coordinates,
+- Decoding :class:`~osbng.BNGReference` objects back into easting/nothing coordinates,
   bounding boxes and grid squares as ``Shapely`` geometries.
 - Indexing bounding boxes into grid squares at a specified resolution.
 - Indexing ``Shapely`` geometries into grid squares at a specified resolution.
@@ -76,10 +76,21 @@ PREFIXES = np.array(
         ["HL", "HM", "HN", "HO", "HP", "JL", "JM"],
     ]
 )
+"""NDArray[np.str_] of shape (13, 7): 100km BNG square letter prefixes.
+
+Each element is a two-letter string itentifying a 100km grid square. The positional 
+indices correspond to the 10km grid square location in the BNG index system and are 
+used to determine the specific grid square for a given set of easting and northing 
+coordinates.
+"""
 
 # BNG ordinal direction suffixes and corresponding positional indices
 # Used to identify intermediate quadtree resolutions
 SUFFIXES = np.array([["SW", "NW"], ["SE", "NE"]])
+"""NDArray[np.str_] of shape (2, 2): BNG ordinal direction suffixes.
+
+Used to identify intermediate quadtree resolutions.
+"""
 
 
 class BNGIndexedGeometry:
