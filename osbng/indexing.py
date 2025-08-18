@@ -77,7 +77,7 @@ PREFIXES: npt.NDArray[np.str_] = np.array(
         ["HL", "HM", "HN", "HO", "HP", "JL", "JM"],
     ]
 )
-"""NDArray[np.str_] of shape (13, 7): 100km BNG square letter prefixes.
+"""npt.NDArray[np.str_] of shape (13, 7): 100km BNG square letter prefixes.
 
 Each element is a two-letter string itentifying a 100km grid square. The positional 
 indices correspond to the 10km grid square location in the BNG index system and are 
@@ -88,7 +88,7 @@ coordinates.
 # BNG ordinal direction suffixes and corresponding positional indices
 # Used to identify intermediate quadtree resolutions
 SUFFIXES: npt.NDArray[np.str_] = np.array([["SW", "NW"], ["SE", "NE"]])
-"""NDArray[np.str_] of shape (2, 2): BNG ordinal direction suffixes.
+"""npt.NDArray[np.str_] of shape (2, 2): BNG ordinal direction suffixes.
 
 Used to identify intermediate quadtree resolutions.
 """
