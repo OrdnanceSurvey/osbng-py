@@ -1,5 +1,5 @@
-osbng documentation
-===================
+``osbng`` Documentation
+=======================
 
 .. toctree::
    :maxdepth: 2
