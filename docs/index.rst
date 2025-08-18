@@ -15,3 +15,4 @@ osbng documentation
    pages/hierarchy
    pages/traversal
    pages/grids
+   pages/errors
