@@ -35,6 +35,7 @@ Supported resolutions:
 import warnings
 
 import numpy as np
+import numpy.typing as npt
 from shapely import Geometry, box, contains, intersection, intersects, prepare
 from shapely.geometry import Polygon
 
@@ -59,7 +60,7 @@ __all__ = [
 warnings.simplefilter("always")
 
 # 100km BNG grid square letter prefixes and corresponding positional indices
-PREFIXES = np.array(
+PREFIXES: npt.NDArray[np.str_] = np.array(
     [
         ["SV", "SW", "SX", "SY", "SZ", "TV", "TW"],
         ["SQ", "SR", "SS", "ST", "SU", "TQ", "TR"],
@@ -86,7 +87,7 @@ coordinates.
 
 # BNG ordinal direction suffixes and corresponding positional indices
 # Used to identify intermediate quadtree resolutions
-SUFFIXES = np.array([["SW", "NW"], ["SE", "NE"]])
+SUFFIXES: npt.NDArray[np.str_] = np.array([["SW", "NW"], ["SE", "NE"]])
 """NDArray[np.str_] of shape (2, 2): BNG ordinal direction suffixes.
 
 Used to identify intermediate quadtree resolutions.
