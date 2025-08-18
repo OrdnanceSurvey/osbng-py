@@ -8,23 +8,24 @@ allows for the traversal of this hierarchy by providing methods to return the pa
 children of BNGReference objects at specified resolutions.
 
 Parent and child definitions:
-- **Parent**: The parent of a BNGReference object is the grid square at the next higher
-    (coarser) resolution level that contains the current reference. For example, the
-    parent of a 1km grid square reference would be the 5km grid square that contains it.
-- **Children**: The children of a BNGReference object are the grid squares at the next
-    lower (finer) resolution level that are contained within the current reference. For
-    example, the children of a 10km grid square reference would be the 5km grid squares
-    that it contains.
+    - **Parent**: The parent of a BNGReference object is the grid square at the next
+      higher (coarser) resolution level that contains the current reference. For
+      example, the parent of a 1km grid square reference would be the 5km grid square
+      that contains it.
+    - **Children**: The children of a BNGReference object are the grid squares at the
+      next lower (finer) resolution level that are contained within the current
+      reference. For example, the children of a 10km grid square reference would be the
+      5km grid squares that it contains.
 
 Note:
-- While parent and child derivation defaults to the next higher and lower resolution,
-    any supported resolution in the hierarchy can be specified.
+    - While parent and child derivation defaults to the next higher and lower
+      resolution, any supported resolution in the hierarchy can be specified.
 
 Supported Resolutions:
     - The module supports the 'standard' and 'intermediate' quadtree resolutions,
-        including 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 5m and 1m.
-    - These resolutions passed to hierarchy functions are validated and normalised using
-        the resolution mapping defined in the 'resolution' module.
+      including 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 5m and 1m.
+    - These resolutions passed to hierarchy functions are validated and normalised
+      using the resolution mapping defined in the 'resolution' module.
 """
 
 from osbng.bng_reference import BNGReference, _validate_bngreferences
