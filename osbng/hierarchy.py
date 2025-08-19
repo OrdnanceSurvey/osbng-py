@@ -25,7 +25,7 @@ Supported Resolutions:
     - The module supports the 'standard' and 'intermediate' quadtree resolutions,
       including 100km, 50km, 10km, 5km, 1km, 500m, 100m, 50m, 10m, 5m and 1m.
     - These resolutions passed to hierarchy functions are validated and normalised
-      using the resolution mapping defined in the 'resolution' module.
+      using the resolution mapping defined in the :doc:`resolution` module.
 """
 
 from osbng.bng_reference import BNGReference, _validate_bngreferences
