@@ -63,7 +63,7 @@ def bng_to_children(
 
     Returns:
         list[BNGReference]: A list of :class:`~osbng.BNGReference` objects that are
-            children of the input :class:`~osbng.BNGReference` object.
+        children of the input :class:`~osbng.BNGReference` object.
 
     Raises:
         BNGReferenceError: If the first positional argument is not a
@@ -144,7 +144,7 @@ def bng_to_parent(
 
     Returns:
         BNGReference: A :class:`~osbng.BNGReference` object that is the parent of the
-            input :class:`~osbng.BNGReference` object.
+        input :class:`~osbng.BNGReference` object.
 
     Raises:
         BNGReferenceError: If the first positional argument is not a
