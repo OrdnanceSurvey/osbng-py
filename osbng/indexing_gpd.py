@@ -90,8 +90,8 @@ def gdf_to_bng_intersection_explode(
 
     Returns:
         gpd.GeoDataFrame: A new GeoDataFrame with one row per BNGIndexedGeometry
-            object, containing three columns bng_ref, is_core, and geometry
-            corresponding to the BNGIndexedGeometry object properties.
+        object, containing three columns bng_ref, is_core, and geometry
+        corresponding to the BNGIndexedGeometry object properties.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
