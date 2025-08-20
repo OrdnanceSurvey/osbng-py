@@ -62,13 +62,13 @@ def gdf_to_bng_intersection_explode(
     :class:`~osbng.indexing.BNGIndexedGeometry` object property: bng_ref, is_core, and
     geom.
 
-    Decomposition is achieved by applying the osbng.indexing.geom_to_bng_intersection
-    function to each geometry in the input ``GeoPandas`` ``GeoDataFrame``, returning a
-    flattened ``GeoDataFrame`` by exploding the resulting
-    :class:`~osbng.indexing.BNGIndexedGeometry` lists.
+    Decomposition is achieved by applying the
+    :class:`~osbng.geom_to_bng_intersection` function to each geometry in the
+    input ``GeoPandas`` ``GeoDataFrame``, returning a flattened ``GeoDataFrame`` by
+    exploding the resulting :class:`~osbng.indexing.BNGIndexedGeometry` lists.
 
     The active geometry column of the input ``GeoDataFrame`` is passed to
-    geom_to_bng_intersection, which is expected to be set and in the
+    :class:`~osbng.geom_to_bng_intersection`, which is expected to be set and in the
     OSGB36 / British National Grid coordinate reference system (CRS) (EPSG:27700).
 
     The input ``GeoDataFrame`` geometry column is replaced with the geom property of the
