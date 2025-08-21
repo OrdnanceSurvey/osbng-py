@@ -273,7 +273,7 @@ def _validate_and_normalise_bbox(
 def _get_bng_suffix(
     easting: int | float, northing: int | float, resolution: int
 ) -> str:
-    """Get the BNG ordinal suffix for a given easting, northing and quadtree resolution.
+    """Gets the BNG ordinal suffix given coordinates and a quadtree resolution.
 
     Args:
         easting (int | float): Easting coordinate.
