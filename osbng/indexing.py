@@ -361,6 +361,10 @@ def xy_to_bng(
         BNGReference(bng_ref_formatted=SU 3 1 NE, resolution_label=5km)
         >>> xy_to_bng(437289, 115541, 1)
         BNGReference(bng_ref_formatted=SU 37289 15541, resolution_label=1m)
+
+    See Also:
+        :func:`~osbng.indexing.bng_to_xy` for decoding a
+        :class:`~osbng.indexing.BNGReference` to easting and northing coordinates.
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
@@ -441,8 +445,12 @@ def bng_to_xy(
         (430000, 110000)
         >>> bng_to_xy(BNGReference("SU 3 1 NE"), position="centre")
         (437500, 117500)
-        >>> bng_to_xy(BNGReference("SU 37289 15541"), position="centre)
+        >>> bng_to_xy(BNGReference("SU 37289 15541"), position="centre")
         (437289.5, 115541.5)
+
+    See Also:
+        :func:`~osbng.indexing.xy_to_bng` for encoding a easting and northing
+        coordinates to a :class:`~osbng.indexing.BNGReference`.
     """
     # validate position string
     valid_positions = [
