@@ -138,7 +138,7 @@ class BNGIndexedGeometry:
 
     @property
     def bng_ref(self) -> BNGReference:
-        """BNGReference object representing the grid square."""
+        """:class:`~osbng.bng_reference.BNGReference` representing the grid square."""
         return self._bng_ref
 
     @property
@@ -150,12 +150,12 @@ class BNGIndexedGeometry:
     def geom(self) -> Geometry:
         """Intersection between the input geometry and the grid square.
 
-        Intersection represented as a Shapely Geometry object.
+        Intersection represented as a ``Shapely Geometry`` object.
         """
         return self._geom
 
     def __repr__(self):
-        """String representation of the BNGIndexedGeometry object."""
+        """String representation of the :class:`~osbng.indexing.BNGIndexedGeometry`."""
         return (
             f"BNGIndexedGeometry(bng_ref={self._bng_ref}, "
             f"is_core={self._is_core}, geom={self._geom.wkt})"
