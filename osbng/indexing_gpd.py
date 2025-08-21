@@ -1,11 +1,12 @@
 """Index geometries in a ``GeoPandas`` ``GeoDataFrame`` against the BNG index system.
 
-This module requires the `GeoPandas <https://github.com/geopandas/geopandas>`__
-package to be installed.
+Note:
+    This module requires the `GeoPandas <https://github.com/geopandas/geopandas>`__
+    package to be installed.
 
-To install the required package, use:
+    To install the required package, use:
 
-    pip install osbng[geopandas]
+        pip install osbng[geopandas]
 
 """
 
