@@ -412,24 +412,26 @@ def xy_to_bng(
 def bng_to_xy(
     bng_ref: BNGReference, *, position: str = "lower-left"
 ) -> tuple[int | float, int | float]:
-    """Returns easting and northing coordinates given a BNGReference.
+    """Returns easting and northing coordinates given a ``BNGReference``.
 
-      An optional grid square position can be specified to return the coordinates of a
-      specific corner or the centre of the grid square.
+    An optional grid square ``position`` keyword argument can be specified to return
+    the coordinates of a specific corner or the centre of the grid square.
 
     Args:
-        bng_ref (BNGReference): The BNGReference.
+        bng_ref (BNGReference): The :class:`~osbng.indexing.BNGReference`.
+
+    Keyword Args:
         position (str, optional): The grid square position expressed as a string.
             One of: 'lower-left', 'upper-left', 'upper-right', 'lower-right', 'centre'.
-            Keyword only.
 
     Returns:
         tuple[int | float, int | float]: The easting and northing coordinates as a
             tuple.
 
     Raises:
-        BNGReferenceError: If the first positional argument is not a BNGReference.
-        TypeError: If the first argument is not a BNGReference.
+        BNGReferenceError: If the first positional argument is not a
+        :class:`~osbng.indexing.BNGReference`.
+        TypeError: If the first argument is not a :class:`~osbng.indexing.BNGReference`.
         ValueError: If an invalid position provided.
 
     Example:
