@@ -28,8 +28,17 @@ Supported resolutions:
 - These resolutions passed to indexing functions are validated and normalised using
   the resolution mapping defined in the :doc:`resolution` module.
 
+See Also:
+    The :doc:`indexing_gpd` module which provides a
+    :func:`~osbng.indexing_gpd.gdf_to_bng_intersection_explode` function supporting the
+    indexing  of geometries in a GeoPandas_ ``GeoDataFrame`` against the BNG index
+    system.
+
 .. _Shapely:
    https://github.com/shapely/shapely
+
+.. _GeoPandas:
+   https://github.com/geopandas/geopandas
 """
 
 import warnings
