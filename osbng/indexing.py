@@ -104,29 +104,30 @@ Used to identify intermediate quadtree resolutions.
 
 
 class BNGIndexedGeometry:
-    """Decomposition of a Shapely Geometry object into BNG grid squares at a resolution.
+    """Decomposition of a `Shapely Geometry` object into BNG grid squares.
 
-    The BNGIndexedGeometry class stores information about the relationship between an
-    input geometry and the grid squares it intersects. This is particularly useful for
-    spatial indexing and analysis of geometries against the BNG index system.
+    The :class:`~osbng.indexing.BNGIndexedGeometry` class stores information about the
+    relationship between an input geometry and the grid squares it intersects. This is
+    particularly useful for spatial indexing and analysis of geometries against the BNG
+    index system.
+
+    See Also:
+        The :class:`~osbng.indexing.BNGIndexedGeometry` class is instantiated as part
+        of the :func:`~osbng.indexing.geom_to_bng_intersection` indexing function that
+        decomposes a ``Shapely Geometry`` into grid squares at a specified resolution.
+        The decomposition can be used for indexing, spatial analysis, or visualisation.
 
     Attributes:
-        bng_ref (BNGReference): The BNGReference object representing the grid square
-            corresponding to the decomposition.
+        bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference` object
+            representing the grid square corresponding to the decomposition.
         is_core (bool): A Boolean flag indicating whether the grid square geometry is
-            entirely contained by the input geometry. This is relevant for Polygon
-            geometries and helps distinguish between "core" (fully inside) and "edge"
-            (partially overlapping) grid squares.
-        geom (Geometry): The Shapely Geometry representing the intersection between the
-            input geometry and the grid square. This can one of a number of geometry
-            types depending on the overlap. When is_core is True, geom is the same as
-            the grid square geometry.
-
-    Usage:
-        The BNGIndexedGeometry class is instantiated as part of the
-        geom_to_bng_intersection indexing function that decomposes a Shapely Geometry
-        into grid squares at a specified resolution. The decomposition can be used for
-        indexing, spatial analysis, or visualisation.
+            entirely contained by the input geometry. This is relevant for ``Polygon``
+            geometries and helps distinguish between ``core`` (fully inside) and
+            ``edge`` (partially overlapping) grid squares.
+        geom (Geometry): The ``Shapely Geometry`` representing the intersection between
+            the input geometry and the grid square. This can one of a number of
+            geometry types depending on the overlap. When ``is_core`` is True, ``geom``
+            is the same as the grid square geometry.
     """
 
     def __init__(self, bng_ref: BNGReference, is_core: bool, geom: Geometry):
