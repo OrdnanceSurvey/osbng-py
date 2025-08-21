@@ -104,7 +104,7 @@ Used to identify intermediate quadtree resolutions.
 
 
 class BNGIndexedGeometry:
-    """Decomposition of a `Shapely Geometry` object into BNG grid squares.
+    """Decomposition of a ``Shapely Geometry`` object into BNG grid squares.
 
     The :class:`~osbng.indexing.BNGIndexedGeometry` class stores information about the
     relationship between an input geometry and the grid squares it intersects. This is
