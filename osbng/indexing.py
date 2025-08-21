@@ -336,7 +336,7 @@ def _decompose_geom(geom: Geometry) -> list[Geometry]:
 def xy_to_bng(
     easting: int | float, northing: int | float, resolution: int | str
 ) -> BNGReference:
-    """Returns a BNGReference given easting and northing coordinates and resolution.
+    """Returns a ``BNGReference`` given easting and northing coordinates and resolution.
 
     Args:
         easting (int | float): The easting coordinate.
@@ -345,7 +345,7 @@ def xy_to_bng(
             a metre-based integer or as a string label.
 
     Returns:
-        BNGReference: The BNGReference.
+        BNGReference: The :class:`~osbng.indexing.BNGReference`.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
