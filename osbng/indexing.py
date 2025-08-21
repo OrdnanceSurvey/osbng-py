@@ -111,7 +111,7 @@ class BNGIndexedGeometry:
     for spatial indexing and analysis of geometries against the BNG index system.
 
     Attributes:
-        bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference` object
+        bng_ref (BNGReference): The :class:`~osbng.BNGReference` object
             representing the grid square corresponding to the decomposition.
         is_core (bool): A Boolean flag indicating whether the grid square geometry is
             entirely contained by the input geometry. This is relevant for ``Polygon``
@@ -124,7 +124,7 @@ class BNGIndexedGeometry:
 
     See Also:
         The ``BNGIndexedGeometry`` class is instantiated as part of the
-        :func:`~osbng.indexing.geom_to_bng_intersection` indexing function that
+        :func:`~osbng.geom_to_bng_intersection` indexing function that
         decomposes a ``Shapely Geometry`` into grid squares at a specified resolution.
         The decomposition can be used for indexing, spatial analysis, or visualisation.
     """
@@ -137,7 +137,7 @@ class BNGIndexedGeometry:
 
     @property
     def bng_ref(self) -> BNGReference:
-        """:class:`~osbng.bng_reference.BNGReference` representing the grid square."""
+        """:class:`~osbng.BNGReference` representing the grid square."""
         return self._bng_ref
 
     @property
@@ -154,7 +154,7 @@ class BNGIndexedGeometry:
         return self._geom
 
     def __repr__(self):
-        """String representation of the :class:`~osbng.indexing.BNGIndexedGeometry`."""
+        """String representation of the ``BNGIndexedGeometry``."""
         return (
             f"BNGIndexedGeometry(bng_ref={self._bng_ref}, "
             f"is_core={self._is_core}, geom={self._geom.wkt})"
@@ -345,7 +345,7 @@ def xy_to_bng(
             a metre-based integer or as a string label.
 
     Returns:
-        BNGReference: The :class:`~osbng.indexing.BNGReference`.
+        BNGReference: The :class:`~osbng.BNGReference`.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
@@ -364,7 +364,7 @@ def xy_to_bng(
 
     See Also:
         :func:`~osbng.indexing.bng_to_xy` for decoding a
-        :class:`~osbng.indexing.BNGReference` to easting and northing coordinates.
+        :class:`~osbng.BNGReference` to easting and northing coordinates.
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
@@ -416,13 +416,13 @@ def xy_to_bng(
 def bng_to_xy(
     bng_ref: BNGReference, *, position: str = "lower-left"
 ) -> tuple[int | float, int | float]:
-    """Returns easting and northing coordinates given a ``BNGReference``.
+    """Returns easting and northing coordinates given a :class:`~osbng.BNGReference`.
 
     An optional grid square ``position`` keyword argument can be specified to return
     the coordinates of a specific corner or the centre of the grid square.
 
     Args:
-        bng_ref (BNGReference): The :class:`~osbng.indexing.BNGReference`.
+        bng_ref (BNGReference): The :class:`~osbng.BNGReference`.
 
     Keyword Args:
         position (str, optional): The grid square position expressed as a string.
@@ -430,12 +430,12 @@ def bng_to_xy(
 
     Returns:
         tuple[int | float, int | float]: The easting and northing coordinates as a
-            tuple.
+        tuple.
 
     Raises:
         BNGReferenceError: If the first positional argument is not a
-        :class:`~osbng.indexing.BNGReference`.
-        TypeError: If the first argument is not a :class:`~osbng.indexing.BNGReference`.
+        :class:`~osbng.BNGReference`.
+        TypeError: If the first argument is not a :class:`~osbng.BNGReference`.
         ValueError: If an invalid position provided.
 
     Example:
@@ -449,8 +449,8 @@ def bng_to_xy(
         (437289.5, 115541.5)
 
     See Also:
-        :func:`~osbng.indexing.xy_to_bng` for encoding a easting and northing
-        coordinates to a :class:`~osbng.indexing.BNGReference`.
+        :func:`~osbng.xy_to_bng` for encoding a easting and northing
+        coordinates to a :class:`~osbng.BNGReference` at a given resolution.
     """
     # validate position string
     valid_positions = [
