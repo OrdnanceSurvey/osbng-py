@@ -1,7 +1,7 @@
 """Generate British National Grid (BNG) grid square data within specified bounds.
 
 Uses a GeoJSON-like mapping for grid squares implementing the `__geo_interface__
-protocol <https://gist.github.com/sgillies/2217756>`__. Use of this protocol enables
+<https://gist.github.com/sgillies/2217756>`__. Use of this protocol enables
 integration with geospatial data processing libraries and tools.
 
 Grid square data covering the BNG index system bounds is provided as an iterator at
@@ -41,7 +41,7 @@ def bbox_to_bng_iterfeatures(
     """Returns an iterator of BNGReference Features given a bounding box and resolution.
 
     Implements the `__geo_interface__
-    protocol <https://gist.github.com/sgillies/2217756>`__. The returned data structure
+    <https://gist.github.com/sgillies/2217756>`__ protocol. The returned data structure
     represents the :class:`~osbng.BNGReference` object as a GeoJSON-like Feature.
 
     Args:
