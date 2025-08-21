@@ -110,12 +110,6 @@ class BNGIndexedGeometry:
     an input geometry and the grid squares it intersects. This is particularly useful
     for spatial indexing and analysis of geometries against the BNG index system.
 
-    See Also:
-        The ``BNGIndexedGeometry`` class is instantiated as part of the
-        :func:`~osbng.indexing.geom_to_bng_intersection` indexing function that
-        decomposes a ``Shapely Geometry`` into grid squares at a specified resolution.
-        The decomposition can be used for indexing, spatial analysis, or visualisation.
-
     Attributes:
         bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference` object
             representing the grid square corresponding to the decomposition.
@@ -127,6 +121,12 @@ class BNGIndexedGeometry:
             the input geometry and the grid square. This can one of a number of
             geometry types depending on the overlap. When ``is_core`` is True, ``geom``
             is the same as the grid square geometry.
+
+    See Also:
+        The ``BNGIndexedGeometry`` class is instantiated as part of the
+        :func:`~osbng.indexing.geom_to_bng_intersection` indexing function that
+        decomposes a ``Shapely Geometry`` into grid squares at a specified resolution.
+        The decomposition can be used for indexing, spatial analysis, or visualisation.
     """
 
     def __init__(self, bng_ref: BNGReference, is_core: bool, geom: Geometry):
