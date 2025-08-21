@@ -54,7 +54,7 @@ def gdf_to_bng_intersection_explode(
     *,
     reset_index: bool = True,
 ) -> gpd.GeoDataFrame:
-    """Applies geom_to_bng_intersection to a ``GeoDataFrame`` at a given resolution.
+    """Applies ``geom_to_bng_intersection`` to a ``GeoDataFrame`` at a given resolution.
 
     Decomposes each geometry in the input ``GeoDataFrame`` bounded by their presence in
     grid squares at the specified resolution. The resulting
