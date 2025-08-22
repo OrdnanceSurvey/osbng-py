@@ -1,10 +1,10 @@
 """Index coordinates and ``Shapely`` geometries against the BNG index system.
 
 Supports bi-directional conversion between easting/northing coordinate pairs
-and :class:`~osbng.BNGReference` objects at supported resolutions as defined in the
-:doc:`resolution` module. Additionally, it enables the indexing of geometries,
-represented using Shapely_ ``Geometry`` objects, into grid squares at a specified
-resolution. ``Shapely`` geometries can also be decomposed into simplified
+and :class:`~osbng.bng_reference.BNGReference` objects at supported resolutions as
+defined in the :doc:`resolution` module. Additionally, it enables the indexing of
+geometries, represented using Shapely_ ``Geometry`` objects, into grid squares at a
+specified resolution. ``Shapely`` geometries can also be decomposed into simplified
 representations bounded by their presence in each grid square at a specified resolution.
 
 Indexing functionality facilitates grid-based spatial analysis, enabling applications
@@ -12,10 +12,11 @@ such as statistical aggregation, data visualisation, and data interoperability.
 
 Summary of functionality:
 
-- Encoding easting and northing coordinates into :class:`~osbng.BNGReference` objects at
-  a specified resolution.
-- Decoding :class:`~osbng.BNGReference` objects back into easting/nothing coordinates,
-  bounding boxes and grid squares as ``Shapely`` geometries.
+- Encoding easting and northing coordinates into
+  :class:`~osbng.bng_reference.BNGReference` objects at a specified resolution.
+- Decoding :class:`~osbng.bng_reference.BNGReference` objects back into
+  easting/northing coordinates, bounding boxes and grid squares as ``Shapely``
+  geometries.
 - Indexing bounding boxes into grid squares at a specified resolution.
 - Indexing ``Shapely`` geometries into grid squares at a specified resolution.
 - Decomposing ``Shapely`` geometries into simplified representations bounded by their
@@ -111,7 +112,7 @@ class BNGIndexedGeometry:
     for spatial indexing and analysis of geometries against the BNG index system.
 
     Attributes:
-        bng_ref (BNGReference): The :class:`~osbng.BNGReference` object
+        bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference` object
             representing the grid square corresponding to the decomposition.
         is_core (bool): A Boolean flag indicating whether the grid square geometry is
             entirely contained by the input geometry. This is relevant for ``Polygon``
@@ -124,7 +125,7 @@ class BNGIndexedGeometry:
 
     See Also:
         The ``BNGIndexedGeometry`` class is instantiated as part of the
-        :func:`~osbng.geom_to_bng_intersection` indexing function that
+        :func:`~osbng.indexing.geom_to_bng_intersection` indexing function that
         decomposes a ``Shapely Geometry`` into grid squares at a specified resolution.
         The decomposition can be used for indexing, spatial analysis, or visualisation.
     """
@@ -137,7 +138,7 @@ class BNGIndexedGeometry:
 
     @property
     def bng_ref(self) -> BNGReference:
-        """:class:`~osbng.BNGReference` representing the grid square."""
+        """:class:`~osbng.bng_reference.BNGReference` representing the grid square."""
         return self._bng_ref
 
     @property
@@ -345,7 +346,7 @@ def xy_to_bng(
             integer or as a string label.
 
     Returns:
-        BNGReference: The :class:`~osbng.BNGReference`.
+        BNGReference: The :class:`~osbng.bng_reference.BNGReference`.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
@@ -364,7 +365,7 @@ def xy_to_bng(
 
     See Also:
         :func:`~osbng.indexing.bng_to_xy` for decoding a
-        :class:`~osbng.BNGReference` to easting and northing coordinates.
+        :class:`~osbng.bng_reference.BNGReference` to easting and northing coordinates.
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
@@ -416,26 +417,26 @@ def xy_to_bng(
 def bng_to_xy(
     bng_ref: BNGReference, *, position: str = "lower-left"
 ) -> tuple[int | float, int | float]:
-    """Returns easting and northing coordinates given a :class:`~osbng.BNGReference`.
+    """Returns easting and northing coordinates given a ``BNGReference``.
 
     An optional grid square ``position`` keyword argument can be specified to return
     the coordinates of a specific corner or the centre of the grid square.
 
     Args:
-        bng_ref (BNGReference): The :class:`~osbng.BNGReference`.
+        bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference`.
 
     Keyword Args:
         position (str, optional): The grid square position expressed as a string.
             One of: 'lower-left', 'upper-left', 'upper-right', 'lower-right', 'centre'.
 
     Returns:
-        tuple[int | float, int | float]: The easting and northing coordinates as a
-        tuple.
+        tuple[int | float, int | float]: Easting and northing coordinates as a tuple.
 
     Raises:
         BNGReferenceError: If the first positional argument is not a
-        :class:`~osbng.BNGReference`.
-        TypeError: If the first argument is not a :class:`~osbng.BNGReference`.
+            :class:`~osbng.bng_reference.BNGReference`.
+        TypeError: If the first argument is not a
+            :class:`~osbng.bng_reference.BNGReference`.
         ValueError: If an invalid position provided.
 
     Examples:
@@ -551,14 +552,15 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
     """Returns grid square bounding box coordinates given a ``BNGReference``.
 
     Args:
-        bng_ref (BNGReference): The :class:`~osbng.BNGReference`.
+        bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference`.
 
     Returns:
         tuple[int, int, int, int]: The grid square bounding box coordinates
-        ``(minx, miny, maxx, maxy)`` as a tuple.
+            as a tuple ``(minx, miny, maxx, maxy)``.
 
     Raises:
-        TypeError: If first argument is not a :class:`~osbng.BNGReference`.
+        TypeError: If first argument is not a
+            :class:`~osbng.bng_reference.BNGReference`.
 
     Example:
         >>> bng_to_bbox(BNGReference("SU"))
@@ -572,7 +574,7 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
 
     See Also:
         The :func:`~osbng.indexing.bng_to_grid_geom` function which converts a
-        :class:`~osbng.BNGReference` to a ``Shapely Polygon``.
+        :class:`~osbng.bng_reference.BNGReference` to a ``Shapely Polygon``.
     """
     # Extract lower left and upper right coordinates of grid square
     min_xy = bng_to_xy(bng_ref, position="lower-left")
@@ -586,15 +588,16 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
     """Returns a grid square as a ``Shapely Polygon`` given a ``BNGReference``.
 
     Args:
-        bng_ref (BNGReference): The :class:`~osbng.BNGReference`.
+        bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference`.
 
     Returns:
         Polygon: Grid square as a ``Shapely Polygon`` object.
 
     Raises:
         BNGReferenceError: If the first positional argument is not a
-        :class:`~osbng.BNGReference`.
-        TypeError: If first argument is not a :class:`~osbng.BNGReference`.
+            :class:`~osbng.bng_reference.BNGReference`.
+        TypeError: If first argument is not a
+            :class:`~osbng.bng_reference.BNGReference`.
 
     Examples:
         >>> bng_to_grid_geom(BNGReference("SU")).wkt
@@ -620,7 +623,7 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
 
     See Also:
         The :func:`~osbng.indexing.bng_to_bbox` function which converts a
-        :class:`~osbng.BNGReference` to bounding box coordinates.
+        :class:`~osbng.bng_reference.BNGReference` to bounding box coordinates.
     """
     return box(*bng_to_bbox(bng_ref))
 
@@ -662,7 +665,7 @@ def bbox_to_bng(
             integer or as a string label.
 
     Returns:
-        list[BNGReference]: :class:`~osbng.BNGReference` list.
+        list[BNGReference]: :class:`~osbng.bng_reference.BNGReference` list.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
@@ -686,8 +689,8 @@ def bbox_to_bng(
 
     See Also:
         The :func:`~osbng.grids.bbox_to_bng_iterfeatures` function which returns an
-        iterator of :class:`~osbng.BNGReference` ``Features`` given a bounding box and
-        resolution.
+        iterator of :class:`~osbng.bng_reference.BNGReference` ``Features`` given a
+        bounding box and resolution.
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
@@ -728,10 +731,10 @@ def bbox_to_bng(
 def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
     """Returns a ``BNGReference`` list given a ``Shapely Geometry`` and resolution.
 
-    The :class:`~osbng.BNGReference` list returned represents the grid squares
-    intersected by the input geometry. :class:`~osbng.BNGReference` objects are
-    deduplicated in cases where two or more parts of a multi-part geometry intersect
-    the same grid square.
+    The :class:`~osbng.bng_reference.BNGReference` list returned represents the grid
+    squares intersected by the input geometry.
+    :class:`~osbng.bng_reference.BNGReference` objects are deduplicated in cases where
+    two or more parts of a multi-part geometry intersect the same grid square.
 
     This function is useful for spatial indexing and aggregation of geometries against
     the BNG index system.
@@ -741,15 +744,15 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
         a multi-part geometry:
 
         - For ``Point`` geometries, the function returns a list comprising a single
-          :class:`~osbng.BNGReference`. A :class:`~osbng.errors.BNGExtentError`
-          exception is raised if the coordinates fall outside of the BNG index system
-          extent.
+          :class:`~osbng.bng_reference.BNGReference`. A
+          :class:`~osbng.errors.BNGExtentError` exception is raised if the coordinates
+          fall outside of the BNG index system extent.
         - For ``LineString`` and ``Polygon`` geometry types, the function returns a
-          :class:`~osbng.BNGReference` list representing the grid squares intersected
-          by the geometry. When a geometry extends beyond the BNG index system extent,
-          the function will show a feature bounding box warning but will still return a
-          :class:`~osbng.BNGReference` for each of the intersected grid squares within
-          the BNG index system extent.
+          :class:`~osbng.bng_reference.BNGReference` list representing the grid squares
+          intersected by the geometry. When a geometry extends beyond the BNG index
+          system extent, the function will show a feature bounding box warning but will
+          still return a :class:`~osbng.bng_reference.BNGReference` for each of the
+          intersected grid squares within the BNG index system extent.
 
     Args:
         geom (Geometry): ``Shapely`` Geometry.
@@ -757,7 +760,7 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
             integer or as a string label.
 
     Returns:
-        list[BNGReference]: :class:`~osbng.BNGReference` list.
+        list[BNGReference]: :class:`~osbng.bng_reference.BNGReference` list.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
@@ -777,7 +780,7 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
 
     See Also:
         For geometry decomposition by the BNG index system, use
-        :func:`~osbng.geom_to_bng_intersection` or
+        :func:`~osbng.indexing.geom_to_bng_intersection` or
         :func:`~osbng.indexing_gpd.gdf_to_bng_intersection_explode` instead.
     """
     # Validate and normalise the resolution to its metre-based integer value
@@ -818,10 +821,11 @@ def geom_to_bng_intersection(
 
     Decomposes a ``Shapely Geometry`` into grid squares at a specified resolution.
 
-    Unlike :func:`~osbng.geom_to_bng` which only returns :class:`BNGReference` objects
-    representing the grid squares intersected by the input geometry,
-    ``geom_to_bng_intersection`` returns :class:`BNGIndexedGeometry` objects that store
-    the intersection between the input geometry and the grid square geometries.
+    Unlike :func:`~osbng.indexing.geom_to_bng` which only returns
+    :class:`osbng.bng_reference.BNGReference` objects representing the grid squares
+    intersected by the input geometry, ``geom_to_bng_intersection`` returns
+    :class:`BNGIndexedGeometry` objects that store the intersection between the input
+    geometry and the grid square geometries.
 
     This is particularly useful for spatial indexing, aggregation and visualisation
     use cases that requires the decomposition of geometries into their constituent
