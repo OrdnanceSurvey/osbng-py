@@ -64,9 +64,11 @@ def bng_to_children(
     Args:
         bng_ref (BNGReference): The :class:`~osbng.BNGReference` object to derive
             children from.
+
+    Keyword Args:
         resolution (int | str | None, optional): The resolution of
             the children :class:`~osbng.BNGReference` objects expressed either as a
-            metre-based integer or as a string label. Defaults to None. Keyword only.
+            metre-based integer or as a string label. Defaults to None.
 
     Returns:
         list[BNGReference]: A list of :class:`~osbng.BNGReference` objects that are
@@ -150,9 +152,11 @@ def bng_to_parent(
     Args:
         bng_ref (BNGReference): The :class:`~osbng.BNGReference` object to derive parent
             from.
+
+    Keyword Args:
         resolution (int | str | None, optional): The resolution of the parent
             :class:`~osbng.BNGReference` objects expressed either as a metre-based
-            integer or as a string label. Defaults to None. Keyword only.
+            integer or as a string label. Defaults to None.
 
     Returns:
         BNGReference: A :class:`~osbng.BNGReference` object that is the parent of the
