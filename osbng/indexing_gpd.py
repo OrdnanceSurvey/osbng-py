@@ -90,8 +90,10 @@ def gdf_to_bng_intersection_explode(
         gdf (gpd.GeoDataFrame): Input ``GeoPandas`` ``GeoDataFrame``.
         resolution (int | str): The BNG resolution expressed either as a metre-based
             integer or as a string label.
+
+    Keyword Args:
         reset_index (bool): Whether to reset the index of the resulting ``GeoDataFrame``
-            .Defaults to True. Keyword-only.
+            .Defaults to True.
 
     Returns:
         gpd.GeoDataFrame: A new ``GeoDataFrame`` with one row per
