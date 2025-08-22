@@ -1028,8 +1028,8 @@ def geom_to_bng_intersection(
         - The :func:`~osbng.indexing_gpd.gdf_to_bng_intersection_explode` function
           function supporting the indexing  of geometries in a
           ``GeoPandas GeoDataFrame`` against the BNG index system.
-        - The :func:`~osbng.indexing.geom_to_bng` if geometry decomposition is not
-          required and a list of :class:`~osbng.bng_reference.BNGReference` is
+        - The :func:`~osbng.indexing.geom_to_bng` function if geometry decomposition is
+          not required and a list of :class:`~osbng.bng_reference.BNGReference` is
           sufficient.
     """
     # Initialise an empty list to store the BNGIndexedGeometry objects
