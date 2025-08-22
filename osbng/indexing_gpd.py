@@ -60,8 +60,8 @@ def gdf_to_bng_intersection_explode(
     grid squares at the specified resolution. The resulting
     :class:`~osbng.indexing.BNGIndexedGeometry` objects are exploded into individual
     rows, with each row containing a new column for each
-    :class:`~osbng.indexing.BNGIndexedGeometry` object property: bng_ref, is_core, and
-    geom.
+    :class:`~osbng.indexing.BNGIndexedGeometry` object property: ``bng_ref``,
+    ``is_core``, and ``geom``.
 
     Decomposition is achieved by applying the
     :class:`~osbng.geom_to_bng_intersection` function to each geometry in the
