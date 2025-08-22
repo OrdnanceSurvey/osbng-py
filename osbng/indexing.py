@@ -453,8 +453,8 @@ def bng_to_xy(
 
     See Also:
         - The :meth:`osbng.bng_reference.BNGReference.bng_to_xy` instance method.
-        - The :func:`~osbng.xy_to_bng` function for encoding a easting and northing
-          coordinates to a :class:`~osbng.BNGReference` at a given resolution.
+        - The :func:`~osbng.indexing.xy_to_bng` function for encoding a easting and
+          northing coordinates to a :class:`~osbng.BNGReference` at a given resolution.
     """
     # validate position string
     valid_positions = [
