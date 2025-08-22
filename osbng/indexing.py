@@ -726,44 +726,44 @@ def bbox_to_bng(
 
 
 def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
-    """Returns a BNGReference list given a Shapely Geometry and resolution.
+    """Returns a ``BNGReference`` list given a ``Shapely Geometry`` and resolution.
 
-    The BNGReference list returned represents the grid squares intersected by the
-    input geometry. BNGReference objects are deduplicated in cases where two or more
-    parts of a multi-part geometry intersect the same grid square.
+    The :class:`~osbng.BNGReference` list returned represents the grid squares
+    intersected by the input geometry. :class:`~osbng.BNGReference` objects are
+    deduplicated in cases where two or more parts of a multi-part geometry intersect
+    the same grid square.
 
     This function is useful for spatial indexing and aggregation of geometries against
     the BNG index system.
 
-    For geometry decomposition by the BNG index system, use geom_to_bng_intersection
-    instead.
+    Notes:
+        A note on the type of the input geometry. This also applies to the parts within
+        a multi-part geometry:
 
-    A note on the type of the input geometry. This also applies to the parts within a
-    multi-part geometry:
-
-    For Point geometries, the function returns a list comprising a single BNGReference.
-    A BNGExtentError exception is raised if the Point coordinates are outside of the
-    BNG index system extent.
-
-    For LineString and Polygon geometry types, the function returns a BNGReference list
-    representing the grid squares intersected by the geometry. When a geometry
-    extends beyond the BNG index system extent, the function will show a feature
-    bounding box warning but will still return a BNGReference for each of the
-    intersected grid squares within the BNG index system extent.
+        - For ``Point`` geometries, the function returns a list comprising a single
+          :class:`~osbng.BNGReference`. A :class:`~osbng.errors.BNGExtentError`
+          exception is raised if the coordinates fall outside of the BNG index system
+          extent.
+        - For ``LineString`` and ``Polygon`` geometry types, the function returns a
+          :class:`~osbng.BNGReference` list representing the grid squares intersected
+          by the geometry. When a geometry extends beyond the BNG index system extent,
+          the function will show a feature bounding box warning but will still return a
+          :class:`~osbng.BNGReference` for each of the intersected grid squares within
+          the BNG index system extent.
 
     Args:
-        geom (Geometry): Shapely Geometry.
+        geom (Geometry): ``Shapely`` Geometry.
         resolution (int | str): The BNG resolution expressed either as a metre-based
             integer or as a string label.
 
     Returns:
-        list[BNGReference]: BNGReference list.
+        list[BNGReference]: :class:`~osbng.BNGReference` list.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
         ValueError: If the geometry type is not supported.
-        BNGExtentError: If the coordinates of a Point geometry are outside of the BNG
-            index system extent.
+        BNGExtentError: If the coordinates of a ``Point`` geometry are outside of the
+            BNG index system extent.
 
     Example:
         >>> geom_to_bng(Point(430000, 110000), "100km")
@@ -774,6 +774,10 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
         [BNGReference(bng_ref_formatted=SU 3000 1000 SE, resolution_label=5m),
          BNGReference(bng_ref_formatted=SU 3000 1000 SW, resolution_label=5m),
          BNGReference(bng_ref_formatted=SU 3000 1000 NE, resolution_label=5m)]
+
+    See Also:
+        For geometry decomposition by the BNG index system, use
+        :func:`~osbng.geom_to_bng_intersection` instead.
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
