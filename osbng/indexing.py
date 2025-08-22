@@ -341,8 +341,8 @@ def xy_to_bng(
     Args:
         easting (int | float): The easting coordinate.
         northing (int | float): The northing coordinate.
-        resolution (int | str): The resolution of the BNG reference expressed either as
-            a metre-based integer or as a string label.
+        resolution (int | str): The BNG resolution expressed either as a metre-based
+            integer or as a string label.
 
     Returns:
         BNGReference: The :class:`~osbng.BNGReference`.
@@ -658,8 +658,8 @@ def bbox_to_bng(
         ymin (int | float): The minimum northing coordinate of the BBOX.
         xmax (int | float): The maximum easting coordinate of the BBOX.
         ymax (int | float): The maximum northing coordinate of the BBOX.
-        resolution (int | str): The resolution of the BNG reference expressed either as
-            a metre-based integer or as a string label.
+        resolution (int | str): The BNG resolution expressed either as a metre-based
+            integer or as a string label.
 
     Returns:
         list[BNGReference]: :class:`~osbng.BNGReference` list.
