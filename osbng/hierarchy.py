@@ -18,7 +18,7 @@ Parent and child definitions:
       current reference. For example, the children of a 10km grid square reference
       would be the 5km grid squares that it contains.
 
-Note:
+Notes:
     While parent and child derivation defaults to the next higher and lower
     resolution, any supported resolution in the hierarchy can be specified.
 
@@ -53,8 +53,9 @@ def bng_to_children(
     the :class:`~osbng.BNGReference` objects in the next resolution down from the input
     :class:`~osbng.BNGReference` resolution. For example, 100km -> 50km.
 
-    Any valid resolution can be provided as the child resolution, provided it is less
-    than the resolution of the input :class:`~osbng.BNGReference`.
+    Notes:
+        Any valid resolution can be provided as the child resolution, provided it is
+        less than the resolution of the input :class:`~osbng.BNGReference`.
 
     Args:
         bng_ref (BNGReference): The :class:`~osbng.BNGReference` object to derive
