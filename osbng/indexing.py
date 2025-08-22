@@ -341,7 +341,7 @@ def xy_to_bng(
 
     See Also:
         The :func:`~osbng.indexing.bng_to_xy` function and
-        :meth:`~osbng.bng_reference.BNGReference.bng_to_xy` instance method for
+        :meth:`osbng.bng_reference.BNGReference.bng_to_xy` instance method for
         decoding a :class:`~osbng.bng_reference.BNGReference` to easting and northing
         coordinates.
 
@@ -425,8 +425,9 @@ def bng_to_xy(
     the coordinates of a specific corner or the centre of the grid square.
 
     See Also:
-        The :func:`~osbng.xy_to_bng` function for encoding a easting and northing
-        coordinates to a :class:`~osbng.BNGReference` at a given resolution.
+        - The :meth:`osbng.bng_reference.BNGReference.bng_to_xy` instance method.
+        - The :func:`~osbng.xy_to_bng` function for encoding a easting and northing
+          coordinates to a :class:`~osbng.BNGReference` at a given resolution.
 
     Args:
         bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference`.
@@ -554,10 +555,11 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
     """Returns grid square bounding box coordinates given a ``BNGReference``.
 
     See Also:
-        The :func:`~osbng.indexing.bng_to_grid_geom` function and
-        :meth:`~osbng.bng_reference.BNGReference.bng_to_grid_geom` instance method
-        which convert a :class:`~osbng.bng_reference.BNGReference` to a
-        ``Shapely Polygon``.
+        - The :meth:`osbng.bng_reference.BNGReference.bng_to_bbox` instance method.
+        - The :func:`~osbng.indexing.bng_to_grid_geom` function and
+          :meth:`~osbng.bng_reference.BNGReference.bng_to_grid_geom` instance method
+          which convert a :class:`~osbng.bng_reference.BNGReference` to a
+          ``Shapely Polygon``.
 
     Args:
         bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference`.
@@ -592,10 +594,12 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
     """Returns a grid square as a ``Shapely Polygon`` given a ``BNGReference``.
 
     See Also:
-        The :func:`~osbng.indexing.bng_to_bbox` function and
-        :meth:`~osbng.bng_reference.BNGReference.bng_to_bbox` instance method which
-        convert a :class:`~osbng.bng_reference.BNGReference` to bounding box
-        coordinates.
+        - The :meth:`osbng.bng_reference.BNGReference.bng_to_grid_geom` instance
+          method.
+        - The :func:`~osbng.indexing.bng_to_bbox` function and
+          :meth:`osbng.bng_reference.BNGReference.bng_to_bbox` instance method which
+          convert a :class:`~osbng.bng_reference.BNGReference` to bounding box
+          coordinates.
 
     Args:
         bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference`.
