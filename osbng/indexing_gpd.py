@@ -63,28 +63,29 @@ def gdf_to_bng_intersection_explode(
     :class:`~osbng.indexing.BNGIndexedGeometry` object property: ``bng_ref``,
     ``is_core``, and ``geom``.
 
-    Decomposition is achieved by applying the
-    :class:`~osbng.geom_to_bng_intersection` function to each geometry in the
-    input ``GeoPandas`` ``GeoDataFrame``, returning a flattened ``GeoDataFrame`` by
-    exploding the resulting :class:`~osbng.indexing.BNGIndexedGeometry` lists.
+    Note:
+        Decomposition is achieved by applying the
+        :class:`~osbng.geom_to_bng_intersection` function to each geometry in the
+        input ``GeoPandas`` ``GeoDataFrame``, returning a flattened ``GeoDataFrame`` by
+        exploding the resulting :class:`~osbng.indexing.BNGIndexedGeometry` lists.
 
-    The active geometry column of the input ``GeoDataFrame`` is passed to
-    :class:`~osbng.geom_to_bng_intersection`, which is expected to be set and in the
-    OSGB36 / British National Grid coordinate reference system (CRS) (EPSG:27700).
+        The active geometry column of the input ``GeoDataFrame`` is passed to
+        :class:`~osbng.geom_to_bng_intersection`, which is expected to be set and in the
+        OSGB36 / British National Grid coordinate reference system (CRS) (EPSG:27700).
 
-    The input ``GeoDataFrame`` geometry column is replaced with the geom property of the
-    :class:`~osbng.indexing.BNGIndexedGeometry` objects. The input geometry column can
-    be retrieved if required by joining the resulting ``GeoDataFrame`` with the original
-    ``GeoDataFrame`` on the index (if not reset), or using a feature identifier.
-    Dropping the original geometry column reduces memory usage and simplifies the
-    resulting ``GeoDataFrame``.
+        The input ``GeoDataFrame`` geometry column is replaced with the geom property of
+        the :class:`~osbng.indexing.BNGIndexedGeometry` objects. The input geometry
+        column can be retrieved if required by joining the resulting ``GeoDataFrame``
+        with the original ``GeoDataFrame`` on the index (if not reset), or using a
+        feature identifier. Dropping the original geometry column reduces memory usage
+        and simplifies the resulting ``GeoDataFrame``.
 
-    All non-geometry columns from the original ``GeoDataFrame`` are retained in the
-    resulting ``GeoDataFrame``.
+        All non-geometry columns from the original ``GeoDataFrame`` are retained in the
+        resulting ``GeoDataFrame``.
 
-    Exploding the resulting ``GeoDataFrame`` allows for easier analysis and manipulation
-    of the :class:`~osbng.indexing.BNGIndexedGeometry` object properties. This is
-    otherwise a more complex operation.
+        Exploding the resulting ``GeoDataFrame`` allows for easier analysis and
+        manipulation of the :class:`~osbng.indexing.BNGIndexedGeometry` object
+        properties. This is otherwise a more complex operation.
 
     Args:
         gdf (gpd.GeoDataFrame): Input ``GeoPandas`` ``GeoDataFrame``.
