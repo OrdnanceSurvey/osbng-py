@@ -777,7 +777,8 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
 
     See Also:
         For geometry decomposition by the BNG index system, use
-        :func:`~osbng.geom_to_bng_intersection` instead.
+        :func:`~osbng.geom_to_bng_intersection` or
+        :func:`~osbng.indexing_gpd.gdf_to_bng_intersection_explode` instead.
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
