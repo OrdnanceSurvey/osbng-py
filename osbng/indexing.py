@@ -174,7 +174,7 @@ def _validate_and_normalise_bng_resolution(resolution: int | str) -> int:
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
 
-    Example:
+    Examples:
         >>> _validate_and_normalise_bng_resolution(1000)
         1000
         >>> _validate_and_normalise_bng_resolution("1km")
@@ -284,7 +284,7 @@ def _get_bng_suffix(
     Returns:
         str: The BNG ordinal direction suffix.
 
-    Example:
+    Examples:
         >>> _get_bng_suffix(437289, 115541, 5000)
         'NE'
     """
@@ -352,7 +352,7 @@ def xy_to_bng(
         BNGExtentError: If the easting and northing coordinates are outside the BNG
             index system extent.
 
-    Example:
+    Examples:
         >>> xy_to_bng(437289, 115541, "100km")
         BNGReference(bng_ref_formatted=SU, resolution_label=100km)
         >>> xy_to_bng(437289, 115541, "10km")
@@ -438,7 +438,7 @@ def bng_to_xy(
         TypeError: If the first argument is not a :class:`~osbng.BNGReference`.
         ValueError: If an invalid position provided.
 
-    Example:
+    Examples:
         >>> bng_to_xy(BNGReference("SU"), position="lower-left")
         (400000, 100000)
         >>> bng_to_xy(BNGReference("SU 3 1"), position="lower-left")
@@ -596,7 +596,7 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
         :class:`~osbng.BNGReference`.
         TypeError: If first argument is not a :class:`~osbng.BNGReference`.
 
-    Example:
+    Examples:
         >>> bng_to_grid_geom(BNGReference("SU")).wkt
         (
         'POLYGON ((500000 100000, 500000 200000, 400000 200000, 400000 100000, '
@@ -667,7 +667,7 @@ def bbox_to_bng(
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
 
-    Example:
+    Examples:
         >>> bbox_to_bng(400000, 100000, 500000, 200000, "50km")
         [BNGReference(bng_ref_formatted=SU SW, resolution_label=50km),
          BNGReference(bng_ref_formatted=SU SE, resolution_label=50km),
@@ -765,7 +765,7 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
         BNGExtentError: If the coordinates of a ``Point`` geometry are outside of the
             BNG index system extent.
 
-    Example:
+    Examples:
         >>> geom_to_bng(Point(430000, 110000), "100km")
         [BNGReference(bng_ref_formatted=SU, resolution_label=100km)]
         >>> geom_to_bng(
@@ -859,7 +859,7 @@ def geom_to_bng_intersection(
         BNGExtentError: If the coordinates of a ``Point`` geometry are outside of the
             BNG index system extent.
 
-    Example:
+    Examples:
         >>> from shapely.geometry import Point
         >>> geom_to_bng_intersection(Point(430000, 110000), "100km")
         [
