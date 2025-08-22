@@ -57,6 +57,10 @@ def bng_to_children(
         Any valid resolution can be provided as the child resolution, provided it is
         less than the resolution of the input :class:`~osbng.BNGReference`.
 
+    See Also:
+        :class:`~osbng.hierarchy.bng_to_parent` to derive the
+        :class:`~osbng.BNGReference` object in the next resolution up.
+
     Args:
         bng_ref (BNGReference): The :class:`~osbng.BNGReference` object to derive
             children from.
@@ -135,8 +139,13 @@ def bng_to_parent(
     :class:`~osbng.BNGReference` in the next BNG resolution up from the input
     :class:`~osbng.BNGReference` resolution. For example, 50km -> 100km.
 
-    Any valid resolution can be provided as the parent resolution, provided it is
-    greater than the resolution of the input :class:`~osbng.BNGReference`.
+    Notes:
+        Any valid resolution can be provided as the parent resolution, provided it is
+        greater than the resolution of the input :class:`~osbng.BNGReference`.
+
+    See Also:
+        :class:`~osbng.hierarchy.bng_to_children` to derive the
+        :class:`~osbng.BNGReference` objects in the next resolution down.
 
     Args:
         bng_ref (BNGReference): The :class:`~osbng.BNGReference` object to derive parent
