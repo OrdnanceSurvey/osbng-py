@@ -26,7 +26,7 @@ represent powers of ten from 1m to 100km
 identified by an ordinal (``NE, SE, SW, NW``) BNG reference direction
 suffix.
 
-.. figure:: ../_static/images/osbng_grids_100km_10km_1km.png
+.. image:: ../_static/images/osbng_grids_100km_10km_1km.png
    :alt: BNG index system overview at 100km, 10km and 1km resolutions
 
 Installation
