@@ -115,8 +115,7 @@ def bng_to_children(
     # input BNGReference object
     if validated_resolution >= bng_ref.resolution_metres:
         raise BNGHierarchyError(
-            "Resolution must be less than the resolution of input "
-            ":class:`~osbng.BNGReference` object"
+            "Resolution must be less than the resolution of input BNGReference object"
         )
 
     # Get min and max coordinates of the grid square bounding box
@@ -202,8 +201,8 @@ def bng_to_parent(
     # BNGReference object
     if validated_resolution <= bng_ref.resolution_metres:
         raise BNGHierarchyError(
-            "Resolution must be greater than the resolution "
-            "of input :class:`~osbng.BNGReference` object"
+            "Resolution must be greater than the resolution of input BNGReference "
+            "object"
         )
 
     # Dervive coordinates of the grid square bounding box
