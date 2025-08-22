@@ -814,44 +814,50 @@ def geom_to_bng(geom: Geometry, resolution: int | str) -> list[BNGReference]:
 def geom_to_bng_intersection(
     geom: Geometry, resolution: int | str
 ) -> list[BNGIndexedGeometry]:
-    """Returns a BNGIndexedGeometry list given a Shapely Geometry and resolution.
+    """Returns a ``BNGIndexedGeometry`` list given a Shapely Geometry and resolution.
 
-    Decomposes a Shapely Geometry into grid squares at a specified resolution. Unlike
-    geom_to_bng which only returns BNGReference objects representing the grid squares
-    intersected by the input geometry, geom_to_bng_intersection returns
-    BNGIndexedGeometry objects that store the intersection between the input geometry
-    and the grid square geometries.
+    Decomposes a ``Shapely Geometry`` into grid squares at a specified resolution.
+
+    Unlike :func:`~osbng.geom_to_bng` which only returns :class:`BNGReference` objects
+    representing the grid squares intersected by the input geometry,
+    ``geom_to_bng_intersection`` returns :class:`BNGIndexedGeometry` objects that store
+    the intersection between the input geometry and the grid square geometries.
 
     This is particularly useful for spatial indexing, aggregation and visualisation
     use cases that requires the decomposition of geometries into their constituent
     parts bounded by the BNG index system.
 
-    A note on the type of the input geometry. This also applies to the parts within a
-    multi-part geometry:
+    Notes:
+        A note on the type of the input geometry. This also applies to the parts within
+        a multi-part geometry:
 
-    For Point geometries, the function returns a list comprising a single
-    BNGIndexedGeometry object. A BNGExtentError exception is raised if the coordinates
-    are outside of the BNG index system extent.
+        - For ``Point`` geometries, the function returns a list comprising a single
+          :class:`~osbng.indexing.BNGIndexedGeometry` object. A
+          :class:`~osbng.errors.BNGExtentError` exception is raised if the coordinates
+          are outside of the BNG index system extent.
 
-    For LineString and Polygon geometry types, the function returns a list of
-    BNGIndexedGeometry objects representing the intersections between the grid squares
-    and the geometry. When the geometry extends beyond the BNG index system extent, the
-    function will show a feature bounding box warning but will still return the
-    BNGIndexedGeometry objects for the intersected grid squares.
+        - For ``LineString`` and ``Polygon`` geometry types, the function returns a
+          list of :class:`~osbng.indexing.BNGIndexedGeometry` objects representing the
+          intersections between the grid squares and the geometry. When the geometry
+          extends beyond the BNG index system extent, the function will show a feature
+          bounding box warning but will still return the
+          :class:`~osbng.indexing.BNGIndexedGeometry` objects for the intersected grid
+          squares.
 
     Args:
-        geom (Geometry): Shapely Geometry object.
+        geom (Geometry): ``Shapely Geometry`` object.
         resolution (int | str): The BNG resolution expressed either as a metre-based
             integer or as a string label.
 
     Returns:
-        list[BNGIndexedGeometry]: List of BNGIndexedGeometry objects.
+        list[BNGIndexedGeometry]: List of :class:`~osbng.indexing.BNGIndexedGeometry`
+            objects.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
         ValueError: If the geometry type is not supported.
-        BNGExtentError: If the coordinates of a Point geometry are outside of the BNG
-            index system extent.
+        BNGExtentError: If the coordinates of a ``Point`` geometry are outside of the
+            BNG index system extent.
 
     Example:
         >>> from shapely.geometry import Point
@@ -1003,6 +1009,12 @@ def geom_to_bng_intersection(
                 )
             )
         ]
+
+    See Also:
+        The :func:`~osbng.indexing_gpd.gdf_to_bng_intersection_explode` function
+        function supporting the indexing  of geometries in a ``GeoPandas GeoDataFrame``
+        against the BNG index system.
+
     """
     # Initialise an empty list to store the BNGIndexedGeometry objects
     bng_idx_geoms = []
