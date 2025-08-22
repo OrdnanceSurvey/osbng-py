@@ -548,17 +548,17 @@ def bng_to_xy(
 
 @_validate_bngreferences
 def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
-    """Returns grid square bounding box coordinates given a BNGReference.
+    """Returns grid square bounding box coordinates given a ``BNGReference``.
 
     Args:
-        bng_ref (BNGReference): The BNGReference.
+        bng_ref (BNGReference): The :class:`~osbng.BNGReference`.
 
     Returns:
         tuple[int, int, int, int]: The grid square bounding box coordinates
-            (min x, min y, max x, max y) as a tuple.
+        ``(minx, miny, maxx, maxy)`` as a tuple.
 
     Raises:
-        TypeError: If first argumnet is not a BNGReference.
+        TypeError: If first argument is not a :class:`~osbng.BNGReference`.
 
     Example:
         >>> bng_to_bbox(BNGReference("SU"))
@@ -569,6 +569,10 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
         (435000, 115000, 440000, 120000)
         >>> bng_to_bbox(BNGReference("SU 37289 15541"))
         (437289, 115541, 437290, 115542)
+
+    See Also:
+        The :func:`~osbng.indexing.bng_to_grid_geom` function which converts a
+        :class:`~osbng.BNGReference` to a ``Shapely Polygon``.
     """
     # Extract lower left and upper right coordinates of grid square
     min_xy = bng_to_xy(bng_ref, position="lower-left")
@@ -579,17 +583,18 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
 
 @_validate_bngreferences
 def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
-    """Returns a grid square as a Shapely Polygon given a BNGReference.
+    """Returns a grid square as a ``Shapely Polygon`` given a ``BNGReference``.
 
     Args:
-        bng_ref (BNGReference): The BNGReference.
+        bng_ref (BNGReference): The :class:`~osbng.BNGReference`.
 
     Returns:
-        Polygon: Grid square as a Shapely Polygon object.
+        Polygon: Grid square as a ``Shapely Polygon`` object.
 
     Raises:
-        BNGReferenceError: If the first positional argument is not a BNGReference.
-        TypeError: If first argument is not a BNGReference.
+        BNGReferenceError: If the first positional argument is not a
+        :class:`~osbng.BNGReference`.
+        TypeError: If first argument is not a :class:`~osbng.BNGReference`.
 
     Example:
         >>> bng_to_grid_geom(BNGReference("SU")).wkt
@@ -612,6 +617,10 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
         'POLYGON ((437290 115541, 437290 115542, 437289 115542, 437289 115541, '
         '437290 115541))'
         )
+
+    See Also:
+        The :func:`~osbng.indexing.bng_to_bbox` function which converts a
+        :class:`~osbng.BNGReference` to bounding box coordinates.
     """
     return box(*bng_to_bbox(bng_ref))
 
@@ -623,25 +632,26 @@ def bbox_to_bng(
     ymax: int | float,
     resolution: int | str,
 ) -> list[BNGReference]:
-    """Returns a BNGReference list given a bounding box and resolution.
+    """Returns a ``BNGReference`` list given a bounding box and resolution.
 
-    The relationship between the bounding box (BBOX) and the returned grid squares
-    depends on the alignment of the BBOX with the BNG index system:
-
-    If the BBOX edges align with the BNG index system (xmin, ymin, xmax, ymax
-    are multiples of the specified resolution), only the grid squares entirely
-    contained within the BBOX are returned. Grid squares that intersect but are not
-    fully contained within the BBOX are excluded.
-
-    If the BBOX edges are not aligned with the BNG index system, grid squares
-    that are partially overlapped by the BBOX are also included. In this case,
-    the function ensures all relevant grid squares that the BBOX touches are
-    returned, including those at the edges.
-
-    Validates and normalises the BBOX coordinates to the BNG index system
+    Validates and normalises the bounding box (BBOX) coordinates to the BNG index system
     extent. If BBOX coordinates fall outside of the BNG index system extent,
     then a warning is raised and the coordinates are snapped to the bounds of the BNG
     index system.
+
+    Notes:
+        The relationship between the BBOX and the returned grid squares
+        depends on the alignment of the BBOX with the BNG index system:
+
+        - **BNG Aligned**: If the BBOX edges align with the BNG index system (xmin,
+          ymin, xmax, ymax are multiples of the specified resolution), only the grid
+          squares entirely contained within the BBOX are returned. Grid squares that
+          intersect but are not fully contained within the BBOX are excluded.
+
+        - **Non-BNG Aligned**: If the BBOX edges are not aligned with the BNG index
+          system, grid squares that are partially overlapped by the BBOX are also
+          included. In this case, the function ensures all relevant grid squares that
+          the BBOX touches are returned, including those at the edges.
 
     Args:
         xmin (int | float): The minimum easting coordinate of the BBOX.
@@ -652,7 +662,7 @@ def bbox_to_bng(
             a metre-based integer or as a string label.
 
     Returns:
-        list[BNGReference]: BNGReference list.
+        list[BNGReference]: :class:`~osbng.BNGReference` list.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
@@ -673,6 +683,11 @@ def bbox_to_bng(
          BNGReference(bng_ref_formatted=SX 8 8 NE, resolution_label=5km),
          BNGReference(bng_ref_formatted=SX 9 8 NW, resolution_label=5km),
          BNGReference(bng_ref_formatted=SX 9 8 NE, resolution_label=5km)]
+
+    See Also:
+        The :func:`~osbng.grids.bbox_to_bng_iterfeatures` function which returns an
+        iterator of :class:`~osbng.BNGReference` ``Features`` given a bounding box and
+        resolution.
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
