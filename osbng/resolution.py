@@ -14,14 +14,14 @@ Supported BNG resolutions are:
 - 5m
 - 1m
 
-Relates metre-based BNG resolutions, expressed as integer values, to their respective
-string label representations.  These mappings are used to indicate different resolution
-precision levels in BNG references and serve as the basis for validating and normalising
-resolutions within the system.
+:data:`~osbng.BNG_RESOLUTIONS` relates metre-based BNG resolutions, expressed as
+integer values, to their respective string label representations. These mappings are
+used to indicate different resolution precision levels in BNG references and serve as
+the basis for validating and normalising resolutions within the system.
 
 The integer values represent spatial resolutions in metres, while the string labels
 provide a human-readable descriptor for each resolution level. For example, the numeric
-resolution 1000 is mapped to the label '1km'.
+resolution ``1000`` is mapped to the label ``1km``.
 
 The resolution mappings also include a flag indicating whether a given resolution
 represents an (intermediate) quadtree resolution.  Quadtree resolutions are used to
