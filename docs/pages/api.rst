@@ -22,6 +22,8 @@ the respective module pages.
 
    osbng.BNG_BOUNDS
    osbng.BNG_RESOLUTIONS
+   osbng.PREFIXES
+   osbng.SUFFIXES
    osbng.BNGReference
    osbng.bng_grid_100km
    osbng.bng_grid_50km
