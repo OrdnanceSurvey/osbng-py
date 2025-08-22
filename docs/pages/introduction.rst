@@ -41,13 +41,12 @@ Install ``osbng`` from GitHub using ``pip``:
 Complimentary Tools
 -------------------
 
-- ```osbng-r`` <https://github.com/OrdnanceSurvey/osbng-r>`__, an R
-  package with broad parity to the ``osbng`` Python package.
-- ```osbng-grids`` <https://github.com/OrdnanceSurvey/osbng-grids>`__,
-  for BNG grid data in GeoParquet and GeoPackage (GPKG) formats.
-- ```mosaic`` <https://github.com/databrickslabs/mosaic>`__, a
-  Databricks package providing geospatial grid indexing using the BNG
-  for Apache Spark.
+- `osbng-r <https://github.com/OrdnanceSurvey/osbng-r>`_, an R package with broad 
+  parity to the ``osbng`` Python package.
+- `osbng-grids <https://github.com/OrdnanceSurvey/osbng-grids>`_, for BNG grid data in 
+  ``GeoParquet`` and ``GeoPackage (GPKG)`` formats.
+- `mosaic <https://github.com/databrickslabs/mosaic>`_, a Databricks package providing 
+  geospatial grid indexing using the BNG for Apache Spark.
 
 Usage
 -----
@@ -93,8 +92,9 @@ against the BNG index system. This includes:
   objects at a specified resolution.
 - Decoding ``BNGReference`` objects back into coordinates, bounding
   boxes and grid squares as
-  ```Shapely`` <https://github.com/shapely/shapely>`__ geometries.
-- Indexing bounding boxes and ``Shapely`` geometries into grid squares
+  `Shapely <https://github.com/shapely/shapely>`_ geometries.
+- Indexing bounding boxes and `Shapely <https://github.com/shapely/shapely>`_ 
+  geometries into grid squares
   at a specified resolution for spatial analysis.
 
 .. image:: ../_static/images/osbng_indexing_geom_to_bng_5km_london.png
@@ -122,7 +122,7 @@ Indexing GeoPandas (GPD)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Optional functionality is available when the
-```GeoPandas`` <https://github.com/geopandas/geopandas>`__ package is
+`GeoPandas <https://github.com/geopandas/geopandas>`_ package is
 installed. This enables indexing of geometries in a ``GeoDataFrame``
 against the BNG index system. Includes:
 
@@ -185,7 +185,7 @@ Provides functionality to generate BNG grid square data within specified
 bounds. This includes:
 
 - Returning a GeoJSON-like mapping for grid squares implementing the
-  ```__geo_interface__`` <https://gist.github.com/sgillies/2217756>`__
+  `__geo_interface__ <https://gist.github.com/sgillies/2217756>`_
   protocol supporting integration with other tools in the Python
   geospatial ecosystem.
 - Grid square data covering the BNG index system bounds is provided as
