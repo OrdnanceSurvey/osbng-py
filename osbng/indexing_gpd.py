@@ -65,9 +65,9 @@ def gdf_to_bng_intersection_explode(
 
     Notes:
         Decomposition is achieved by applying the
-        :class:`~osbng.geom_to_bng_intersection` function to each geometry in the
-        input ``GeoPandas`` ``GeoDataFrame``, returning a flattened ``GeoDataFrame`` by
-        exploding the resulting :class:`~osbng.indexing.BNGIndexedGeometry` lists.
+        :class:`~osbng.indexing.geom_to_bng_intersection` function to each geometry in
+        the input ``GeoPandas`` ``GeoDataFrame``, returning a flattened ``GeoDataFrame``
+        by exploding the resulting :class:`~osbng.indexing.BNGIndexedGeometry` lists.
 
         The input ``GeoDataFrame`` geometry column is replaced with the geom property of
         the :class:`~osbng.indexing.BNGIndexedGeometry` objects. The input geometry
@@ -85,8 +85,9 @@ def gdf_to_bng_intersection_explode(
 
     Warnings:
         The active geometry column of the input ``GeoDataFrame`` is passed to
-        :class:`~osbng.geom_to_bng_intersection`, which is expected to be set and in the
-        OSGB36 / British National Grid coordinate reference system (CRS) (EPSG:27700).
+        :class:`~osbng.indexing.geom_to_bng_intersection`, which is expected to be set
+        and in the OSGB36 / British National Grid coordinate reference system (CRS)
+        (EPSG:27700).
 
     Args:
         gdf (gpd.GeoDataFrame): Input ``GeoPandas`` ``GeoDataFrame``.
@@ -94,8 +95,8 @@ def gdf_to_bng_intersection_explode(
             integer or as a string label.
 
     Keyword Args:
-        reset_index (bool): Whether to reset the index of the resulting ``GeoDataFrame``
-            .Defaults to True.
+        reset_index (bool): Whether to reset the index of the resulting
+        ``GeoDataFrame``. Defaults to True.
 
     Returns:
         gpd.GeoDataFrame: A new ``GeoDataFrame`` with one row per
@@ -114,7 +115,7 @@ def gdf_to_bng_intersection_explode(
 
     See Also:
         :class:`~osbng.indexing.geom_to_bng_intersection` to index ``Shapely``
-        geometries directly
+        geometries directly.
 
     """
     # Validate and normalise the resolution to its metre-based integer value

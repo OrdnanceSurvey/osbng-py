@@ -42,7 +42,8 @@ def bbox_to_bng_iterfeatures(
 
     Implements the `__geo_interface__
     <https://gist.github.com/sgillies/2217756>`__ protocol. The returned data structure
-    represents the :class:`~osbng.BNGReference` object as a GeoJSON-like Feature.
+    represents the :class:`~osbng.bng_reference.BNGReference` object as a GeoJSON-like
+    Feature.
 
     Args:
         xmin (int | float): The minimum easting coordinate of the bounding box (BBOX).
