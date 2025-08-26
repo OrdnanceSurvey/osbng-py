@@ -283,17 +283,17 @@ class BNGReference:
         bng_ref_string (str): The BNG reference string.
 
     Properties:
-        bng_ref_compact (str): The BNG reference with whitespace removed.
-        bng_ref_formatted (str): The pretty-formatted version of the BNG reference with
-        single spaces between components.
-        resolution_metres (int): The resolution of the BNG reference in meters.
-        resolution_label (str): The resolution of the BNG reference expressed as a
-        descriptive string.
-        __geo_interface__ (dict): A GeoJSON-like mapping for a BNGReference object.
+        - bng_ref_compact (str): The BNG reference with whitespace removed.
+        - bng_ref_formatted (str): The pretty-formatted version of the BNG reference
+          with single spaces between components.
+        - resolution_metres (int): The resolution of the BNG reference in meters.
+        - resolution_label (str): The resolution of the BNG reference expressed as a
+          descriptive string.
+        - __geo_interface__ (dict): A GeoJSON-like mapping for a BNGReference object.
 
     Methods:
-        bng_to_xy(position: str, optional) -> tuple[int | float, int | float]: Returns
-            the easting and northing coordinates for the current
+        bng_to_xy(position: str, optional) -> tuple[int | float, int | float]:
+            Returns the easting and northing coordinates for the current
             :class:`~osbng.bng_reference.BNGReference` object.
         bng_to_bbox() -> tuple[int, int, int, int]: Returns bounding box coordinates for
             the current :class:`~osbng.bng_reference.BNGReference` object.
