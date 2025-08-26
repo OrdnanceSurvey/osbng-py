@@ -28,7 +28,14 @@ __all__ = [
 ]
 
 # BNG index system bounds
-BNG_BOUNDS = (0, 0, 700000, 1300000)
+BNG_BOUNDS: tuple[int, int, int, int] = (0, 0, 700000, 1300000)
+"""tuple[int, int, int, int]: BNG index system bounding box.
+
+Expressed as (xmin, ymin, xmax, ymax) using easting and northing coordinates.
+
+Represents the valid extent for :class:`~osbng.bng_reference.BNGReference` and grid 
+generation.
+"""
 
 
 def bbox_to_bng_iterfeatures(
@@ -73,8 +80,75 @@ def bbox_to_bng_iterfeatures(
 # BNGReference object Features
 # Resolution capped at 1km to prevent excessive data generation
 # for lower (finer) resolutions
-bng_grid_100km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "100km")
-bng_grid_50km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "50km")
-bng_grid_10km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "10km")
-bng_grid_5km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "5km")
-bng_grid_1km = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "1km")
+
+bng_grid_100km: Iterator[dict[str, Any]] = bbox_to_bng_iterfeatures(
+    *BNG_BOUNDS, "100km"
+)
+"""Iterator of GeoJSON-like Features for 100km BNG grid squares within ``BNG_BOUNDS``.
+
+Each yielded dictionary implements the ``__geo_interface__``  for a single 100km BNG 
+grid square and corresponds to a :class:`~osbng.bng_reference.BNGReference` at 100 km 
+resolution.
+
+Notes:
+    - No Features are generated until the iterator is consumed.
+    - Convert to a list (``list(bng_grid_100km)``) to trigger Feature generation.
+    - Pass directly to ``gpd.GeoDataFrame.from_features`` for 
+    ``GeoDataFrame`` construction.
+"""
+
+bng_grid_50km: Iterator[dict[str, Any]] = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "50km")
+"""Iterator of GeoJSON-like Features for 50km BNG grid squares within ``BNG_BOUNDS``.
+
+Each yielded dictionary implements the ``__geo_interface__``  for a single 50km BNG grid
+square and corresponds to a :class:`~osbng.bng_reference.BNGReference` at 50km 
+resolution.
+
+Notes:
+    - No Features are generated until the iterator is consumed.
+    - Convert to a list (``list(bng_grid_50km)``) to trigger Feature generation.
+    - Pass directly to ``gpd.GeoDataFrame.from_features`` for 
+    ``GeoDataFrame`` construction.
+"""
+
+bng_grid_10km: Iterator[dict[str, Any]] = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "10km")
+"""Iterator of GeoJSON-like Features for 10km BNG grid squares within ``BNG_BOUNDS``.
+
+Each yielded dictionary implements the ``__geo_interface__``  for a single 10km BNG grid
+square and corresponds to a :class:`~osbng.bng_reference.BNGReference` at 10km 
+resolution.
+
+Notes:
+    - No Features are generated until the iterator is consumed.
+    - Convert to a list (``list(bng_grid_10km)``) to trigger Feature generation.
+    - Pass directly to ``gpd.GeoDataFrame.from_features`` for 
+    ``GeoDataFrame`` construction.
+"""
+
+bng_grid_5km: Iterator[dict[str, Any]] = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "5km")
+"""Iterator of GeoJSON-like Features for all 5km BNG grid squares within ``BNG_BOUNDS``.
+
+Each yielded dictionary implements the ``__geo_interface__``  for a single 5km BNG grid 
+square and corresponds to a :class:`~osbng.bng_reference.BNGReference` at 5km resolution
+.
+
+Notes:
+    - No Features are generated until the iterator is consumed.
+    - Convert to a list (``list(bng_grid_5km)``) to trigger Feature generation.
+    - Pass directly to ``gpd.GeoDataFrame.from_features`` for 
+    ``GeoDataFrame`` construction.
+"""
+
+bng_grid_1km: Iterator[dict[str, Any]] = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "1km")
+"""Iterator of GeoJSON-like Features for all 1km BNG grid squares within ``BNG_BOUNDS``.
+
+Each yielded dictionary implements the ``__geo_interface__``  for a single 1km BNG grid 
+square and corresponds to a :class:`~osbng.bng_reference.BNGReference` at 1km resolution
+.
+
+Notes:
+    - No Features are generated until the iterator is consumed.
+    - Convert to a list (``list(bng_grid_1km)``) to trigger Feature generation.
+    - Pass directly to ``gpd.GeoDataFrame.from_features`` for 
+    ``GeoDataFrame`` construction.
+"""
