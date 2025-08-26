@@ -2,11 +2,12 @@
 
 It supports spatial analyses such as distance-constrained nearest neighbour searches and
 'distance within' queries by offering:
-- **Grid traversal**: Generate k-discs and k-rings around a given grid square.
-- **Neighbourhood operations**: Identify neighbouring grid squares and checking
+    - **Grid traversal**: Generate k-discs and k-rings around a given grid square.
+    - **Neighbourhood operations**: Identify neighbouring grid squares and checking
     adjacency.
-- **Distance computation**: Calculate the distance between grid square centroids.
-- **Proximity queries**: Retrieve all grid squares within a specified absolute distance.
+    - **Distance computation**: Calculate the distance between grid square centroids.
+    - **Proximity queries**: Retrieve all grid squares within a specified absolute
+    distance.
 
 """
 
@@ -99,29 +100,32 @@ def _ring_or_disc(
 @_validate_bngreferences
 def bng_kring(
     bng_ref: BNGReference, k: int, *, return_relations: bool = False
-) -> list[BNGReference]:
-    """Returns a hollow ring around a given BNGReference object.
+) -> list[BNGReference] | list[tuple[BNGReference, int, int]]:
+    """Returns a hollow ring around a given :class:`~osbng.BNGReference` object.
 
-    Nearby BNGReference objects at a grid distance k are returned.
+    Nearby :class:`~osbng.BNGReference` objects at a grid distance k are returned.
 
-    Returned BNGReference objects are ordered North to South then West to East,
-        therefore not in ring order.
+    Notes:
+        Returned :class:`~osbng.BNGReference` objects are ordered North to South then
+        West to East, therefore not in ring order.
 
     Args:
         bng_ref (BNGReference): A BNGReference object.
         k (int): Grid distance in units of grid squares.
+
+    Keyword Args:
         return_relations (bool, optional): If True, returns a list of
             (BNGReference, dx, dy) tuples where dx, dy are integer offsets in grid
             units.  If False (default), returns a list of BNGReference objects.
             Keyword only.
 
     Returns:
-        list[BNGReference]: All BNGReference objects representing squares in a square
-            ring of radius k.
-
-        If return_relations is True, returns list[(BNGReference, dx, dy)], where dx and
-            dy are the x and y offsets between bng_ref and each returned BNGReference
-            object in units of grid squares.
+        list[BNGReference]: If return_relations is False (default), returns all
+        :class:`~osbng.BNGReference` objects representing squares in a square ring of
+        radius k.
+        If return_relations is True, returns a list of (BNGReference, dx, dy) tuples,
+        where dx and dy are the x and y offsets between bng_ref and each returned
+        :class:`~osbng.BNGReference` object in units of grid squares.
 
     Examples:
         >>> bng_kring(BNGReference("SU1234"), 1)
@@ -154,28 +158,32 @@ def bng_kring(
 def bng_kdisc(
     bng_ref: BNGReference, k: int, *, return_relations: bool = False
 ) -> list[BNGReference]:
-    """Returns a filled disc around a given BNGReference object.
+    """Returns a filled disc around a given :class:`~osbng.BNGReference` object.
 
-    Nearby BNGReference objects within a grid distance k are returned, including the
-    given central BNGReference object.
+    Nearby :class:`~osbng.BNGReference` objects within a grid distance k are returned,
+    including the given central :class:`~osbng.BNGReference` object.
 
-    Returned BNGReference objects are ordered North to South then West to East.
+    Notes:
+        Returned :class:`~osbng.BNGReference` objects are ordered North to South then
+        West to East.
 
     Args:
         bng_ref (BNGReference): A BNGReference object.
         k (int): Grid distance in units of grid squares.
+
+    Keyword Args:
         return_relations (bool, optional): If True, returns a list of
-            (BNGReference, dx, dy) tuples where dx, dy are integer offsets in grid
-            units.  If False (default), returns a list of BNGReference objects.
-            Keyword only.
+            (:class:`~osbng.BNGReference`, dx, dy) tuples where dx, dy are integer
+            offsets in grid units.  If False (default), returns a list of
+            :class:`~osbng.BNGReference` objects. Keyword only.
 
     Returns:
-        list[BNGReference]: All BNGReference objects representing grid squares in a
-            square of radius k.
-
-        If return_relations is True, returns list[(BNGReference, dx, dy)], where dx and
-            dy are the x and y offsets between bng_ref and each returned BNGReference
-            object in units of grid squares.
+        list[BNGReference]: If return_relations is False (default), returns all
+        :class:`~osbng.BNGReference` objects representing grid squares in a square ring
+        of radius k.
+        If return_relations is True, returns a list of (BNGReference, dx, dy) tuples,
+        where dx and dy are the x and y offsets between bng_ref and each returned
+        :class:`~osbng.BNGReference` object in units of grid squares.
 
     Examples:
         >>> bng_kdisc(BNGReference("SU1234"), 1)
@@ -210,15 +218,18 @@ def bng_kdisc(
 def bng_distance(
     bng_ref1: BNGReference, bng_ref2: BNGReference, *, edge_to_edge: bool = False
 ) -> float:
-    """Returns the euclidean distance between two BNGReference objects.
+    """Returns the euclidean distance between two :class:`~osbng.BNGReference` objects.
 
-    Note that the two BNGReference objects do not necessarily need to share a common
-    resolution.  When edge_to_edge = True and bng_ref1 and bng_ref2 have a parent-child
-    relationship, the returned distance is 0.
+    Notes:
+        Note that the two :class:`~osbng.BNGReference` objects do not necessarily need
+        to share a common resolution.  When edge_to_edge = True and bng_ref1 and
+        bng_ref2 have a parent-child relationship, the returned distance is 0.
 
     Args:
         bng_ref1 (BNGReference): A BNGReference object.
         bng_ref2 (BNGReference): A BNGReference object.
+
+    Keyword Args:
         edge_to_edge (bool, optional): If False (default), distance will be
             centroid-to-centroid distance.  If True, distance will be the shortest
             distance between any point in the grid squares.  Keyword only.
@@ -300,14 +311,14 @@ def bng_distance(
 
 @_validate_bngreferences
 def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
-    """Returns the four neighbouring BNGReferences sharing an edge with the input.
+    """Returns the four neighbouring squares sharing an edge with the input square.
 
     Args:
-        bng_ref (BNGReference): A BNGReference object.
+        bng_ref (BNGReference): A :class:`~osbng.BNGReference` object.
 
     Returns:
-        list[BNGReference]: The grid squares immediately North, South, East and West
-            of bng_ref.
+        list[BNGReference]: The grid squares immediately North, East, South and West
+        of bng_ref, in that order.
 
     Examples:
         >>> bng_neighbours(BNGReference("SU1234"))
@@ -350,17 +361,21 @@ def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
 
 @_validate_bngreferences
 def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
-    """Returns True if the two BNGReference objects are neighbours, otherwise False.
+    """Tests whether two :class:`~osbng.BNGReference` objects are neighbours.
+
+    Returns True if the two :class:`~osbng.BNGReference` objects are neighbours,
+    otherwise False.
 
     Neighbours are defined as grid squares that share an edge with the first
-    BNGReference object.
+    :class:`~osbng.BNGReference` object.
 
     Args:
         bng_ref1 (BNGReference): A BNGReference object.
         bng_ref2 (BNGReference): A BNGReference object.
 
     Returns:
-        bool: True if the two BNGReference objects are neighbours, otherwise False.
+        bool: True if the two :class:`~osbng.BNGReference` objects are neighbours,
+        otherwise False.
 
     Raises:
         TypeError: If the first or second argument is not a BNGReference object.
@@ -389,18 +404,18 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
 
 @_validate_bngreferences
 def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
-    """Returns a list of BNG reference objects within an absolute distance d.
+    """Returns a list of :class:`~osbng.BNGReference` objects within a distance d.
 
     All squares will be returned for which any part of its boundary is within distance d
     of any part of bng_ref's boundary.
 
     Args:
-        bng_ref (BNGReference): A BNGReference object.
+        bng_ref (BNGReference): A :class:`~osbng.BNGReference` object.
         d (int or float): The absolute distance d in metres.
 
     Returns:
         list[BNGReference]: All grid squares which have any part of their geometry
-            within distance d of bng_ref's geometry
+        within distance d of bng_ref's geometry
 
     Examples:
         >>> bng_dwithin(BNGReference("SU1234"), 1000)
