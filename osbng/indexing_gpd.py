@@ -88,10 +88,6 @@ def gdf_to_bng_intersection_explode(
         :class:`~osbng.geom_to_bng_intersection`, which is expected to be set and in the
         OSGB36 / British National Grid coordinate reference system (CRS) (EPSG:27700).
 
-    See Also:
-        :class:`~osbng.indexing.geom_to_bng_intersection` to index ``Shapely``
-        geometries directly
-
     Args:
         gdf (gpd.GeoDataFrame): Input ``GeoPandas`` ``GeoDataFrame``.
         resolution (int | str): The BNG resolution expressed either as a metre-based
@@ -115,6 +111,11 @@ def gdf_to_bng_intersection_explode(
         ValueError: If the ``GeoDataFrame`` CRS is not equal to "EPSG:27700"
         ValueError: If an active geometry column is not set in the ``GeoDataFrame``.
         ValueError: If the geometry type is not supported.
+
+    See Also:
+        :class:`~osbng.indexing.geom_to_bng_intersection` to index ``Shapely``
+        geometries directly
+
     """
     # Validate and normalise the resolution to its metre-based integer value
     validated_resolution = _validate_and_normalise_bng_resolution(resolution)
