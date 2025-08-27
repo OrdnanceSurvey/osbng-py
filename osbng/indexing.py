@@ -559,8 +559,7 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
         bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference`.
 
     Returns:
-        tuple[int, int, int, int]: The grid square bounding box coordinates
-            as a tuple ``(minx, miny, maxx, maxy)``.
+        tuple[int, int, int, int]: The grid square bounding box coordinates as a tuple.
 
     Raises:
         TypeError: If first argument is not a
@@ -865,8 +864,7 @@ def geom_to_bng_intersection(
             integer or as a string label.
 
     Returns:
-        list[BNGIndexedGeometry]: List of :class:`~osbng.indexing.BNGIndexedGeometry`
-            objects.
+        list[BNGIndexedGeometry]: List of :class:`~osbng.indexing.BNGIndexedGeometry`.
 
     Raises:
         BNGResolutionError: If an invalid resolution is provided.
