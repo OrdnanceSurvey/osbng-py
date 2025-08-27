@@ -96,7 +96,7 @@ def gdf_to_bng_intersection_explode(
 
     Keyword Args:
         reset_index (bool): Whether to reset the index of the resulting
-        ``GeoDataFrame``. Defaults to True.
+          ``GeoDataFrame``, defaults to True.
 
     Returns:
         gpd.GeoDataFrame: A new ``GeoDataFrame`` with one row per

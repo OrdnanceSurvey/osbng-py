@@ -93,8 +93,8 @@ resolution.
 Notes:
     - No Features are generated until the iterator is consumed.
     - Convert to a list (``list(bng_grid_100km)``) to trigger Feature generation.
-    - Pass directly to ``gpd.GeoDataFrame.from_features`` for 
-    ``GeoDataFrame`` construction.
+    - Pass directly to ``gpd.GeoDataFrame.from_features`` for ``GeoDataFrame`` 
+      construction.
 """
 
 bng_grid_50km: Iterator[dict[str, Any]] = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "50km")
@@ -107,8 +107,8 @@ resolution.
 Notes:
     - No Features are generated until the iterator is consumed.
     - Convert to a list (``list(bng_grid_50km)``) to trigger Feature generation.
-    - Pass directly to ``gpd.GeoDataFrame.from_features`` for 
-    ``GeoDataFrame`` construction.
+    - Pass directly to ``gpd.GeoDataFrame.from_features`` for ``GeoDataFrame`` 
+      construction.
 """
 
 bng_grid_10km: Iterator[dict[str, Any]] = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "10km")
@@ -121,8 +121,8 @@ resolution.
 Notes:
     - No Features are generated until the iterator is consumed.
     - Convert to a list (``list(bng_grid_10km)``) to trigger Feature generation.
-    - Pass directly to ``gpd.GeoDataFrame.from_features`` for 
-    ``GeoDataFrame`` construction.
+    - Pass directly to ``gpd.GeoDataFrame.from_features`` for ``GeoDataFrame`` 
+      construction.
 """
 
 bng_grid_5km: Iterator[dict[str, Any]] = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "5km")
@@ -135,8 +135,8 @@ square and corresponds to a :class:`~osbng.bng_reference.BNGReference` at 5km re
 Notes:
     - No Features are generated until the iterator is consumed.
     - Convert to a list (``list(bng_grid_5km)``) to trigger Feature generation.
-    - Pass directly to ``gpd.GeoDataFrame.from_features`` for 
-    ``GeoDataFrame`` construction.
+    - Pass directly to ``gpd.GeoDataFrame.from_features`` for ``GeoDataFrame`` 
+      construction.
 """
 
 bng_grid_1km: Iterator[dict[str, Any]] = bbox_to_bng_iterfeatures(*BNG_BOUNDS, "1km")
@@ -149,6 +149,6 @@ square and corresponds to a :class:`~osbng.bng_reference.BNGReference` at 1km re
 Notes:
     - No Features are generated until the iterator is consumed.
     - Convert to a list (``list(bng_grid_1km)``) to trigger Feature generation.
-    - Pass directly to ``gpd.GeoDataFrame.from_features`` for 
-    ``GeoDataFrame`` construction.
+    - Pass directly to ``gpd.GeoDataFrame.from_features`` for ``GeoDataFrame`` 
+      construction.
 """
