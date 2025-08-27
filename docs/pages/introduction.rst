@@ -26,7 +26,7 @@ represent powers of ten from 1m to 100km
 identified by an ordinal (``NE, SE, SW, NW``) BNG reference direction
 suffix.
 
-.. figure:: ../_static/images/osbng_grids_100km_10km_1km.png
+.. image:: ../_static/images/osbng_grids_100km_10km_1km.png
    :alt: BNG index system overview at 100km, 10km and 1km resolutions
 
 Installation
@@ -41,13 +41,12 @@ Install ``osbng`` from GitHub using ``pip``:
 Complimentary Tools
 -------------------
 
-- ```osbng-r`` <https://github.com/OrdnanceSurvey/osbng-r>`__, an R
-  package with broad parity to the ``osbng`` Python package.
-- ```osbng-grids`` <https://github.com/OrdnanceSurvey/osbng-grids>`__,
-  for BNG grid data in GeoParquet and GeoPackage (GPKG) formats.
-- ```mosaic`` <https://github.com/databrickslabs/mosaic>`__, a
-  Databricks package providing geospatial grid indexing using the BNG
-  for Apache Spark.
+- `osbng-r <https://github.com/OrdnanceSurvey/osbng-r>`_, an R package with broad 
+  parity to the ``osbng`` Python package.
+- `osbng-grids <https://github.com/OrdnanceSurvey/osbng-grids>`_, for BNG grid data in 
+  ``GeoParquet`` and ``GeoPackage (GPKG)`` formats.
+- `mosaic <https://github.com/databrickslabs/mosaic>`_, a Databricks package providing 
+  geospatial grid indexing using the BNG for Apache Spark.
 
 Usage
 -----
@@ -93,8 +92,9 @@ against the BNG index system. This includes:
   objects at a specified resolution.
 - Decoding ``BNGReference`` objects back into coordinates, bounding
   boxes and grid squares as
-  ```Shapely`` <https://github.com/shapely/shapely>`__ geometries.
-- Indexing bounding boxes and ``Shapely`` geometries into grid squares
+  `Shapely <https://github.com/shapely/shapely>`_ geometries.
+- Indexing bounding boxes and `Shapely <https://github.com/shapely/shapely>`_ 
+  geometries into grid squares
   at a specified resolution for spatial analysis.
 
 .. image:: ../_static/images/osbng_indexing_geom_to_bng_5km_london.png
@@ -122,13 +122,37 @@ Indexing GeoPandas (GPD)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Optional functionality is available when the
-```GeoPandas`` <https://github.com/geopandas/geopandas>`__ package is
+`GeoPandas <https://github.com/geopandas/geopandas>`_ package iss
 installed. This enables indexing of geometries in a ``GeoDataFrame``
 against the BNG index system. Includes:
 
 - Indexing geometries in a ``GeoDataFrame`` into grid squares at a
   specified resolution, and explode the resulting lists of indexed
   objects into a flattened ``GeoDataFrame`` for further analysis.
+
+The following example indexes the boundaries for the 'London' and 'South West' Regions in England:
+
+.. code:: python
+
+   >>> import geopandas as gpd
+   >>> from osbng.indexing_gpd import gdf_to_bng_intersection_explode
+   >>> gdf = gpd.read_file("docs/examples/data/Regions_December_2024_Boundaries_EN_BFC.gpkg")
+   >>> gdf = gdf[gdf["RGN24NM"].isin(["London", "South West"])]
+   >>> gdf_to_bng_intersection_explode(gdf=gdf, resolution="5km")
+           RGN24CD     RGN24NM   BNG_E  ...                                            bng_ref  is_core                                           geometry
+   0     E12000007      London  517517  ...  BNGReference(bng_ref_formatted=TQ 2 8 SE, reso...     True  POLYGON ((530000 180000, 530000 185000, 525000...
+   1     E12000007      London  517517  ...  BNGReference(bng_ref_formatted=TQ 1 8 SW, reso...     True  POLYGON ((515000 180000, 515000 185000, 510000...
+   2     E12000007      London  517517  ...  BNGReference(bng_ref_formatted=TQ 2 9 SE, reso...     True  POLYGON ((530000 190000, 530000 195000, 525000...
+   3     E12000007      London  517517  ...  BNGReference(bng_ref_formatted=TQ 3 9 SW, reso...     True  POLYGON ((535000 190000, 535000 195000, 530000...
+   4     E12000007      London  517517  ...  BNGReference(bng_ref_formatted=TQ 5 8 NW, reso...     True  POLYGON ((555000 185000, 555000 190000, 550000...
+   ...         ...         ...     ...  ...                                                ...      ...                                                ...
+   1410  E12000009  South West  285016  ...  BNGReference(bng_ref_formatted=SS 2 2 SW, reso...    False  POLYGON ((221321.396 120105.5, 221322.097 1200...
+   1411  E12000009  South West  285016  ...  BNGReference(bng_ref_formatted=SS 1 4 SW, reso...    False  POLYGON ((214017.097 144997.004, 214015.596 14...
+   1412  E12000009  South West  285016  ...  BNGReference(bng_ref_formatted=SS 1 4 NW, reso...    False  POLYGON ((212833.304 145000.003, 212828.101 14...
+   1413  E12000009  South West  285016  ...  BNGReference(bng_ref_formatted=ST 2 4 NE, reso...    False  POLYGON ((329353.83 147854.995, 329360.673 147...
+   1414  E12000009  South West  285016  ...  BNGReference(bng_ref_formatted=ST 2 6 SW, reso...    False  POLYGON ((323061.501 160841.099, 323064.799 16...
+   
+   [1415 rows x 10 columns]
 
 Hierarchy
 ~~~~~~~~~
@@ -185,7 +209,7 @@ Provides functionality to generate BNG grid square data within specified
 bounds. This includes:
 
 - Returning a GeoJSON-like mapping for grid squares implementing the
-  ```__geo_interface__`` <https://gist.github.com/sgillies/2217756>`__
+  `__geo_interface__ <https://gist.github.com/sgillies/2217756>`_
   protocol supporting integration with other tools in the Python
   geospatial ecosystem.
 - Grid square data covering the BNG index system bounds is provided as

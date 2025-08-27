@@ -1,5 +1,5 @@
-osbng documentation
-===================
+``osbng`` Documentation
+=======================
 
 .. toctree::
    :maxdepth: 2
@@ -15,3 +15,4 @@ osbng documentation
    pages/hierarchy
    pages/traversal
    pages/grids
+   pages/errors

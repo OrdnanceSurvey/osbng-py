@@ -68,6 +68,7 @@ html_theme_options = {
 # Support cross‑references to objects in external projects
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", "inventories/python.inv"),
+    "numpy": ("https://numpy.org/doc/stable/", "inventories/numpy.inv"),
     "shapely": ("https://shapely.readthedocs.io/en/stable/", "inventories/shapely.inv"),
     "geopandas": ("https://geopandas.org/en/stable/", "inventories/geopandas.inv"),
 }
