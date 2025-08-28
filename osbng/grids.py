@@ -65,6 +65,17 @@ def bbox_to_bng_iterfeatures(
 
     Raises:
         BNGResolutionError: If the resolution is not a valid resolution.
+
+    Examples:
+        >>> print(*bbox_to_bng_iterfeatures(530000, 180000, 535000, 185000, "5km"))
+        {'type': 'Feature', 'properties': {'bng_ref': 'TQ38SW'}, 'geometry':
+        {'type': 'Polygon', 'coordinates': (((535000.0, 180000.0), (535000.0, 185000.0),
+        (530000.0, 185000.0), (530000.0, 180000.0), (535000.0, 180000.0)),)}}
+        >>> print(*bbox_to_bng_iterfeatures(530000, 180000, 535000, 185000, "10km"))
+        {'type': 'Feature', 'properties': {'bng_ref': 'TQ38'}, 'geometry':
+        {'type': 'Polygon', 'coordinates': (((540000.0, 180000.0), (540000.0, 190000.0),
+        (530000.0, 190000.0), (530000.0, 180000.0), (540000.0, 180000.0)),)}}
+
     """
     # Convert the bounding box to BNGReference objects
     bng_refs = bbox_to_bng(xmin, ymin, xmax, ymax, resolution)
