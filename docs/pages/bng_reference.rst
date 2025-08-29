@@ -8,10 +8,10 @@ BNG Reference
    :no-inherited-members:
    :no-special-members:
 
-``BNGReference`` Object
------------------------
+``BNGReference``
+----------------
 
-The ``BNGReference`` constructor converts a BNG reference string into a
+The ``BNGReference`` class supports the conversion of a BNG reference string into a
 :class:`~osbng.bng_reference.BNGReference` object, ensuring type consistency across the
 package. All functions accepting or returning BNG references enforce the use of this
 class. 
