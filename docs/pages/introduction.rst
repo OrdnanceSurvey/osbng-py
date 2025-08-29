@@ -223,6 +223,21 @@ of the iterators:
    >>> import geopandas as gpd
    >>> from osbng.grids import bng_grid_10km
    >>> gdf = gpd.GeoDataFrame.from_features(bng_grid_10km, crs=27700)
+   >>> gdf
+                                                  geometry bng_ref
+   0     POLYGON ((10000 0, 10000 10000, 0 10000, 0 0, ...    SV00
+   1     POLYGON ((20000 0, 20000 10000, 10000 10000, 1...    SV10
+   2     POLYGON ((30000 0, 30000 10000, 20000 10000, 2...    SV20
+   3     POLYGON ((40000 0, 40000 10000, 30000 10000, 3...    SV30
+   4     POLYGON ((50000 0, 50000 10000, 40000 10000, 4...    SV40
+   ...                                                 ...     ...
+   9095  POLYGON ((660000 1290000, 660000 1300000, 6500...    JM59
+   9096  POLYGON ((670000 1290000, 670000 1300000, 6600...    JM69
+   9097  POLYGON ((680000 1290000, 680000 1300000, 6700...    JM79
+   9098  POLYGON ((690000 1290000, 690000 1300000, 6800...    JM89
+   9099  POLYGON ((700000 1290000, 700000 1300000, 6900...    JM99
+   
+   [9100 rows x 2 columns]
 
 Contributing
 ------------
