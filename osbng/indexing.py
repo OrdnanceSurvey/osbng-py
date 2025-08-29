@@ -144,14 +144,23 @@ class BNGIndexedGeometry:
 
     @property
     def is_core(self) -> bool:
-        """True if grid square geometry is contained by the input geometry."""
+        """True if grid square geometry is contained by the input geometry.
+
+        A Boolean flag indicating whether the grid square geometry is entirely
+        contained by the input geometry. This is relevant for ``Polygon`` geometries
+        and helps distinguish between ``core`` (fully inside) and ``edge``
+        (partially overlapping) grid squares.
+        """
         return self._is_core
 
     @property
     def geom(self) -> Geometry:
         """Intersection between the input geometry and the grid square.
 
-        Intersection represented as a ``Shapely Geometry`` object.
+        The ``Shapely Geometry`` representing the intersection between the input
+        geometry and the grid square. This can one of a number of geometry types
+        depending on the overlap. When ``is_core`` is True, ``geom`` is the same as the
+        grid square geometry.
         """
         return self._geom
 
