@@ -168,7 +168,7 @@ def bng_kring(
 @_validate_bngreferences
 def bng_kdisc(
     bng_ref: BNGReference, k: int, *, return_relations: bool = False
-) -> list[BNGReference]:
+) -> list[BNGReference] | list[tuple[BNGReference, int, int]]:
     """Returns a filled disc around a :class:`~osbng.bng_reference.BNGReference` object.
 
     Nearby :class:`~osbng.bng_reference.BNGReference` objects within a grid distance
