@@ -388,12 +388,12 @@ class BNGReference:
 
     @property
     def resolution_metres(self) -> int:
-        """Returns the resolution of the BNGReference in meters."""
+        """Returns the resolution of the ``BNGReference`` in meters."""
         return _get_bng_resolution_metres(self._bng_ref_compact)
 
     @property
     def resolution_label(self) -> str:
-        """Returns the resolution of the BNGReference expressed as a descriptive string.
+        """Returns the resolution of the ``BNGReference`` expressed as a string.
 
         The resolution is returned in a human-readable format, such as '10km', '50km',
         '5km', etc.
@@ -406,11 +406,12 @@ class BNGReference:
 
     @property
     def __geo_interface__(self) -> dict[str, Union[str, dict]]:
-        """Returns a GeoJSON-like mapping for a BNGReference object.
+        """Returns a GeoJSON-like mapping for the ``BNGReference``.
 
         Implements the `__geo_interface__
         <https://gist.github.com/sgillies/2217756>`__ protocol. The returned data
-        structure represents the BNGReference object as a GeoJSON-like Feature.
+        structure represents the :class:`~osbng.bng_reference.BNGReference` object as a
+        GeoJSON-like Feature.
         """
         return {
             "type": "Feature",
