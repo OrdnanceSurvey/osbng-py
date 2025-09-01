@@ -292,29 +292,50 @@ class BNGReference:
     Args:
         bng_ref_string (str): The BNG reference string.
 
-    Properties:
-        - bng_ref_compact (str): The BNG reference with whitespace removed.
-        - bng_ref_formatted (str): The pretty-formatted version of the BNG reference
-          with single spaces between components.
-        - resolution_metres (int): The resolution of the BNG reference in meters.
-        - resolution_label (str): The resolution of the BNG reference expressed as a
-          descriptive string.
-        - __geo_interface__ (dict): A GeoJSON-like mapping for a BNGReference object.
+    Attributes:
+        bng_ref_compact (str): The BNG reference with whitespace removed.
+        bng_ref_formatted (str): The pretty-formatted version of the BNG reference
+            with single spaces between components.
+        resolution_metres (int): The resolution of the BNG reference in meters.
+        resolution_label (str): The resolution of the BNG reference expressed as a
+            descriptive string.
+        __geo_interface__ (dict): A GeoJSON-like mapping for a
+            :class:`~osbng.bng_reference.BNGReference` object.
 
     Methods:
-        bng_to_xy(position: str, optional) -> tuple[int | float, int | float]:
-            Returns the easting and northing coordinates for the current
-            :class:`~osbng.bng_reference.BNGReference` object.
+        bng_to_xy(position: str = "lower-left") -> tuple[int | float, int | float]:
+            Returns easting and northing coordinates for the current object.
         bng_to_bbox() -> tuple[int, int, int, int]: Returns bounding box coordinates for
-            the current :class:`~osbng.bng_reference.BNGReference` object.
+            the current object.
         bng_to_grid_geom() -> Polygon: Returns a grid square as a ``Shapely`` Polygon
-            for the current :class:`~osbng.bng_reference.BNGReference` object.
-        bng_to_children(resolution: int | str | None, optional) -> list[BNGReference]:
+            for the current object.
+        bng_to_children(resolution: int | str | None = None) -> list[BNGReference]:
             Returns a list of :class:`~osbng.bng_reference.BNGReference` objects that
-            are children of the input :class:`~osbng.bng_reference.BNGReference` object.
-        bng_to_parent(resolution: int | str | None, optional) -> BNGReference: Returns a
+            are children of the current object.
+        bng_to_parent(resolution: int | str | None = None) -> BNGReference: Returns a
             :class:`~osbng.bng_reference.BNGReference` object that is the parent of the
-            input :class:`~osbng.bng_reference.BNGReference` object.
+            current object.
+        bng_kring(k: int, return_relations: bool = False) -> list[BNGReference] |
+            list[tuple[BNGReference, int, int]]:
+            Returns a list of :class:`~osbng.bng_reference.BNGReference` objects
+            forming a hollow ring around the current object.
+        bng_kdisc(k: int, return_relations: bool = False) -> list[BNGReference] |
+            list[tuple[BNGReference, int, int]]:
+            Returns a list of :class:`~osbng.bng_reference.BNGReference` objects
+            forming a filled disc around the current object.
+        bng_distance(bng_ref2: BNGReference, edge_to_edge: bool = False) -> float:
+            Returns the euclidean distance between a
+            :class:`~osbng.bng_reference.BNGReference` and the current object.
+        bng_neighbours() -> list[BNGReference]:
+            Returns a list of :class:`~osbng.bng_reference.BNGReference` objects
+            representing the four neighbouring grid squares sharing an edge with the
+            current object.
+        bng_is_neighbour(bng_ref2: BNGReference) -> bool:
+            Tests whether an input :class:`~osbng.bng_reference.BNGReference` is a
+            neighbour of the current object.
+        bng_dwithin(d:int | float) -> list[BNGReference]:
+            Returns a list of :class:`~osbng.bng_reference.BNGReference` objects
+            within a distance ``d`` from the current object.
 
     Raises:
         BNGReferenceError: If the BNG reference string is invalid.
@@ -335,6 +356,11 @@ class BNGReference:
         (512000, 134000, 513000, 135000)
         >>> bng_ref.bng_to_parent()
         BNGReference(bng_ref_formatted=TQ 1 3 SW, resolution_label=5km)
+        >>> bng_ref.bng_neighbours()
+        [BNGReference(bng_ref_formatted=TQ 12 35, resolution_label=1km),
+         BNGReference(bng_ref_formatted=TQ 13 34, resolution_label=1km),
+         BNGReference(bng_ref_formatted=TQ 12 33, resolution_label=1km),
+         BNGReference(bng_ref_formatted=TQ 11 34, resolution_label=1km)]
     """
 
     def __init__(self, bng_ref_string: str):
