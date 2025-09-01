@@ -203,7 +203,7 @@ def _get_bng_resolution_metres(bng_ref_string: str) -> int:
 
 
 def _get_bng_resolution_label(bng_ref_string: str) -> str:
-    """Gets the resolution of a BNG reference expressed as a descriptive string.
+    """Returns the resolution of a BNG reference expressed as a descriptive string.
 
     The resolution is returned in a human-readable format, such as '10km', '50km', '5km'
     etc.
@@ -217,6 +217,10 @@ def _get_bng_resolution_label(bng_ref_string: str) -> str:
     Examples:
         >>> _get_bng_resolution_label("TQ1234")
         '1km'
+        >>> _get_bng_resolution_label("TQ12")
+        '10km'
+        >>> _get_bng_resolution_label("TQSW")
+        '50km'
     """
     # Get the resolution in meters
     resolution_meters = _get_bng_resolution_metres(bng_ref_string)
