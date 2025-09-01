@@ -161,7 +161,7 @@ def _validate_bng_ref_string(bng_ref_string: str) -> bool:
 
 
 def _get_bng_resolution_metres(bng_ref_string: str) -> int:
-    """Gets the resolution of a BNG reference string in metres.
+    """Returns the resolution of a BNG reference string in metres.
 
     Args:
         bng_ref_string (str): The BNG reference string.
@@ -172,6 +172,10 @@ def _get_bng_resolution_metres(bng_ref_string: str) -> int:
     Examples:
         >>> _get_bng_resolution_metres("TQ1234")
         1000
+        >>> _get_bng_resolution_metres("TQ12")
+        10000
+        >>> _get_bng_resolution_metres("TQ SW")
+        50000
     """
     # Match BNG reference string against regex pattern
     match = _PATTERN.match(bng_ref_string)
