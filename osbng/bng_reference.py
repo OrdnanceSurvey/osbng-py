@@ -246,6 +246,8 @@ def _format_bng_ref_string(bng_ref_string: str) -> str:
         'TQ 12 34'
         >>> _format_bng_ref_string("TQ1234NE")
         'TQ 12 34 NE'
+        >>> _format_bng_ref_string("TQ127349NE")
+        'TQ 127 349 NE'
     """
     # Match BNG reference string against regex pattern
     match = _PATTERN.match(bng_ref_string)
