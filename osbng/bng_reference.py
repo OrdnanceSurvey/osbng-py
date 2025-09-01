@@ -79,8 +79,8 @@ adhere to the following format:
 EPSG:27700 (OSGB36 / British National Grid)
 ---------------------------------------------
 
-The BNG system is a practical application of the EPSG:27700 (OSGB36 / British National
-Grid) coordinate reference system (https://epsg.io/27700) which provides the geodetic
+The BNG system is a practical application of the `EPSG:27700 (OSGB36 / British National
+Grid) <https://epsg.io/27700>`__ coordinate reference system which provides the geodetic
 framework that defines how locations defined by easting and northing coordinates and
 encoded as BNG references (e.g. 'ST 569 714') are projected to the grid.
 
