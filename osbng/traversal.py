@@ -349,7 +349,7 @@ def bng_distance(
 
 @_validate_bngreferences
 def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
-    """Returns the four neighbouring squares sharing an edge with the input square.
+    """Returns the four neighbouring squares sharing an edge with the input grid square.
 
     Args:
         bng_ref (BNGReference): A :class:`~osbng.bng_reference.BNGReference` object.
