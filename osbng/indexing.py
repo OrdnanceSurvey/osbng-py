@@ -132,7 +132,7 @@ class BNGIndexedGeometry:
     """
 
     def __init__(self, bng_ref: BNGReference, is_core: bool, geom: Geometry):
-        """Initialise a BNGIndexedGeometry object."""
+        """Initialises a BNGIndexedGeometry object."""
         self._bng_ref = bng_ref
         self._is_core = is_core
         self._geom = geom

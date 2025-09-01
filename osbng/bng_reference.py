@@ -364,7 +364,7 @@ class BNGReference:
     """
 
     def __init__(self, bng_ref_string: str):
-        """Initialise a BNGReference object."""
+        """Initialises a BNGReference object."""
         # Validate the BNG reference string
         if not _validate_bng_ref_string(bng_ref_string):
             raise BNGReferenceError(f"Invalid BNG reference string: '{bng_ref_string}'")
