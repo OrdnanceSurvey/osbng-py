@@ -49,19 +49,24 @@ There are two exceptions to this structure:
 
 A BNG reference can be expressed at different scales, as follows:
 
-1.  100km: Identified by a two-letter code (e.g. 'TQ').
-2.  50km: Subdivides the 100km grid into four quadrants. The grid reference adds an
-    ordinal direction suffix (NE, NW, SE, SW) to indicate the quadrant within the 100km
-    square (e.g. 'TQ SW').
-3.  10km: Adds one-digit easting and northing values (e.g. 'TQ 2 3').
-4.  5km: Subdivides the 10km square adding an ordinal suffix (e.g. 'TQ 53 SW').
-5.  1km: Adds two-digit easting and northing values (e.g. 'TQ 23 34').
-6.  500m: Subdivides the 1km square adding an ordinal suffix (e.g. 'TQ 23 34 NE').
-7.  100m: Adds three-digit easting and northing values (e.g. ' TQ 238 347').
-8.  50m: Subdivides the 100m square adding an ordinal suffix (e.g. ' TQ 238 347 SE').
-9.  10m: Adds four-digit easting and northing values (e.g. ' TQ 2386 3472').
-10. 5m: Subdivides the 10m square adding an ordinal suffix (e.g. 'TQ 2386 3472 NW').
-11. 1m: Adds five-digit easting and northing values (e.g. ' TQ 23863 34729').
+=========== ========================================================= ==================
+Resolution   Description                                               Example
+=========== ========================================================= ==================
+100km        Identified by a two-letter code                           TQ
+50km         Subdivides the 100km grid into four quadrants. The grid   TQ SW
+             reference adds an ordinal direction suffix
+             (NE, NW, SE, SW) to indicate the quadrant within the
+             100km square.
+10km         Adds one-digit easting and northing values                TQ 2 3
+5km          Subdivides the 10km square adding an ordinal suffix       TQ 23 SW
+1km          Adds two-digit easting and northing values                TQ 23 34
+500m         Subdivides the 1km square adding an ordinal suffix        TQ 23 34 NE
+100m         Adds three-digit easting and northing values              TQ 238 347
+50m          Subdivides the 100m square adding an ordinal suffix       TQ 238 347 SE
+10m          Adds four-digit easting and northing values               TQ 2386 3472
+5m           Subdivides the 10m square adding an ordinal suffix        TQ 23863 34729 NW
+1m           Adds five-digit easting and northing values               TQ 23863 34729
+=========== ========================================================= ==================
 
 BNG Reference Formatting
 ---------------------------
