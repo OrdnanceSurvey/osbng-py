@@ -95,8 +95,10 @@ def bng_to_children(
         BNGReference(bng_ref_formatted=SU 3 6 NE, resolution_label=5km)]
 
     See Also:
-        :class:`~osbng.hierarchy.bng_to_parent` to derive the
-        :class:`~osbng.bng_reference.BNGReference` object in the next resolution up.
+        - The equivalent :meth:`osbng.bng_reference.BNGReference.bng_to_children`
+          instance method.
+        - :class:`~osbng.hierarchy.bng_to_parent` to derive the
+          :class:`~osbng.bng_reference.BNGReference` object in the next resolution up.
 
     """
     # Raise error if the resolution is 1m
@@ -181,8 +183,11 @@ def bng_to_parent(
         BNGReference(bng_ref_formatted=SU 3 5, resolution_label=10km)
 
     See Also:
-        :class:`~osbng.hierarchy.bng_to_children` to derive the
-        :class:`~osbng.bng_reference.BNGReference` objects in the next resolution down.
+        - The equivalent :meth:`osbng.bng_reference.BNGReference.bng_to_parent`
+          instance method.
+        - :class:`~osbng.hierarchy.bng_to_children` to derive the
+          :class:`~osbng.bng_reference.BNGReference` objects in the next resolution
+          down.
 
     """
     # Raise error if the resolution is 100km

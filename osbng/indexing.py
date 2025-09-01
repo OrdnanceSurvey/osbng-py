@@ -462,7 +462,8 @@ def bng_to_xy(
         (437289.5, 115541.5)
 
     See Also:
-        - The :meth:`osbng.bng_reference.BNGReference.bng_to_xy` instance method.
+        - The equivalent :meth:`osbng.bng_reference.BNGReference.bng_to_xy` instance
+          method.
         - The :func:`~osbng.indexing.xy_to_bng` function for encoding a easting and
           northing coordinates to a :class:`~osbng.BNGReference` at a given resolution.
     """
@@ -585,7 +586,8 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
         (437289, 115541, 437290, 115542)
 
     See Also:
-        - The :meth:`osbng.bng_reference.BNGReference.bng_to_bbox` instance method.
+        - The equivalent :meth:`osbng.bng_reference.BNGReference.bng_to_bbox` instance
+          method.
         - The :func:`~osbng.indexing.bng_to_grid_geom` function and
           :meth:`~osbng.bng_reference.BNGReference.bng_to_grid_geom` instance method
           which convert a :class:`~osbng.bng_reference.BNGReference` to a
@@ -637,8 +639,8 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
         )
 
     See Also:
-        - The :meth:`osbng.bng_reference.BNGReference.bng_to_grid_geom` instance
-          method.
+        - The equivalent :meth:`osbng.bng_reference.BNGReference.bng_to_grid_geom`
+          instance method.
         - The :func:`~osbng.indexing.bng_to_bbox` function and
           :meth:`osbng.bng_reference.BNGReference.bng_to_bbox` instance method which
           convert a :class:`~osbng.bng_reference.BNGReference` to bounding box
