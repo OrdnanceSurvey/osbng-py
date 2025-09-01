@@ -41,9 +41,6 @@ Properties
    BNGReference.resolution_metres
    BNGReference.resolution_label
    BNGReference.__geo_interface__
-   BNGReference.__eq__
-   BNGReference.__lt__
-   BNGReference.__repr__
 
 Methods
 ~~~~~~~
