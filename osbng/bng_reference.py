@@ -422,17 +422,21 @@ class BNGReference:
         }
 
     def __eq__(self, other: object):
-        """Defined equality based on bng_ref_compact."""
+        """Defines equality based on :attr:`~osbng.BNGReference.bng_ref_compact`."""
         if isinstance(other, BNGReference):
             return self.bng_ref_compact == other.bng_ref_compact
         return False
 
     def __lt__(self, other: object):
-        """Defines ordering using resolution_metres and bng_ref_compact.
+        """Defines ordering using BNG resolution and reference string.
 
-        For two BNGReference objects, ordering is done in the following order:
-        1. Rank by resolution_metres, where higher resolutions are ordered first.
-        2. Rank by bng_ref_compact alphabetically.
+        For two :class:`~osbng.bng_reference.BNGReference` objects, ordering is done in
+        the following order:
+
+        1. Rank by :attr:`~osbng.bng_reference.BNGReference.resolution_metres`, where
+           higher resolutions are ordered first.
+        2. Rank by :attr:`~osbng.bng_reference.BNGReference.bng_ref_compact`
+           alphabetically.
 
         Example:
             >>> BNGReference("SU") < BNGReference("SU1234")
@@ -448,11 +452,11 @@ class BNGReference:
         return NotImplemented
 
     def __hash__(self):
-        """Uses bng_ref_compact for hashing."""
+        """Uses ``BNGReference.bng_ref_compact`` for hashing."""
         return hash(self.bng_ref_compact)
 
     def __repr__(self):
-        """Prints in format showing bng_ref_formatted and resolution_label."""
+        """String representation of the ``BNGReference``."""
         return (
             f"BNGReference(bng_ref_formatted={self.bng_ref_formatted}, "
             f"resolution_label={self.resolution_label})"
