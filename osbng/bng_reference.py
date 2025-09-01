@@ -174,7 +174,7 @@ def _get_bng_resolution_metres(bng_ref_string: str) -> int:
         1000
         >>> _get_bng_resolution_metres("TQ12")
         10000
-        >>> _get_bng_resolution_metres("TQ SW")
+        >>> _get_bng_resolution_metres("TQSW")
         50000
     """
     # Match BNG reference string against regex pattern
