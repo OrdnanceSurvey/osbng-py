@@ -230,10 +230,10 @@ def _get_bng_resolution_label(bng_ref_string: str) -> str:
 
 
 def _format_bng_ref_string(bng_ref_string: str) -> str:
-    """Returns a pretty formatted BNG reference string.
+    """Returns the BNG reference string in pretty format.
 
-    Pretty formatting is defined as a single whitespace between the reference components
-    including prefix, easting and northing, and suffix if present.
+    Uses a single space between the prefix, easting, northing, and suffix to improve
+    readability.
 
     Args:
         bng_ref_string (str): The BNG reference string.
@@ -374,12 +374,16 @@ class BNGReference:
 
     @property
     def bng_ref_compact(self) -> str:
-        """Returns the BNG reference string with whitespace removed."""
+        """Returns the BNG reference string with all whitespace removed."""
         return self._bng_ref_compact
 
     @property
     def bng_ref_formatted(self) -> str:
-        """Returns a pretty-formatted version with single spaces between components."""
+        """Returns the BNG reference string in pretty format.
+
+        Uses a single space between the prefix, easting, northing, and suffix to
+        improve readability.
+        """
         return _format_bng_ref_string(self._bng_ref_compact)
 
     @property
