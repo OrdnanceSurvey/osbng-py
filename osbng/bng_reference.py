@@ -26,6 +26,9 @@ resolutions. At its highest level, the grid divides GB into 100km by 100km squar
 each identified by a two-letter code. Successive levels of resolution further subdivide
 the grid squares into finer detail, down to individual 1-meter squares.
 
+.. image:: https://raw.githubusercontent.com/OrdnanceSurvey/osbng-py/main/docs/_static/images/osbng_grids_100km.png
+   :align: center
+
 BNG Reference Structure
 ------------------------
 
