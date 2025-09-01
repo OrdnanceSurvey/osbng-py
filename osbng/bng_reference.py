@@ -393,7 +393,15 @@ class BNGReference:
 
     @property
     def resolution_label(self) -> str:
-        """Returns the resolution of the BNGReference expressed as a string."""
+        """Returns the resolution of the BNGReference expressed as a descriptive string.
+
+        The resolution is returned in a human-readable format, such as '10km', '50km',
+        '5km', etc.
+
+        See Also:
+            :data:`osbng.resolution.BNG_RESOLUTIONS` for mappings from metre-based
+            integer resolution values to string label representations.
+        """
         return _get_bng_resolution_label(self._bng_ref_compact)
 
     @property
