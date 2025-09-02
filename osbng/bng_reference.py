@@ -817,7 +817,11 @@ class BNGReference:
         return _bng_distance(self, bng_ref2, edge_to_edge=edge_to_edge)
 
     def bng_neighbours(self) -> list["BNGReference"]:
-        """Returns the four BNGReference objects sharing an edge with this BNGReference.
+        """Returns the four BNGReference object neighbours to this BNGReference.
+
+        The neighbours are defined as the grid squares immediately North, East, South
+        and West of the input grid square sharing an edge with the input
+        :class:`~osbng.bng_reference.BNGReference` object.
 
         Returns:
             list[BNGReference]: The grid squares immediately North, South, East and
