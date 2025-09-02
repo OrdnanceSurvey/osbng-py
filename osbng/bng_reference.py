@@ -43,9 +43,9 @@ is followed by an easting and northing value, and optionally, a suffix indicatin
 ordinal (intercardinal) direction (``NE``, ``SE``, ``SW``, ``NW``). These suffixes
 represent a quadtree subdivision of the grid at the 'standard' resolutions (``100km``,
 ``10km``, ``1km``, ``100m``, and ``10m``), with each direction indicating a specific
-quadrant.
+quadrant.::
 
-**<prefix><easting value><northing value><suffix>**
+<prefix><easting value><northing value><suffix>
 
 There are two exceptions to this structure:
 
