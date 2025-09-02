@@ -203,7 +203,7 @@ def _get_bng_resolution_metres(bng_ref_string: str) -> int:
 
 
 def _get_bng_resolution_label(bng_ref_string: str) -> str:
-    """Returns the resolution of a BNG reference expressed as a descriptive string.
+    """Returns the resolution of a BNG reference string as a descriptive label.
 
     The resolution is returned in a human-readable format, such as '10km', '50km', '5km'
     etc.
@@ -212,7 +212,7 @@ def _get_bng_resolution_label(bng_ref_string: str) -> str:
         bng_ref_string (str): The BNG reference string.
 
     Returns:
-        str: The resolution of the BNG reference as a string.
+        str: The resolution of the BNG reference as a string label.
 
     Examples:
         >>> _get_bng_resolution_label("TQ1234")
@@ -230,7 +230,7 @@ def _get_bng_resolution_label(bng_ref_string: str) -> str:
 
 
 def _format_bng_ref_string(bng_ref_string: str) -> str:
-    """Returns the BNG reference string in pretty format.
+    """Returns a BNG reference string in pretty format.
 
     Uses a single space between the prefix, easting, northing, and suffix to improve
     readability.
@@ -276,13 +276,15 @@ def _format_bng_ref_string(bng_ref_string: str) -> str:
 
 
 class BNGReference:
-    """A custom object for handling British National Grid (BNG) references.
+    """A custom object for handling BNG references.
 
     Converts a BNG reference string into a :class:`~osbng.bng_reference.BNGReference`
     object, ensuring type consistency across the package. All functions accepting or
-    returning BNG references enforce the use of this class. These functions are
-    available both as instance methods of the :class:`~osbng.bng_reference.BNGReference`
-    object and as standalone functions, providing users with the flexibility to either:
+    returning BNG references enforce the use of this class.
+
+    These functions are available both as instance methods of the
+    :class:`~osbng.bng_reference.BNGReference` object and as standalone functions,
+    providing users with the flexibility to either:
 
     - Create a :class:`~osbng.bng_reference.BNGReference` object and pass it to a
       function.
@@ -293,49 +295,46 @@ class BNGReference:
         bng_ref_string (str): The BNG reference string.
 
     Attributes:
-        bng_ref_compact (str): The BNG reference with whitespace removed.
-        bng_ref_formatted (str): The pretty-formatted version of the BNG reference
-            with single spaces between components.
-        resolution_metres (int): The resolution of the BNG reference in meters.
-        resolution_label (str): The resolution of the BNG reference expressed as a
+        bng_ref_compact (str): The BNG reference string of this ``BNGReference`` with
+            whitespace removed.
+        bng_ref_formatted (str): The pretty-formatted BNG reference string of this
+            ``BNGReference`` with single spaces between components.
+        resolution_metres (int): The resolution of this ``BNGReference`` in meters.
+        resolution_label (str): The resolution of this ``BNGReference`` expressed as a
             descriptive string.
-        __geo_interface__ (dict): A GeoJSON-like mapping for a
-            :class:`~osbng.bng_reference.BNGReference` object.
+        __geo_interface__ (dict): A GeoJSON-like mapping of this ``BNGReference``.
 
     Methods:
         bng_to_xy(position: str = "lower-left") -> tuple[int | float, int | float]:
-            Returns easting and northing coordinates for the current object.
-        bng_to_bbox() -> tuple[int, int, int, int]: Returns bounding box coordinates for
-            the current object.
-        bng_to_grid_geom() -> Polygon: Returns a grid square as a ``Shapely`` Polygon
-            for the current object.
+            Returns easting and northing coordinates of this  ``BNGReference`` at a
+            specified grid square position.
+        bng_to_bbox() -> tuple[int, int, int, int]: Returns grid square bounding box
+            coordinates of this ``BNGReference``.
+        bng_to_grid_geom() -> Polygon: Returns a grid square as a ``Shapely Polygon``
+            of this ``BNGReference``.
         bng_to_children(resolution: int | str | None = None) -> list[BNGReference]:
-            Returns a list of :class:`~osbng.bng_reference.BNGReference` objects that
-            are children of the current object.
-        bng_to_parent(resolution: int | str | None = None) -> BNGReference: Returns a
-            :class:`~osbng.bng_reference.BNGReference` object that is the parent of the
-            current object.
+            Returns a list of ``BNGReference`` objects that are children of this
+            ``BNGReference``.
+        bng_to_parent(resolution: int | str | None = None) -> BNGReference: Returns the
+            ``BNGReference`` that is the parent of this ``BNGReference``.
         bng_kring(k: int, return_relations: bool = False) -> list[BNGReference] |
             list[tuple[BNGReference, int, int]]:
-            Returns a list of :class:`~osbng.bng_reference.BNGReference` objects
-            forming a hollow ring around the current object.
+            Returns a list of ``BNGReference`` objects forming a hollow ring around this
+            ``BNGReference``.
         bng_kdisc(k: int, return_relations: bool = False) -> list[BNGReference] |
             list[tuple[BNGReference, int, int]]:
-            Returns a list of :class:`~osbng.bng_reference.BNGReference` objects
-            forming a filled disc around the current object.
+            Returns a list of ``BNGReference`` objects forming a filled disc around this
+            ``BNGReference``.
         bng_distance(bng_ref2: BNGReference, edge_to_edge: bool = False) -> float:
-            Returns the euclidean distance between a
-            :class:`~osbng.bng_reference.BNGReference` and the current object.
-        bng_neighbours() -> list[BNGReference]:
-            Returns a list of :class:`~osbng.bng_reference.BNGReference` objects
-            representing the four neighbouring grid squares sharing an edge with the
-            current object.
-        bng_is_neighbour(bng_ref2: BNGReference) -> bool:
-            Tests whether an input :class:`~osbng.bng_reference.BNGReference` is a
-            neighbour of the current object.
-        bng_dwithin(d:int | float) -> list[BNGReference]:
-            Returns a list of :class:`~osbng.bng_reference.BNGReference` objects
-            within a distance ``d`` from the current object.
+            Returns the euclidean distance between ``bng_ref2`` and this
+            ``BNGReference``.
+        bng_neighbours() -> list[BNGReference]: Returns a list of ``BNGReference``
+            objects representing the four neighbouring grid squares sharing an edge
+            with this ``BNGReference``.
+        bng_is_neighbour(bng_ref2: BNGReference) -> bool: Tests whether ``bng_ref2`` is
+            a neighbour of this ``BNGReference``.
+        bng_dwithin(d:int | float) -> list[BNGReference]: Returns a list of
+            ``BNGReference`` objects within a distance ``d`` from this ``BNGReference``.
 
     Raises:
         BNGReferenceError: If the BNG reference string is invalid.
@@ -364,7 +363,7 @@ class BNGReference:
     """
 
     def __init__(self, bng_ref_string: str):
-        """Initialises a BNGReference object."""
+        """Initialises a ``BNGReference`` from a BNG reference string."""
         # Validate the BNG reference string
         if not _validate_bng_ref_string(bng_ref_string):
             raise BNGReferenceError(f"Invalid BNG reference string: '{bng_ref_string}'")
@@ -374,12 +373,12 @@ class BNGReference:
 
     @property
     def bng_ref_compact(self) -> str:
-        """Returns the BNG reference string with all whitespace removed."""
+        """The BNG reference string of this ``BNGReference`` with whitespace removed."""
         return self._bng_ref_compact
 
     @property
     def bng_ref_formatted(self) -> str:
-        """Returns the BNG reference string in pretty format.
+        """The BNG reference string of this ``BNGReference`` in pretty format.
 
         Uses a single space between the prefix, easting, northing, and suffix to
         improve readability.
@@ -388,12 +387,12 @@ class BNGReference:
 
     @property
     def resolution_metres(self) -> int:
-        """Returns the resolution of the ``BNGReference`` in meters."""
+        """The resolution of this ``BNGReference`` in meters."""
         return _get_bng_resolution_metres(self._bng_ref_compact)
 
     @property
     def resolution_label(self) -> str:
-        """Returns the resolution of the ``BNGReference`` expressed as a string.
+        """The resolution of this ``BNGReference`` expressed as a string label.
 
         The resolution is returned in a human-readable format, such as '10km', '50km',
         '5km', etc.
@@ -406,7 +405,7 @@ class BNGReference:
 
     @property
     def __geo_interface__(self) -> dict[str, Union[str, dict]]:
-        """Returns a GeoJSON-like mapping for the ``BNGReference``.
+        """A GeoJSON-like mapping of this ``BNGReference``.
 
         Implements the `__geo_interface__
         <https://gist.github.com/sgillies/2217756>`__ protocol. The returned data
@@ -422,13 +421,13 @@ class BNGReference:
         }
 
     def __eq__(self, other: object):
-        """Defines equality based on :attr:`~osbng.BNGReference.bng_ref_compact`."""
+        """Determines whether this ``BNGReference`` is equal to ``other``."""
         if isinstance(other, BNGReference):
             return self.bng_ref_compact == other.bng_ref_compact
         return False
 
     def __lt__(self, other: object):
-        """Defines ordering using BNG resolution and reference string.
+        """Determines whether this ``BNGReference`` is ordered before ``other``.
 
         For two :class:`~osbng.bng_reference.BNGReference` objects, ordering is done in
         the following order:
@@ -452,11 +451,11 @@ class BNGReference:
         return NotImplemented
 
     def __hash__(self):
-        """Uses ``BNGReference.bng_ref_compact`` for hashing."""
+        """Returns a hash value of this ``BNGReference``."""
         return hash(self.bng_ref_compact)
 
     def __repr__(self):
-        """String representation of the ``BNGReference``."""
+        """Returns the string representation of this ``BNGReference``."""
         return (
             f"BNGReference(bng_ref_formatted={self.bng_ref_formatted}, "
             f"resolution_label={self.resolution_label})"
@@ -465,40 +464,46 @@ class BNGReference:
     def bng_to_xy(
         self, position: str = "lower-left"
     ) -> tuple[int | float, int | float]:
-        """Returns the easting and northing for a specified grid cell position.
+        """Returns easting and northing coordinates of this ``BNGReference``.
 
-        Args:
-            position (str): The grid cell position expressed as a string.
-                            One of: 'lower-left', 'upper-left', 'upper-right',
-                            'lower-right', 'centre'.
+        An optional grid square ``position`` keyword argument can be specified to
+        return the coordinates of a specific corner or the centre of the grid square.
+
+        Keyword Args:
+            position (str, optional): The grid square position expressed as a string.
+                One of: 'lower-left', 'upper-left', 'upper-right', 'lower-right',
+                'centre'.
 
         Returns:
-            tuple[int | float, int | float]: The easting and northing coordinates as a
+            tuple[int | float, int | float]: Easting and northing coordinates as a
                 tuple.
 
         Raises:
             ValueError: If invalid position provided.
 
         Example:
-            >>> BNGReference("SU").bng_to_xy("lower-left")
+            >>> BNGReference("SU").bng_to_xy()
             (400000, 100000)
-            >>> BNGReference("SU 3 1").bng_to_xy("lower-left")
+            >>> BNGReference("SU 3 1").bng_to_xy()
             (430000, 110000)
             >>> BNGReference("SU 3 1 NE").bng_to_xy("centre")
             (437500, 117500)
             >>> BNGReference("SU 37289 15541").bng_to_xy("centre")
             (437289.5, 115541.5)
+
+        See Also:
+            The equivalent :func:`osbng.indexing.bng_to_xy` function.
         """
         from osbng.indexing import bng_to_xy as _bng_to_xy
 
         return _bng_to_xy(self, position)
 
     def bng_to_bbox(self) -> tuple[int, int, int, int]:
-        """Returns bounding box coordinates for the current BNGReference object.
+        """Returns grid square bounding box coordinates of this ``BNGReference``.
 
         Returns:
-            tuple[int, int, int, int]: The bounding box coordinates
-                (min x, min y, max x, max y) as a tuple.
+            tuple[int, int, int, int]: The grid square bounding box coordinates as a
+                tuple.
 
         Example:
             >>> BNGReference("SU").bng_to_bbox()
@@ -509,16 +514,19 @@ class BNGReference:
             (435000, 115000, 440000, 120000)
             >>> BNGReference("SU 37289 15541").bng_to_bbox()
             (437289, 115541, 437290, 115542)
+
+        See Also:
+            The equivalent :func:`osbng.indexing.bng_to_bbox` function.
         """
         from osbng.indexing import bng_to_bbox as _bng_to_bbox
 
         return _bng_to_bbox(self)
 
     def bng_to_grid_geom(self) -> Polygon:
-        """Returns the BNGReference object's grid square as a ``Shapely`` Polygon.
+        """Returns a grid square as a ``Shapely Polygon`` of this ``BNGReference``.
 
         Returns:
-            Polygon: Grid square as ``Shapely`` Polygon object.
+            Polygon: Grid square as ``Shapely Polygon`` object.
 
         Example:
             >>> BNGReference("SU").bng_to_grid_geom().wkt
@@ -541,19 +549,22 @@ class BNGReference:
     def bng_to_children(
         self, resolution: int | str | None = None
     ) -> list["BNGReference"]:
-        """Returns the children of the current BNGReference object.
+        """Returns a list of child ``BNGReference`` objects of this ``BNGReference``.
 
         By default, the children of the :class:`~osbng.bng_reference.BNGReference`
         object is defined as the :class:`~osbng.bng_reference.BNGReference` objects in
-        the next resolution down from the input BNGReference resolution. For example,
-        100km -> 50km.
+        the next resolution down from the current ``BNGReference`` resolution. For
+        example, 100km -> 50km.
 
-        Any valid resolution can be provided as the child resolution, provided it is
-        less than the resolution of the input BNGReference.
+        Notes:
+            Any valid resolution can be provided as the child resolution, provided it
+            is less than the resolution of the current
+            :class:`~osbng.bng_reference.BNGReference` object.
 
-        Args:
+        Keyword Args:
             resolution (int | str | None, optional): The resolution of the children
-                :class:`~osbng.bng_reference.BNGReference` objects. Defaults to None.
+                :class:`~osbng.bng_reference.BNGReference` objects expressed either
+                as a metre-based integer or as a string label. Defaults to None.
 
         Returns:
             list[BNGReference]: A list of BNGReference objects that are children of the
@@ -578,24 +589,31 @@ class BNGReference:
             BNGReference(bng_ref_formatted=SU 3 6 SE, resolution_label=5km),
             BNGReference(bng_ref_formatted=SU 3 6 NW, resolution_label=5km),
             BNGReference(bng_ref_formatted=SU 3 6 NE, resolution_label=5km)]
+
+        See Also:
+            The equivalent :func:`osbng.hierarchy.bng_to_children` function.
         """
         from osbng.hierarchy import bng_to_children as _bng_to_children
 
         return _bng_to_children(self, resolution)
 
     def bng_to_parent(self, resolution: int | str | None = None) -> "BNGReference":
-        """Returns the parent of the current object.
+        """Returns the ``BNGReference`` that is the parent of this ``BNGReference``.
 
         By default, the parent of the :class:`~osbng.bng_reference.BNGReference` object
-        is defined as the BNGReference in the next BNG resolution up from the current
-        BNGReference resolution. For example, 50km -> 100km.
+        is defined as the :class:`~osbng.bng_reference.BNGReference` in the next BNG
+        resolution up from the current :class:`~osbng.bng_reference.BNGReference`
+        resolution. For example, 50km -> 100km.
 
-        Any valid resolution can be provided as the parent resolution, provided it is
-        greater than the resolution of the current BNGReference.
+        Notes:
+            Any valid resolution can be provided as the parent resolution, provided it
+            is greater than the resolution of the current
+            :class:`~osbng.bng_reference.BNGReference` object.
 
-        Args:
+        Keyword Args:
             resolution (int | str | None, optional): The resolution of the parent
-                BNGReference. Defaults to None.
+                :class:`~osbng.bng_reference.BNGReference` objects expressed either as
+                a metre-based integer or as a string label. Defaults to None.
 
         Returns:
             BNGReference: A :class:`~osbng.bng_reference.BNGReference` object that is
@@ -614,16 +632,18 @@ class BNGReference:
             BNGReference(bng_ref_formatted=SU 3 6, resolution_label=10km)
             >>> BNGReference("SU 342 567").bng_to_parent()
             BNGReference(bng_ref_formatted=SU 34 56 NW, resolution_label=500m)
-            >>> bng_to_parent(BNGReference("SU 342 567"), resolution=10000)
+            >>> BNGReference("SU 342 567").bng_to_parent(resolution=10000)
             BNGReference(bng_ref_formatted=SU 3 5, resolution_label=10km)
 
+        See Also:
+            The equivalent :func:`osbng.hierarchy.bng_to_parent` function.
         """
         from osbng.hierarchy import bng_to_parent as _bng_to_parent
 
         return _bng_to_parent(self, resolution)
 
     def bng_kring(self, k: int, return_relations: bool = False) -> list["BNGReference"]:
-        """Returns a hollow ring around the current BNGReference object.
+        """Returns a hollow ring of BNGReference objects around this ``BNGReference``.
 
         Returns all :class:`~osbng.bng_reference.BNGReference` objects at a grid
         distance k.
@@ -633,6 +653,8 @@ class BNGReference:
 
         Args:
             k (int): Grid distance in units of grid squares.
+
+        Keyword Args:
             return_relations (bool, optional): If True, returns a list of
                 (BNGReference, dx, dy) tuples where dx, dy are integer offsets in grid
                 units.  If False (default), returns a list of
@@ -667,15 +689,19 @@ class BNGReference:
             ]
             >>> BNGReference("SU1234").bng_kring(3)
             [list of 24 BNGReference objects]
+
+        See Also:
+            The equivalent :func:`osbng.traversal.bng_kring` function.
         """
         from osbng.traversal import bng_kring as _bng_kring
 
         return _bng_kring(self, k, return_relations=return_relations)
 
     def bng_kdisc(self, k: int, return_relations: bool = False) -> list["BNGReference"]:
-        """Returns a filled disc around the current BNGReference object.
+        """Returns a filled disc of BNGReference objects around this ``BNGReference``.
 
-        Returns all BNGReferences up to a grid distance k, including the given central
+        Returns all :class:`~osbng.bng_reference.BNGReference` objects up to a grid
+        distance ``k``, including the given central
         :class:`~osbng.bng_reference.BNGReference` object.
 
         Returned :class:`~osbng.bng_reference.BNGReference` objects are ordered North to
@@ -683,6 +709,8 @@ class BNGReference:
 
         Args:
             k (int): Grid distance in units of grid squares.
+
+        Keyword Args:
             return_relations (bool, optional): If True, returns a list of
                 (BNGReference, dx, dy) tuples where dx, dy are integer offsets in grid
                 units.  If False (default), returns a list of
@@ -690,7 +718,7 @@ class BNGReference:
 
         Returns:
             list[BNGReference]: All :class:`~osbng.bng_reference.BNGReference` objects
-                representing grid squares in a square of radius k.
+                representing grid squares in a square of radius ``k``.
 
         Examples:
             >>> BNGReference("SU1234").bng_kdisc(1)
@@ -719,6 +747,9 @@ class BNGReference:
             ]
             >>> BNGReference("SU1234").bng_kdisc(3)
             [list of 49 BNGReference objects]
+
+        See Also:
+            The equivalent :func:`osbng.traversal.bng_kdisc` function.
         """
         from osbng.traversal import bng_kdisc as _bng_kdisc
 
@@ -727,17 +758,23 @@ class BNGReference:
     def bng_distance(
         self, bng_ref2: "BNGReference", edge_to_edge: bool = False
     ) -> float:
-        """Returns the euclidean distance to another BNGReference.
+        """Returns the euclidean distance between bng_ref2 and this ``BNGReference``.
 
-        Note:
+        When ``edge_to_edge`` is False, the distance is the centroid-to-centroid
+        distance in metres.  When ``edge_to_edge`` is True, the distance is the
+        shortest distance between any two parts of the grid squares.
+
+        Notes:
             The other :class:`~osbng.bng_reference.BNGReference` object does not
-            necessarily need to share a common resolution.  When edge_to_edge = True and
-            the two :class:`~osbng.bng_reference.BNGReference` objects have a
-            parent-child relationship, the returned distance is 0.
+            necessarily need to share a common resolution.  When ``edge_to_edge``
+            = True and the two :class:`~osbng.bng_reference.BNGReference` objects have
+            a parent-child relationship, the returned distance is 0.
 
         Args:
             bng_ref2 (BNGReference): A :class:`~osbng.bng_reference.BNGReference` object
                 .
+
+        Keyword Args:
             edge_to_edge (bool, optional): If False (default), distance will be
                 centroid-to-centroid distance.  If True, distance will be the shortest
                 distance between any point in the grid squares.
@@ -747,7 +784,7 @@ class BNGReference:
             :class:`~osbng.bng_reference.BNGReference` objects.
 
         Raises:
-            TypeError: If the bng_ref2 argument is not a
+            TypeError: If the ``bng_ref2`` argument is not a
             :class:`~osbng.bng_reference.BNGReference` object.
 
         Examples:
@@ -769,31 +806,37 @@ class BNGReference:
             ...     BNGReference("SU2345"), edge_to_edge=True
             ... )
             0.0
+
+        See Also:
+            The equivalent :func:`osbng.traversal.bng_distance` function.
         """
         from osbng.traversal import bng_distance as _bng_distance
 
         return _bng_distance(self, bng_ref2, edge_to_edge=edge_to_edge)
 
     def bng_neighbours(self) -> list["BNGReference"]:
-        """Returns the four neighbouring BNGReferences sharing an edge with the input.
+        """Returns the four BNGReference objects sharing an edge with this BNGReference.
 
         Returns:
             list[BNGReference]: The grid squares immediately North, South, East and
-            West of bng_ref.
+            West of this :class:`~osbng.bng_reference.BNGReference` object.
 
         Examples:
-            >>> BNGRefence("SU1234").bng_neighbours()
+            >>> BNGReference("SU1234").bng_neighbours()
             [BNGReference('SU1235'), BNGReference('SU1334'),
             BNGReference('SU1233'), BNGReference('SU1134')]
+
+        See Also:
+            The equivalent :func:`osbng.traversal.bng_neighbours` function.
         """
         from osbng.traversal import bng_neighbours as _bng_neighbours
 
         return _bng_neighbours(self)
 
     def bng_is_neighbour(self, bng_ref2: "BNGReference") -> bool:
-        """Returns True if the BNGReference object is a neighbour, otherwise False.
+        """Tests whether ``bng_ref2`` is a neighbour of this ``BNGReference``.
 
-        Neighbours are defined as grid squares that share an edge with the current
+        Neighbours are defined as grid squares that share an edge with this
         :class:`~osbng.bng_reference.BNGReference` object.
 
         Args:
@@ -805,7 +848,7 @@ class BNGReference:
             neighbours, otherwise False.
 
         Raises:
-            TypeError: If the bng_ref2 argument is not a
+            TypeError: If the ``bng_ref2`` argument is not a
             :class:`~osbng.bng_reference.BNGReference` object.
             BNGNeighbourError: If the :class:`~osbng.bng_reference.BNGReference` object
             is not at the same resolution.
@@ -818,24 +861,26 @@ class BNGReference:
             >>> BNGReference("SU1234").bng_is_neighbour(BNGReference("SU1234"))
             False
 
+        See Also:
+            The equivalent :func:`osbng.traversal.bng_is_neighbour` function.
         """
         from osbng.traversal import bng_is_neighbour as _bng_is_neighbour
 
         return _bng_is_neighbour(self, bng_ref2)
 
     def bng_dwithin(self, d: int | float) -> list["BNGReference"]:
-        """Returns a list of BNGReferencess within an absolute distance d.
+        """Returns all BNGReference objects within distance ``d`` of this BNGReference.
 
-        All squares will be returned for which any part of its boundary is within
-        distance d of any part of the :class:`~osbng.bng_reference.BNGReference`
+        All grid squares will be returned for which any part of its boundary is within
+        distance ``d`` of any part of the :class:`~osbng.bng_reference.BNGReference`
         object's boundary.
 
         Args:
-            d (int or float): The absolute distance d in metres.
+            d (int or float): The absolute distance ``d`` in metres.
 
         Returns:
             list[BNGReference]: All grid squares which have any part of their geometry
-            within distance d of the current grid square
+            within distance ``d`` of the current grid square
 
         Examples:
             >>> BNGReference("SU1234").bng_dwithin(1000)
@@ -852,6 +897,9 @@ class BNGReference:
             ]
             >>> BNGReference("SU1234").bng_dwithin(1001)
             [list of 21 BNGReference objects]
+
+        See Also:
+            The equivalent :func:`osbng.traversal.bng_dwithin` function.
         """
         from osbng.traversal import bng_dwithin as _bng_dwithin
 
@@ -859,7 +907,7 @@ class BNGReference:
 
 
 def _validate_bngreferences(func: Callable) -> Callable:
-    """Validate that a BNGReference object is passed as an arg or kwarg as expected."""
+    """Validates that a BNGReference object is passed as an arg or kwarg as expected."""
 
     @wraps(func)
     def wrapper(*args: Union[BNGReference], **kwargs: Union[BNGReference]) -> Callable:
