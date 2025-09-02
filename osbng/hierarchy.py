@@ -47,7 +47,7 @@ __all__ = ["bng_to_children", "bng_to_parent"]
 def bng_to_children(
     bng_ref: BNGReference, *, resolution: int | str | None = None
 ) -> list[BNGReference]:
-    """Returns children of the input :class:`~osbng.bng_reference.BNGReference` object.
+    """Returns a list of child ``BNGReference`` objects of a ``BNGReference``.
 
     By default, the children of the :class:`~osbng.bng_reference.BNGReference` object is
     defined as the :class:`~osbng.bng_reference.BNGReference` objects in the next
@@ -140,7 +140,7 @@ def bng_to_children(
 def bng_to_parent(
     bng_ref: BNGReference, *, resolution: int | str | None = None
 ) -> BNGReference:
-    """Returns the parent of input :class:`~osbng.bng_reference.BNGReference` object.
+    """Returns the `BNGReference`that is the parent of a ``BNGReference``.
 
     By default, the parent of the :class:`~osbng.bng_reference.BNGReference` object is
     defined as the :class:`~osbng.bng_reference.BNGReference` in the next BNG resolution
