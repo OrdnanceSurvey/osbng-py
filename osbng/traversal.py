@@ -349,7 +349,7 @@ def bng_distance(
 
 @_validate_bngreferences
 def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
-    """Returns the four BNGReference object neighbours to the input BNGReference.
+    """Returns the four ``BNGReference`` object neighbours of a ``BNGReference``.
 
     The neighbours are defined as the grid squares immediately North, East, South and
     West of the input grid square sharing an edge with the input
