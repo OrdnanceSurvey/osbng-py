@@ -646,7 +646,7 @@ class BNGReference:
         """Returns a hollow ring of BNGReference objects around this ``BNGReference``.
 
         Returns all :class:`~osbng.bng_reference.BNGReference` objects at a grid
-        distance k.
+        distance ``k``.
 
         Returned :class:`~osbng.bng_reference.BNGReference` objects are ordered North to
         South then West to East, therefore not in ring order.
