@@ -648,8 +648,9 @@ class BNGReference:
         Returns all :class:`~osbng.bng_reference.BNGReference` objects at a grid
         distance ``k``.
 
-        Returned :class:`~osbng.bng_reference.BNGReference` objects are ordered North to
-        South then West to East, therefore not in ring order.
+        Notes:
+            Returned :class:`~osbng.bng_reference.BNGReference` objects are ordered
+            North to South then West to East, therefore not in ring order.
 
         Args:
             k (int): Grid distance in units of grid squares.
@@ -704,8 +705,9 @@ class BNGReference:
         distance ``k``, including the given central
         :class:`~osbng.bng_reference.BNGReference` object.
 
-        Returned :class:`~osbng.bng_reference.BNGReference` objects are ordered North to
-        South then West to East.
+        Notes:
+            Returned :class:`~osbng.bng_reference.BNGReference` objects are ordered
+            North to South then West to East.
 
         Args:
             k (int): Grid distance in units of grid squares.
