@@ -102,10 +102,10 @@ def _ring_or_disc(
 def bng_kring(
     bng_ref: BNGReference, k: int, *, return_relations: bool = False
 ) -> list[BNGReference] | list[tuple[BNGReference, int, int]]:
-    """Returns a hollow ring around a :class:`~osbng.bng_reference.BNGReference` object.
+    """Returns a hollow ring of BNGReference objects around a ``BNGReference`` object.
 
-    Nearby :class:`~osbng.bng_reference.BNGReference` objects at a grid distance ``k``
-    are returned.
+    Returns all :class:`~osbng.bng_reference.BNGReference` objects at a grid distance
+    ``k``.
 
     Notes:
         Returned :class:`~osbng.bng_reference.BNGReference` objects are ordered North to
@@ -169,10 +169,10 @@ def bng_kring(
 def bng_kdisc(
     bng_ref: BNGReference, k: int, *, return_relations: bool = False
 ) -> list[BNGReference] | list[tuple[BNGReference, int, int]]:
-    """Returns a filled disc around a :class:`~osbng.bng_reference.BNGReference` object.
+    """Returns a filled disc of BNGReference objects around a ``BNGReference``.
 
-    Nearby :class:`~osbng.bng_reference.BNGReference` objects within a grid distance
-    ``k`` are returned, including the given central
+    Returns all :class:`~osbng.bng_reference.BNGReference` objects up to a grid
+    distance ``k``, including the given central
     :class:`~osbng.bng_reference.BNGReference` object.
 
     Notes:
@@ -349,7 +349,11 @@ def bng_distance(
 
 @_validate_bngreferences
 def bng_neighbours(bng_ref: BNGReference) -> list[BNGReference]:
-    """Returns the four neighbouring squares sharing an edge with the input grid square.
+    """Returns the four BNGReference object neighbours to the input BNGReference.
+
+    The neighbours are defined as the grid squares immediately North, East, South and
+    West of the input grid square sharing an edge with the input
+    :class:`~osbng.bng_reference.BNGReference` object.
 
     Args:
         bng_ref (BNGReference): A :class:`~osbng.bng_reference.BNGReference` object.
@@ -461,7 +465,7 @@ def bng_is_neighbour(bng_ref1: BNGReference, bng_ref2: BNGReference) -> bool:
 
 @_validate_bngreferences
 def bng_dwithin(bng_ref: BNGReference, d: int | float) -> list[BNGReference]:
-    """Returns a list of ``BNGReference`` objects within a distance ``d``.
+    """Returns a list of ``BNGReference`` objects within an absolute distance ``d``.
 
     All squares will be returned for which any part of its boundary is within distance
     ``d`` of any part of the input :class:`~osbng.bng_reference.BNGReference`'s
