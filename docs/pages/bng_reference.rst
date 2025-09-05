@@ -24,6 +24,9 @@ functions, providing users with the flexibility to either:
 - Create a :class:`~osbng.bng_reference.BNGReference` object and use one of its
   instance methods.
 
+``BNGReference`` objects can be compared and ordered. Ordering considers both the grid 
+resolution and the reference string. They are also hashable, so can be used as 
+keys or set elements.
 
 .. autoclass:: BNGReference
    :no-members:
@@ -59,3 +62,7 @@ Methods
    BNGReference.bng_neighbours
    BNGReference.bng_is_neighbour
    BNGReference.bng_dwithin
+   BNGReference.__eq__
+   BNGReference.__lt__
+   BNGReference.__hash__
+   BNGReference.__repr__
