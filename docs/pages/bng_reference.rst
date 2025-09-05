@@ -16,7 +16,7 @@ The ``BNGReference`` class supports the conversion of a BNG reference string int
 package. All functions accepting or returning BNG references enforce the use of this
 class. 
 
-These functions are available both as instance methods of class and as standalone 
+These functions are available both as instance methods of the class and as standalone 
 functions, providing users with the flexibility to either:
 
 - Create a :class:`~osbng.bng_reference.BNGReference` object and pass it to a
