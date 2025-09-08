@@ -47,7 +47,7 @@ __all__ = ["bng_to_children", "bng_to_parent"]
 def bng_to_children(
     bng_ref: BNGReference, *, resolution: int | str | None = None
 ) -> list[BNGReference]:
-    """Returns children of the input :class:`~osbng.bng_reference.BNGReference` object.
+    """Returns a list of child ``BNGReference`` objects of a ``BNGReference``.
 
     By default, the children of the :class:`~osbng.bng_reference.BNGReference` object is
     defined as the :class:`~osbng.bng_reference.BNGReference` objects in the next
@@ -95,8 +95,10 @@ def bng_to_children(
         BNGReference(bng_ref_formatted=SU 3 6 NE, resolution_label=5km)]
 
     See Also:
-        :class:`~osbng.hierarchy.bng_to_parent` to derive the
-        :class:`~osbng.bng_reference.BNGReference` object in the next resolution up.
+        - The equivalent :meth:`osbng.bng_reference.BNGReference.bng_to_children`
+          instance method.
+        - :class:`~osbng.hierarchy.bng_to_parent` to derive the
+          :class:`~osbng.bng_reference.BNGReference` object in the next resolution up.
 
     """
     # Raise error if the resolution is 1m
@@ -138,7 +140,7 @@ def bng_to_children(
 def bng_to_parent(
     bng_ref: BNGReference, *, resolution: int | str | None = None
 ) -> BNGReference:
-    """Returns the parent of input :class:`~osbng.bng_reference.BNGReference` object.
+    """Returns the `BNGReference`that is the parent of a ``BNGReference``.
 
     By default, the parent of the :class:`~osbng.bng_reference.BNGReference` object is
     defined as the :class:`~osbng.bng_reference.BNGReference` in the next BNG resolution
@@ -181,8 +183,11 @@ def bng_to_parent(
         BNGReference(bng_ref_formatted=SU 3 5, resolution_label=10km)
 
     See Also:
-        :class:`~osbng.hierarchy.bng_to_children` to derive the
-        :class:`~osbng.bng_reference.BNGReference` objects in the next resolution down.
+        - The equivalent :meth:`osbng.bng_reference.BNGReference.bng_to_parent`
+          instance method.
+        - :class:`~osbng.hierarchy.bng_to_children` to derive the
+          :class:`~osbng.bng_reference.BNGReference` objects in the next resolution
+          down.
 
     """
     # Raise error if the resolution is 100km

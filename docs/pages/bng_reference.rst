@@ -8,15 +8,15 @@ BNG Reference
    :no-inherited-members:
    :no-special-members:
 
-``BNGReference`` Object
------------------------
+``BNGReference``
+----------------
 
-The ``BNGReference`` constructor converts a BNG reference string into a
+The ``BNGReference`` class supports the conversion of a BNG reference string into a
 :class:`~osbng.bng_reference.BNGReference` object, ensuring type consistency across the
 package. All functions accepting or returning BNG references enforce the use of this
 class. 
 
-These functions are available both as instance methods of class and as standalone 
+These functions are available both as instance methods of the class and as standalone 
 functions, providing users with the flexibility to either:
 
 - Create a :class:`~osbng.bng_reference.BNGReference` object and pass it to a
@@ -24,6 +24,9 @@ functions, providing users with the flexibility to either:
 - Create a :class:`~osbng.bng_reference.BNGReference` object and use one of its
   instance methods.
 
+``BNGReference`` objects can be compared and ordered. Ordering considers both the grid 
+resolution and the reference string. They are also hashable, so can be used as 
+keys or set elements.
 
 .. autoclass:: BNGReference
    :no-members:
@@ -41,9 +44,6 @@ Properties
    BNGReference.resolution_metres
    BNGReference.resolution_label
    BNGReference.__geo_interface__
-   BNGReference.__eq__
-   BNGReference.__lt__
-   BNGReference.__repr__
 
 Methods
 ~~~~~~~
@@ -62,3 +62,7 @@ Methods
    BNGReference.bng_neighbours
    BNGReference.bng_is_neighbour
    BNGReference.bng_dwithin
+   BNGReference.__eq__
+   BNGReference.__lt__
+   BNGReference.__hash__
+   BNGReference.__repr__

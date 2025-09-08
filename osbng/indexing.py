@@ -106,23 +106,18 @@ Used to identify intermediate quadtree resolutions.
 
 
 class BNGIndexedGeometry:
-    """Decomposition of a ``Shapely Geometry`` object into BNG grid squares.
+    """Represents the decomposition of a Shapely Geometry object into BNG grid squares.
 
     The ``BNGIndexedGeometry`` class stores information about the relationship between
     an input geometry and the grid squares it intersects. This is particularly useful
     for spatial indexing and analysis of geometries against the BNG index system.
 
     Attributes:
-        bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference` object
-            representing the grid square corresponding to the decomposition.
-        is_core (bool): A Boolean flag indicating whether the grid square geometry is
-            entirely contained by the input geometry. This is relevant for ``Polygon``
-            geometries and helps distinguish between ``core`` (fully inside) and
-            ``edge`` (partially overlapping) grid squares.
-        geom (Geometry): The ``Shapely Geometry`` representing the intersection between
-            the input geometry and the grid square. This can one of a number of
-            geometry types depending on the overlap. When ``is_core`` is True, ``geom``
-            is the same as the grid square geometry.
+        bng_ref (BNGReference): The ``BNGReference`` corresponding to this grid square.
+        is_core (bool): A boolean flag indicating whether this grid square geometry is
+            entirely contained by the input geometry.
+        geom (Geometry): The intersection geometry between the input geometry and this
+            grid square.
 
     See Also:
         The ``BNGIndexedGeometry`` class is instantiated as part of the
@@ -132,26 +127,34 @@ class BNGIndexedGeometry:
     """
 
     def __init__(self, bng_ref: BNGReference, is_core: bool, geom: Geometry):
-        """Initialise BNGIndexedGeometry."""
+        """Initialises a ``BNGIndexedGeometry``."""
         self._bng_ref = bng_ref
         self._is_core = is_core
         self._geom = geom
 
     @property
     def bng_ref(self) -> BNGReference:
-        """:class:`~osbng.bng_reference.BNGReference` representing the grid square."""
+        """The ``BNGReference`` corresponding to this grid square."""
         return self._bng_ref
 
     @property
     def is_core(self) -> bool:
-        """True if grid square geometry is contained by the input geometry."""
+        """Flag indicating whether this grid square is contained by the input geometry.
+
+        This is particularly relevant for ``Polygon`` and ``MultiPolygon`` geometries
+        and helps distinguish between ``core`` (fully inside) and ``edge``
+        (partially overlapping) grid squares.
+        """
         return self._is_core
 
     @property
     def geom(self) -> Geometry:
-        """Intersection between the input geometry and the grid square.
+        """The intersection geometry between the input geometry and this grid square.
 
-        Intersection represented as a ``Shapely Geometry`` object.
+        The ``Shapely Geometry`` representing the intersection between the input
+        geometry and this grid square. This can one of a number of geometry types
+        depending on the overlap. When ``is_core`` = True, ``geom`` is equal to the
+        grid square geometry.
         """
         return self._geom
 
@@ -453,7 +456,8 @@ def bng_to_xy(
         (437289.5, 115541.5)
 
     See Also:
-        - The :meth:`osbng.bng_reference.BNGReference.bng_to_xy` instance method.
+        - The equivalent :meth:`osbng.bng_reference.BNGReference.bng_to_xy` instance
+          method.
         - The :func:`~osbng.indexing.xy_to_bng` function for encoding a easting and
           northing coordinates to a :class:`~osbng.BNGReference` at a given resolution.
     """
@@ -576,7 +580,8 @@ def bng_to_bbox(bng_ref: BNGReference) -> tuple[int, int, int, int]:
         (437289, 115541, 437290, 115542)
 
     See Also:
-        - The :meth:`osbng.bng_reference.BNGReference.bng_to_bbox` instance method.
+        - The equivalent :meth:`osbng.bng_reference.BNGReference.bng_to_bbox` instance
+          method.
         - The :func:`~osbng.indexing.bng_to_grid_geom` function and
           :meth:`~osbng.bng_reference.BNGReference.bng_to_grid_geom` instance method
           which convert a :class:`~osbng.bng_reference.BNGReference` to a
@@ -628,8 +633,8 @@ def bng_to_grid_geom(bng_ref: BNGReference) -> Polygon:
         )
 
     See Also:
-        - The :meth:`osbng.bng_reference.BNGReference.bng_to_grid_geom` instance
-          method.
+        - The equivalent :meth:`osbng.bng_reference.BNGReference.bng_to_grid_geom`
+          instance method.
         - The :func:`~osbng.indexing.bng_to_bbox` function and
           :meth:`osbng.bng_reference.BNGReference.bng_to_bbox` instance method which
           convert a :class:`~osbng.bng_reference.BNGReference` to bounding box
