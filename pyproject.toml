@@ -21,6 +21,12 @@ requires-python = ">=3.10, <3.14"
 dependencies = ["shapely >=2.0.0"]
 
 [project.optional-dependencies]
+docs = [
+    "pydata-sphinx-theme >= 0.16",
+    "nbsphinx >= 0.9",
+    "sphinx >= 8.2",
+    "sphinx-copybutton >= 0.5"
+]
 geopandas = ["geopandas >= 1.0.0"]
 test = [
     "pytest",
