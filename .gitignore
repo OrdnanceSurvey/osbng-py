@@ -11,3 +11,7 @@ __pycache__/
 build/
 dist/
 *.egg-info/
+
+# Sphinx build output
+docs/_build/
+docs/pages/_autosummary/

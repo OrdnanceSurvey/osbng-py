@@ -19,12 +19,21 @@ from osbng.grids import (
     bng_grid_50km,
     bng_grid_100km,
 )
-from osbng.indexing import bbox_to_bng, geom_to_bng, geom_to_bng_intersection, xy_to_bng
+from osbng.indexing import (
+    PREFIXES,
+    SUFFIXES,
+    bbox_to_bng,
+    geom_to_bng,
+    geom_to_bng_intersection,
+    xy_to_bng,
+)
 from osbng.resolution import BNG_RESOLUTIONS
 
 __all__ = [
     "BNG_BOUNDS",
     "BNG_RESOLUTIONS",
+    "PREFIXES",
+    "SUFFIXES",
     "BNGReference",
     "bng_grid_100km",
     "bng_grid_50km",
@@ -37,4 +46,4 @@ __all__ = [
     "geom_to_bng",
     "geom_to_bng_intersection",
 ]
-__version__ = "0.3.2"
+__version__ = "0.3.3"

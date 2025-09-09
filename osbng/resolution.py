@@ -14,14 +14,14 @@ Supported BNG resolutions are:
 - 5m
 - 1m
 
-Relates metre-based BNG resolutions, expressed as integer values, to their respective
-string label representations.  These mappings are used to indicate different resolution
-precision levels in BNG references and serve as the basis for validating and normalising
-resolutions within the system.
+:data:`~osbng.resolution.BNG_RESOLUTIONS` relates metre-based BNG resolutions,
+expressed as integer values, to their respective string label representations. These
+mappings are used to indicate different resolution precision levels in BNG references
+and serve as the basis for validating and normalising resolutions within the system.
 
 The integer values represent spatial resolutions in metres, while the string labels
 provide a human-readable descriptor for each resolution level. For example, the numeric
-resolution 1000 is mapped to the label '1km'.
+resolution ``1000`` is mapped to the label ``1km``.
 
 The resolution mappings also include a flag indicating whether a given resolution
 represents an (intermediate) quadtree resolution.  Quadtree resolutions are used to
@@ -37,7 +37,7 @@ __all__ = ["BNG_RESOLUTIONS"]
 # Supported BNG resolutions
 # Mappings from metre-based integer values to string label representations
 # Quadtree flag indicates whether resolution represents an intermediate quadtree level
-BNG_RESOLUTIONS = {
+BNG_RESOLUTIONS: dict[int, dict[str, str | bool]] = {
     100000: {"label": "100km", "quadtree": False},
     50000: {"label": "50km", "quadtree": True},
     10000: {"label": "10km", "quadtree": False},
@@ -50,3 +50,9 @@ BNG_RESOLUTIONS = {
     5: {"label": "5m", "quadtree": True},
     1: {"label": "1m", "quadtree": False},
 }
+"""dict[int, dict[str, str | bool]]: Supported BNG resolutions and mappings.
+
+Mappings from metre-based integer resolution values to string label representations.
+Quadtree flag indicates whether resolution represents an intermediate quadtree level,
+identified in a BNG reference string by an ordinal direction :data:`~osbng.SUFFIXES`.
+"""

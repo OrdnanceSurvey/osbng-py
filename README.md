@@ -82,6 +82,30 @@ Optional functionality is available when the [`GeoPandas`](https://github.com/ge
 
 * Indexing geometries in a `GeoDataFrame` into grid squares at a specified resolution, and explode the resulting lists of indexed objects into a flattened `GeoDataFrame` for further analysis.
 
+The following example indexes the boundaries for the 'London' and 'South West' Regions in England:
+
+``` python
+>>> import geopandas as gpd
+>>> from osbng.indexing_gpd import gdf_to_bng_intersection_explode
+>>> gdf = gpd.read_file("docs/examples/data/Regions_December_2024_Boundaries_EN_BFC.gpkg")
+>>> gdf = gdf[gdf["RGN24NM"].isin(["London", "South West"])]
+>>> gdf_to_bng_intersection_explode(gdf=gdf, resolution="5km")
+        RGN24CD     RGN24NM   BNG_E  ...                                            bng_ref  is_core                                           geometry
+0     E12000007      London  517517  ...  BNGReference(bng_ref_formatted=TQ 2 8 SE, reso...     True  POLYGON ((530000 180000, 530000 185000, 525000...
+1     E12000007      London  517517  ...  BNGReference(bng_ref_formatted=TQ 1 8 SW, reso...     True  POLYGON ((515000 180000, 515000 185000, 510000...
+2     E12000007      London  517517  ...  BNGReference(bng_ref_formatted=TQ 2 9 SE, reso...     True  POLYGON ((530000 190000, 530000 195000, 525000...
+3     E12000007      London  517517  ...  BNGReference(bng_ref_formatted=TQ 3 9 SW, reso...     True  POLYGON ((535000 190000, 535000 195000, 530000...
+4     E12000007      London  517517  ...  BNGReference(bng_ref_formatted=TQ 5 8 NW, reso...     True  POLYGON ((555000 185000, 555000 190000, 550000...
+...         ...         ...     ...  ...                                                ...      ...                                                ...
+1410  E12000009  South West  285016  ...  BNGReference(bng_ref_formatted=SS 2 2 SW, reso...    False  POLYGON ((221321.396 120105.5, 221322.097 1200...
+1411  E12000009  South West  285016  ...  BNGReference(bng_ref_formatted=SS 1 4 SW, reso...    False  POLYGON ((214017.097 144997.004, 214015.596 14...
+1412  E12000009  South West  285016  ...  BNGReference(bng_ref_formatted=SS 1 4 NW, reso...    False  POLYGON ((212833.304 145000.003, 212828.101 14...
+1413  E12000009  South West  285016  ...  BNGReference(bng_ref_formatted=ST 2 4 NE, reso...    False  POLYGON ((329353.83 147854.995, 329360.673 147...
+1414  E12000009  South West  285016  ...  BNGReference(bng_ref_formatted=ST 2 6 SW, reso...    False  POLYGON ((323061.501 160841.099, 323064.799 16...
+
+[1415 rows x 10 columns]
+```
+
 ### Hierarchy
 
 Provides functionality to navigate the hierarchical structure of the BNG index system. This includes:
@@ -136,6 +160,21 @@ The following example constructs a `GeoPandas` GeoDataFrame from one of the iter
 >>> import geopandas as gpd
 >>> from osbng.grids import bng_grid_10km
 >>> gdf = gpd.GeoDataFrame.from_features(bng_grid_10km, crs=27700)
+>>> gdf
+                                               geometry bng_ref
+0     POLYGON ((10000 0, 10000 10000, 0 10000, 0 0, ...    SV00
+1     POLYGON ((20000 0, 20000 10000, 10000 10000, 1...    SV10
+2     POLYGON ((30000 0, 30000 10000, 20000 10000, 2...    SV20
+3     POLYGON ((40000 0, 40000 10000, 30000 10000, 3...    SV30
+4     POLYGON ((50000 0, 50000 10000, 40000 10000, 4...    SV40
+...                                                 ...     ...
+9095  POLYGON ((660000 1290000, 660000 1300000, 6500...    JM59
+9096  POLYGON ((670000 1290000, 670000 1300000, 6600...    JM69
+9097  POLYGON ((680000 1290000, 680000 1300000, 6700...    JM79
+9098  POLYGON ((690000 1290000, 690000 1300000, 6800...    JM89
+9099  POLYGON ((700000 1290000, 700000 1300000, 6900...    JM99
+
+[9100 rows x 2 columns]
 ```
 
 ## Contributing
