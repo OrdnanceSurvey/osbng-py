@@ -16,7 +16,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 project = "osbng"
 author = "Ordnance Survey"
 copyright = f"{datetime.now().year}, {author}"
-release = "0.3.1"
+release = "0.3.3"
 
 # Sphinx extensions
 extensions = [
