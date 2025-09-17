@@ -477,7 +477,7 @@ class BNGReference:
         )
 
     def bng_to_xy(
-        self, position: str = "lower-left"
+        self, *, position: str = "lower-left"
     ) -> tuple[int | float, int | float]:
         """Returns easting and northing coordinates of this ``BNGReference``.
 
@@ -511,7 +511,7 @@ class BNGReference:
         """
         from osbng.indexing import bng_to_xy as _bng_to_xy
 
-        return _bng_to_xy(self, position)
+        return _bng_to_xy(self, position=position)
 
     def bng_to_bbox(self) -> tuple[int, int, int, int]:
         """Returns grid square bounding box coordinates of this ``BNGReference``.
@@ -562,7 +562,7 @@ class BNGReference:
         return _bng_to_grid_geom(self)
 
     def bng_to_children(
-        self, resolution: int | str | None = None
+        self, *, resolution: int | str | None = None
     ) -> list["BNGReference"]:
         """Returns a list of child ``BNGReference`` objects of this ``BNGReference``.
 
@@ -610,9 +610,9 @@ class BNGReference:
         """
         from osbng.hierarchy import bng_to_children as _bng_to_children
 
-        return _bng_to_children(self, resolution)
+        return _bng_to_children(self, resolution=resolution)
 
-    def bng_to_parent(self, resolution: int | str | None = None) -> "BNGReference":
+    def bng_to_parent(self, *, resolution: int | str | None = None) -> "BNGReference":
         """Returns the ``BNGReference`` that is the parent of this ``BNGReference``.
 
         By default, the parent of the :class:`~osbng.bng_reference.BNGReference` object
@@ -655,9 +655,11 @@ class BNGReference:
         """
         from osbng.hierarchy import bng_to_parent as _bng_to_parent
 
-        return _bng_to_parent(self, resolution)
+        return _bng_to_parent(self, resolution=resolution)
 
-    def bng_kring(self, k: int, return_relations: bool = False) -> list["BNGReference"]:
+    def bng_kring(
+        self, k: int, *, return_relations: bool = False
+    ) -> list["BNGReference"]:
         """Returns a hollow ring of BNGReference objects around this ``BNGReference``.
 
         Returns all :class:`~osbng.bng_reference.BNGReference` objects at a grid
@@ -713,7 +715,9 @@ class BNGReference:
 
         return _bng_kring(self, k, return_relations=return_relations)
 
-    def bng_kdisc(self, k: int, return_relations: bool = False) -> list["BNGReference"]:
+    def bng_kdisc(
+        self, k: int, *, return_relations: bool = False
+    ) -> list["BNGReference"]:
         """Returns a filled disc of BNGReference objects around this ``BNGReference``.
 
         Returns all :class:`~osbng.bng_reference.BNGReference` objects up to a grid
@@ -773,7 +777,7 @@ class BNGReference:
         return _bng_kdisc(self, k, return_relations=return_relations)
 
     def bng_distance(
-        self, bng_ref2: "BNGReference", edge_to_edge: bool = False
+        self, bng_ref2: "BNGReference", *, edge_to_edge: bool = False
     ) -> float:
         """Returns the euclidean distance between bng_ref2 and this ``BNGReference``.
 
