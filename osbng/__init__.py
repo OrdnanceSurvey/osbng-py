@@ -46,4 +46,4 @@ __all__ = [
     "geom_to_bng",
     "geom_to_bng_intersection",
 ]
-__version__ = "0.3.3"
+__version__ = "0.4.0"
