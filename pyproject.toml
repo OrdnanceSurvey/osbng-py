@@ -37,24 +37,34 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# GeoPandas is required for indexing geometries in GeoDataFrames
+# via the osbng.indexing_gpd module
+geopandas = ["geopandas >= 1.0"]
+# Sphinx documentation building tools
 docs = [
     "pydata-sphinx-theme >= 0.16",
     "nbsphinx >= 0.9",
     "sphinx >= 8.2",
     "sphinx-copybutton >= 0.5"
 ]
-geopandas = ["geopandas >= 1.0"]
+# Testing frameworks and tools
 test = [
-    "pytest",
-    "tox >= 4.26",
     "geopandas >= 1.0",
-    "coverage"
+    "pytest >= 8.0",
+    "tox >= 4.26"
 ]
+# Code formatting and linting tools
+lint = [
+    "ruff >= 0.14"
+]
+# Suggested runtime features
 all = [
     "geopandas >= 1.0",
-    "matplotlib",
-    "pytest",
-    "tox >= 4.26"
+    "matplotlib >= 3.7"
+]
+# Complete development environment
+dev = [
+    "osbng[docs, test, lint, all]"
 ]
 
 [build-system]
