@@ -8,6 +8,7 @@ way to define the structure of the test case data.
 """
 
 from math import sqrt
+from pathlib import Path
 from typing import Any, TypedDict
 
 import pytest
@@ -55,9 +56,9 @@ class ValidateAndNormaliseBNGResolutionTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")[
-        "_validate_and_normalise_bng_resolution"
-    ],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["_validate_and_normalise_bng_resolution"],
 )
 def test__validate_and_normalise_bng_resolution(
     test_case: ValidateAndNormaliseBNGResolutionTestCase,
@@ -105,9 +106,9 @@ class ValidateEastingNorthingTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")[
-        "_validate_easting_northing"
-    ],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["_validate_easting_northing"],
 )
 def test__validate_easting_northing(test_case: ValidateEastingNorthingTestCase) -> None:
     """Test _validate_and_normalise_bng_resolution with test cases from JSON file.
@@ -158,9 +159,9 @@ class ValidateAndNormaliseBBOXTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")[
-        "_validate_and_normalise_bbox"
-    ],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["_validate_and_normalise_bbox"],
 )
 def test__validate_and_normalise_bbox(
     test_case: ValidateAndNormaliseBBOXTestCase,
@@ -209,7 +210,9 @@ class GetBNGSuffixTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")["_get_bng_suffix"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["_get_bng_suffix"],
 )
 def test__get_bng_suffix(test_case: GetBNGSuffixTestCase) -> None:
     """Test _get_bng_suffix function with test cases from JSON file.
@@ -244,7 +247,9 @@ class DecomposeGeomTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")["_decompose_geom"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["_decompose_geom"],
 )
 def test__decompose_geom(test_case: DecomposeGeomTestCase) -> None:
     """Test _decompose_geom with test cases from JSON file.
@@ -293,7 +298,9 @@ class XYToBNGTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")["xy_to_bng"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["xy_to_bng"],
 )
 def test_xy_to_bng(test_case: XYToBNGTestCase) -> None:
     """Test xy_to_bng with test cases from JSON file.
@@ -343,7 +350,9 @@ class BNGToXYTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_xy"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["bng_to_xy"],
 )
 def test_bng_to_xy(test_case: BNGToXYTestCase) -> None:
     """Test bng_to_xy with test cases from JSON file.
@@ -380,7 +389,9 @@ class BNGToBBOXTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_bbox"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["bng_to_bbox"],
 )
 def test_bng_to_bbox(test_case: BNGToBBOXTestCase) -> None:
     """Test bng_to_bbox with test cases from JSON file.
@@ -417,7 +428,9 @@ class BNGToGridGeomTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")["bng_to_grid_geom"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["bng_to_grid_geom"],
 )
 def test_bng_to_grid_geom(test_case: BNGToGridGeomTestCase) -> None:
     """Test bng_to_grid_geom with test cases from JSON file.
@@ -467,7 +480,9 @@ class BBOXToBNGTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")["bbox_to_bng"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["bbox_to_bng"],
 )
 def test_bbox_to_bng(test_case: BBOXToBNGTestCase) -> None:
     """Test bbox_to_bng with test cases from JSON file.
@@ -550,7 +565,9 @@ def validate_and_assert_bng_intersects(
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")["geom_to_bng"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["geom_to_bng"],
 )
 def test_geom_to_bng(test_case: GeomToBNGTestCase) -> None:
     """Test geom_to_bng with test cases from JSON file.
@@ -655,9 +672,9 @@ def validate_and_assert_bng_intersection(
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/indexing_test_cases.json")[
-        "geom_to_bng_intersection"
-    ],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["geom_to_bng_intersection"],
 )
 def test_geom_to_bng_intersection(test_case: GeomToBNGIntersectionTestCase) -> None:
     """Test geom_to_bng_intersection with test cases from JSON file.

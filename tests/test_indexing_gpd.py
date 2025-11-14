@@ -13,6 +13,7 @@ Testing reuses the test cases for the osbng.indexing.geom_to_bng_intersection fu
 """
 
 from math import sqrt
+from pathlib import Path
 
 import pytest
 
@@ -80,9 +81,9 @@ def validate_and_assert_gdf_bng_intersection(
     "test_case",
     # Load test cases from JSON file
     # Reuses test cases for the osbng.indexing.geom_to_bng_intersection function
-    _load_test_cases(file_path="./data/indexing_test_cases.json")[
-        "geom_to_bng_intersection"
-    ],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "indexing_test_cases.json"
+    )["geom_to_bng_intersection"],
 )
 def test_gdf_to_bng_intersection_explode(
     test_case: GeomToBNGIntersectionTestCase,
