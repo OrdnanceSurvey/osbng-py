@@ -35,6 +35,11 @@ dependencies = [
     "shapely >= 2.0"
 ]
 
+[project.urls]
+Homepage = "https://github.com/OrdnanceSurvey/osbng-py"
+Documentation = "https://osbng.readthedocs.io/"
+Repository = "https://github.com/OrdnanceSurvey/osbng-py"
+
 [project.optional-dependencies]
 # GeoPandas is required for indexing geometries in GeoDataFrames
 # via the osbng.indexing_gpd module
