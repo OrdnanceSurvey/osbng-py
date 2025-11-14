@@ -46,7 +46,7 @@ docs = [
 geopandas = ["geopandas >= 1.0"]
 test = [
     "pytest",
-    "tox",
+    "tox >= 4.26",
     "geopandas >= 1.0",
     "coverage"
 ]
@@ -54,7 +54,7 @@ all = [
     "geopandas >= 1.0",
     "matplotlib",
     "pytest",
-    "tox"
+    "tox >= 4.26"
 ]
 
 [build-system]
