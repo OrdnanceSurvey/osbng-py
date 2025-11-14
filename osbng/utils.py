@@ -1,17 +1,20 @@
 """Support for parameterised testing."""
 
 import json
+from pathlib import Path
 
 
-def _load_test_cases(file_path: str) -> dict:
+def _load_test_cases(file_path: str | Path) -> dict:
     """Load test cases from a JSON file.
 
     Args:
-        file_path (str): The path to the JSON file containing the test cases.
+        file_path (str | Path): Path to the JSON file containing test cases.
 
     Returns:
-        dict: The test cases as a dictionary.
+        dict: Test cases as a dictionary.
 
     """
-    with open(file_path) as f:
+    # Convert to Path object if a string is provided
+    p = Path(file_path)
+    with p.open(encoding="utf-8") as f:
         return json.load(f)
