@@ -51,12 +51,15 @@ docs = [
 # Testing frameworks and tools
 test = [
     "geopandas >= 1.0",
-    "pytest >= 8.0",
-    "tox >= 4.26"
+    "pytest >= 8.0"
 ]
 # Code formatting and linting tools
 lint = [
     "ruff >= 0.14"
+]
+# Automated test tools
+ci = [
+    "tox >= 4.26"
 ]
 # Suggested runtime features
 all = [
@@ -65,7 +68,7 @@ all = [
 ]
 # Complete development environment
 dev = [
-    "osbng[docs, test, lint, all]"
+    "osbng[docs, test, lint, ci, all]"
 ]
 
 [build-system]
@@ -82,6 +85,7 @@ where = [
 ]
 
 [tool.pytest.ini_options]
+# Runs test collection and prints summary of test outcomes
 addopts = "-ra"
 testpaths = [
     "tests"
@@ -98,6 +102,15 @@ envlist = [
     "py314"
 ]
 skip_missing_interpreters = false
+
+[tool.tox.env_run_base]
+# Install from optional dependencies test group
+extras = [
+    "test"
+]
+commands = [
+    ["pytest", { replace = "posargs", default = ["tests"], extend = true }]
+]
 
 [tool.ruff.lint]
 select = [
