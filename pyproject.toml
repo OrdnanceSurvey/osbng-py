@@ -93,10 +93,10 @@ requires = [
     "tox >= 4.26"
 ]
 envlist = [
-    "3.11",
-    "3.12",
-    "3.13",
-    "3.14"
+    py311,
+    py312,
+    py313,
+    py314
 ]
 skip_missing_interpreters = false
 
