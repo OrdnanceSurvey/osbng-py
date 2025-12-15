@@ -12,10 +12,10 @@ The package supports the 'standard' BNG metre-based resolutions, which represent
 
 ## Installation
 
-Install `osbng` from GitHub using `pip`:
+Install `osbng` from PyPI using `pip`:
 
 ``` shell
-pip install git+https://github.com/OrdnanceSurvey/osbng-py.git
+pip install osbng
 ```
 
 ## Complimentary Tools
