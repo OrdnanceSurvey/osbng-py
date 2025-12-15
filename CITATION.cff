@@ -17,6 +17,9 @@ authors:
   - given-names: Chris
     family-names: Jochem
     email: chris.jochem@os.uk
+  - given-names: Lucy
+    family-names: Main
+    email: lucy.main@os.uk
 repository-code: 'https://github.com/OrdnanceSurvey/osbng-py'
 abstract: >-
   Offers a streamlined programmatic interface to Ordnance

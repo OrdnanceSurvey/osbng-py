@@ -8,7 +8,8 @@ authors = [
     {name = "Steve Kingston", email = "steve.kingston@os.uk"}, 
     {name = "Kate New", email = "kate.new@os.uk"},
     {name = "Tom Peterken", email = "tom.peterken@os.uk"},
-    {name = "Chris Jochem", email = "chris.jochem@os.uk"}
+    {name = "Chris Jochem", email = "chris.jochem@os.uk"},
+    {name = "Lucy Main", email = "lucy.main@os.uk"}
 ]
 keywords = [
     "geospatial", 
