@@ -32,11 +32,11 @@ suffix.
 Installation
 ------------
 
-Install ``osbng`` from GitHub using ``pip``:
+Install ``osbng`` from PyPI using ``pip``:
 
 .. code:: shell
 
-   pip install git+https://github.com/OrdnanceSurvey/osbng-py.git
+   pip install osbng
 
 Complimentary Tools
 -------------------
