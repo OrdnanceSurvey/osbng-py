@@ -47,6 +47,10 @@ Repository = "https://github.com/OrdnanceSurvey/osbng-py"
 geopandas = [
     "geopandas >= 1.0"
 ]
+# Rasterio is required for raster indexing
+rasterio = [
+    "rasterio >= 1.4"
+]
 # Sphinx documentation building tools
 docs = [
     "pydata-sphinx-theme >= 0.16",
@@ -72,6 +76,7 @@ ci = [
 all = [
     "geopandas >= 1.0",
     "matplotlib >= 3.7"
+    "rasterio >= 1.4"
 ]
 # Complete development environment
 dev = [
