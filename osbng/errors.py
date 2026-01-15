@@ -23,20 +23,26 @@ class BNGReferenceError(Exception):
 
 
 class BNGResolutionError(Exception):
-    """Raised for unsupported BNG resolutions."""
+    """Raised for unsupported BNG resolutions.
 
-    def __init__(self):
+    Args:
+        message (str | None): Optional additional message to include.
+    """
+
+    def __init__(self, message: str | None = None):
         """Initialise exception with a message listing supported resolutions."""
         # Extract the numeric and string resolutions from BNG_RESOLUTIONS
         # Create message listing supported resolutions
-        message = (
+        _message = (
             "Invalid BNG resolution provided. Supported resolutions are: \n"
             + f"Metres: {', '.join(map(str, BNG_RESOLUTIONS.keys()))}\n"
             + "Labels: "
             + f"{', '.join(value['label'] for value in BNG_RESOLUTIONS.values())}"
         )
+        if message:
+            _message = message + "\n" + _message
         # Pass message to base class
-        super().__init__(message)
+        super().__init__(_message)
 
 
 class BNGHierarchyError(Exception):
@@ -55,19 +61,24 @@ class BNGExtentError(Exception):
     """Raised for coordinates outside the BNG index system extent.
 
     BNG extent defined as 0 <= easting < 700000 and 0 <= northing < 1300000
+
+    Args:
+        message (str | None): Optional additional message to include.
     """
 
-    def __init__(self):
+    def __init__(self, message: str | None = None):
         """Initialise exception with a message listing the valid coordinate ranges."""
         # Create message listing the easting and northing coordinate ranges
-        message = (
+        _message = (
             "Coordinates outside of the BNG extent. "
             "Easting and northing values must be within: \n"
             "0 <= easting < 700000\n"
             "0 <= northing < 1300000"
         )
+        if message:
+            _message = message + "\n" + _message
         # Pass message to base class
-        super().__init__(message)
+        super().__init__(_message)
 
 
 class RasterIntersectionError(Exception):
