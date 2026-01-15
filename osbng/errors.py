@@ -70,6 +70,24 @@ class BNGExtentError(Exception):
         super().__init__(message)
 
 
+class RasterIntersectionError(Exception):
+    """Raised when a raster does not intersect with the BNGReference bounds."""
+
+    pass
+
+
+class RasterResError(Exception):
+    """Raised when the raster res does not tesselate within the BNG grid square."""
+
+    pass
+
+
+class RasterCRSError(Exception):
+    """Raised when a raster is not in the British National Grid CRS (EPSG:27700)."""
+
+    pass
+
+
 # Map exception strings to exception classes
 _EXCEPTION_MAP = {
     "BNGReferenceError": BNGReferenceError,
@@ -77,4 +95,7 @@ _EXCEPTION_MAP = {
     "BNGHierarchyError": BNGHierarchyError,
     "BNGNeighbourError": BNGNeighbourError,
     "BNGExtentError": BNGExtentError,
+    "RasterIntersectionError": RasterIntersectionError,
+    "RasterResError": RasterResError,
+    "RasterCRSError": RasterCRSError,
 }
