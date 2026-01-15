@@ -32,13 +32,19 @@ suffix.
 Installation
 ------------
 
-Install ``osbng`` from GitHub using ``pip``:
+Install ``osbng`` from PyPI using ``pip``:
 
 .. code:: shell
 
-   pip install git+https://github.com/OrdnanceSurvey/osbng-py.git
+   pip install osbng
 
-Complimentary Tools
+Or, install a specific branch from a development version on GitHub using ``pip``:
+
+.. code:: shell
+
+   pip install git+https://github.com/OrdnanceSurvey/osbng-py.git@branch-name
+
+Complementary Tools
 -------------------
 
 - `osbng-r <https://github.com/OrdnanceSurvey/osbng-r>`_, an R package with broad 

@@ -12,13 +12,19 @@ The package supports the 'standard' BNG metre-based resolutions, which represent
 
 ## Installation
 
-Install `osbng` from GitHub using `pip`:
+Install `osbng` from PyPI using `pip`:
 
 ``` shell
-pip install git+https://github.com/OrdnanceSurvey/osbng-py.git
+pip install osbng
 ```
 
-## Complimentary Tools
+Or, install a specific branch from a development version on GitHub using `pip`:
+
+``` shell
+pip install git+https://github.com/OrdnanceSurvey/osbng-py.git@branch-name
+```
+
+## Complementary Tools
 
 * [`osbng-r`](https://github.com/OrdnanceSurvey/osbng-r), an R package with broad parity to the `osbng` Python package.
 * [`osbng-grids`](https://github.com/OrdnanceSurvey/osbng-grids), for BNG grid data in GeoParquet and GeoPackage (GPKG) formats.

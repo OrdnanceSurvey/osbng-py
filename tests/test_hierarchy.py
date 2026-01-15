@@ -7,6 +7,7 @@ defined in the utils module. The test cases are defined as TypedDicts, which pro
 way to define the structure of the test case data.
 """
 
+from pathlib import Path
 from typing import TypedDict
 
 import pytest
@@ -40,7 +41,9 @@ class BNGToChildrenTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_children"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "hierarchy_test_cases.json"
+    )["bng_to_children"],
 )
 def test_bng_to_children(test_case: BNGToChildrenTestCase) -> None:
     """Test bng_to_children with test cases from JSON file.
@@ -105,7 +108,9 @@ class BNGToParentTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/hierarchy_test_cases.json")["bng_to_parent"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "hierarchy_test_cases.json"
+    )["bng_to_parent"],
 )
 def test_bng_to_parent(test_case: BNGToParentTestCase) -> None:
     """Test bng_to_parent with test cases from JSON file.

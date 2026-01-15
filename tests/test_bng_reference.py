@@ -9,6 +9,7 @@ defined in the utils module. The test cases are defined as TypedDicts, which pro
 way to define the structure of the test case data.
 """
 
+from pathlib import Path
 from typing import TypedDict
 
 import pytest
@@ -40,9 +41,9 @@ class ValidateBNGRefStringTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/bng_reference_test_cases.json")[
-        "_validate_bng_ref_string"
-    ],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "bng_reference_test_cases.json"
+    )["_validate_bng_ref_string"],
 )
 def test__validate_bng_ref_string(test_case: ValidateBNGRefStringTestCase) -> None:
     """Test _validate_bng_ref_string function with test cases from JSON file.
@@ -73,9 +74,9 @@ class GetBNGResolutionMetresTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/bng_reference_test_cases.json")[
-        "_get_bng_resolution_metres"
-    ],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "bng_reference_test_cases.json"
+    )["_get_bng_resolution_metres"],
 )
 def test__get_bng_resolution_metres(test_case: GetBNGResolutionMetresTestCase) -> None:
     """Test _get_bng_resolution_metres function with test cases from JSON file.
@@ -106,9 +107,9 @@ class GetBNGResolutionLabelTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/bng_reference_test_cases.json")[
-        "_get_bng_resolution_label"
-    ],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "bng_reference_test_cases.json"
+    )["_get_bng_resolution_label"],
 )
 def test__get_bng_resolution_label(test_case: GetBNGResolutionLabelTestCase) -> None:
     """Test _get_bng_resolution_label function with test cases from JSON file.
@@ -139,9 +140,9 @@ class FormatBNGRefStringTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/bng_reference_test_cases.json")[
-        "_format_bng_ref_string"
-    ],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "bng_reference_test_cases.json"
+    )["_format_bng_ref_string"],
 )
 def test__format_bng_ref_string(test_case: FormatBNGRefStringTestCase) -> None:
     """Test _format_bng_ref_string function with test cases from JSON file.
@@ -183,7 +184,9 @@ class BNGReferenceTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/bng_reference_test_cases.json")["BNGReference"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "bng_reference_test_cases.json"
+    )["BNGReference"],
 )
 def test_bngreference(test_case: BNGReferenceTestCase) -> None:
     """Test BNGReference object with test cases from JSON file.

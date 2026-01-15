@@ -17,13 +17,13 @@ from osbng.resolution import BNG_RESOLUTIONS
 
 
 class BNGReferenceError(Exception):
-    """Exception raised for invalid BNG reference strings."""
+    """Raised for invalid BNG reference strings."""
 
     pass
 
 
 class BNGResolutionError(Exception):
-    """Exception raised for unsupported BNG resolutions."""
+    """Raised for unsupported BNG resolutions."""
 
     def __init__(self):
         """Initialise exception with a message listing supported resolutions."""
@@ -40,19 +40,19 @@ class BNGResolutionError(Exception):
 
 
 class BNGHierarchyError(Exception):
-    """Exception raised for invalid parent/child derivation."""
+    """Raised for invalid parent/child derivation."""
 
     pass
 
 
 class BNGNeighbourError(Exception):
-    """Exception raised for invalid neighbour relationships."""
+    """Raised for invalid neighbour relationships."""
 
     pass
 
 
 class BNGExtentError(Exception):
-    """Exception raised for coordinates outside the BNG index system extent.
+    """Raised for coordinates outside the BNG index system extent.
 
     BNG extent defined as 0 <= easting < 700000 and 0 <= northing < 1300000
     """

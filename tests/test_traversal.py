@@ -7,6 +7,7 @@ defined in the utils module. The test cases are defined as TypedDicts, which pro
 way to define the structure of the test case data.
 """
 
+from pathlib import Path
 from typing import TypedDict
 
 import pytest
@@ -44,7 +45,9 @@ class BNGDistanceTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_distance"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "traversal_test_cases.json"
+    )["bng_distance"],
 )
 def test_bng_distance(test_case: BNGDistanceTestCase) -> None:
     """Test bng_distance with test cases from JSON file.
@@ -101,7 +104,9 @@ class BNGIsNeighbourTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_is_neighbour"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "traversal_test_cases.json"
+    )["bng_is_neighbour"],
 )
 def test_bng_is_neighbour(test_case: BNGIsNeighbourTestCase) -> None:
     """Test bng_is_neighbour with test cases from JSON file.
@@ -159,7 +164,9 @@ class BNGKRingTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_kring"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "traversal_test_cases.json"
+    )["bng_kring"],
 )
 def test_bng_kring(test_case: BNGKRingTestCase) -> None:
     """Test bng_kring with test cases from JSON file.
@@ -220,7 +227,9 @@ class BNGKDiscTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_kdisc"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "traversal_test_cases.json"
+    )["bng_kdisc"],
 )
 def test_bng_kdisc(test_case: BNGKDiscTestCase) -> None:
     """Test bng_kdisc with test cases from JSON file.
@@ -278,7 +287,9 @@ class BNGKDWithinTestCase(TypedDict):
 @pytest.mark.parametrize(
     "test_case",
     # Load test cases from JSON file
-    _load_test_cases(file_path="./data/traversal_test_cases.json")["bng_dwithin"],
+    _load_test_cases(
+        file_path=Path(__file__).parent / "data" / "traversal_test_cases.json"
+    )["bng_dwithin"],
 )
 def test_bng_dwithin(test_case: BNGKDWithinTestCase) -> None:
     """Test bng_dwithin with test cases from JSON file.

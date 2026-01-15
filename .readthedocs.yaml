@@ -1,0 +1,26 @@
+# Read the Docs configuration file
+
+# Required
+version: 2
+
+# Set the OS and Python version for the build environment
+build:
+  os: ubuntu-24.04
+  tools:
+    python: "3.14"
+
+# Build documentation in the docs/ directory with Sphinx
+sphinx:
+   configuration: docs/conf.py
+
+# Python requirements to build Sphinx documentation
+# Install from docs extra requirements group in pyproject.toml
+# Corresponds to: pip install .[docs, geopandas]
+python:
+  install:
+    - method: pip
+      path: .
+      extra_requirements: 
+        - docs
+        - geopandas
+        
