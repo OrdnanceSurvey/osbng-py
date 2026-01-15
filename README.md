@@ -18,7 +18,7 @@ Install `osbng` from PyPI using `pip`:
 pip install osbng
 ```
 
-## Complimentary Tools
+## Complementary Tools
 
 * [`osbng-r`](https://github.com/OrdnanceSurvey/osbng-r), an R package with broad parity to the `osbng` Python package.
 * [`osbng-grids`](https://github.com/OrdnanceSurvey/osbng-grids), for BNG grid data in GeoParquet and GeoPackage (GPKG) formats.

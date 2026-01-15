@@ -38,7 +38,7 @@ Install ``osbng`` from PyPI using ``pip``:
 
    pip install osbng
 
-Complimentary Tools
+Complementary Tools
 -------------------
 
 - `osbng-r <https://github.com/OrdnanceSurvey/osbng-r>`_, an R package with broad 
