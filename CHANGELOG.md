@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
   - Encoding easting and northing coordinates into `BNGReference` objects at a specified resolution.
   - Decoding `BNGReference` objects back into coordinates, bounding boxes and grid squares as `Shapely` geometries.
   - Indexing bounding boxes and `Shapely` geometries into grid squares at a specified resolution.
+  - `BNGIndexedGeometry` object representing the decomposition of a `Shapely Geometry` object into BNG grid squares.
   - Optional indexing of geometries in a `GeoPandas GeoDataFrame` into grid squares at a specified resolution.
 - Hierarchy:
   - Returning parents and children of `BNGReference` objects at specified resolutions.
