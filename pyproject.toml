@@ -75,7 +75,7 @@ ci = [
 # Suggested runtime features
 all = [
     "geopandas >= 1.0",
-    "matplotlib >= 3.7"
+    "matplotlib >= 3.7",
     "rasterio >= 1.4"
 ]
 # Complete development environment
