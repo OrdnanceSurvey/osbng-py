@@ -38,6 +38,12 @@ Install ``osbng`` from PyPI using ``pip``:
 
    pip install osbng
 
+Or, install a specific branch from a development version on GitHub using ``pip``:
+
+.. code:: shell
+
+   pip install git+https://github.com/OrdnanceSurvey/osbng-py.git@branch-name
+
 Complementary Tools
 -------------------
 
