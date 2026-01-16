@@ -11,14 +11,23 @@ Note:
 """
 
 try:
-    import rasterio as rio  # noqa: F401
+    import rasterio as rio
 except ImportError as e:
     raise ImportError(
         "The 'rasterio' package is required to use the 'osbng.indexing_rio' module. "
         "Install it with: pip install osbng[rasterio]"
     ) from e
 
+from typing import Self
+
+import numpy as np
 from rasterio import DatasetReader
+from rasterio.coords import BoundingBox
+from rasterio.errors import RasterioIOError
+from rasterio.profiles import Profile
+from rasterio.transform import Affine, guard_transform
+from rasterio.windows import Window, from_bounds
+from rasterio.windows import transform as window_transform
 from shapely.geometry import box
 
 from osbng.bng_reference import BNGReference
@@ -121,3 +130,250 @@ def _validate_crs(src: DatasetReader) -> None:
             "Input raster must be in British National Grid CRS (EPSG:27700). "
             f"CRS found: {src.crs}"
         )
+
+
+class BNGIndexedRaster:
+    """Represents a square BNG grid raster chip.
+
+      BNGIndexedRaster objects are created when an input raster is decomposed at a
+        given BNG resolution.
+
+    Attributes:
+        bng_ref (BNGReference): The BNGReference object for this raster chip.
+        is_core (bool): A boolean flag indicating whether this square BNG grid raster
+          chip is entirely contained by the input raster bounds.
+        transform (rio.transform.Affine): The affine transformation matrix for this
+          raster chip.
+        profile (rio.profiles.Profile): The rasterio profile for this raster chip.
+        count (int): The number of bands in this raster chip.
+        height (int): The height of this raster chip in pixels.
+        width (int): The width of this raster chip in pixels.
+        nodata (int): The nodata value for this raster chip.
+        dtypes (list): The data types of this raster chip's bands.
+        filepath_in (str): The file path to the input raster.
+        bounds_in (rio.coords.BoundingBox): The bounding box of the input raster.
+        res (tuple): The pixel resolution of this raster chip as a (xres, yres) tuple.
+
+    Methods:
+        rst_read(**kwargs) -> np.ndarray:
+            Reads this raster chip's data into memory.
+        rst_write(filepath_out: str, *, read_kw: dict|None=None, **kwargs) -> None:
+            Writes this raster chip to a file.
+        to_record() -> dict:
+            Serialises this BNGIndexedRaster object to a dictionary record.
+        from_record(record: dict) -> Self:
+            Deserialises a BNGIndexedRaster object from a dictionary record.
+
+    See Also:
+        rst_bounds_to_bng: Converts raster bounds to BNGReference list.
+        rst_to_bng_intersection: Converts a raster to a BNGIndexedRaster list.
+        rst_to_bng_intersection_iter: Yields BNGIndexedRaster objects for rasters in a
+          directory.
+        BNGIndexedGeometry: Vector equivalent of this class.
+    """
+
+    def __init__(self, src: DatasetReader | str, bng_ref: BNGReference):
+        """Initializes a BNGIndexedRaster object.
+
+        Args:
+            src (DatasetReader | str): An open rasterio dataset or a file path to a
+              raster.
+            bng_ref (BNGReference): A BNGReference object.
+
+        Raises:
+            RasterCRSError: If the raster is not in the British National Grid CRS
+              (EPSG:27700).
+            BNGRasterExtentError: If the raster bounds are outside the BNG index system
+              extent.
+            RasterIntersectionError: If the raster bounds do not intersect with the
+              BNGReference bounds.
+            RasterResError: If the raster pixels are not square (equal x and y
+              res), or if the raster resolution is not a factor of the BNG resolution.
+            BNGResolutionError: If the raster resolution is not compatible with the
+              target BNG resolution.
+            RasterioIOError: If src is neither a rasterio DatasetReader nor a valid file
+              path string.
+        """
+        if isinstance(src, DatasetReader):
+            self._src = src
+        else:
+            try:
+                self._src = rio.open(src)
+            except Exception:
+                raise RasterioIOError(
+                    "src must be a rasterio DatasetReader or a file path string to a"
+                    " valid raster file."
+                )
+        self._profile = self._src.profile.copy()  # store original profile while open
+        self._in_res = self._src.res
+        self._bng_ref = bng_ref
+        _validate_crs(self._src)
+        _validate_within_extent(self._src)
+        _validate_raster_bounds(self._src, bng_ref)
+        _evaluate_resolution_compatibility(self._src.res, bng_ref.resolution_metres)
+
+        self._src.close()  # close the dataset to avoid open file handles
+
+    def __repr__(self) -> str:
+        """String representation of this BNGIndexedRaster object."""
+        return (
+            "BNGIndexedRaster(src='{self.filepath_in}', "
+            f"bng_ref=BNGReference({self.bng_ref.bng_ref_compact}))"
+        )
+
+    @property
+    def _window(self) -> Window:
+        """The rasterio window object for this raster chip."""
+        return from_bounds(*self.bng_ref.bng_to_bbox(), self._src.transform)
+
+    @property
+    def bng_ref(self) -> BNGReference:
+        """The BNGReference object for this raster chip."""
+        return self._bng_ref
+
+    @property
+    def transform(self) -> Affine:
+        """The affine transformation matrix for this raster chip."""
+        return window_transform(self._window, guard_transform(self._src.transform))
+
+    @property
+    def profile(self) -> Profile:
+        """The rasterio profile for this raster chip."""
+        profile = self._profile
+        profile.update(
+            {"height": self.height, "width": self.width, "transform": self.transform}
+        )
+        return profile
+
+    @property
+    def count(self) -> int:
+        """The number of bands in this raster chip."""
+        return self._src.count
+
+    @property
+    def height(self) -> int:
+        """The height of this raster chip in pixels."""
+        return round(self._window.height)
+
+    @property
+    def width(self) -> int:
+        """The width of this raster chip in pixels."""
+        return round(self._window.width)
+
+    @property
+    def nodata(self) -> int:
+        """The nodata value for this raster chip."""
+        return self._src.nodata
+
+    @property
+    def dtypes(self) -> list:
+        """The data types of this raster chip's bands."""
+        return self._src.dtypes
+
+    @property
+    def filepath_in(self) -> str:
+        """The file path to the input raster."""
+        return self._src.name
+
+    @property
+    def bounds_in(self) -> BoundingBox:
+        """The bounding box of the input raster."""
+        return self._src.bounds
+
+    @property
+    def is_core(self) -> bool:
+        """Whether this BNG raster chip is entirely within the input raster bounds.
+
+        Note that this does not preclude this raster chip from having nodata values.
+        """
+        rst_bbox = box(*self.bounds_in)
+        return rst_bbox.contains(self.bng_ref.bng_to_grid_geom())
+
+    @property
+    def res(self) -> tuple:
+        """The pixel resolution of this raster chip as a (xres, yres) tuple."""
+        return self._src.res
+
+    def rst_read(self, **kwargs) -> np.ndarray:
+        """Reads this raster chip data into memory.
+
+        Keyword Args:
+            **kwargs: Additional keyword arguments to pass to rasterio's read function.
+
+        Returns:
+            np.ndarray: A NumPy array containing the raster chip data.
+
+        """
+        with rio.open(self.filepath_in) as dataset:
+            rst = dataset.read(window=self._window, boundless=True, **kwargs)
+
+        return rst
+
+    def rst_write(
+        self, filepath_out: str, *, read_kw: dict | None = None, **kwargs
+    ) -> None:
+        """Writes this raster chip to a file.
+
+        Args:
+            filepath_out (str): The file path to write this raster chip to.
+
+        Keyword Args:
+            read_kw (dict|None): Additional keyword arguments to pass to rasterio's read
+              function.
+            **kwargs: Additional keyword arguments to pass to rasterio's write function.
+
+        """
+        read_kwargs = read_kw if read_kw else {}
+
+        with rio.open(self.filepath_in) as dataset:
+            rst = dataset.read(window=self._window, boundless=True, **read_kwargs)
+
+            with rio.open(filepath_out, "w", **self.profile) as dst:
+                dst.write(rst, **kwargs)
+        print(f"Raster chip written to {filepath_out}")
+
+    def to_record(self) -> dict:
+        """Serialises this BNGIndexedRaster object to a dictionary record.
+
+        Returns:
+            dict: A dictionary representation of this BNGIndexedRaster object.
+        """
+        record = {
+            "bng_ref": self.bng_ref.bng_ref_compact,
+            "is_core": self.is_core,
+            "transform": {
+                "a": self.transform.a,
+                "b": self.transform.b,
+                "c": self.transform.c,
+                "d": self.transform.d,
+                "e": self.transform.e,
+                "f": self.transform.f,
+            },
+            "count": self.count,
+            "height": self.height,
+            "width": self.width,
+            "nodata": self.nodata,
+            "dtypes": {band: dtype for band, dtype in enumerate(self.dtypes, start=1)},
+            "filepath_in": self.filepath_in,
+            "bounds_in": {
+                "xmin": self.bounds_in.left,
+                "ymin": self.bounds_in.bottom,
+                "xmax": self.bounds_in.right,
+                "ymax": self.bounds_in.top,
+            },
+            "res": self.res[0],
+        }
+        return record
+
+    @classmethod
+    def from_record(cls, record: dict) -> Self:
+        """Deserialises a BNGIndexedRaster object from a dictionary record.
+
+        Args:
+            record (dict): A dictionary representation of a BNGIndexedRaster object.
+
+        Returns:
+            BNGIndexedRaster: The deserialised BNGIndexedRaster object.
+        """
+        bng_ref = BNGReference(record["bng_ref"])
+        return cls(src=record["filepath_in"], bng_ref=bng_ref)
