@@ -227,7 +227,7 @@ class BNGIndexedRaster:
     def __repr__(self) -> str:
         """String representation of this BNGIndexedRaster object."""
         return (
-            "BNGIndexedRaster(src='{self.filepath_in}', "
+            f"BNGIndexedRaster(src='{self.filepath_in}', "
             f"bng_ref=BNGReference({self.bng_ref.bng_ref_compact}))"
         )
 
