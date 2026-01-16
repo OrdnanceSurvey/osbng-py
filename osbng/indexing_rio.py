@@ -25,6 +25,7 @@ from osbng.bng_reference import BNGReference
 from osbng.errors import (
     BNGExtentError,
     BNGResolutionError,
+    RasterCRSError,
     RasterIntersectionError,
     RasterResError,
 )
@@ -103,4 +104,20 @@ def _evaluate_resolution_compatibility(rst_res: tuple, bng_resolution: int) -> N
             f"Input raster resolution {rst_res[0]} m is not a factor of target BNG "
             f"resolution {bng_resolution} m. Please resample/transform the input "
             "raster prior to indexing."
+        )
+
+
+def _validate_crs(src: DatasetReader) -> None:
+    """Validates that the input raster is in the British National Grid CRS (EPSG:27700).
+
+    Args:
+        src (DatasetReader): An open rasterio dataset.
+
+    Raises:
+        RasterCRSError: If the raster's CRS is not EPSG:27700.
+    """
+    if src.crs.to_epsg() != 27700:
+        raise RasterCRSError(
+            "Input raster must be in British National Grid CRS (EPSG:27700). "
+            f"CRS found: {src.crs}"
         )
