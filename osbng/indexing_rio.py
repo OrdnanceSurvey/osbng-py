@@ -21,7 +21,8 @@ except ImportError as e:
 from rasterio import DatasetReader
 from shapely.geometry import box
 
-from osbng.errors import BNGExtentError
+from osbng.bng_reference import BNGReference
+from osbng.errors import BNGExtentError, RasterIntersectionError
 
 
 def _validate_within_extent(src: DatasetReader) -> None:
@@ -38,4 +39,22 @@ def _validate_within_extent(src: DatasetReader) -> None:
     if not rst_bbox.within(bng_extent):
         raise BNGExtentError(
             "The raster bounds are outside the BNG index system extent."
+        )
+
+
+def _validate_raster_bounds(src: DatasetReader, bng_ref: BNGReference) -> None:
+    """Validates that the raster bounds intersect with the BNGReference bounds.
+
+    Args:
+        src (DatasetReader): A rasterio dataset.
+        bng_ref (BNGReference): A BNGReference object.
+
+    Raises:
+        RasterIntersectionError: If the raster bounds do not intersect with the
+        BNGReference bounds.
+    """
+    rst_bbox = box(*src.bounds)
+    if not rst_bbox.intersects(bng_ref.bng_to_grid_geom()):
+        raise RasterIntersectionError(
+            "The raster bounds do not intersect with the BNGReference bounds."
         )
