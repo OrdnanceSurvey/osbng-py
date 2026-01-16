@@ -420,3 +420,39 @@ def rst_bounds_to_bng(
                 "src must be a rasterio DatasetReader or a file path string to a valid"
                 " raster file."
             )
+
+
+def rst_to_bng_intersection(
+    src: DatasetReader | str,
+    resolution: int | str,
+) -> list[BNGIndexedRaster]:
+    """Returns a BNGIndexedRaster list given an input raster and BNG resolution.
+
+    A BNGIndexedRaster object is created for each BNG grid square that intersects with
+    the raster bounds at the specified resolution.
+
+    Args:
+        src (DatasetReader | str): An open rasterio dataset or a file path to a raster.
+        resolution (int | str): The BNG resolution expressed either as a metre-based
+            integer or as a string label.
+
+    Returns:
+        list[BNGIndexedRaster]: A list of BNGIndexedRaster objects covering the raster
+          bounds.
+
+    Raises:
+        RasterCRSError: If the raster is not in the British National Grid CRS
+          (EPSG:27700).
+        BNGRasterExtentError: If the raster bounds are outside the BNG index system
+          extent.
+        RasterResError: If the raster pixels are not square (equal x and y resolution),
+          or if the raster resolution is not a factor of the BNG resolution.
+        BNGResolutionError: If an invalid resolution is provided, or if the raster
+          resolution is not compatible with the target BNG resolution.
+        RasterioIOError: If src is neither a rasterio DatasetReader nor a valid file
+          path string.
+
+    """
+    bng_refs = rst_bounds_to_bng(src, resolution)
+
+    return [BNGIndexedRaster(src, bng_ref) for bng_ref in bng_refs]
