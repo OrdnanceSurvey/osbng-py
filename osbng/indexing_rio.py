@@ -22,7 +22,12 @@ from rasterio import DatasetReader
 from shapely.geometry import box
 
 from osbng.bng_reference import BNGReference
-from osbng.errors import BNGExtentError, RasterIntersectionError
+from osbng.errors import (
+    BNGExtentError,
+    BNGResolutionError,
+    RasterIntersectionError,
+    RasterResError,
+)
 
 
 def _validate_within_extent(src: DatasetReader) -> None:
@@ -57,4 +62,45 @@ def _validate_raster_bounds(src: DatasetReader, bng_ref: BNGReference) -> None:
     if not rst_bbox.intersects(bng_ref.bng_to_grid_geom()):
         raise RasterIntersectionError(
             "The raster bounds do not intersect with the BNGReference bounds."
+        )
+
+
+def _evaluate_resolution_compatibility(rst_res: tuple, bng_resolution: int) -> None:
+    """Evaluates if the raster resolution is compatible with the target BNG resolution.
+
+    Notes:
+        - Raster pixels must be square (equal x and y resolution).
+        - The BNG resolution must be at least twice the raster resolution.
+        - If the raster resolution is not a factor of the BNG resolution, the input
+        raster must be resampled/transformed prior to indexing.
+
+    Args:
+        rst_res (tuple): The raster resolution as a (xres, yres) tuple.
+        bng_resolution (int): The target BNG resolution in metres.
+
+    Raises:
+        RasterResError: If the raster pixels are not square (equal x and y resolution),
+         or if the raster resolution is not a factor of the BNG resolution.
+        BNGResolutionError: If the raster resolution is not compatible with the target
+         BNG resolution.
+    """
+    if rst_res[0] != rst_res[1]:
+        raise RasterResError(
+            "Input raster must have square pixels (equal x and y resolution)."
+        )
+
+    # require that the BNG resolution is at least twice the raster resolution
+    if bng_resolution < 2 * rst_res[0]:
+        raise BNGResolutionError(
+            f"Input raster resolution {rst_res[0]}m is too coarse for target BNG "
+            f"resolution {bng_resolution}m. BNG resolution must be at least twice "
+            "the raster resolution."
+        )
+
+    # check if raster resolution is a factor of BNG resolution
+    if bng_resolution % rst_res[0] != 0:
+        raise RasterResError(
+            f"Input raster resolution {rst_res[0]} m is not a factor of target BNG "
+            f"resolution {bng_resolution} m. Please resample/transform the input "
+            "raster prior to indexing."
         )
