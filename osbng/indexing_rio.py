@@ -38,6 +38,7 @@ from osbng.errors import (
     RasterIntersectionError,
     RasterResError,
 )
+from osbng.indexing import bbox_to_bng
 
 
 def _validate_within_extent(src: DatasetReader) -> None:
@@ -377,3 +378,45 @@ class BNGIndexedRaster:
         """
         bng_ref = BNGReference(record["bng_ref"])
         return cls(src=record["filepath_in"], bng_ref=bng_ref)
+
+
+def rst_bounds_to_bng(
+    src: DatasetReader | str, resolution: int | str
+) -> list[BNGReference]:
+    """Returns a BNGReference list given the BNG resolution and the raster's bounds.
+
+    A BNGReference object is created for each BNG grid square that intersects with
+    the raster bounds at the specified resolution.
+
+    Args:
+        src (DatasetReader | str): An open rasterio dataset or a file path to a raster.
+        resolution (int | str): The BNG resolution expressed either as a metre-based
+            integer or as a string label.
+
+    Returns:
+        list[BNGReference]: A list of BNGReference objects covering the raster bounds.
+
+    Raises:
+        RasterCRSError: If the raster is not in the British National Grid CRS
+          (EPSG:27700).
+        BNGRasterExtentError: If the raster bounds are outside the BNG index system
+          extent.
+        BNGResolutionError: If an invalid resolution is provided.
+        RasterioIOError: If src is neither a rasterio DatasetReader nor a valid file
+          path string.
+    """
+    if isinstance(src, DatasetReader):
+        _validate_crs(src)
+        _validate_within_extent(src)
+        return bbox_to_bng(*src.bounds, resolution)
+    else:
+        try:
+            with rio.open(src) as dataset:
+                _validate_crs(dataset)
+                _validate_within_extent(dataset)
+                return bbox_to_bng(*dataset.bounds, resolution)
+        except Exception:
+            raise RasterioIOError(
+                "src must be a rasterio DatasetReader or a file path string to a valid"
+                " raster file."
+            )
