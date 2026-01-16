@@ -18,7 +18,9 @@ except ImportError as e:
         "Install it with: pip install osbng[rasterio]"
     ) from e
 
-from typing import Self
+import glob
+import os
+from typing import Iterator, Self
 
 import numpy as np
 from rasterio import DatasetReader
@@ -456,3 +458,89 @@ def rst_to_bng_intersection(
     bng_refs = rst_bounds_to_bng(src, resolution)
 
     return [BNGIndexedRaster(src, bng_ref) for bng_ref in bng_refs]
+
+
+def rst_to_bng_intersection_iter(
+    dir_path: str,
+    resolution: int | str,
+    *,
+    filename_glob: str = "*.tif*",
+    recursive: bool = False,
+    as_records: bool = False,
+) -> Iterator[BNGIndexedRaster] | Iterator[dict]:
+    """Yields chipped BNGIndexedRaster objects from a directory of raster files.
+
+    For each raster file found in the specified directory (matching the optional glob
+    pattern), this function identifies the BNG grid squares that intersect with the
+    raster's bounds at the specified resolution. It then yields a BNGIndexedRaster
+    object for each intersecting grid square.
+
+    Notes:
+        This function will yield separate BNGIndexedRaster objects for each raster file
+          found in the specified directory, even if a BNG grid square spans multiple
+          raster files.
+
+    Args:
+        dir_path (str): The directory containing raster files to be processed.
+        resolution (int|str): The BNG resolution expressed either as a metre-based
+            integer or as a string label.
+
+    Keyword Args:
+        filename_glob (str): An optional glob pattern to match specific raster files in
+          the directory. Defaults to *.tif*
+        recursive (bool): Whether to search for files recursively in subdirectories.
+          Defaults to False.
+        as_records (bool): If True, yields dictionary records instead of
+          BNGIndexedRaster objects. Defaults to False.
+
+    Yields:
+        Iterator[BNGIndexedRaster]|Iterator[dict]: An iterator yielding BNGIndexedRaster
+          objects, or dictionary records if as_records is True.
+
+    Raises:
+        NotADirectoryError: If the provided path is not a valid directory.
+        FileNotFoundError: If no raster files are found in the directory.
+        RasterCRSError: If the raster is not in the British National Grid CRS
+          (EPSG:27700).
+        BNGRasterExtentError: If the raster bounds are outside the BNG index system
+          extent.
+        RasterResError: If the raster pixels are not square (equal x and y resolution),
+          or if the raster resolution is not a factor of the BNG resolution.
+        BNGResolutionError: If an invalid resolution is provided, or if the raster
+          resolution is not compatible with the target BNG resolution.
+
+    """
+    if not os.path.isdir(dir_path):
+        raise NotADirectoryError(
+            f"The provided path '{dir_path}' is not a valid directory."
+        )
+
+    bng_refs = []
+    glob_pattern = filename_glob if filename_glob else "*.tif*"
+    # Iterate over all .tif and .tif* files in the directory
+    files = glob.iglob(dir_path + "/" + glob_pattern, recursive=recursive)
+
+    # identify if any files exist
+    try:
+        with rio.open(next(files)) as dataset:
+            bng_refs = rst_bounds_to_bng(dataset, resolution)
+            for bng_ref in bng_refs:
+                if as_records:
+                    yield BNGIndexedRaster(dataset, bng_ref).to_record()
+                else:
+                    yield BNGIndexedRaster(dataset, bng_ref)
+    except StopIteration:
+        raise FileNotFoundError(
+            f"No raster files found in directory '{dir_path}' "
+            f"matching pattern '{glob_pattern}'."
+        )
+
+    # continue with remaining files
+    for raster_file in files:
+        with rio.open(raster_file) as dataset:
+            bng_refs = rst_bounds_to_bng(dataset, resolution)
+            for bng_ref in bng_refs:
+                if as_records:
+                    yield BNGIndexedRaster(dataset, bng_ref).to_record()
+                else:
+                    yield BNGIndexedRaster(dataset, bng_ref)
