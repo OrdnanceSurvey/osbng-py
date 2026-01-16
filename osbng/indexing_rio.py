@@ -42,6 +42,13 @@ from osbng.errors import (
 )
 from osbng.indexing import bbox_to_bng
 
+__all__ = [
+    "BNGIndexedRaster",
+    "rst_bounds_to_bng",
+    "rst_to_bng_intersection",
+    "rst_to_bng_intersection_iter",
+]
+
 
 def _validate_within_extent(src: DatasetReader) -> None:
     """Validates that coordinates are within the bounds of the BNG index system extent.
