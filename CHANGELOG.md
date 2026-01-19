@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.1] - 2026-01-19
+
+### Fixed
+
+- Corrected the documentation URL in PyPI metadata to point to the proper Read the Docs location.
+
 ## [0.5.0] - 2026-01-19
 
 ### Added
