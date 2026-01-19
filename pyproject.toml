@@ -38,7 +38,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://github.com/OrdnanceSurvey/osbng-py"
-Documentation = "https://osbng.readthedocs.io/"
+Documentation = "https://osbng-py.readthedocs.io/en/stable/"
 Repository = "https://github.com/OrdnanceSurvey/osbng-py"
 
 [project.optional-dependencies]
