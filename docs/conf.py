@@ -74,4 +74,5 @@ intersphinx_mapping = {
     "numpy": ("https://numpy.org/doc/stable/", "inventories/numpy.inv"),
     "shapely": ("https://shapely.readthedocs.io/en/stable/", "inventories/shapely.inv"),
     "geopandas": ("https://geopandas.org/en/stable/", "inventories/geopandas.inv"),
+    "rasterio": ("https://rasterio.readthedocs.io/en/stable/", None),
 }

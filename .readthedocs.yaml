@@ -15,7 +15,7 @@ sphinx:
 
 # Python requirements to build Sphinx documentation
 # Install from docs extra requirements group in pyproject.toml
-# Corresponds to: pip install .[docs, geopandas]
+# Corresponds to: pip install .[docs, geopandas, rasterio]
 python:
   install:
     - method: pip
@@ -23,4 +23,5 @@ python:
       extra_requirements: 
         - docs
         - geopandas
+        - rasterio
         

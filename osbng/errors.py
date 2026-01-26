@@ -12,11 +12,11 @@ Custom exceptions:
 - **BNGReferenceError**: Raised when an invalid BNG reference string is provided.
 - **BNGResolutionError**: Raised when an invalid BNG resolution is provided.
 - **RasterCRSError**: Raised when a raster is not in the British National Grid CRS
- (EPSG:27700).
+  (EPSG:27700).
 - **RasterIntersectionError**: Raised when a raster does not intersect with the
- BNGReference bounds.
+  BNGReference bounds.
 - **RasterResError**: Raised when the raster res does not tesselate within the BNG grid
- square.
+  square.
 """
 
 from osbng.resolution import BNG_RESOLUTIONS

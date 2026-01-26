@@ -12,6 +12,7 @@
    pages/resolution
    pages/indexing
    pages/indexing_gpd
+   pages/indexing_rio
    pages/hierarchy
    pages/traversal
    pages/grids

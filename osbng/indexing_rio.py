@@ -1,7 +1,7 @@
-"""Index rasters in Rasterio DatasetReader objects against the BNG index system.
+"""Index rasters in ``Rasterio`` ``DatasetReader`` objects against the BNG index system.
 
 Note:
-    This module requires the 'Rasterio' (https://github.com/rasterio/rasterio)
+    This module requires the `Rasterio <https://github.com/rasterio/rasterio>`__
     package to be installed.
 
     To install the required package, use:
@@ -54,7 +54,7 @@ def _validate_within_extent(src: DatasetReader) -> None:
     """Validates that coordinates are within the bounds of the BNG index system extent.
 
     Args:
-        src (DatasetReader): A rasterio dataset.
+        src (DatasetReader): A Rasterio dataset.
 
     Raises:
         BNGExtentError: If the raster bounds are outside the BNG index system extent.
@@ -71,7 +71,7 @@ def _validate_raster_bounds(src: DatasetReader, bng_ref: BNGReference) -> None:
     """Validates that the raster bounds intersect with the BNGReference bounds.
 
     Args:
-        src (DatasetReader): A rasterio dataset.
+        src (DatasetReader): A Rasterio dataset.
         bng_ref (BNGReference): A BNGReference object.
 
     Raises:
@@ -130,7 +130,7 @@ def _validate_crs(src: DatasetReader) -> None:
     """Validates that the input raster is in the British National Grid CRS (EPSG:27700).
 
     Args:
-        src (DatasetReader): An open rasterio dataset.
+        src (DatasetReader): An open Rasterio dataset.
 
     Raises:
         RasterCRSError: If the raster's CRS is not EPSG:27700.
@@ -145,16 +145,17 @@ def _validate_crs(src: DatasetReader) -> None:
 class BNGIndexedRaster:
     """Represents a square BNG grid raster chip.
 
-      BNGIndexedRaster objects are created when an input raster is decomposed at a
+      ``BNGIndexedRaster`` objects are created when an input raster is decomposed at a
         given BNG resolution.
 
     Attributes:
-        bng_ref (BNGReference): The BNGReference object for this raster chip.
+        bng_ref (BNGReference): The :class:`~osbng.bng_reference.BNGReference` object
+        for this raster chip.
         is_core (bool): A boolean flag indicating whether this square BNG grid raster
           chip is entirely contained by the input raster bounds.
         transform (rio.transform.Affine): The affine transformation matrix for this
           raster chip.
-        profile (rio.profiles.Profile): The rasterio profile for this raster chip.
+        profile (rio.profiles.Profile): The Rasterio profile for this raster chip.
         count (int): The number of bands in this raster chip.
         height (int): The height of this raster chip in pixels.
         width (int): The width of this raster chip in pixels.
@@ -170,39 +171,39 @@ class BNGIndexedRaster:
         rst_write(filepath_out: str, *, read_kw: dict|None=None, **kwargs) -> None:
             Writes this raster chip to a file.
         to_record() -> dict:
-            Serialises this BNGIndexedRaster object to a dictionary record.
+            Serialises this ``BNGIndexedRaster`` object to a dictionary record.
         from_record(record: dict) -> Self:
-            Deserialises a BNGIndexedRaster object from a dictionary record.
+            Deserialises a ``BNGIndexedRaster`` object from a dictionary record.
 
     See Also:
-        rst_bounds_to_bng: Converts raster bounds to BNGReference list.
-        rst_to_bng_intersection: Converts a raster to a BNGIndexedRaster list.
-        rst_to_bng_intersection_iter: Yields BNGIndexedRaster objects for rasters in a
-          directory.
+        rst_bounds_to_bng: Converts raster bounds to ``BNGReference`` list.
+        rst_to_bng_intersection: Converts a raster to a ``BNGIndexedRaster`` list.
+        rst_to_bng_intersection_iter: Yields ``BNGIndexedRaster`` objects for
+        rasters in a directory.
         BNGIndexedGeometry: Vector equivalent of this class.
     """
 
     def __init__(self, src: DatasetReader | str, bng_ref: BNGReference):
-        """Initializes a BNGIndexedRaster object.
+        """Initialises a ``BNGIndexedRaster`` object.
 
         Args:
-            src (DatasetReader | str): An open rasterio dataset or a file path to a
-              raster.
-            bng_ref (BNGReference): A BNGReference object.
+            src (rasterio.io.DatasetReader | str): An open Rasterio dataset or a file
+              path to a raster.
+            bng_ref (BNGReference): A :class:`~osbng.bng_reference.BNGReference` object.
 
         Raises:
             RasterCRSError: If the raster is not in the British National Grid CRS
               (EPSG:27700).
-            BNGRasterExtentError: If the raster bounds are outside the BNG index system
+            BNGExtentError: If the raster bounds are outside the BNG index system
               extent.
             RasterIntersectionError: If the raster bounds do not intersect with the
-              BNGReference bounds.
+              ``BNGReference`` bounds.
             RasterResError: If the raster pixels are not square (equal x and y
               res), or if the raster resolution is not a factor of the BNG resolution.
             BNGResolutionError: If the raster resolution is not compatible with the
               target BNG resolution.
-            RasterioIOError: If src is neither a rasterio DatasetReader nor a valid file
-              path string.
+            :class:`~rasterio.errors.RasterioIOError`: If ``src`` is neither a Rasterio
+              ``DatasetReader`` nor a valid file path string.
         """
         if isinstance(src, DatasetReader):
             self._src = src
@@ -211,8 +212,8 @@ class BNGIndexedRaster:
                 self._src = rio.open(src)
             except Exception:
                 raise RasterioIOError(
-                    "src must be a rasterio DatasetReader or a file path string to a"
-                    " valid raster file."
+                    "src must be a Rasterio ``DatasetReader`` or a file path string to"
+                    " a valid raster file."
                 )
         self._profile = self._src.profile.copy()  # store original profile while open
         self._in_res = self._src.res
@@ -225,7 +226,7 @@ class BNGIndexedRaster:
         self._src.close()  # close the dataset to avoid open file handles
 
     def __repr__(self) -> str:
-        """String representation of this BNGIndexedRaster object."""
+        """String representation of this ``BNGIndexedRaster`` object."""
         return (
             f"BNGIndexedRaster(src='{self.filepath_in}', "
             f"bng_ref=BNGReference({self.bng_ref.bng_ref_compact}))"
@@ -233,12 +234,12 @@ class BNGIndexedRaster:
 
     @property
     def _window(self) -> Window:
-        """The rasterio window object for this raster chip."""
+        """The Rasterio window object for this raster chip."""
         return from_bounds(*self.bng_ref.bng_to_bbox(), self._src.transform)
 
     @property
     def bng_ref(self) -> BNGReference:
-        """The BNGReference object for this raster chip."""
+        """The ``BNGReference`` object for this raster chip."""
         return self._bng_ref
 
     @property
@@ -248,7 +249,7 @@ class BNGIndexedRaster:
 
     @property
     def profile(self) -> Profile:
-        """The rasterio profile for this raster chip."""
+        """The Rasterio profile for this raster chip."""
         profile = self._profile
         profile.update(
             {"height": self.height, "width": self.width, "transform": self.transform}
@@ -308,7 +309,7 @@ class BNGIndexedRaster:
         """Reads this raster chip data into memory.
 
         Keyword Args:
-            **kwargs: Additional keyword arguments to pass to rasterio's read function.
+            **kwargs: Additional keyword arguments to pass to Rasterio's read function.
 
         Returns:
             np.ndarray: A NumPy array containing the raster chip data.
@@ -328,9 +329,9 @@ class BNGIndexedRaster:
             filepath_out (str): The file path to write this raster chip to.
 
         Keyword Args:
-            read_kw (dict|None): Additional keyword arguments to pass to rasterio's read
+            read_kw (dict|None): Additional keyword arguments to pass to Rasterio's read
               function.
-            **kwargs: Additional keyword arguments to pass to rasterio's write function.
+            **kwargs: Additional keyword arguments to pass to Rasterio's write function.
 
         """
         read_kwargs = read_kw if read_kw else {}
@@ -343,10 +344,14 @@ class BNGIndexedRaster:
         print(f"Raster chip written to {filepath_out}")
 
     def to_record(self) -> dict:
-        """Serialises this BNGIndexedRaster object to a dictionary record.
+        """Serialises this ``BNGIndexedRaster`` object to a record.
 
         Returns:
-            dict: A dictionary representation of this BNGIndexedRaster object.
+            dict: A dictionary representation of this
+            ``BNGIndexedRaster`` object.
+
+        See Also:
+            from_record: Deserialises a ``BNGIndexedRaster`` object from a record.
         """
         record = {
             "bng_ref": self.bng_ref.bng_ref_compact,
@@ -377,13 +382,17 @@ class BNGIndexedRaster:
 
     @classmethod
     def from_record(cls, record: dict) -> Self:
-        """Deserialises a BNGIndexedRaster object from a dictionary record.
+        """Deserialises a ``BNGIndexedRaster`` object from a record.
 
         Args:
-            record (dict): A dictionary representation of a BNGIndexedRaster object.
+            record (dict): A dictionary representation of a
+            ``BNGIndexedRaster`` object.
 
         Returns:
-            BNGIndexedRaster: The deserialised BNGIndexedRaster object.
+            BNGIndexedRaster: The deserialised ``BNGIndexedRaster`` object.
+
+        See Also:
+            to_record: Serialises this ``BNGIndexedRaster`` object to a record.
         """
         bng_ref = BNGReference(record["bng_ref"])
         return cls(src=record["filepath_in"], bng_ref=bng_ref)
@@ -392,27 +401,29 @@ class BNGIndexedRaster:
 def rst_bounds_to_bng(
     src: DatasetReader | str, resolution: int | str
 ) -> list[BNGReference]:
-    """Returns a BNGReference list given the BNG resolution and the raster's bounds.
+    """Returns a ``BNGReference`` list given the BNG resolution and the raster's bounds.
 
-    A BNGReference object is created for each BNG grid square that intersects with
-    the raster bounds at the specified resolution.
+    A :class:`~osbng.bng_reference.BNGReference` object is created for each BNG grid
+    square that intersects with the raster bounds at the specified resolution.
 
     Args:
-        src (DatasetReader | str): An open rasterio dataset or a file path to a raster.
+        src (rasterio.io.DatasetReader | str): An open Rasterio dataset or a file path
+          to a raster.
         resolution (int | str): The BNG resolution expressed either as a metre-based
             integer or as a string label.
 
     Returns:
-        list[BNGReference]: A list of BNGReference objects covering the raster bounds.
+        list[BNGReference]: A list of ``BNGReference`` objects covering the raster
+        bounds.
 
     Raises:
         RasterCRSError: If the raster is not in the British National Grid CRS
           (EPSG:27700).
-        BNGRasterExtentError: If the raster bounds are outside the BNG index system
+        BNGExtentError: If the raster bounds are outside the BNG index system
           extent.
         BNGResolutionError: If an invalid resolution is provided.
-        RasterioIOError: If src is neither a rasterio DatasetReader nor a valid file
-          path string.
+        :class:`~rasterio.errors.RasterioIOError`: If ``src`` is neither a Rasterio
+          ``DatasetReader`` nor a valid file path string.
     """
     if isinstance(src, DatasetReader):
         _validate_crs(src)
@@ -426,8 +437,8 @@ def rst_bounds_to_bng(
                 return bbox_to_bng(*dataset.bounds, resolution)
         except Exception:
             raise RasterioIOError(
-                "src must be a rasterio DatasetReader or a file path string to a valid"
-                " raster file."
+                "src must be a Rasterio ``DatasetReader`` or a file path string to a "
+                "valid raster file."
             )
 
 
@@ -435,31 +446,32 @@ def rst_to_bng_intersection(
     src: DatasetReader | str,
     resolution: int | str,
 ) -> list[BNGIndexedRaster]:
-    """Returns a BNGIndexedRaster list given an input raster and BNG resolution.
+    """Returns a ``BNGIndexedRaster`` list given an input raster and BNG resolution.
 
-    A BNGIndexedRaster object is created for each BNG grid square that intersects with
-    the raster bounds at the specified resolution.
+    A :class:`~osbng.indexing_rio.BNGIndexedRaster` object is created for each BNG
+    grid square that intersects with the raster bounds at the specified resolution.
 
     Args:
-        src (DatasetReader | str): An open rasterio dataset or a file path to a raster.
+        src (rasterio.io.DatasetReader | str): An open Rasterio dataset or a file path
+          to a raster.
         resolution (int | str): The BNG resolution expressed either as a metre-based
             integer or as a string label.
 
     Returns:
-        list[BNGIndexedRaster]: A list of BNGIndexedRaster objects covering the raster
-          bounds.
+        list[BNGIndexedRaster]: A list of ``BNGIndexedRaster`` objects covering the
+        raster bounds.
 
     Raises:
         RasterCRSError: If the raster is not in the British National Grid CRS
           (EPSG:27700).
-        BNGRasterExtentError: If the raster bounds are outside the BNG index system
+        BNGExtentError: If the raster bounds are outside the BNG index system
           extent.
         RasterResError: If the raster pixels are not square (equal x and y resolution),
           or if the raster resolution is not a factor of the BNG resolution.
         BNGResolutionError: If an invalid resolution is provided, or if the raster
           resolution is not compatible with the target BNG resolution.
-        RasterioIOError: If src is neither a rasterio DatasetReader nor a valid file
-          path string.
+        :class:`~rasterio.errors.RasterioIOError`: If ``src`` is neither a Rasterio
+          ``DatasetReader`` nor a valid file path string.
 
     """
     bng_refs = rst_bounds_to_bng(src, resolution)
@@ -475,17 +487,18 @@ def rst_to_bng_intersection_iter(
     recursive: bool = False,
     as_records: bool = False,
 ) -> Iterator[BNGIndexedRaster] | Iterator[dict]:
-    """Yields chipped BNGIndexedRaster objects from a directory of raster files.
+    """Yields chipped ``BNGIndexedRaster`` objects from a directory of raster files.
 
     For each raster file found in the specified directory (matching the optional glob
     pattern), this function identifies the BNG grid squares that intersect with the
-    raster's bounds at the specified resolution. It then yields a BNGIndexedRaster
-    object for each intersecting grid square.
+    raster's bounds at the specified resolution. It then yields a
+    :class:`~osbng.indexing_rio.BNGIndexedRaster` object for each intersecting grid
+    square.
 
     Notes:
-        This function will yield separate BNGIndexedRaster objects for each raster file
-          found in the specified directory, even if a BNG grid square spans multiple
-          raster files.
+        This function will yield separate ``BNGIndexedRaster``
+        objects for each raster file found in the specified directory, even if a BNG
+        grid square spans multiple raster files.
 
     Args:
         dir_path (str): The directory containing raster files to be processed.
@@ -498,24 +511,23 @@ def rst_to_bng_intersection_iter(
         recursive (bool): Whether to search for files recursively in subdirectories.
           Defaults to False.
         as_records (bool): If True, yields dictionary records instead of
-          BNGIndexedRaster objects. Defaults to False.
+          ``BNGIndexedRaster`` objects. Defaults to False.
 
     Yields:
-        Iterator[BNGIndexedRaster]|Iterator[dict]: An iterator yielding BNGIndexedRaster
-          objects, or dictionary records if as_records is True.
+        ``BNGIndexedRaster`` | dict: ``BNGIndexedRaster`` objects, or dictionary
+        records if ``as_records`` is True.
 
     Raises:
         NotADirectoryError: If the provided path is not a valid directory.
         FileNotFoundError: If no raster files are found in the directory.
         RasterCRSError: If the raster is not in the British National Grid CRS
           (EPSG:27700).
-        BNGRasterExtentError: If the raster bounds are outside the BNG index system
+        BNGExtentError: If the raster bounds are outside the BNG index system
           extent.
         RasterResError: If the raster pixels are not square (equal x and y resolution),
           or if the raster resolution is not a factor of the BNG resolution.
         BNGResolutionError: If an invalid resolution is provided, or if the raster
           resolution is not compatible with the target BNG resolution.
-
     """
     if not os.path.isdir(dir_path):
         raise NotADirectoryError(
