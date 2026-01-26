@@ -112,6 +112,40 @@ The following example indexes the boundaries for the 'London' and 'South West' R
 [1415 rows x 10 columns]
 ```
 
+### Indexing Rasterio (rio)
+
+Optional functionality is available when the [`Rasterio`](https://github.com/rasterio/rasterio) package is installed. This enables indexing of rasters against the BNG index system. This includes:
+
+* A custom `BNGIndexedRaster` object representing the decomposition of a raster within the BNG grid extent into square grid chips. Rasters and chips are not read into memory until necessary, making it easier to work with large volumes of data.
+* Returning `BNGReference` objects for each grid square a raster's bounds intersect.
+* Returning a list of `BNGIndexedRaster` objects at a given resolution for an input raster.
+* Providing an iterator of `BNGIndexedRaster` objects created for all raster files matching a given naming convention within a directory.
+* Serialising and deserialising of `BNGIndexedRaster` objects into dictionary records.
+
+The following example indexes a [Terrain50](https://docs.os.uk/os-downloads/products/land-and-terrain-portfolio/os-terrain-50) file found in the data folder, creating a Pandas ``DataFrame`` to store the metadata about the resulting chips:
+
+``` python
+>>> from osbng.indexing_rio import rst_to_bng_intersection_iter
+>>> import pandas as pd
+>>> raster_dir = "docs/examples/data/"
+>>> chips = rst_to_bng_intersection_iter(
+... raster_dir, 1000, filename_glob="*.asc", as_records=True
+... )
+>>> pd.DataFrame(chips)
+	bng_ref	is_core	transform	count	height	width	nodata	dtypes	filepath_in	bounds_in	res
+0	TQ3070	True	{'a': 50.0, 'b': 0.0, 'c': 530000.0, 'd': 0.0,...	1	20	20	None	{1: 'float32'}	../data\TQ37.asc	{'xmin': 530000.0, 'ymin': 170000.0, 'xmax': 5...	50.0
+1	TQ3170	True	{'a': 50.0, 'b': 0.0, 'c': 531000.0, 'd': 0.0,...	1	20	20	None	{1: 'float32'}	../data\TQ37.asc	{'xmin': 530000.0, 'ymin': 170000.0, 'xmax': 5...	50.0
+2	TQ3270	True	{'a': 50.0, 'b': 0.0, 'c': 532000.0, 'd': 0.0,...	1	20	20	None	{1: 'float32'}	../data\TQ37.asc	{'xmin': 530000.0, 'ymin': 170000.0, 'xmax': 5...	50.0
+3	TQ3370	True	{'a': 50.0, 'b': 0.0, 'c': 533000.0, 'd': 0.0,...	1	20	20	None	{1: 'float32'}	../data\TQ37.asc	{'xmin': 530000.0, 'ymin': 170000.0, 'xmax': 5...	50.0
+4	TQ3470	True	{'a': 50.0, 'b': 0.0, 'c': 534000.0, 'd': 0.0,...	1	20	20	None	{1: 'float32'}	../data\TQ37.asc	{'xmin': 530000.0, 'ymin': 170000.0, 'xmax': 5...	50.0
+...	...	...	...	...	...	...	...	...	...	...	...
+95	TQ3579	True	{'a': 50.0, 'b': 0.0, 'c': 535000.0, 'd': 0.0,...	1	20	20	None	{1: 'float32'}	../data\TQ37.asc	{'xmin': 530000.0, 'ymin': 170000.0, 'xmax': 5...	50.0
+96	TQ3679	True	{'a': 50.0, 'b': 0.0, 'c': 536000.0, 'd': 0.0,...	1	20	20	None	{1: 'float32'}	../data\TQ37.asc	{'xmin': 530000.0, 'ymin': 170000.0, 'xmax': 5...	50.0
+97	TQ3779	True	{'a': 50.0, 'b': 0.0, 'c': 537000.0, 'd': 0.0,...	1	20	20	None	{1: 'float32'}	../data\TQ37.asc	{'xmin': 530000.0, 'ymin': 170000.0, 'xmax': 5...	50.0
+98	TQ3879	True	{'a': 50.0, 'b': 0.0, 'c': 538000.0, 'd': 0.0,...	1	20	20	None	{1: 'float32'}	../data\TQ37.asc	{'xmin': 530000.0, 'ymin': 170000.0, 'xmax': 5...	50.0
+99	TQ3979	True	{'a': 50.0, 'b': 0.0, 'c': 539000.0, 'd': 0.0,...	1	20	20	None	{1: 'float32'}	../data\TQ37.asc	{'xmin': 530000.0, 'ymin': 170000.0, 'xmax': 5...	50.0
+```
+
 ### Hierarchy
 
 Provides functionality to navigate the hierarchical structure of the BNG index system. This includes:
