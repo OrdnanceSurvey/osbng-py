@@ -314,6 +314,17 @@ class BNGIndexedRaster:
         Returns:
             np.ndarray: A NumPy array containing the raster chip data.
 
+        Examples:
+            >>> from osbng import BNGReference
+            >>> from osbng.indexing_rio import BNGIndexedRaster
+            >>> terrain_path = "../data/TQ37.asc"
+            >>> raster_chip = BNGIndexedRaster(
+            ...     src=terrain_path, bng_ref=BNGReference("TQ373750")
+            ... )
+            >>> raster_chip.rst_read()
+            array([[[30.9, 28.9],
+            [27.3, 25.5]]], dtype=float32)
+
         """
         with rio.open(self.filepath_in) as dataset:
             rst = dataset.read(window=self._window, boundless=True, **kwargs)
@@ -359,6 +370,34 @@ class BNGIndexedRaster:
             dict: A dictionary representation of this
             ``BNGIndexedRaster`` object.
 
+        Examples:
+            >>> from osbng import BNGReference
+            >>> from osbng.indexing_rio import BNGIndexedRaster
+            >>> terrain_path = "../data/TQ37.asc"
+            >>> raster_chip = BNGIndexedRaster(
+            ...     src=terrain_path, bng_ref=BNGReference("TQ373750")
+            ... )
+            >>> raster_chip.to_record()
+            {'bng_ref': 'TQ373750',
+            'is_core': True,
+            'transform': {'a': 50.0,
+            'b': 0.0,
+            'c': np.float64(537300.0),
+            'd': 0.0,
+            'e': -50.0,
+            'f': np.float64(175100.0)},
+            'count': 1,
+            'height': 2,
+            'width': 2,
+            'nodata': None,
+            'dtypes': {1: 'float32'},
+            'filepath_in': "../data/TQ37.asc",
+            'bounds_in': {'xmin': 530000.0,
+            'ymin': 170000.0,
+            'xmax': 540000.0,
+            'ymax': 180000.0},
+            'res': 50.0}
+
         See Also:
             from_record: Deserialises a ``BNGIndexedRaster`` object from a record.
         """
@@ -400,6 +439,15 @@ class BNGIndexedRaster:
         Returns:
             BNGIndexedRaster: The deserialised ``BNGIndexedRaster`` object.
 
+        Examples:
+            >>> from osbng import BNGReference
+            >>> from osbng.indexing_rio import BNGIndexedRaster
+            >>> terrain_path = "../data/TQ37.asc"
+            >>> BNGIndexedRaster.from_record(
+            ...     {"bng_ref": "TQ373750", "filepath_in": terrain_path}
+            ... )
+            BNGIndexedRaster(src='../data/TQ37.asc', bng_ref=BNGReference(TQ373750))
+
         See Also:
             to_record: Serialises this ``BNGIndexedRaster`` object to a record.
         """
@@ -433,6 +481,16 @@ def rst_bounds_to_bng(
         BNGResolutionError: If an invalid resolution is provided.
         :class:`~rasterio.errors.RasterioIOError`: If ``src`` is neither a Rasterio
           ``DatasetReader`` nor a valid file path string.
+
+    Examples:
+        >>> from osbng import rst_bounds_to_bng
+        >>> terrain_path = "../data/TQ37.asc"
+        >>> for g in rst_bounds_to_bng(terrain_path, "5km"):
+        ...     print(g)
+        BNGReference(bng_ref_formatted=TQ 3 7 SW, resolution_label=5km)
+        BNGReference(bng_ref_formatted=TQ 3 7 SE, resolution_label=5km)
+        BNGReference(bng_ref_formatted=TQ 3 7 NW, resolution_label=5km)
+        BNGReference(bng_ref_formatted=TQ 3 7 NE, resolution_label=5km)
     """
     if isinstance(src, DatasetReader):
         _validate_crs(src)
@@ -481,6 +539,15 @@ def rst_to_bng_intersection(
           resolution is not compatible with the target BNG resolution.
         :class:`~rasterio.errors.RasterioIOError`: If ``src`` is neither a Rasterio
           ``DatasetReader`` nor a valid file path string.
+
+    Examples:
+        >>> from osbng import rst_to_bng_intersection
+        >>> terrain_path = "../data/TQ37.asc"
+        >>> rst_to_bng_intersection(terrain_path, "5km")
+        [BNGIndexedRaster(src='../data/TQ37.asc', bng_ref=BNGReference(TQ37SW)),
+        BNGIndexedRaster(src='../data/TQ37.asc', bng_ref=BNGReference(TQ37SE)),
+        BNGIndexedRaster(src='../data/TQ37.asc', bng_ref=BNGReference(TQ37NW)),
+        BNGIndexedRaster(src='../data/TQ37.asc', bng_ref=BNGReference(TQ37NE))]
 
     """
     bng_refs = rst_bounds_to_bng(src, resolution)
@@ -537,6 +604,18 @@ def rst_to_bng_intersection_iter(
           or if the raster resolution is not a factor of the BNG resolution.
         BNGResolutionError: If an invalid resolution is provided, or if the raster
           resolution is not compatible with the target BNG resolution.
+
+    Examples:
+        >>> from osbng import rst_to_bng_intersection_iter
+        >>> folder_path = "../data/"
+        >>> for rst in rst_to_bng_intersection_iter(
+        ...     folder, "5km", filename_glob="*asc"
+        ... ):
+        ...     print(rst.bng_ref.bng_ref_compact)
+        TQ37SW
+        TQ37SE
+        TQ37NW
+        TQ37NE
     """
     if not os.path.isdir(dir_path):
         raise NotADirectoryError(
