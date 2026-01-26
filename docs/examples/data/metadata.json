@@ -1,4 +1,5 @@
-{
+[
+    {
     "dataset": "Regions (December 2024) Boundaries EN BFC",
     "description": "This file contains the digital vector boundaries for Regions in England as at December 2024",
     "version": "December 2024",
@@ -21,3 +22,28 @@
         "url": "https://epsg.io/27700"
     }
 }
+,
+{
+    "dataset": "OS Terrain 50: TQ37",
+    "description": "This ASCII Grid (with accompanying GML/PRJ files) contains a 50m-resolution DTM product for the TQ37 100km square in Great Britain.",
+    "version": "July 2025",
+    "author": "Ordnance Survey",
+    "source": {
+        "name": "Ordnance Survey Data Hub",
+        "url": "https://osdatahub.os.uk/"
+    },
+    "file": {
+        "format": "ASCII Grid",
+        "name": "TQ37.asc"
+    },
+    "license": {
+        "name": "Open Government Licence",
+        "url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+    },
+    "crs": {
+        "name": "EPSG:27700",
+        "description": "British National Grid (OSGB36)",
+        "url": "https://epsg.io/27700"
+    }
+}
+]

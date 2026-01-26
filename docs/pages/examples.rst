@@ -9,3 +9,4 @@ The following notebooks illustrate core ``osbng`` functionality.
    ../examples/notebooks/osbng_overview.ipynb
    ../examples/notebooks/osbng_indexing_polygon_examples.ipynb
    ../examples/notebooks/osbng_create_grids_examples.ipynb
+   ../examples/notebooks/osbng_indexing_raster_examples.ipynb
