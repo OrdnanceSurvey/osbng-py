@@ -321,7 +321,12 @@ class BNGIndexedRaster:
         return rst
 
     def rst_write(
-        self, filepath_out: str, *, read_kw: dict | None = None, **kwargs
+        self,
+        filepath_out: str,
+        *,
+        verbose: bool = False,
+        read_kw: dict | None = None,
+        **kwargs,
     ) -> None:
         """Writes this raster chip to a file.
 
@@ -329,6 +334,8 @@ class BNGIndexedRaster:
             filepath_out (str): The file path to write this raster chip to.
 
         Keyword Args:
+            verbose (bool): If True, prints a message indicating the output file path.
+              Defaults to False.
             read_kw (dict|None): Additional keyword arguments to pass to Rasterio's read
               function.
             **kwargs: Additional keyword arguments to pass to Rasterio's write function.
@@ -341,7 +348,9 @@ class BNGIndexedRaster:
 
             with rio.open(filepath_out, "w", **self.profile) as dst:
                 dst.write(rst, **kwargs)
-        print(f"Raster chip written to {filepath_out}")
+
+        if verbose:
+            print(f"Raster chip written to {filepath_out}")
 
     def to_record(self) -> dict:
         """Serialises this ``BNGIndexedRaster`` object to a record.
